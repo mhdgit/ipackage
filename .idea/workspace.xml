@@ -2,7 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="635e63dd-f7b8-415a-a66f-415dd4a44b0f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/home.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/MyIcons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/dish.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/payment.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/1.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/2.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/c4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/group.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/languages/ar.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/languages/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/localization/center_localization.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/localization/localizationValues.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/modules/Language.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/modules/my_icons.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/home/home.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/home/special_foreign_offers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ipackage.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ipackage.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/special_offers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,16 +47,33 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/images" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Android_Studio_Projects\ipackage\assets\icons" />
+      <recent name="E:\Android_Studio_Projects\ipackage\lib\widgets\home" />
+      <recent name="E:\Android_Studio_Projects\ipackage\assets\images" />
+      <recent name="E:\Android_Studio_Projects\ipackage\lib\widgets" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Android_Studio_Projects\ipackage\assets\images" />
+      <recent name="E:\Android_Studio_Projects\ipackage\lib\widgets\home" />
+      <recent name="E:\Android_Studio_Projects\ipackage\assets\icons" />
+      <recent name="E:\Android_Studio_Projects\ipackage\lib\modules" />
+      <recent name="E:\Android_Studio_Projects\ipackage\lib" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
@@ -50,5 +93,35 @@
       <updated>1615473739237</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="462" y="138" key="FileChooserDialogImpl" timestamp="1615601599401">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="462" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1615601599401" />
+    <state width="1325" height="150" key="GridCell.Tab.0.bottom" timestamp="1615875011055">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1325" height="150" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1615875011055" />
+    <state width="1325" height="150" key="GridCell.Tab.0.center" timestamp="1615875011055">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1325" height="150" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1615875011055" />
+    <state width="1325" height="150" key="GridCell.Tab.0.left" timestamp="1615875011055">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1325" height="150" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1615875011055" />
+    <state width="1325" height="150" key="GridCell.Tab.0.right" timestamp="1615875011055">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1325" height="150" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1615875011055" />
+    <state x="221" y="29" key="SettingsEditor" timestamp="1615736448608">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="221" y="29" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1615736448608" />
+    <state x="481" y="285" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1615603148282">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="481" y="285" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1366.768@0.0.1366.768" timestamp="1615603148282" />
   </component>
 </project>
