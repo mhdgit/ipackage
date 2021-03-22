@@ -31,14 +31,14 @@ class _SpecialOffersState extends State<SpecialOffers> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(4.0),
                 onTap: () {},
-                child: Card(
+                child: Card(shadowColor: Colors.white,
+                  elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                   clipBehavior: Clip.antiAlias,
-                  elevation: 0.5,
                   margin: const EdgeInsets.all(0.0),
-                  color: Colors.white,
+                  color: Color(0xffFAFAFA),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -108,7 +108,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                               context, 'home_offer_card_city'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            fontSize: 19,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff07898B),
                           ),
@@ -118,8 +118,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
 
                       Container(
                         color: Colors.white,
-                        margin: const EdgeInsets.all(8.0),
-                        padding: const EdgeInsets.all(0.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -128,7 +127,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                               child: Padding(
                                   padding: const EdgeInsets.only(
                                       top: 0.0,
-                                      right: 8.0,
+                                      right: 0.0,
                                       left: 0.0,
                                       bottom: 0.0),
                                   child: Text(
@@ -172,7 +171,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           getTranslated(
                               context, 'home_offer_card_details'),
@@ -269,7 +268,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                                 context, 'home_offer_card_breakfast'),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 12,
                                               color: Colors.white,
                                             ),
                                           ),
@@ -297,7 +296,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                                 context, 'home_offer_card_transportation'),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 12,
                                               color: Colors.white,
                                             ),
                                           ),
@@ -325,14 +324,14 @@ class _SpecialOffersState extends State<SpecialOffers> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(4.0),
                 onTap: () {},
-                child: Card(
+                child: Card(shadowColor: Colors.white,
+                  elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                   clipBehavior: Clip.antiAlias,
-                  elevation: 0.5,
                   margin: const EdgeInsets.all(0.0),
-                  color: Colors.white,
+                  color: Color(0xffFAFAFA),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -351,7 +350,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                       BorderRadius.circular(15)),
                                 ),
                                 child: Image.asset(
-                                  'assets/images/2.png',
+                                  'assets/images/c4.jpg',
                                   fit: BoxFit.fill,
                                   height: screenHeight * 0.28,
                                 ),
@@ -402,7 +401,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                               context, 'home_offer_card_city'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            fontSize: 19,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff07898B),
                           ),
@@ -412,8 +411,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
 
                       Container(
                         color: Colors.white,
-                        margin: const EdgeInsets.all(8.0),
-                        padding: const EdgeInsets.all(0.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -422,7 +420,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                               child: Padding(
                                   padding: const EdgeInsets.only(
                                       top: 0.0,
-                                      right: 8.0,
+                                      right: 0.0,
                                       left: 0.0,
                                       bottom: 0.0),
                                   child: Text(
@@ -466,7 +464,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           getTranslated(
                               context, 'home_offer_card_details'),
@@ -563,7 +561,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                                 context, 'home_offer_card_breakfast'),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 12,
                                               color: Colors.white,
                                             ),
                                           ),
@@ -591,7 +589,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                                 context, 'home_offer_card_transportation'),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 12,
                                               color: Colors.white,
                                             ),
                                           ),
@@ -619,14 +617,14 @@ class _SpecialOffersState extends State<SpecialOffers> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(4.0),
                 onTap: () {},
-                child: Card(
+                child: Card(shadowColor: Colors.white,
+                  elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                   clipBehavior: Clip.antiAlias,
-                  elevation: 0.5,
                   margin: const EdgeInsets.all(0.0),
-                  color: Colors.white,
+                  color: Color(0xffFAFAFA),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -645,7 +643,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                       BorderRadius.circular(15)),
                                 ),
                                 child: Image.asset(
-                                  'assets/images/1.png',
+                                  'assets/images/c4.jpg',
                                   fit: BoxFit.fill,
                                   height: screenHeight * 0.28,
                                 ),
@@ -696,7 +694,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                               context, 'home_offer_card_city'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            fontSize: 19,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff07898B),
                           ),
@@ -706,8 +704,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
 
                       Container(
                         color: Colors.white,
-                        margin: const EdgeInsets.all(8.0),
-                        padding: const EdgeInsets.all(0.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -716,7 +713,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                               child: Padding(
                                   padding: const EdgeInsets.only(
                                       top: 0.0,
-                                      right: 8.0,
+                                      right: 0.0,
                                       left: 0.0,
                                       bottom: 0.0),
                                   child: Text(
@@ -760,7 +757,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           getTranslated(
                               context, 'home_offer_card_details'),
@@ -857,7 +854,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                                 context, 'home_offer_card_breakfast'),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 12,
                                               color: Colors.white,
                                             ),
                                           ),
@@ -885,7 +882,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                                 context, 'home_offer_card_transportation'),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 12,
                                               color: Colors.white,
                                             ),
                                           ),

@@ -124,6 +124,25 @@
   "home_agent_ratings_title" : "تقييمات العملاء",
   "home_best_hotels_title" : "أفضل الفنادق",
 
+  "pyt_national_tourism_btn" : "السياحة الداخلية",
+  "pyt_n_t_label" : "اكتشف جمال المملكة العربية السعودية",
+  "pyt_n_t_label_2" : "و تعرّف على جاذبية وجهاتها السياحية، من القمم الجبلية في أبها, مروراً بالمساحات الخضراء في الباحة و المتاحف العريقة في جدة",
+
+  "pyt_international_tourism_btn" : "السياحة الخارجية",
+  "pyt_in_t_label" : "خطّط اليوم لمغامرة الغد",
+  "pyt_in_t_label_2" : "ابحث عن أكثر البطاقات استمتاعاً. احجز بطريقة مرنة",
+  "pyt_in_t_source_btn" : "المغادرة من",
+  "pyt_in_t_des_btn" : "الذهاب إلى",
+  "pyt_in_t_date_btn" : "تاريخ الذهاب",
+  "pyt_in_t_number_btn" : "شخص بالغ - أطفال",
+  "pyt_in_t_adult_label" : "شخص بالغ",
+  "pyt_in_t_children_label" : "أطفال",
+  "pyt_in_t_flight_btn" : "الطيران",
+  "pyt_in_t_search_btn" : "بحث",
+
+  "pyt_ambassadors_btn" : "سفراء آي باكج",
+
+
   "home_search_hint" : "ابحث عن كوبون أو متجر",
   "home_search_btn" : "ابحث",
   "home_stores_title" : "المتاجر",

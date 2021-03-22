@@ -5,7 +5,6 @@ import 'package:ipackage/localization/center_localization.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/widgets/home/home.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
