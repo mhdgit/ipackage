@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ipackage/localization/center_localization.dart';
 import 'package:ipackage/localization/localizationValues.dart';
-import 'file:///E:/Android_Studio_Projects/ipackage/lib/widgets/home/home.dart';
+import 'package:ipackage/widgets/home/home.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
