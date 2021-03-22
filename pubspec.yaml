@@ -33,6 +33,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.4
   getwidget: ^1.2.4
+  dropdown_below: ^0.0.7
+  flutter_number_picker: ^0.0.8
 
 dev_dependencies:
   flutter_test:
@@ -53,10 +55,11 @@ flutter:
   assets:
     - lib/languages/en.json
     - lib/languages/ar.json
+    - assets/images/logo.jpg
     - assets/images/c4.jpg
+    - assets/images/c3.jpg
+    - assets/images/c1.jpg
     - assets/images/group.jpg
-    - assets/images/1.png
-    - assets/images/2.png
     - assets/icons/dish.png
     - assets/icons/payment.png
   #   - images/a_dot_ham.jpeg

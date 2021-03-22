@@ -4,6 +4,8 @@ import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/special_foreign_offers.dart';
 import 'package:ipackage/widgets/home/special_offers.dart';
+import 'package:ipackage/widgets/settings.dart';
+import 'package:ipackage/widgets/trip_plan/plan_your_trip.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -206,7 +208,7 @@ class _HomeState extends State<Home> {
                 children: <Widget>[
                   Container(
                     width: screenWidth * 0.5,
-                    height: screenHeight * 0.4,
+                    height: screenHeight * 0.35,
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {},
@@ -223,12 +225,13 @@ class _HomeState extends State<Home> {
                           color: Colors.white,
                           child: Column(
                             // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(0),
                                 child:
-                                  Image.asset('assets/icons/payment.png',),
+                                  Container(height: screenHeight * 0.1,
+                                  child: Image.asset('assets/icons/payment.png',fit: BoxFit.fill,)),
                               ),
 
                               Padding(
@@ -263,11 +266,243 @@ class _HomeState extends State<Home> {
                                               bottom: 0.0),
                                           child: Text(
                                             getTranslated(context,
-                                                'home_offer_card_days'),
-                                            textAlign: TextAlign.start,
+                                                'home_payment_choices_title'),
+                                            textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15,
+                                                fontSize: 14,
+                                                color: Colors.black),
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: screenWidth * 0.5,
+                    height: screenHeight * 0.35,
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(4.0),
+                        onTap: () {},
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          elevation: 0.5,
+                          margin: const EdgeInsets.all(0.0),
+                          color: Colors.white,
+                          child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(0),
+                                child:
+                                Container(height: screenHeight * 0.1,
+                                    child: Image.asset('assets/icons/payment.png',fit: BoxFit.fill,)),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  getTranslated(
+                                      context, 'home_payment_choices_title'),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                  softWrap: true,
+                                ),
+                              ),
+
+                              Container(
+                                color: Colors.white,
+                                margin: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(0.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      flex: 50,
+                                      child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 0.0,
+                                              right: 8.0,
+                                              left: 0.0,
+                                              bottom: 0.0),
+                                          child: Text(
+                                            getTranslated(context,
+                                                'home_payment_choices_title'),
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black),
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Row(
+                children: <Widget>[
+                  Container(
+                    width: screenWidth * 0.5,
+                    height: screenHeight * 0.35,
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(4.0),
+                        onTap: () {},
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          elevation: 0.5,
+                          margin: const EdgeInsets.all(0.0),
+                          color: Colors.white,
+                          child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(0),
+                                child:
+                                Container(height: screenHeight * 0.1,
+                                    child: Image.asset('assets/icons/payment.png',fit: BoxFit.fill,)),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  getTranslated(
+                                      context, 'home_payment_choices_title'),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                  softWrap: true,
+                                ),
+                              ),
+
+                              Container(
+                                color: Colors.white,
+                                margin: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(0.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      flex: 50,
+                                      child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 0.0,
+                                              right: 8.0,
+                                              left: 0.0,
+                                              bottom: 0.0),
+                                          child: Text(
+                                            getTranslated(context,
+                                                'home_payment_choices_title'),
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black),
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: screenWidth * 0.5,
+                    height: screenHeight * 0.35,
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(4.0),
+                        onTap: () {},
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          elevation: 0.5,
+                          margin: const EdgeInsets.all(0.0),
+                          color: Colors.white,
+                          child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(0),
+                                child:
+                                Container(height: screenHeight * 0.1,
+                                    child: Image.asset('assets/icons/payment.png',fit: BoxFit.fill,)),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  getTranslated(
+                                      context, 'home_payment_choices_title'),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                  softWrap: true,
+                                ),
+                              ),
+
+                              Container(
+                                color: Colors.white,
+                                margin: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(0.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      flex: 50,
+                                      child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 0.0,
+                                              right: 8.0,
+                                              left: 0.0,
+                                              bottom: 0.0),
+                                          child: Text(
+                                            getTranslated(context,
+                                                'home_payment_choices_title'),
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 14,
                                                 color: Colors.black),
                                           )),
                                     ),
@@ -290,7 +525,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white,
         unselectedItemColor: Color(0xff9FD0D2),
         selectedItemColor: Color(0xff07898B),
-        onTap: null, // new
+        onTap: onTabTapped, // new
         currentIndex: 0,
         type: BottomNavigationBarType.fixed, // new
         items: [
@@ -314,5 +549,25 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  void onTabTapped(int index) {
+    if (index == 0) {
+      Navigator.of(context).push(
+        new MaterialPageRoute(
+            builder: (BuildContext context) => new Home()),
+      );
+    } else if (index == 1) {
+      Navigator.of(context).push(
+        new MaterialPageRoute(
+            builder: (BuildContext context) => new PlanYourTrip()),
+      );
+    } else if (index == 2) {
+      // Navigator.of(context).push(new MaterialPageRoute(
+      //     builder: (BuildContext context) => new MyAccount()));
+    } else if (index == 3) {
+      Navigator.of(context).push(new MaterialPageRoute(
+          builder: (BuildContext context) => new Settings()));
+    }
   }
 }
