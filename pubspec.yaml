@@ -57,8 +57,7 @@ flutter:
     - lib/languages/ar.json
     - assets/images/logo.jpg
     - assets/images/c4.jpg
-    - assets/images/c3.jpg
-    - assets/images/c1.jpg
+
     - assets/images/group.jpg
     - assets/icons/dish.png
     - assets/icons/payment.png

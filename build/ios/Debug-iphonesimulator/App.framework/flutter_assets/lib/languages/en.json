@@ -124,6 +124,25 @@
   "home_customer_ratings_title" : "Customer ratings",
   "home_best_hotels_title" : "Best hotels",
 
+  "pyt_national_tourism_btn" : "Domestic Tourism",
+  "pyt_n_t_label" : "Discover the beauty of Saudi Arabia ",
+  "pyt_n_t_label_2" : "And learn about the attractions of its tourist destinations, from the mountain peaks in Abha, through the green spaces in the courtyard and the ancient museums in Jeddah. ",
+
+
+  "pyt_international_tourism_btn" : "Foreign Tourism",
+  "pyt_in_t_label" : "Plan tomorrow's adventure today",
+  "pyt_in_t_label_2" : "Find the most fun cards. Book in a flexible way",
+  "pyt_in_t_source_btn" : "Departure from",
+  "pyt_in_t_des_btn" : "Going to",
+  "pyt_in_t_date_btn" : "Go date ",
+  "pyt_in_t_number_btn" : "Adult - children ",
+  "pyt_in_t_adult_label" : "Adults",
+  "pyt_in_t_children_label" : "Children",
+  "pyt_in_t_flight_btn" : "Flight",
+  "pyt_in_t_search_btn" : "Search",
+
+  "pyt_ambassadors_btn" : "iPackage Ambassadors ",
+
   "home_search_hint" : "Find a coupon or store",
   "home_search_btn" : "Search",
   "home_stores_title" : "Stores",
