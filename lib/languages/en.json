@@ -102,6 +102,7 @@
   "home_national_tourism_btn" : "Domestic Tourism",
   "home_international_tourism_btn" : "Foreign Tourism",
   "home_ambassadors_btn" : "iPackage Ambassadors ",
+  "home_national_tourism_cities_label" : "Domestic tourism cities",
   "home_national_tourism_offers_label" : "Special offers in domestic tourism ",
   "home_national_tourism_offers_label_2" : "The special offers inside the iPackage website are the ones on which there are special discounts and prices for a limited time",
   "home_offer_card_tag" : "family trip",
@@ -142,6 +143,10 @@
   "pyt_in_t_search_btn" : "Search",
 
   "pyt_ambassadors_btn" : "iPackage Ambassadors ",
+
+  "city_trips_label" : "Istanbul Tourism News",
+  "city_trips_card_title" : "Watch the beauty of Istanbul with us",
+  "city_trips_card_body" : "Watch the beauty of Istanbul with us",
 
   "home_search_hint" : "Find a coupon or store",
   "home_search_btn" : "Search",

@@ -904,7 +904,6 @@ class _SpecialOffersState extends State<SpecialOffers> {
           ),
         ],
       ),
-    )
-    ;
+    );
   }
 }

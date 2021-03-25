@@ -2,25 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="635e63dd-f7b8-415a-a66f-415dd4a44b0f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/modules/City.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/trip_plan/plan_domestic_tour.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/trip_plan/plan_foreign_tour.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/trip_plan/plan_ipackage_ambassadors.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/trip_plan/plan_your_trip.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/c1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/c3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/logo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/city_trips.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/hotel_details.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/settings.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/1.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/2.PNG" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/languages/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/ar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/home/special_foreign_offers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/special_foreign_offers.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/home/special_offers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/special_offers.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,50 +83,58 @@
       <option name="project" value="LOCAL" />
       <updated>1616013170868</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Build plan your trip widget.">
+      <created>1616388443912</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1616388443913</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Setup localization feature.&#10;Build home widget." />
-    <option name="LAST_COMMIT_MESSAGE" value="Setup localization feature.&#10;Build home widget." />
+    <MESSAGE value="Build plan your trip widget." />
+    <option name="LAST_COMMIT_MESSAGE" value="Build plan your trip widget." />
   </component>
   <component name="WindowStateProjectService">
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser" timestamp="1616199774235">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1616199774235" />
-    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1616013165102">
+    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1616388439123">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1616013165102" />
+    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1616388439123" />
     <state x="462" y="138" key="FileChooserDialogImpl" timestamp="1615601599401">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="462" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1615601599401" />
-    <state width="1308" height="147" key="GridCell.Tab.0.bottom" timestamp="1616388010376">
+    <state width="1308" height="147" key="GridCell.Tab.0.bottom" timestamp="1616641552691">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1308" height="147" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1616388010376" />
-    <state width="1308" height="147" key="GridCell.Tab.0.center" timestamp="1616388010374">
+    <state width="1308" height="147" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1616641552691" />
+    <state width="1308" height="147" key="GridCell.Tab.0.center" timestamp="1616641552690">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1308" height="147" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1616388010374" />
-    <state width="1308" height="147" key="GridCell.Tab.0.left" timestamp="1616388010374">
+    <state width="1308" height="147" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1616641552690" />
+    <state width="1308" height="147" key="GridCell.Tab.0.left" timestamp="1616641552690">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1308" height="147" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1616388010374" />
-    <state width="1308" height="147" key="GridCell.Tab.0.right" timestamp="1616388010374">
+    <state width="1308" height="147" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1616641552690" />
+    <state width="1308" height="147" key="GridCell.Tab.0.right" timestamp="1616641552691">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1308" height="147" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1616388010374" />
+    <state width="1308" height="147" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1616641552691" />
     <state x="221" y="29" key="SettingsEditor" timestamp="1616068650435">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="221" y="29" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1616068650435" />
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1616013194683">
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1616388496126">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1616013194683" />
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1616388496126" />
     <state x="481" y="285" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1615603148282">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
