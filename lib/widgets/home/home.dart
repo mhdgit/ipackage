@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
+import 'package:ipackage/widgets/city_trips.dart';
 import 'package:ipackage/widgets/home/special_foreign_offers.dart';
 import 'package:ipackage/widgets/home/special_offers.dart';
 import 'package:ipackage/widgets/settings.dart';
@@ -84,6 +85,335 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ],
+              ),
+
+              Container(
+                padding: const EdgeInsets.only(top: 35.0),
+                child: Text(
+                  getTranslated(context, 'home_national_tourism_cities_label'),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.only(top: 5.0, left: 10.0 , bottom: 0.0),
+                height: screenHeight * 0.28,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      width: screenWidth * 0.65,
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(4.0),
+                          onTap: () {
+                            Navigator.of(context).push(new MaterialPageRoute(
+                                builder: (BuildContext context) => new CityTrips()));
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7.0),
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            elevation: 0.5,
+                            margin: const EdgeInsets.all(0.0),
+                            color: Colors.white,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(0),
+                                  child: Stack(
+                                    fit: StackFit.passthrough,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: ClipPath(
+                                          clipper: ShapeBorderClipper(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(7.0)),
+                                          ),
+                                          child: Image.asset(
+                                            'assets/images/c3.jpg',
+                                            fit: BoxFit.fill,
+                                            height: screenHeight * 0.24,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Flex(
+                                          direction: Axis.horizontal,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  height: 20,
+                                                  padding:
+                                                  const EdgeInsets.all(0.0),
+                                                  margin: EdgeInsets.only(
+                                                      top: screenHeight * 0.15),
+                                                  constraints: BoxConstraints(),
+                                                  child: FittedBox(
+                                                    child: Text(
+                                                      'Saudi arabia',
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                Container(
+                                                  width: 80,
+                                                  padding:
+                                                  const EdgeInsets.all(3.0),
+                                                  child: FittedBox(
+                                                    child: GFRating(
+                                                      color: Colors.amber,
+                                                      borderColor: Colors.amber,
+                                                      allowHalfRating: true,
+                                                      value: 5,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+
+
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: screenWidth * 0.65,
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(4.0),
+                          onTap: () {
+                            Navigator.of(context).push(new MaterialPageRoute(
+                                builder: (BuildContext context) => new CityTrips()));
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7.0),
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            elevation: 0.5,
+                            margin: const EdgeInsets.all(0.0),
+                            color: Colors.white,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(0),
+                                  child: Stack(
+                                    fit: StackFit.passthrough,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: ClipPath(
+                                          clipper: ShapeBorderClipper(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(7.0)),
+                                          ),
+                                          child: Image.asset(
+                                            'assets/images/c1.jpg',
+                                            fit: BoxFit.fill,
+                                            height: screenHeight * 0.24,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Flex(
+                                          direction: Axis.horizontal,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  height: 20,
+                                                  padding:
+                                                  const EdgeInsets.all(0.0),
+                                                  margin: EdgeInsets.only(
+                                                      top: screenHeight * 0.15),
+                                                  constraints: BoxConstraints(),
+                                                  child: FittedBox(
+                                                    child: Text(
+                                                      getTranslated(context,
+                                                          'home_offer_card_city'),
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                Container(
+                                                  width: 80,
+                                                  padding:
+                                                  const EdgeInsets.all(3.0),
+                                                  child: FittedBox(
+                                                    child: GFRating(
+                                                      color: Colors.amber,
+                                                      borderColor: Colors.amber,
+                                                      allowHalfRating: true,
+                                                      value: 5,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+
+
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: screenWidth * 0.65,
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(4.0),
+                          onTap: () {
+                            Navigator.of(context).push(new MaterialPageRoute(
+                                builder: (BuildContext context) => new CityTrips()));
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7.0),
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            elevation: 0.5,
+                            margin: const EdgeInsets.all(0.0),
+                            color: Colors.white,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(0),
+                                  child: Stack(
+                                    fit: StackFit.passthrough,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: ClipPath(
+                                          clipper: ShapeBorderClipper(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(7.0)),
+                                          ),
+                                          child: Image.asset(
+                                            'assets/images/c1.jpg',
+                                            fit: BoxFit.fill,
+                                            height: screenHeight * 0.24,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Flex(
+                                          direction: Axis.horizontal,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  height: 20,
+                                                  padding:
+                                                  const EdgeInsets.all(0.0),
+                                                  margin: EdgeInsets.only(
+                                                      top: screenHeight * 0.15),
+                                                  constraints: BoxConstraints(),
+                                                  child: FittedBox(
+                                                    child: Text(
+                                                      getTranslated(context,
+                                                          'home_offer_card_city'),
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                Container(
+                                                  width: 80,
+                                                  padding:
+                                                  const EdgeInsets.all(3.0),
+                                                  child: FittedBox(
+                                                    child: GFRating(
+                                                      color: Colors.amber,
+                                                      borderColor: Colors.amber,
+                                                      allowHalfRating: true,
+                                                      value: 5,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+
+
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
               Container(
