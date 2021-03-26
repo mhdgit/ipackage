@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
+import 'package:ipackage/widgets/home/domestic_offer_main.dart';
 
 class SpecialForeignOffers extends StatefulWidget {
   @override
@@ -30,7 +31,10 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
               onTap: () {},
               child: InkWell(
                 borderRadius: BorderRadius.circular(4.0),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new DomesticOfferMain()));
+                },
                 child: Card(shadowColor: Colors.white,
                   elevation: 0.0,
                   shape: RoundedRectangleBorder(

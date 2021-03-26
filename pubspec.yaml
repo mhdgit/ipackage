@@ -34,7 +34,7 @@ dependencies:
   shared_preferences: ^2.0.4
   getwidget: ^1.2.4
   dropdown_below: ^0.0.7
-  flutter_number_picker: ^0.0.8
+  image_viewer: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +60,11 @@ flutter:
     - assets/images/c3.jpg
     - assets/images/c1.jpg
     - assets/images/group.jpg
+    - assets/images/car.jpg
+    - assets/images/hotel.jpg
+    - assets/images/end.jpg
+    - assets/images/node.jpg
+    - assets/images/castle.jpg
     - assets/icons/dish.png
     - assets/icons/payment.png
   #   - images/a_dot_ham.jpeg

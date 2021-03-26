@@ -1,6 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:image_viewer/image_viewer.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 
 class HotelDetails extends StatefulWidget {
@@ -17,6 +19,10 @@ class _HotelDetailsState extends State<HotelDetails> {
         MediaQuery.of(context).size.height - statusBarHeight - kToolbarHeight;
     final double screenWidth = MediaQuery.of(context).size.width;
 
+    int carouselIndex;
+    List<String> imageList;
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -27,6 +33,41 @@ class _HotelDetailsState extends State<HotelDetails> {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+
+            GFCarousel(
+              enlargeMainPage: true,
+              viewportFraction: 1.0,
+              autoPlay: true,
+              pagination: true,
+              activeIndicator: Color(0xff275879),
+              items: imageList.map(
+                    (url) {
+                  return Container(
+                    margin: EdgeInsets.all(0.0),
+                    child: ClipRRect(
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(5.0)),
+                      child: InkWell(
+                        onTap: () {
+                          ImageViewer.showImageSlider(
+                            images: imageList,
+                            startingPosition: carouselIndex,
+                          );
+                        },
+                        child: Image.network(url,
+                            fit: BoxFit.cover, width: 1000.0),
+                      ),
+                    ),
+                  );
+                },
+              ).toList(),
+              onPageChanged: (index) {
+                setState(() {
+                  carouselIndex = index;
+                });
+              },
+            ),
+
             Padding(
               padding: EdgeInsetsDirectional.only(start: 0 ,top: 10.0 , bottom: 20.0),
               child: ClipPath(
