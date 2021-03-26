@@ -102,6 +102,7 @@
   "home_national_tourism_btn" : "السياحة الداخلية",
   "home_international_tourism_btn" : "السياحة الخارجية",
   "home_ambassadors_btn" : "سفراء آي باكج",
+  "home_national_tourism_cities_label" : "مدن السياحة الداخلية",
   "home_national_tourism_offers_label" : "العروض المميزة في السياحة الداخلية",
   "home_national_tourism_offers_label_2" : "العروض المميزة داخل موقع آي باكج هي التي توجد عليها خصومات و أسعار خاصة لفترة محدودة",
   "home_offer_card_tag" : "رحلة مع العائلة",
@@ -142,6 +143,9 @@
 
   "pyt_ambassadors_btn" : "سفراء آي باكج",
 
+  "city_trips_label" : "أخبار السياحة في اسطنبول",
+  "city_trips_card_title" : "شاهد معنا جمال مدينة اسطنبول",
+  "city_trips_card_body" : "شاهد معنا جمال مدينة اسطنبول",
 
   "home_search_hint" : "ابحث عن كوبون أو متجر",
   "home_search_btn" : "ابحث",
