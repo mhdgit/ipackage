@@ -87,6 +87,33 @@ class _HomeState extends State<Home> {
                 ],
               ),
 
+
+              Container(
+                padding: const EdgeInsets.only(top: 35.0),
+                child: Text(
+                  getTranslated(context, 'home_national_tourism_offers_label'),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    getTranslated(
+                        context, 'home_national_tourism_offers_label_2'),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ),
+
+              SpecialOffers(),
+
               Container(
                 padding: const EdgeInsets.only(top: 35.0),
                 child: Text(
@@ -416,31 +443,6 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
-              Container(
-                padding: const EdgeInsets.only(top: 35.0),
-                child: Text(
-                  getTranslated(context, 'home_national_tourism_offers_label'),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    getTranslated(
-                        context, 'home_national_tourism_offers_label_2'),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ),
-
-              SpecialOffers(),
 
               Container(
                 padding: const EdgeInsets.only(top: 55.0 , bottom: 10.0 , right: 8 , left: 8),
