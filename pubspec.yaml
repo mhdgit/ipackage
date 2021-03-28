@@ -65,6 +65,7 @@ flutter:
     - assets/images/end.jpg
     - assets/images/node.jpg
     - assets/images/castle.jpg
+    - assets/images/profile.jpg
     - assets/icons/dish.png
     - assets/icons/payment.png
   #   - images/a_dot_ham.jpeg
