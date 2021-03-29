@@ -184,6 +184,9 @@
   "do_hotels_tab" : "الفنادق",
   "do_transfer_tab" : "المواصلات",
   "do_activities_tab" : "النشاطات",
+  "do_comments" : "التعليقات",
+  "do_comments_username" : "محمد أحمد",
+  "do_similar_packages" : "باقات يحبها الناس",
 
   "home_search_hint" : "ابحث عن كوبون أو متجر",
   "home_search_btn" : "ابحث",
