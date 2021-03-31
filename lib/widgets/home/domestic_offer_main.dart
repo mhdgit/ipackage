@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
@@ -1204,14 +1203,19 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      getTranslated(
-                                          context, 'do_comments_username'),
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                    Container(
+                                      width: width * 0.35,
+                                      child: FittedBox(
+                                        child: Text(
+                                          getTranslated(
+                                              context, 'do_comments_username'),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Container(
