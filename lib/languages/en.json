@@ -189,6 +189,14 @@
   "do_comments_username" : "Muhammad Ahmad",
   "do_similar_packages" : "Packages loved by people ",
 
+  "foreign_offer_title" : "Family package",
+  "fo_label" : "Istanbul Family Week Package: Discovering monuments and walking on the beach",
+  "fo_passengers" : "Two passengers",
+  "fo_edit" : "Edit",
+  "fo_details" : "Details",
+  "fo_label_2" : "I had a great time",
+  "fo_add_btn" : "Add activity",
+
   "home_search_hint" : "Find a coupon or store",
   "home_search_btn" : "Search",
   "home_stores_title" : "Stores",

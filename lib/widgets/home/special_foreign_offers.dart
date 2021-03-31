@@ -3,6 +3,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/domestic_offer_main.dart';
+import 'package:ipackage/widgets/home/foreign_offer_main.dart';
 
 class SpecialForeignOffers extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                 borderRadius: BorderRadius.circular(4.0),
                 onTap: () {
                   Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new DomesticOfferMain()));
+                      builder: (BuildContext context) => new ForeignOfferMain()));
                 },
                 child: Card(shadowColor: Colors.white,
                   elevation: 0.0,
