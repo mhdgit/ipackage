@@ -185,6 +185,9 @@
   "do_hotels_tab" : "Hotels",
   "do_transfer_tab" : "Transfer",
   "do_activities_tab" : "Activities",
+  "do_comments" : "Comments",
+  "do_comments_username" : "Muhammad Ahmad",
+  "do_similar_packages" : "Packages loved by people ",
 
   "home_search_hint" : "Find a coupon or store",
   "home_search_btn" : "Search",
