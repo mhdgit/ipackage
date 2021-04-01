@@ -1909,6 +1909,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                     )),
               ],
             ),
+
             Row(
               children: [
                 Container(

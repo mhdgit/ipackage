@@ -5,7 +5,7 @@ import 'package:ipackage/main.dart';
 import 'package:ipackage/modules/Language.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/home.dart';
-import 'package:ipackage/widgets/trip_plan/plan_your_trip.dart';
+import 'package:ipackage/widgets/search/search_your_trip.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -100,7 +100,7 @@ class _SettingsState extends State<Settings> {
     } else if (index == 1) {
       Navigator.of(context).push(
         new MaterialPageRoute(
-            builder: (BuildContext context) => new PlanYourTrip()),
+            builder: (BuildContext context) => new SearchYourTrip()),
       );
     } else if (index == 2) {
       // Navigator.of(context).push(new MaterialPageRoute(

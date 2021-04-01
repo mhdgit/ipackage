@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
@@ -5,8 +6,9 @@ import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/city_trips.dart';
 import 'package:ipackage/widgets/home/special_foreign_offers.dart';
 import 'package:ipackage/widgets/home/special_offers.dart';
+import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/settings.dart';
-import 'package:ipackage/widgets/trip_plan/plan_your_trip.dart';
+import 'package:ipackage/widgets/search/search_your_trip.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -31,8 +33,8 @@ class _HomeState extends State<Home> {
                   Expanded(
                     flex: 50,
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 40, right: 8.0, left: 18.0, bottom: 8.0),
+                      padding: const EdgeInsetsDirectional.only(
+                          top: 40, end: 8.0, start: 18.0, bottom: 8.0),
                       child: GFButton(
                         color: Color(0xffA57432),
                         textColor: Colors.white,
@@ -42,15 +44,18 @@ class _HomeState extends State<Home> {
                         textStyle: TextStyle(
                           fontSize: 16.0,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 1,)));
+                        },
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 50,
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 40, right: 18.0, left: 8.0, bottom: 8.0),
+                      padding: const EdgeInsetsDirectional.only(
+                          top: 40, end: 18.0, start: 8.0, bottom: 8.0),
                       child: GFButton(
                         color: Color(0xffF8CB4E),
                         textColor: Colors.white,
@@ -60,7 +65,10 @@ class _HomeState extends State<Home> {
                         textStyle: TextStyle(
                           fontSize: 16.0,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 0,)));
+                        },
                       ),
                     ),
                   ),
@@ -69,7 +77,6 @@ class _HomeState extends State<Home> {
               Row(
                 children: <Widget>[
                   Expanded(
-                    flex: 50,
                     child: Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: GFButton(
@@ -80,7 +87,10 @@ class _HomeState extends State<Home> {
                         textStyle: TextStyle(
                           fontSize: 16.0,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 2,)));
+                        },
                       ),
                     ),
                   ),

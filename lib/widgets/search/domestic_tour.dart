@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/components/rating/gf_rating.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 
-class PlanDomesticTour extends StatefulWidget {
+class DomesticTour extends StatefulWidget {
   @override
-  _PlanDomesticTourState createState() => _PlanDomesticTourState();
+  _DomesticTourState createState() => _DomesticTourState();
 }
 
-class _PlanDomesticTourState extends State<PlanDomesticTour> {
+class _DomesticTourState extends State<DomesticTour> {
   @override
   Widget build(BuildContext context) {
 
