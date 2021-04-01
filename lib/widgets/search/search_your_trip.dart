@@ -3,16 +3,20 @@ import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/home.dart';
 import 'package:ipackage/widgets/settings.dart';
-import 'package:ipackage/widgets/trip_plan/plan_domestic_tour.dart';
-import 'package:ipackage/widgets/trip_plan/plan_foreign_tour.dart';
-import 'package:ipackage/widgets/trip_plan/plan_ipackage_ambassadors.dart';
+import 'package:ipackage/widgets/search/domestic_tour.dart';
+import 'package:ipackage/widgets/search/foreign_tour.dart';
+import 'package:ipackage/widgets/search/ipackage_ambassadors.dart';
 
-class PlanYourTrip extends StatefulWidget {
+class SearchYourTrip extends StatefulWidget {
+  final int initialTabIndex;
+
+  SearchYourTrip({this.initialTabIndex});
+
   @override
-  _PlanYourTripState createState() => _PlanYourTripState();
+  _SearchYourTripState createState() => _SearchYourTripState();
 }
 
-class _PlanYourTripState extends State<PlanYourTrip> {
+class _SearchYourTripState extends State<SearchYourTrip> {
   @override
   Widget build(BuildContext context) {
 
@@ -22,6 +26,7 @@ class _PlanYourTripState extends State<PlanYourTrip> {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return DefaultTabController(
+      initialIndex: widget.initialTabIndex,
       length: 3,
       child: Scaffold(
         appBar: AppBar(
@@ -56,9 +61,9 @@ class _PlanYourTripState extends State<PlanYourTrip> {
         ),
         body: TabBarView(
           children: <Widget>[
-            PlanForeignTour(),
-            PlanDomesticTour(),
-            PlanIPackageAmbassadors(),
+            ForeignTour(),
+            DomesticTour(),
+            IPackageAmbassadors(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -66,7 +71,7 @@ class _PlanYourTripState extends State<PlanYourTrip> {
           unselectedItemColor: Color(0xff9FD0D2),
           selectedItemColor: Color(0xff07898B),
           onTap: onTabTapped, // new
-          currentIndex: 1,
+          currentIndex: 0,
           type: BottomNavigationBarType.fixed,
           items: [
             new BottomNavigationBarItem(
@@ -100,7 +105,7 @@ class _PlanYourTripState extends State<PlanYourTrip> {
     } else if (index == 1) {
       Navigator.of(context).push(
         new MaterialPageRoute(
-            builder: (BuildContext context) => new PlanYourTrip()),
+            builder: (BuildContext context) => new SearchYourTrip()),
       );
     } else if (index == 2) {
       // Navigator.of(context).push(new MaterialPageRoute(

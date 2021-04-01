@@ -5,12 +5,12 @@ import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/City.dart';
 import 'package:ipackage/modules/my_icons.dart';
 
-class PlanForeignTour extends StatefulWidget {
+class ForeignTour extends StatefulWidget {
   @override
-  _PlanForeignTourState createState() => _PlanForeignTourState();
+  _ForeignTourState createState() => _ForeignTourState();
 }
 
-class _PlanForeignTourState extends State<PlanForeignTour> {
+class _ForeignTourState extends State<ForeignTour> {
   List<City> _cities = [
     City(id: 1, enName: 'Egypt', arName: 'مصر'),
     City(id: 2, enName: 'Turkey', arName: 'تركيا'),
