@@ -50,6 +50,14 @@ getwidget
 2.2
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/getwidget-1.2.4/
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/getwidget-1.2.4/lib/
+http
+2.12
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.1/
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.1/lib/
+http_parser
+2.12
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0/
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0/lib/
 image_viewer
 2.1
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_viewer-1.0.0/
@@ -86,6 +94,10 @@ path_provider_windows
 2.12
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.0/
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.0/lib/
+pedantic
+2.12
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.0/
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.0/lib/
 platform
 2.12
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/platform-3.0.0/
@@ -98,6 +110,10 @@ process
 2.12
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/process-4.1.0/
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/process-4.1.0/lib/
+responsive_grid
+2.1
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/responsive_grid-1.2.1+1/
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/responsive_grid-1.2.1+1/lib/
 shared_preferences
 2.12
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.4/
