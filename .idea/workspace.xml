@@ -2,23 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="635e63dd-f7b8-415a-a66f-415dd4a44b0f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/flight.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/forest.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/meal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/plan_your_trip/plan_your_trip.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/my_books.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/languages/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/ar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/home/domestic_offer_main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/domestic_offer_main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/trip_plan/plan_domestic_tour.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/domestic_tour.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/trip_plan/plan_foreign_tour.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/foreign_tour.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/trip_plan/plan_ipackage_ambassadors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/ipackage_ambassadors.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/trip_plan/plan_your_trip.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/search_your_trip.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/plan_your_trip/plan_your_trip.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/plan_your_trip/plan_your_trip.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617177682238</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Build plan your trip widget">
+      <created>1617309135791</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1617309135795</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -134,45 +130,46 @@
     <MESSAGE value="Build family package widget" />
     <MESSAGE value="Build family package widget _updated" />
     <MESSAGE value="Build foreign family package widget" />
-    <option name="LAST_COMMIT_MESSAGE" value="Build foreign family package widget" />
+    <MESSAGE value="Build plan your trip widget" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build plan your trip widget" />
   </component>
   <component name="WindowStateProjectService">
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser" timestamp="1617118525200">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1617118525200" />
-    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1617177677740">
+    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1617309131630">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1617177677740" />
+    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1617309131629" />
     <state x="462" y="138" key="FileChooserDialogImpl" timestamp="1615601599401">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="462" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1615601599401" />
-    <state width="1325" height="143" key="GridCell.Tab.0.bottom" timestamp="1617304262383">
+    <state width="1325" height="143" key="GridCell.Tab.0.bottom" timestamp="1617450890196">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1617304262383" />
-    <state width="1325" height="143" key="GridCell.Tab.0.center" timestamp="1617304262380">
+    <state width="1325" height="143" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1617450890196" />
+    <state width="1325" height="143" key="GridCell.Tab.0.center" timestamp="1617450890195">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1617304262380" />
-    <state width="1325" height="143" key="GridCell.Tab.0.left" timestamp="1617304262376">
+    <state width="1325" height="143" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1617450890195" />
+    <state width="1325" height="143" key="GridCell.Tab.0.left" timestamp="1617450890195">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1617304262376" />
-    <state width="1325" height="143" key="GridCell.Tab.0.right" timestamp="1617304262380">
+    <state width="1325" height="143" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1617450890195" />
+    <state width="1325" height="143" key="GridCell.Tab.0.right" timestamp="1617450890195">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1617304262380" />
+    <state width="1325" height="143" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1617450890195" />
     <state x="221" y="29" key="SettingsEditor" timestamp="1616068650435">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="221" y="29" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1616068650435" />
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1617177700421">
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1617309160802">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1617177700421" />
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1617309160802" />
     <state x="481" y="285" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1615603148282">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
