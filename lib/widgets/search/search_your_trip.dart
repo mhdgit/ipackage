@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/home.dart';
+import 'package:ipackage/widgets/my_books.dart';
+import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/settings.dart';
 import 'package:ipackage/widgets/search/domestic_tour.dart';
 import 'package:ipackage/widgets/search/foreign_tour.dart';
@@ -105,11 +107,11 @@ class _SearchYourTripState extends State<SearchYourTrip> {
     } else if (index == 1) {
       Navigator.of(context).push(
         new MaterialPageRoute(
-            builder: (BuildContext context) => new SearchYourTrip()),
+            builder: (BuildContext context) => new PlanYourTrip()),
       );
     } else if (index == 2) {
-      // Navigator.of(context).push(new MaterialPageRoute(
-      //     builder: (BuildContext context) => new MyAccount()));
+      Navigator.of(context).push(new MaterialPageRoute(
+          builder: (BuildContext context) => new MyBooks()));
     } else if (index == 3) {
       Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new Settings()));

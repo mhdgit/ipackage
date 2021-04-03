@@ -5,6 +5,7 @@ import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/City.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/home.dart';
+import 'package:ipackage/widgets/my_books.dart';
 import 'package:ipackage/widgets/settings.dart';
 
 class PlanYourTrip extends StatefulWidget {
@@ -2046,7 +2047,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
         unselectedItemColor: Color(0xff9FD0D2),
         selectedItemColor: Color(0xff07898B),
         onTap: onTabTapped, // new
-        currentIndex: 0,
+        currentIndex: 1,
         type: BottomNavigationBarType.fixed,
         items: [
           new BottomNavigationBarItem(
@@ -2081,8 +2082,8 @@ class _PlanYourTripState extends State<PlanYourTrip>
             builder: (BuildContext context) => new PlanYourTrip()),
       );
     } else if (index == 2) {
-      // Navigator.of(context).push(new MaterialPageRoute(
-      //     builder: (BuildContext context) => new MyAccount()));
+      Navigator.of(context).push(new MaterialPageRoute(
+          builder: (BuildContext context) => new MyBooks()));
     } else if (index == 3) {
       Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new Settings()));

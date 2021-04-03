@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="635e63dd-f7b8-415a-a66f-415dd4a44b0f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/widgets/my_books.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/languages/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/ar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/city_trips.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/city_trips.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/plan_your_trip/plan_your_trip.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/plan_your_trip/plan_your_trip.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/search/search_your_trip.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/search_your_trip.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/settings.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617309135795</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Build my Books widget">
+      <created>1617452499682</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1617452499682</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -131,45 +137,46 @@
     <MESSAGE value="Build family package widget _updated" />
     <MESSAGE value="Build foreign family package widget" />
     <MESSAGE value="Build plan your trip widget" />
-    <option name="LAST_COMMIT_MESSAGE" value="Build plan your trip widget" />
+    <MESSAGE value="Build my Books widget" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build my Books widget" />
   </component>
   <component name="WindowStateProjectService">
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser" timestamp="1617118525200">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1617118525200" />
-    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1617309131630">
+    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1617452496806">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1617309131629" />
+    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1617452496806" />
     <state x="462" y="138" key="FileChooserDialogImpl" timestamp="1615601599401">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="462" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1615601599401" />
-    <state width="1325" height="143" key="GridCell.Tab.0.bottom" timestamp="1617450890196">
+    <state width="1325" height="143" key="GridCell.Tab.0.bottom" timestamp="1617452852213">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1617450890196" />
-    <state width="1325" height="143" key="GridCell.Tab.0.center" timestamp="1617450890195">
+    <state width="1325" height="143" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1617452852213" />
+    <state width="1325" height="143" key="GridCell.Tab.0.center" timestamp="1617452852212">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1617450890195" />
-    <state width="1325" height="143" key="GridCell.Tab.0.left" timestamp="1617450890195">
+    <state width="1325" height="143" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1617452852212" />
+    <state width="1325" height="143" key="GridCell.Tab.0.left" timestamp="1617452852211">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1617450890195" />
-    <state width="1325" height="143" key="GridCell.Tab.0.right" timestamp="1617450890195">
+    <state width="1325" height="143" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1617452852211" />
+    <state width="1325" height="143" key="GridCell.Tab.0.right" timestamp="1617452852212">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1617450890195" />
+    <state width="1325" height="143" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1617452852212" />
     <state x="221" y="29" key="SettingsEditor" timestamp="1616068650435">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="221" y="29" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1616068650435" />
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1617309160802">
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1617452514588">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1617309160802" />
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1617452514588" />
     <state x="481" y="285" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1615603148282">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
