@@ -196,6 +196,22 @@
   "fo_label_2" : "لقد قضيت وقتاً ممتعاً",
   "fo_add_btn" : "أضف نشاطاً",
 
+  "book_trip_label" : "حدد وجهتك",
+  "book_trip_label_2" : "اختار الباقة",
+  "book_trip_next" : "التالي",
+  "book_trip_previous" : "السابق",
+  "book_trip_days" : "عدد أيام الرحلة",
+  "book_trip_days_2" : "أيام",
+  "book_trip_3_stars" : "3 نجوم",
+  "book_trip_4_stars" : "4 نجوم",
+  "book_trip_5_stars" : "5 نجوم",
+  "book_trip_all_stars" : "جميع الفئات",
+  "book_trip_addition" : "الإضافات",
+  "book_trip_adults_number" : "عدد البالغين",
+  "book_trip_children_number" : "عدد الأطفال",
+  "book_trip_babies_number" : "عدد الرضّع",
+
+
   "home_search_hint" : "ابحث عن كوبون أو متجر",
   "home_search_btn" : "ابحث",
   "home_stores_title" : "المتاجر",
