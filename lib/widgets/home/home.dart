@@ -6,6 +6,7 @@ import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/city_trips.dart';
 import 'package:ipackage/widgets/home/special_foreign_offers.dart';
 import 'package:ipackage/widgets/home/special_offers.dart';
+import 'package:ipackage/widgets/my_books.dart';
 import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/settings.dart';
 import 'package:ipackage/widgets/search/search_your_trip.dart';
@@ -905,8 +906,8 @@ class _HomeState extends State<Home> {
             builder: (BuildContext context) => new PlanYourTrip()),
       );
     } else if (index == 2) {
-      // Navigator.of(context).push(new MaterialPageRoute(
-      //     builder: (BuildContext context) => new MyAccount()));
+      Navigator.of(context).push(new MaterialPageRoute(
+          builder: (BuildContext context) => new MyBooks()));
     } else if (index == 3) {
       Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new Settings()));

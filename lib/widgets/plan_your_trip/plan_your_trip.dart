@@ -5,6 +5,7 @@ import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/City.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/home.dart';
+import 'package:ipackage/widgets/my_books.dart';
 import 'package:ipackage/widgets/settings.dart';
 
 class PlanYourTrip extends StatefulWidget {
@@ -12,8 +13,8 @@ class PlanYourTrip extends StatefulWidget {
   _PlanYourTripState createState() => _PlanYourTripState();
 }
 
-class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMixin {
-
+class _PlanYourTripState extends State<PlanYourTrip>
+    with TickerProviderStateMixin {
   TabController _tabController;
   int _selectedTabBar = 0;
 
@@ -48,7 +49,12 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
   int _childrenNumber = 2;
   int _babiesNumber = 2;
 
-
+  //Stage 4
+  final TextEditingController _nameController = new TextEditingController();
+  final TextEditingController _emailController = new TextEditingController();
+  final TextEditingController _whatsAppController = new TextEditingController();
+  final TextEditingController _budgetController = new TextEditingController();
+  final TextEditingController _notesController = new TextEditingController();
 
   @override
   void initState() {
@@ -62,17 +68,21 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
     _tabController.dispose();
   }
 
-
-  void _showCitiesDialog(context, screenHeight , screenWidth) {
+  void _showCitiesDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.66,),
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.66,
+              ),
               child: Dialog(
-                shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20) , bottomRight: Radius.circular(20) ,)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
@@ -81,15 +91,14 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                     width: screenWidth * 0.9,
                     child: Column(
                       children: <Widget>[
-                        for(int i =0 ; i < _cities.length ; i++)
+                        for (int i = 0; i < _cities.length; i++)
                           Row(
                             children: <Widget>[
                               InkWell(
-                                onTap: (){
-
-                                },
+                                onTap: () {},
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
                                   child: Text(
                                     _cities[i].arName,
                                     style: TextStyle(
@@ -112,16 +121,21 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         });
   }
 
-  void _showTypesDialog(context, screenHeight , screenWidth) {
+  void _showTypesDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.7,),
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.7,
+              ),
               child: Dialog(
-                shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20) , bottomRight: Radius.circular(20) ,)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
@@ -131,15 +145,14 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          for(int i =0 ; i < _types.length ; i++)
+                          for (int i = 0; i < _types.length; i++)
                             Row(
                               children: <Widget>[
                                 InkWell(
-                                  onTap: (){
-
-                                  },
+                                  onTap: () {},
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
                                     child: Text(
                                       _types[i].toString(),
                                       style: TextStyle(
@@ -163,7 +176,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         });
   }
 
-  _navigationBar(width , height){
+  _navigationBar(width, height) {
     return Container(
       width: width * 0.9,
       height: height * 0.13,
@@ -172,15 +185,14 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-
           Expanded(
             flex: 50,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.03),
               child: GFButton(
                 size: 50,
-                onPressed: (){
-                  if(_selectedTabBar > 0)
+                onPressed: () {
+                  if (_selectedTabBar > 0)
                     setState(() {
                       _selectedTabBar -= 1;
                     });
@@ -191,32 +203,32 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
-                      Icon(Icons.arrow_back_ios, color: Colors.black, size: 15.0,),
-
+                      Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                        size: 15.0,
+                      ),
                       Text(
                         getTranslated(context, 'book_trip_previous'),
                         style: TextStyle(color: Colors.black),
                       ),
-
                     ],
                   ),
                 ),
               ),
             ),
           ),
-
           Expanded(
             flex: 50,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.03),
               child: GFButton(
                 size: 50,
-                onPressed: (){
-                  if(_selectedTabBar < 5)
-                  setState(() {
-                    _selectedTabBar += 1;
-                  });
+                onPressed: () {
+                  if (_selectedTabBar < 5)
+                    setState(() {
+                      _selectedTabBar += 1;
+                    });
                 },
                 color: Colors.white,
                 child: Padding(
@@ -228,16 +240,17 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                         getTranslated(context, 'book_trip_next'),
                         style: TextStyle(fontSize: 14, color: Colors.black),
                       ),
-
-                      Icon(Icons.arrow_forward_ios, color: Colors.black, size: 15.0,),
-
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.black,
+                        size: 15.0,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ),
-
         ],
       ),
     );
@@ -268,16 +281,21 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
     });
   }
 
-  void _showDaysDialog(context, screenHeight , screenWidth) {
+  void _showDaysDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.7,),
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.7,
+              ),
               child: Dialog(
-                shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20) , bottomRight: Radius.circular(20) ,)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
@@ -290,7 +308,8 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
                                 getTranslated(context, 'book_trip_days_2'),
                                 style: TextStyle(
@@ -319,15 +338,13 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         color: Color(0xff07898B),
                                       ),
                                       color: Colors.white,
-                                      onPressed: ()
-                                      {
-                                        if(_daysNumber > 1)
+                                      onPressed: () {
+                                        if (_daysNumber > 1)
                                           setState(() {
                                             _daysNumber -= 1;
                                           });
                                       },
                                     ),
-
                                     Container(
                                       child: Text(
                                         _daysNumber.toString(),
@@ -338,7 +355,6 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         ),
                                       ),
                                     ),
-
                                     MaterialButton(
                                       padding: const EdgeInsets.all(2.0),
                                       shape: CircleBorder(
@@ -353,20 +369,17 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         color: Color(0xff07898B),
                                       ),
                                       color: Colors.white,
-                                      onPressed: ()
-                                      {
-                                        if(_daysNumber < 50)
+                                      onPressed: () {
+                                        if (_daysNumber < 50)
                                           setState(() {
                                             _daysNumber += 1;
                                           });
                                       },
                                     ),
-
                                   ],
                                 ),
                               ),
                             )
-
                           ],
                         ),
                       ],
@@ -379,16 +392,21 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         });
   }
 
-  void _showAdultsDialog(context, screenHeight , screenWidth) {
+  void _showAdultsDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.36,),
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.36,
+              ),
               child: Dialog(
-                shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20) , bottomRight: Radius.circular(20) ,)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
@@ -403,10 +421,12 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                             Expanded(
                               flex: 50,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: FittedBox(
                                   child: Text(
-                                    getTranslated(context, 'book_trip_adults_number'),
+                                    getTranslated(
+                                        context, 'book_trip_adults_number'),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
@@ -435,15 +455,13 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         color: Color(0xff07898B),
                                       ),
                                       color: Colors.white,
-                                      onPressed: ()
-                                      {
-                                        if(_adultsNumber > 1)
+                                      onPressed: () {
+                                        if (_adultsNumber > 1)
                                           setState(() {
                                             _adultsNumber -= 1;
                                           });
                                       },
                                     ),
-
                                     Container(
                                       child: Text(
                                         _adultsNumber.toString(),
@@ -454,7 +472,6 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         ),
                                       ),
                                     ),
-
                                     MaterialButton(
                                       padding: const EdgeInsets.all(2.0),
                                       shape: CircleBorder(
@@ -469,20 +486,17 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         color: Color(0xff07898B),
                                       ),
                                       color: Colors.white,
-                                      onPressed: ()
-                                      {
-                                        if(_adultsNumber < 50)
+                                      onPressed: () {
+                                        if (_adultsNumber < 50)
                                           setState(() {
                                             _adultsNumber += 1;
                                           });
                                       },
                                     ),
-
                                   ],
                                 ),
                               ),
                             )
-
                           ],
                         ),
                       ],
@@ -495,16 +509,21 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         });
   }
 
-  void _showChildrenDialog(context, screenHeight , screenWidth) {
+  void _showChildrenDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.505,),
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.505,
+              ),
               child: Dialog(
-                shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20) , bottomRight: Radius.circular(20) ,)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
@@ -519,10 +538,12 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                             Expanded(
                               flex: 50,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: FittedBox(
                                   child: Text(
-                                    getTranslated(context, 'book_trip_children_number'),
+                                    getTranslated(
+                                        context, 'book_trip_children_number'),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
@@ -551,15 +572,13 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         color: Color(0xff07898B),
                                       ),
                                       color: Colors.white,
-                                      onPressed: ()
-                                      {
-                                        if(_childrenNumber > 0)
+                                      onPressed: () {
+                                        if (_childrenNumber > 0)
                                           setState(() {
                                             _childrenNumber -= 1;
                                           });
                                       },
                                     ),
-
                                     Container(
                                       child: Text(
                                         _childrenNumber.toString(),
@@ -570,7 +589,6 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         ),
                                       ),
                                     ),
-
                                     MaterialButton(
                                       padding: const EdgeInsets.all(2.0),
                                       shape: CircleBorder(
@@ -585,20 +603,17 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         color: Color(0xff07898B),
                                       ),
                                       color: Colors.white,
-                                      onPressed: ()
-                                      {
-                                        if(_childrenNumber < 50)
+                                      onPressed: () {
+                                        if (_childrenNumber < 50)
                                           setState(() {
                                             _childrenNumber += 1;
                                           });
                                       },
                                     ),
-
                                   ],
                                 ),
                               ),
                             )
-
                           ],
                         ),
                       ],
@@ -611,16 +626,21 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         });
   }
 
-  void _showBabiesDialog(context, screenHeight , screenWidth) {
+  void _showBabiesDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.66,),
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.66,
+              ),
               child: Dialog(
-                shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20) , bottomRight: Radius.circular(20) ,)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
@@ -635,10 +655,12 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                             Expanded(
                               flex: 50,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: FittedBox(
                                   child: Text(
-                                    getTranslated(context, 'book_trip_babies_number'),
+                                    getTranslated(
+                                        context, 'book_trip_babies_number'),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
@@ -667,15 +689,13 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         color: Color(0xff07898B),
                                       ),
                                       color: Colors.white,
-                                      onPressed: ()
-                                      {
-                                        if(_babiesNumber > 0)
+                                      onPressed: () {
+                                        if (_babiesNumber > 0)
                                           setState(() {
                                             _babiesNumber -= 1;
                                           });
                                       },
                                     ),
-
                                     Container(
                                       child: Text(
                                         _babiesNumber.toString(),
@@ -686,7 +706,6 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         ),
                                       ),
                                     ),
-
                                     MaterialButton(
                                       padding: const EdgeInsets.all(2.0),
                                       shape: CircleBorder(
@@ -701,20 +720,17 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                         color: Color(0xff07898B),
                                       ),
                                       color: Colors.white,
-                                      onPressed: ()
-                                      {
-                                        if(_babiesNumber < 50)
+                                      onPressed: () {
+                                        if (_babiesNumber < 50)
                                           setState(() {
                                             _babiesNumber += 1;
                                           });
                                       },
                                     ),
-
                                   ],
                                 ),
                               ),
                             )
-
                           ],
                         ),
                       ],
@@ -727,8 +743,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         });
   }
 
-  _stage0Widget(width , height)
-  {
+  _stage0Widget(width, height) {
     return Column(
       children: <Widget>[
         Container(
@@ -745,8 +760,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
               child: ClipPath(
                 clipper: ShapeBorderClipper(
                   shape: RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius.circular(7.0)),
+                      borderRadius: BorderRadius.circular(7.0)),
                 ),
                 child: Image.asset(
                   'assets/images/flight.jpg',
@@ -763,14 +777,14 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
           child: Container(
             width: width * 0.84,
             padding:
-            EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 side: BorderSide(color: Colors.black, width: 1),
               ),
               onPressed: () {
-                _showCitiesDialog(context, height , width);
+                _showCitiesDialog(context, height, width);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -802,14 +816,14 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
           child: Container(
             width: width * 0.84,
             padding:
-            EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 side: BorderSide(color: Colors.black, width: 1),
               ),
               onPressed: () {
-                _showTypesDialog(context, height , width);
+                _showTypesDialog(context, height, width);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -841,8 +855,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
     );
   }
 
-  _stage1Widget(width , height)
-  {
+  _stage1Widget(width, height) {
     return Column(
       children: <Widget>[
         Container(
@@ -859,8 +872,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
               child: ClipPath(
                 clipper: ShapeBorderClipper(
                   shape: RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius.circular(7.0)),
+                      borderRadius: BorderRadius.circular(7.0)),
                 ),
                 child: Image.asset(
                   'assets/images/forest.jpg',
@@ -877,7 +889,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
           child: Container(
             width: width * 0.84,
             padding:
-            EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -916,14 +928,14 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
           child: Container(
             width: width * 0.84,
             padding:
-            EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 side: BorderSide(color: Colors.black, width: 1),
               ),
               onPressed: () {
-                _showDaysDialog(context, height , width);
+                _showDaysDialog(context, height, width);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -955,8 +967,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
     );
   }
 
-  _stage2Widget(width , height)
-  {
+  _stage2Widget(width, height) {
     return Column(
       children: <Widget>[
         Container(
@@ -973,8 +984,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
               child: ClipPath(
                 clipper: ShapeBorderClipper(
                   shape: RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius.circular(7.0)),
+                      borderRadius: BorderRadius.circular(7.0)),
                 ),
                 child: Image.asset(
                   'assets/images/hotel.jpg',
@@ -988,7 +998,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         Container(
           width: width * 0.9,
           padding:
-          EdgeInsets.only(top: 5.0, right: 0.0, left: 0.0, bottom: 5.0),
+              EdgeInsets.only(top: 5.0, right: 0.0, left: 0.0, bottom: 5.0),
           child: Row(
             children: [
               Expanded(
@@ -997,12 +1007,13 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: _is3Star ? Color(0xff07898B) : Colors.white,
+                      backgroundColor:
+                          _is3Star ? Color(0xff07898B) : Colors.white,
                       side: BorderSide(color: Colors.black, width: 1),
                     ),
                     onPressed: () {
                       setState(() {
-                        _is3Star = ! _is3Star;
+                        _is3Star = !_is3Star;
                       });
                     },
                     child: Text(
@@ -1021,12 +1032,13 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: _is4Star ? Color(0xff07898B) : Colors.white,
+                      backgroundColor:
+                          _is4Star ? Color(0xff07898B) : Colors.white,
                       side: BorderSide(color: Colors.black, width: 1),
                     ),
                     onPressed: () {
                       setState(() {
-                        _is4Star = ! _is4Star;
+                        _is4Star = !_is4Star;
                       });
                     },
                     child: Text(
@@ -1045,7 +1057,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         Container(
           width: width * 0.9,
           padding:
-          EdgeInsets.only(top: 5.0, right: 0.0, left: 0.0, bottom: 5.0),
+              EdgeInsets.only(top: 5.0, right: 0.0, left: 0.0, bottom: 5.0),
           child: Row(
             children: [
               Expanded(
@@ -1054,12 +1066,13 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: _is5Star ? Color(0xff07898B) : Colors.white,
+                      backgroundColor:
+                          _is5Star ? Color(0xff07898B) : Colors.white,
                       side: BorderSide(color: Colors.black, width: 1),
                     ),
                     onPressed: () {
                       setState(() {
-                        _is5Star = ! _is5Star;
+                        _is5Star = !_is5Star;
                       });
                     },
                     child: Text(
@@ -1078,12 +1091,13 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: _isAllStar ? Color(0xff07898B) : Colors.white,
+                      backgroundColor:
+                          _isAllStar ? Color(0xff07898B) : Colors.white,
                       side: BorderSide(color: Colors.black, width: 1),
                     ),
                     onPressed: () {
                       setState(() {
-                        _isAllStar = ! _isAllStar;
+                        _isAllStar = !_isAllStar;
                       });
                     },
                     child: Text(
@@ -1123,7 +1137,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         Container(
           width: width * 0.9,
           padding:
-          EdgeInsets.only(top: 5.0, right: 0.0, left: 0.0, bottom: 5.0),
+              EdgeInsets.only(top: 5.0, right: 0.0, left: 0.0, bottom: 5.0),
           child: Row(
             children: [
               Expanded(
@@ -1133,22 +1147,25 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.white,
-                      side: BorderSide(color: _isTransfer ? Color(0xff07898B) : Colors.black, width: 1),
+                      side: BorderSide(
+                          color: _isTransfer ? Color(0xff07898B) : Colors.black,
+                          width: 1),
                     ),
                     onPressed: () {
                       setState(() {
-                        _isTransfer = ! _isTransfer;
+                        _isTransfer = !_isTransfer;
                       });
                     },
                     child: Column(
                       children: <Widget>[
-
                         Row(
                           children: <Widget>[
                             Icon(
                               Icons.check_circle_outline,
                               size: 20,
-                              color: _isTransfer ? Color(0xff07898B): Colors.white,
+                              color: _isTransfer
+                                  ? Color(0xff07898B)
+                                  : Colors.white,
                             ),
                           ],
                         ),
@@ -1157,12 +1174,13 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                           fit: BoxFit.fill,
                           height: height * 0.06,
                         ),
-
                         Text(
-                          getTranslated(context, 'home_offer_card_transportation'),
+                          getTranslated(
+                              context, 'home_offer_card_transportation'),
                           style: TextStyle(
                             fontSize: 14,
-                            color: _isTransfer ? Color(0xff07898B) : Colors.black,
+                            color:
+                                _isTransfer ? Color(0xff07898B) : Colors.black,
                           ),
                         ),
                       ],
@@ -1177,22 +1195,26 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.white,
-                      side: BorderSide(color: _isBreakfast ? Color(0xff07898B) : Colors.black, width: 1),
+                      side: BorderSide(
+                          color:
+                              _isBreakfast ? Color(0xff07898B) : Colors.black,
+                          width: 1),
                     ),
                     onPressed: () {
                       setState(() {
-                        _isBreakfast = ! _isBreakfast;
+                        _isBreakfast = !_isBreakfast;
                       });
                     },
                     child: Column(
                       children: <Widget>[
-
                         Row(
                           children: <Widget>[
                             Icon(
                               Icons.check_circle_outline,
                               size: 20,
-                              color: _isBreakfast ? Color(0xff07898B): Colors.white,
+                              color: _isBreakfast
+                                  ? Color(0xff07898B)
+                                  : Colors.white,
                             ),
                           ],
                         ),
@@ -1201,12 +1223,12 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                           fit: BoxFit.fill,
                           height: height * 0.06,
                         ),
-
                         Text(
                           getTranslated(context, 'home_offer_card_breakfast'),
                           style: TextStyle(
                             fontSize: 14,
-                            color: _isBreakfast ? Color(0xff07898B) : Colors.black,
+                            color:
+                                _isBreakfast ? Color(0xff07898B) : Colors.black,
                           ),
                         ),
                       ],
@@ -1222,8 +1244,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
     );
   }
 
-  _stage3Widget(width , height)
-  {
+  _stage3Widget(width, height) {
     return Column(
       children: <Widget>[
         Container(
@@ -1252,14 +1273,14 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
           child: Container(
             width: width * 0.84,
             padding:
-            EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 side: BorderSide(color: Colors.black, width: 1),
               ),
               onPressed: () {
-                _showAdultsDialog(context, height , width);
+                _showAdultsDialog(context, height, width);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1286,7 +1307,6 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
             ),
           ),
         ),
-
         Container(
           width: width * 0.9,
           padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -1313,14 +1333,14 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
           child: Container(
             width: width * 0.84,
             padding:
-            EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 side: BorderSide(color: Colors.black, width: 1),
               ),
               onPressed: () {
-                _showChildrenDialog(context, height , width);
+                _showChildrenDialog(context, height, width);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1347,7 +1367,6 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
             ),
           ),
         ),
-
         Container(
           width: width * 0.9,
           padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -1374,14 +1393,14 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
           child: Container(
             width: width * 0.84,
             padding:
-            EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 side: BorderSide(color: Colors.black, width: 1),
               ),
               onPressed: () {
-                _showBabiesDialog(context, height , width);
+                _showBabiesDialog(context, height, width);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1413,10 +1432,413 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
     );
   }
 
+  _stage4Widget(width, height) {
+    return Column(
+      children: <Widget>[
+        Container(
+          width: width * 0.9,
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsetsDirectional.only(
+                    start: 10.0, top: 0.0, bottom: 0.0),
+                child: Text(
+                  getTranslated(context, 'book_trip_full_name'),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: width * 0.9,
+          child: TextField(
+            keyboardType: TextInputType.text,
+            controller: _nameController,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            textAlign: TextAlign.start,
+            decoration: InputDecoration(
+                hintText: getTranslated(context, 'book_trip_full_name'),
+                hintStyle: TextStyle(
+                  fontSize: 14.0,
+                  color: Color(0xffC3C2C3),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                fillColor: Colors.white,
+                focusColor: Colors.black,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                filled: true),
+          ),
+        ),
+
+        Container(
+          width: width * 0.9,
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsetsDirectional.only(
+                    start: 10.0, top: 0.0, bottom: 0.0),
+                child: Text(
+                  getTranslated(context, 'book_trip_email'),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: width * 0.9,
+          child: TextField(
+            keyboardType: TextInputType.text,
+            controller: _emailController,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            textAlign: TextAlign.start,
+            decoration: InputDecoration(
+                hintText: getTranslated(context, 'book_trip_email'),
+                hintStyle: TextStyle(
+                  fontSize: 14.0,
+                  color: Color(0xffC3C2C3),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                fillColor: Colors.white,
+                focusColor: Colors.black,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                filled: true),
+          ),
+        ),
+
+        Container(
+          width: width * 0.9,
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsetsDirectional.only(
+                    start: 10.0, top: 0.0, bottom: 0.0),
+                child: Text(
+                  getTranslated(context, 'book_trip_whats_app'),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: width * 0.9,
+          child: TextField(
+            keyboardType: TextInputType.text,
+            controller: _whatsAppController,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            textAlign: TextAlign.start,
+            decoration: InputDecoration(
+                hintText: getTranslated(context, 'book_trip_whats_app'),
+                hintStyle: TextStyle(
+                  fontSize: 14.0,
+                  color: Color(0xffC3C2C3),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                fillColor: Colors.white,
+                focusColor: Colors.black,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                filled: true),
+          ),
+        ),
+
+        Container(
+          width: width * 0.9,
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsetsDirectional.only(
+                    start: 10.0, top: 0.0, bottom: 0.0),
+                child: Text(
+                  getTranslated(context, 'book_trip_budget'),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: width * 0.9,
+          child: TextField(
+            keyboardType: TextInputType.text,
+            controller: _budgetController,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            textAlign: TextAlign.start,
+            decoration: InputDecoration(
+                hintText: getTranslated(context, 'book_trip_budget'),
+                hintStyle: TextStyle(
+                  fontSize: 14.0,
+                  color: Color(0xffC3C2C3),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                fillColor: Colors.white,
+                focusColor: Colors.black,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                filled: true),
+          ),
+        ),
+
+        Container(
+          width: width * 0.9,
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsetsDirectional.only(
+                    start: 10.0, top: 0.0, bottom: 0.0),
+                child: Text(
+                  getTranslated(context, 'book_trip_notes'),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: width * 0.9,
+          child: TextField(
+            keyboardType: TextInputType.text,
+            controller: _notesController,
+            maxLines: 3,
+            minLines: 3,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            textAlign: TextAlign.start,
+            decoration: InputDecoration(
+                hintText: getTranslated(context, 'book_trip_note'),
+                hintStyle: TextStyle(
+                  fontSize: 14.0,
+                  color: Color(0xffC3C2C3),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                fillColor: Colors.white,
+                focusColor: Colors.black,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                filled: true),
+          ),
+        ),
+        Container(
+          width: width * 0.9,
+          height: height * 0.13,
+          color: Color(0xff07898B),
+          margin: EdgeInsets.symmetric(vertical: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 50,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: GFButton(
+                    size: 50,
+                    onPressed: () {
+                      if (_selectedTabBar > 0)
+                        setState(() {
+                          _selectedTabBar -= 1;
+                        });
+                    },
+                    color: Color(0xffFECD44),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black,
+                            size: 15.0,
+                          ),
+                          Text(
+                            getTranslated(context, 'book_trip_previous'),
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 50,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: GFButton(
+                    size: 50,
+                    onPressed: () {
+                      if (_selectedTabBar < 5)
+                        setState(() {
+                          _selectedTabBar += 1;
+                        });
+                    },
+                    color: Colors.white,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated(context, 'book_trip_finish'),
+                            style: TextStyle(fontSize: 14, color: Colors.black),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                            size: 15.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     final double screenHeight =
         MediaQuery.of(context).size.height - statusBarHeight - kToolbarHeight;
@@ -1433,7 +1855,8 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                   elevation: 2.0,
                   child: Container(
                     width: screenWidth,
-                    padding: EdgeInsets.symmetric(vertical:40.0 , horizontal: 0.0),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 40.0, horizontal: 0.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -1442,26 +1865,51 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                           child: Row(
                             children: <Widget>[
                               Expanded(
-                                  flex: 70 ,
-                                  child: Text(
-                                    getTranslated(context, 'book_trip_label'),
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                flex: 70,
+                                child: Text(
+                                  getTranslated(context, 'book_trip_label'),
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                  flex: 10,
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.phone,
+                                      color: Color(0xff07898B),
                                     ),
-                                  ),),
-                              Expanded(flex: 10,child: IconButton(icon: Icon(Icons.phone , color: Color(0xff07898B),),onPressed: (){},)),
-                              Expanded(flex: 10,child: IconButton(icon: Icon(MyIcons.whatsapp , color: Color(0xff1AEA4A),),onPressed: (){},)),
-                              Expanded(flex: 10,child: IconButton(icon: Icon(Icons.mail_outline , color: Color(0xff07898B),),onPressed: (){},)),
+                                    onPressed: () {},
+                                  )),
+                              Expanded(
+                                  flex: 10,
+                                  child: IconButton(
+                                    icon: Icon(
+                                      MyIcons.whatsapp,
+                                      color: Color(0xff1AEA4A),
+                                    ),
+                                    onPressed: () {},
+                                  )),
+                              Expanded(
+                                  flex: 10,
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.mail_outline,
+                                      color: Color(0xff07898B),
+                                    ),
+                                    onPressed: () {},
+                                  )),
                             ],
                           ),
                         ),
-
                         Container(
                           width: screenWidth * 0.9,
-                          padding: EdgeInsetsDirectional.only(top: 0.0, bottom: 0.0),
+                          padding:
+                              EdgeInsetsDirectional.only(top: 0.0, bottom: 0.0),
                           child: TabBar(
                             indicatorColor: Colors.white,
                             // labelColor: Color(0xff07898B),
@@ -1469,8 +1917,8 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                             labelPadding: EdgeInsets.all(1.0),
                             indicatorWeight: 4,
                             controller: _tabController,
-                            labelStyle:
-                            TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                            labelStyle: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
                             onTap: (index) {
                               switch (index) {
                                 case 0:
@@ -1509,37 +1957,49 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                               Tab(
                                 child: Container(
                                   height: screenHeight * 0.013,
-                                  color: _selectedTabBar == 0 ? Color(0xff07898B) : Color(0xffB4DCDC),
+                                  color: _selectedTabBar == 0
+                                      ? Color(0xff07898B)
+                                      : Color(0xffB4DCDC),
                                 ),
                               ),
                               Tab(
                                 child: Container(
                                   height: screenHeight * 0.013,
-                                  color: _selectedTabBar == 1 ? Color(0xff07898B) : Color(0xffB4DCDC),
+                                  color: _selectedTabBar == 1
+                                      ? Color(0xff07898B)
+                                      : Color(0xffB4DCDC),
                                 ),
                               ),
                               Tab(
                                 child: Container(
                                   height: screenHeight * 0.013,
-                                  color: _selectedTabBar == 2 ? Color(0xff07898B) : Color(0xffB4DCDC),
+                                  color: _selectedTabBar == 2
+                                      ? Color(0xff07898B)
+                                      : Color(0xffB4DCDC),
                                 ),
                               ),
                               Tab(
                                 child: Container(
                                   height: screenHeight * 0.013,
-                                  color: _selectedTabBar == 3 ? Color(0xff07898B) : Color(0xffB4DCDC),
+                                  color: _selectedTabBar == 3
+                                      ? Color(0xff07898B)
+                                      : Color(0xffB4DCDC),
                                 ),
                               ),
                               Tab(
                                 child: Container(
                                   height: screenHeight * 0.013,
-                                  color: _selectedTabBar == 4 ? Color(0xff07898B) : Color(0xffB4DCDC),
+                                  color: _selectedTabBar == 4
+                                      ? Color(0xff07898B)
+                                      : Color(0xffB4DCDC),
                                 ),
                               ),
                               Tab(
                                 child: Container(
                                   height: screenHeight * 0.013,
-                                  color: _selectedTabBar == 5 ? Color(0xff07898B) : Color(0xffB4DCDC),
+                                  color: _selectedTabBar == 5
+                                      ? Color(0xff07898B)
+                                      : Color(0xffB4DCDC),
                                 ),
                               ),
                             ],
@@ -1555,16 +2015,20 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
                                     if (_selectedTabBar == 5)
                                       return Container();
                                     else if (_selectedTabBar == 4)
-                                      return Container(
-                                      );
+                                      return _stage4Widget(
+                                          screenWidth, screenHeight);
                                     else if (_selectedTabBar == 3)
-                                      return _stage3Widget(screenWidth , screenHeight);
+                                      return _stage3Widget(
+                                          screenWidth, screenHeight);
                                     else if (_selectedTabBar == 2)
-                                      return _stage2Widget(screenWidth , screenHeight);
+                                      return _stage2Widget(
+                                          screenWidth, screenHeight);
                                     else if (_selectedTabBar == 1)
-                                      return _stage1Widget(screenWidth , screenHeight);
+                                      return _stage1Widget(
+                                          screenWidth, screenHeight);
                                     else
-                                      return _stage0Widget(screenWidth , screenHeight);
+                                      return _stage0Widget(
+                                          screenWidth, screenHeight);
                                   },
                                 )),
                           ],
@@ -1583,7 +2047,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
         unselectedItemColor: Color(0xff9FD0D2),
         selectedItemColor: Color(0xff07898B),
         onTap: onTabTapped, // new
-        currentIndex: 0,
+        currentIndex: 1,
         type: BottomNavigationBarType.fixed,
         items: [
           new BottomNavigationBarItem(
@@ -1610,8 +2074,7 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
   void onTabTapped(int index) {
     if (index == 0) {
       Navigator.of(context).push(
-        new MaterialPageRoute(
-            builder: (BuildContext context) => new Home()),
+        new MaterialPageRoute(builder: (BuildContext context) => new Home()),
       );
     } else if (index == 1) {
       Navigator.of(context).push(
@@ -1619,12 +2082,11 @@ class _PlanYourTripState extends State<PlanYourTrip> with TickerProviderStateMix
             builder: (BuildContext context) => new PlanYourTrip()),
       );
     } else if (index == 2) {
-      // Navigator.of(context).push(new MaterialPageRoute(
-      //     builder: (BuildContext context) => new MyAccount()));
+      Navigator.of(context).push(new MaterialPageRoute(
+          builder: (BuildContext context) => new MyBooks()));
     } else if (index == 3) {
       Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new Settings()));
     }
   }
-
 }
