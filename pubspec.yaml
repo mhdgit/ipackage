@@ -73,6 +73,9 @@ flutter:
     - assets/images/meal.png
     - assets/icons/dish.png
     - assets/icons/payment.png
+    - assets/images/users/
+    - assets/images/users/i1.png
+    - assets/images/users/i2.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -90,6 +93,9 @@ flutter:
     - family:  MyIcons
       fonts:
         - asset: assets/icons/MyIcons.ttf
+    - family: cairo
+      fonts:
+        - asset: assets/font/Cairo.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

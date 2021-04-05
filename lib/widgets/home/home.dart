@@ -10,6 +10,7 @@ import 'package:ipackage/widgets/my_books.dart';
 import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/settings.dart';
 import 'package:ipackage/widgets/search/search_your_trip.dart';
+import 'package:ipackage/widgets/users/new_account.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -29,8 +30,12 @@ class _HomeState extends State<Home> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              SizedBox(
+                height: 50,
+              ),
               Row(
                 children: <Widget>[
+
                   Expanded(
                     flex: 50,
                     child: Padding(
@@ -91,6 +96,28 @@ class _HomeState extends State<Home> {
                         onPressed: () {
                           Navigator.of(context).push(new MaterialPageRoute(
                               builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 2,)));
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: GFButton(
+                        color: Color(0xff07898B),
+                        textColor: Colors.white,
+                        text: 'account',
+                        size: 50.0,
+                        textStyle: TextStyle(
+                          fontSize: 16.0,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (BuildContext context) => new New_account()));
                         },
                       ),
                     ),

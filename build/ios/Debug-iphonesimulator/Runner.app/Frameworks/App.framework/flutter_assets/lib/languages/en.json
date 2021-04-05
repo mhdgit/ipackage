@@ -211,6 +211,16 @@
   "book_trip_adults_number" : "Adults number",
   "book_trip_children_number" : "Children number",
   "book_trip_babies_number" : "Babies number",
+  "book_trip_full_name" : "Full name",
+  "book_trip_email" : "E-mail",
+  "book_trip_whats_app" : "Whatsapp number",
+  "book_trip_budget" : "Budget",
+  "book_trip_notes" : "Notes you want to tell us",
+  "book_trip_finish" : "Finish",
+
+  "my_reservations_title" : "Reservation status",
+  "my_reservations_set" : "Booked",
+  "my_reservations_canceled" : "Canceled",
 
   "home_search_hint" : "Find a coupon or store",
   "home_search_btn" : "Search",

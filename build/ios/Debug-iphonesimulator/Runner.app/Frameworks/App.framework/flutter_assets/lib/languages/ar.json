@@ -210,6 +210,16 @@
   "book_trip_adults_number" : "عدد البالغين",
   "book_trip_children_number" : "عدد الأطفال",
   "book_trip_babies_number" : "عدد الرضّع",
+  "book_trip_full_name" : "الاسم الكامل",
+  "book_trip_email" : "البريد الالكتروني",
+  "book_trip_whats_app" : "رقم الواتساب",
+  "book_trip_budget" : "الميزانية المحددة",
+  "book_trip_notes" : "ملاحظات تريد إخبارنا بها",
+  "book_trip_finish" : "إنهاء",
+
+  "my_reservations_title" : "حالة الحجز",
+  "my_reservations_set" : "تم الحجز",
+  "my_reservations_canceled" : "ملغية",
 
 
   "home_search_hint" : "ابحث عن كوبون أو متجر",
