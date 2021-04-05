@@ -3,6 +3,7 @@ import 'package:getwidget/components/rating/gf_rating.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
+import 'package:ipackage/widgets/change_activity.dart';
 import 'package:ipackage/widgets/home/domestic_offer_main.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -990,7 +991,11 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                   Expanded(
                                                     flex:40,
                                                     child: TextButton(
-                                                      onPressed: (){},
+                                                      onPressed: (){
+                                                        Navigator.of(context).push(new MaterialPageRoute(
+                                                            builder: (BuildContext context) =>
+                                                            new ChangeActivity()));
+                                                      },
                                                       child: Text(
                                                         getTranslated(context, 'fo_add_btn'),
                                                         textAlign: TextAlign.start,
