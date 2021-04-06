@@ -78,7 +78,24 @@ class _login extends State<login> {
                               ),
                               //controller: _usernameController,
                             ),
-                            SizedBox(height: 30,),
+                            SizedBox(height: 20,),
+
+                            TextButton(
+                              child: Text(getTranslated(context, 'login_reset_pass_main')),
+                              style: TextButton.styleFrom(
+                                primary: Colors.black,
+
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'cairo',
+
+                                ),
+                              ),
+                              onPressed: () {
+                                print('Pressed');
+                              },
+                            ),
 
                             GFButton(
                               color: Color(0xff07898b),
