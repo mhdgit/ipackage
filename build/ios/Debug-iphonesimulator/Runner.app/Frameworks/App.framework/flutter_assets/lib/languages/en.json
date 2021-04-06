@@ -256,5 +256,7 @@
   "login_google": "Continue with Google",
   "Copied": " The code has been copied ",
   "search_results": "Search results for ",
-  "skip": "skip"
+  "skip": "skip",
+
+  "OR_hint": "OR"
 }

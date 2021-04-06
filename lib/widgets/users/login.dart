@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/modules/my_icons.dart';
+import 'package:ipackage/widgets/users/reset_pass.dart';
 
 
 class login extends StatefulWidget {
@@ -89,11 +91,13 @@ class _login extends State<login> {
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontFamily: 'cairo',
-
+                                  decoration: TextDecoration.underline,
                                 ),
+
                               ),
                               onPressed: () {
-                                print('Pressed');
+                                Navigator.of(context).push(new MaterialPageRoute(
+                                    builder: (BuildContext context) => new reset_pass()));
                               },
                             ),
 
@@ -113,9 +117,19 @@ class _login extends State<login> {
                               },
                             ),
 
-                            TextButton(
-                              child: Text(getTranslated(context, 'drawer_login')),
+                            SizedBox(height: 10,),
+                            Center(
+                              child:Text(getTranslated(context, 'OR_hint'),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: 'cairo',),textAlign: TextAlign.center,),
+                            ),
+                            SizedBox(height: 10,),
+
+                            SizedBox(
+                          width: double.infinity,
+                          child:TextButton.icon(
+                              label: Text(getTranslated(context, 'login_facebook'),textAlign: TextAlign.center,),
+                              icon: Icon(MyIcons.facebook_square,color: Color(0xff07898b),),
                               style: TextButton.styleFrom(
+
                                 primary: Colors.black,
 
                                 textStyle: TextStyle(
@@ -124,11 +138,41 @@ class _login extends State<login> {
                                   fontFamily: 'cairo',
 
                                 ),
+
+                                side: BorderSide(color: Color(0xff07898b), width: 1),
+
                               ),
                               onPressed: () {
                                 print('Pressed');
                               },
-                            )
+                            ),),
+                            SizedBox(height: 10,),
+                            SizedBox(
+                              width: double.infinity,
+                              child:TextButton.icon(
+                                label: Text(getTranslated(context, 'login_google'),textAlign: TextAlign.center,),
+                                icon: Icon(MyIcons.google,color: Color(0xff07898b),),
+                                style: TextButton.styleFrom(
+
+                                  primary: Colors.black,
+
+                                  textStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontFamily: 'cairo',
+
+                                  ),
+
+                                  side: BorderSide(color: Color(0xff07898b), width: 1),
+
+                                ),
+                                onPressed: () {
+                                  print('Pressed');
+                                },
+                              ),),
+
+
+
 
 
                           ],
