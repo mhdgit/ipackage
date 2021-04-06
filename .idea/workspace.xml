@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="635e63dd-f7b8-415a-a66f-415dd4a44b0f" name="Default Changelist" comment="" />
+    <list default="true" id="635e63dd-f7b8-415a-a66f-415dd4a44b0f" name="Default Changelist" comment="Build change widgets_updated">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/change_hotel_room.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/change_hotel_room.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,8 +144,25 @@
       <option name="project" value="LOCAL" />
       <updated>1617667731056</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Build change widgets_updated">
+      <created>1617667771406</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1617667771406</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Setup localization feature.&#10;Build home widget." />
@@ -162,30 +182,30 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1617118525200" />
-    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1617667729617">
+    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1617707240310">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1617667729617" />
+    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1617707240310" />
     <state x="462" y="138" key="FileChooserDialogImpl" timestamp="1615601599401">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="462" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1615601599401" />
-    <state width="1325" height="143" key="GridCell.Tab.0.bottom" timestamp="1617667503177">
+    <state width="1325" height="143" key="GridCell.Tab.0.bottom" timestamp="1617707319454">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1617667503177" />
-    <state width="1325" height="143" key="GridCell.Tab.0.center" timestamp="1617667503176">
+    <state width="1325" height="143" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1617707319454" />
+    <state width="1325" height="143" key="GridCell.Tab.0.center" timestamp="1617707319454">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1617667503176" />
-    <state width="1325" height="143" key="GridCell.Tab.0.left" timestamp="1617667503176">
+    <state width="1325" height="143" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1617707319454" />
+    <state width="1325" height="143" key="GridCell.Tab.0.left" timestamp="1617707319452">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1617667503176" />
-    <state width="1325" height="143" key="GridCell.Tab.0.right" timestamp="1617667503176">
+    <state width="1325" height="143" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1617707319452" />
+    <state width="1325" height="143" key="GridCell.Tab.0.right" timestamp="1617707319454">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1325" height="143" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1617667503176" />
+    <state width="1325" height="143" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1617707319454" />
     <state x="548" y="105" key="RollbackChangesDialog" timestamp="1617667543900">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -194,14 +214,18 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="221" y="29" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1616068650435" />
+    <state x="445" y="101" key="VCS.ChangeListViewerDialog" timestamp="1617667761207">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="445" y="101" key="VCS.ChangeListViewerDialog/0.0.1366.768@0.0.1366.768" timestamp="1617667761207" />
     <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1617453228986">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1617453228986" />
-    <state x="481" y="299" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617667746597">
+    <state x="481" y="299" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617667775434">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="481" y="299" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768@0.0.1366.768" timestamp="1617667746597" />
+    <state x="481" y="299" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768@0.0.1366.768" timestamp="1617667775434" />
     <state x="481" y="285" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1615603148282">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

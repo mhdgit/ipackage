@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
-import 'package:ipackage/widgets/hotel_details.dart';
 
 class ChangeHotelRoom extends StatefulWidget {
   @override
