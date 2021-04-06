@@ -222,6 +222,19 @@
   "my_reservations_set" : "Booked",
   "my_reservations_canceled" : "Canceled",
 
+  "hotel_details_label" : "New Palace Hotel ",
+  "hotel_details_location" : "Egypt - Ismailia",
+  "hotel_details_label_2" : "Hotel details",
+  "hotel_details_label_3" : "It is one of the most prestigious hotels in Ismailia, and it is located in the heart of Ismailia, near all the tourist attractions in the city, two minutes from the train station, and 15 minutes from the beaches of Ismailia. Once you arrive you will receive a warm welcome from our attentive and lovely team, who will be more than happy to choose the right room for you. ",
+  "hotel_details_room" : "Hotel room",
+  "hotel_details_room_2" : "A room for one person",
+  "hotel_details_room_3" : "means of comfort",
+  "hotel_details_room_4" : "Cleanliness is of a high standard",
+
+  "change_hotel" : "Change of hotels",
+  "change_hotel_room" : "Change of bedroom",
+  "change_activity" : "Change of activity",
+
   "home_search_hint" : "Find a coupon or store",
   "home_search_btn" : "Search",
   "home_stores_title" : "Stores",
