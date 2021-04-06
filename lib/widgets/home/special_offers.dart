@@ -36,7 +36,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                       builder: (BuildContext context) => new DomesticOfferMain()));
                 },
                 child: Card(shadowColor: Colors.white,
-                  elevation: 0.0,
+                  elevation: 1.5,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
