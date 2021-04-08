@@ -102,7 +102,9 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              Row(
+
+              //account btn
+              /*Row(
                 children: <Widget>[
                   Expanded(
                     child: Padding(
@@ -123,7 +125,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ],
-              ),
+              ),*/
 
 
               Container(
