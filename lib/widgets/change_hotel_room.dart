@@ -17,7 +17,6 @@ class _ChangeHotelRoomState extends State<ChangeHotelRoom> {
         MediaQuery.of(context).size.height - statusBarHeight - kToolbarHeight;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xffE9F7F8),

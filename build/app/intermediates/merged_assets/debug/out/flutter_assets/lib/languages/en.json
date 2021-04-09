@@ -101,7 +101,12 @@
 
   "home_national_tourism_btn" : "Domestic Tourism",
   "home_international_tourism_btn" : "Foreign Tourism",
+
   "home_ambassadors_btn" : "iPackage Ambassadors ",
+  "home_ambassadors_btn_2" : "Destination",
+  "home_ambassadors_btn_3" : "Tour guide",
+  "home_ambassadors_btn_4" : "Tourist",
+
   "home_national_tourism_cities_label" : "Domestic tourism cities",
   "home_national_tourism_offers_label" : "Special offers in domestic tourism ",
   "home_national_tourism_offers_label_2" : "The special offers inside the iPackage website are the ones on which there are special discounts and prices for a limited time",
@@ -234,6 +239,44 @@
   "change_hotel" : "Change of hotels",
   "change_hotel_room" : "Change of bedroom",
   "change_activity" : "Change of activity",
+
+  "ambassadors_services" : "Services",
+  "as_agent_name" : "Ambassador's name",
+  "as_year" : "year",
+  "as_services" : "The services it provides",
+  "as_language" : "Ambassador's language ",
+
+  "ambassador_profile_btn" : "Ambassador booking",
+  "ambassador_profile_service" : "Rent a cottage",
+  "ambassador_profile_rating" : "Service rating",
+  "ambassador_profile_response" : "Average response speed",
+  "ambassador_profile_hours" : "Hours",
+  "ambassador_profile_service_info" : "Information about the service",
+  "ambassador_profile_service_info_2" : "Detailed information about the service provided by the ambassador to the tourist",
+  "ambassador_profile_service_ext" : "Developments are available for this service",
+  "ambassador_profile_service_ext_2" : "Tour guide",
+  "ambassador_profile_service_ext_3" : "for two days",
+
+  "ambassador_profile_add_btn" : "Add service",
+  "ambassador_profile_name" : "Name",
+  "ambassador_profile_agents" : "Agents number",
+  "ambassador_profile_level" : "Rating",
+  "ambassador_profile_speed" : "Response speed",
+  "ambassador_profile_speed_value" : "Five hours",
+  "ambassador_profile_last_check" : "Last check",
+  "ambassador_profile_last_check_value" : "2 hours ago",
+
+  "ambassador_add_service_location" : "Service title",
+  "ambassador_add_service_location_2" : "Include a short title that accurately describes your project",
+  "ambassador_add_service_details" : "Service details",
+  "ambassador_add_service_details_2" : "Include a detailed and accurate description of your service",
+  "ambassador_add_service_images" : "Service gallery",
+  "ambassador_add_service_images_2" : "Add a photo or video",
+  "ambassador_add_service_images_3" : "Size: (800x470) pixels, maximum size: 5MB, allowed number: 10 files",
+  "ambassador_add_service_images_4" : "Choosing a well-designed video or image will show your service professionally and increase your sales ",
+  "ambassador_add_service_budget" : "Service budget",
+  "ambassador_add_service_period" : "Term of delivery",
+
 
   "home_search_hint" : "Find a coupon or store",
   "home_search_btn" : "Search",

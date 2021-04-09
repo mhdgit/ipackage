@@ -1,6 +1,5 @@
 import 'package:dropdown_below/dropdown_below.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/City.dart';
 import 'package:ipackage/modules/my_icons.dart';
