@@ -271,5 +271,13 @@
   "search_results": "Search results for ",
   "skip": "skip",
 
-  "OR_hint": "OR"
+  "OR_hint": "OR",
+  "Continue": "Continue",
+  "reset_email_error": "The email address you entered is not registered with us, please try again",
+  "reset_code_error": "The code you entered is wrong, please try again",
+  "reset_code_title": "The code",
+  "reset_code_subtitle": "Please type the code that was sent to you",
+  "reset_new_pass_title": "Create a new password",
+  "reset_new_pass_subtitle": "Please type a new password",
+  "reset_pass_subtitle": "Please reset the password using email"
 }
