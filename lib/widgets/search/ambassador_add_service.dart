@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/widgets/notifications.dart';
 
 class AmbassadorAddService extends StatefulWidget {
   @override
@@ -30,7 +31,10 @@ class _AmbassadorAddServiceState extends State<AmbassadorAddService> {
         shadowColor: Colors.white,
         actions: [
           IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){}),
-          IconButton(icon: Icon(Icons.notifications_outlined , color: Colors.black,), onPressed: (){}),
+          IconButton(icon: Icon(Icons.notifications_outlined , color: Colors.black,), onPressed: (){
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Notifications()));
+          }),
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: CircleAvatar(

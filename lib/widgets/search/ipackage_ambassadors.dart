@@ -4,6 +4,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/City.dart';
 import 'package:ipackage/widgets/search/ambassadors_services.dart';
+import 'package:ipackage/widgets/search/tourist_services.dart';
 
 class IPackageAmbassadors extends StatefulWidget {
   @override
@@ -75,7 +76,10 @@ class _IPackageAmbassadorsState extends State<IPackageAmbassadors> {
             padding:
             EdgeInsets.only(top: 10.0, right: 0.0, left: 0.0, bottom: 0.0),
             child: GFButton(
-              onPressed: (){},
+              onPressed: (){
+                Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => new TouristServices()));
+              },
               text: getTranslated(context, 'home_ambassadors_btn_3'),
               textColor: Colors.white,
               textStyle: TextStyle(fontSize: 14),

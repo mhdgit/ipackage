@@ -265,8 +265,8 @@
   "ambassador_profile_last_check" : "آخر تواجد",
   "ambassador_profile_last_check_value" : "منذ ساعتين",
 
-  "ambassador_add_service_location" : "عنوان الخدمة",
-  "ambassador_add_service_location_2" : "أدرج عنواناً موجزاً يوصف مشروعك بشكل دقيق",
+  "ambassador_add_service_title" : "عنوان الخدمة",
+  "ambassador_add_service_title_2" : "أدرج عنواناً موجزاً يوصف مشروعك بشكل دقيق",
   "ambassador_add_service_details" : "تفاصيل الخدمة",
   "ambassador_add_service_details_2" : "أدرج وصفاً مفصلاً و دقيقاً لخدمتك",
   "ambassador_add_service_images" : "معرض الخدمة",
@@ -275,6 +275,35 @@
   "ambassador_add_service_images_4" : "اختيار فيديو أو صورة مصممة بشكل جيد ستظهر خدمتك بشكل احترافي و تزيد من مبيعاتك",
   "ambassador_add_service_budget" : "ميزانية الخدمة",
   "ambassador_add_service_period" : "مدة التسليم",
+
+  "tourist_services" : "طلبات السياح",
+  "tourist_services_username" : "اسم السائح",
+  "tourist_services_request" : "وصف للخدمة التي يريدها",
+
+  "tourist_add_service_requirements" : "متطلبات الخدمة",
+  "tourist_add_service_requirements_2" : "اذكر أهم المتطلبات التي تريدها بالخدمة",
+  "tourist_add_service_budget" : "الميزانية المتوقعة للخدمة",
+  "tourist_add_service_term" : "المدة المتوقعة للتسليم",
+
+  "tourist_service_main_title" : "مشروع مرشد سياحي",
+  "tourist_service_main_btn" : "أضف عرضك",
+  "tourist_service_main_card" : "بطاقة الخدمة",
+  "tourist_service_main_budget" : "الميزانية",
+  "tourist_service_main_term" : "مدة التنفيذ",
+  "tourist_service_main_offers_average" : "متوسط العروض",
+  "tourist_service_main_details" : "تفاصيل الخدمة",
+  "tourist_service_main_details_2" : "هو واحد من الفنادق المرموقة في الاسماعيلية، و يقع في قلب مدينة الاسماعيلية بالقرب من جميع المعالم السياحية في المدينة ، و على بعد دقيقتين من محطة القطار ، و على بعد 15 دقيقة من شواطئ مدينة الاسماعيلية. و بمجرد وصولك سوف تحصل على ترحيب حار من فريقنا اليقظ و الجميل ، الذين سيكونون أكثر من سعداء لاختيار الغرفة المناسبة لك.",
+  "tourist_service_main_requirements" : "الاحتياجات المطلوبة",
+  "tourist_service_main_requirement_2" : "معرفة الأماكن",
+  "tourist_service_main_add_offer" : "أضف عرضك الآن",
+  "tourist_service_main_offer_details" : "تفاصيل العرض",
+  "tourist_service_main_offers" : "العروض المقدمة",
+
+  "notifications" : "الإشعارات",
+  "notification_name" : "اسم السائح",
+  "notification_content" : "لقد قام السائح بالتواصل معك",
+  "notification_content_2" : "مرحبا أنا محمد أحمد و أريد التواصل معك",
+
 
   "home_search_hint" : "ابحث عن كوبون أو متجر",
   "home_search_btn" : "ابحث",
