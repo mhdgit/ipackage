@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/widgets/notifications.dart';
 import 'package:ipackage/widgets/search/ambassador_add_service.dart';
 
 class AmbassadorProfile extends StatefulWidget {
@@ -28,7 +29,10 @@ class _AmbassadorProfileState extends State<AmbassadorProfile> {
         ),
         actions: [
           IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){}),
-          IconButton(icon: Icon(Icons.notifications_outlined , color: Colors.black,), onPressed: (){}),
+          IconButton(icon: Icon(Icons.notifications_outlined , color: Colors.black,), onPressed: (){
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Notifications()));
+          }),
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: CircleAvatar(

@@ -277,6 +277,34 @@
   "ambassador_add_service_budget" : "Service budget",
   "ambassador_add_service_period" : "Term of delivery",
 
+  "tourist_services" : "Tourist requests",
+  "tourist_services_username" : "Tourist name",
+  "tourist_services_request" : "A description of the service he wanted ",
+
+  "tourist_add_service_requirements" : "Service requirements",
+  "tourist_add_service_requirements_2" : "List the most important requirements that you want in the service ",
+  "tourist_add_service_budget" : "Projected budget for the service",
+  "tourist_add_service_term" : "Projected term for the service",
+
+  "notifications" : "Notifications",
+  "notification_name" : "Tourist name",
+  "notification_content" : "The tourist has contacted you",
+  "notification_content_2" : "Hello, I am Mohamed Ahmed, and I want to communicate with you",
+
+  "tourist_service_main_title" : "A tour guide project",
+  "tourist_service_main_btn" : "Add your offer",
+  "tourist_service_main_card" : "Service card",
+  "tourist_service_main_budget" : "Budget",
+  "tourist_service_main_term" : "Duration of implementation",
+  "tourist_service_main_offers_average" : "Average offers",
+  "tourist_service_main_details" : "Service details",
+  "tourist_service_main_details_2" : "It is one of the most prestigious hotels in Ismailia, and it is located in the heart of Ismailia, near all the tourist attractions in the city, two minutes from the train station, and 15 minutes from the beaches of Ismailia. Once you arrive you will receive a warm welcome from our attentive and lovely team, who will be more than happy to choose the right room for you.",
+  "tourist_service_main_requirements" : "Required needs",
+  "tourist_service_main_requirement_2" : "Knowing the places",
+  "tourist_service_main_add_offer" : "Add your offer now",
+  "tourist_service_main_offer_details" : "Offer details",
+  "tourist_service_main_offers" : "Offers made",
+
 
   "home_search_hint" : "Find a coupon or store",
   "home_search_btn" : "Search",
