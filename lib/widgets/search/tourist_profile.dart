@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/widgets/chats/chats.dart';
+import 'package:ipackage/widgets/notifications.dart';
 import 'package:ipackage/widgets/search/ambassador_add_service.dart';
 import 'package:ipackage/widgets/search/tourist_add_service.dart';
 
@@ -28,8 +30,14 @@ class _TouristProfileState extends State<TouristProfile> {
           getTranslated(context, 'as_agent_name'),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){}),
-          IconButton(icon: Icon(Icons.notifications_outlined , color: Colors.black,), onPressed: (){}),
+          IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Chats()));
+          }),
+          IconButton(icon: Icon(Icons.notifications_outlined , color: Colors.black,), onPressed: (){
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Notifications()));
+          }),
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: CircleAvatar(

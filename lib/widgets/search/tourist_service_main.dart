@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/components/rating/gf_rating.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/widgets/chats/chats.dart';
 import 'package:ipackage/widgets/notifications.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -122,7 +123,10 @@ class _TouristServiceMainState extends State<TouristServiceMain> {
           getTranslated(context, 'tourist_services_username'),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){}),
+          IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Chats()));
+          }),
           IconButton(icon: Icon(Icons.notifications_outlined , color: Colors.black,), onPressed: (){
             Navigator.of(context).push(new MaterialPageRoute(
                 builder: (BuildContext context) => new Notifications()));

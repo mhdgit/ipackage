@@ -286,11 +286,6 @@
   "tourist_add_service_budget" : "Projected budget for the service",
   "tourist_add_service_term" : "Projected term for the service",
 
-  "notifications" : "Notifications",
-  "notification_name" : "Tourist name",
-  "notification_content" : "The tourist has contacted you",
-  "notification_content_2" : "Hello, I am Mohamed Ahmed, and I want to communicate with you",
-
   "tourist_service_main_title" : "A tour guide project",
   "tourist_service_main_btn" : "Add your offer",
   "tourist_service_main_card" : "Service card",
@@ -304,6 +299,13 @@
   "tourist_service_main_add_offer" : "Add your offer now",
   "tourist_service_main_offer_details" : "Offer details",
   "tourist_service_main_offers" : "Offers made",
+
+  "notifications" : "Notifications",
+  "notification_name" : "Tourist name",
+  "notification_content" : "The tourist has contacted you",
+  "notification_content_2" : "Hello, I am Mohamed Ahmed, and I want to communicate with you",
+
+  "change_flight" : "Change flight",
 
 
   "home_search_hint" : "Find a coupon or store",

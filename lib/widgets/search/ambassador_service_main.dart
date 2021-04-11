@@ -3,6 +3,7 @@ import 'package:getwidget/components/rating/gf_rating.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:image_viewer/image_viewer.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/widgets/chats/chats.dart';
 import 'package:ipackage/widgets/notifications.dart';
 import 'package:ipackage/widgets/search/ambassador_profile.dart';
 
@@ -127,7 +128,10 @@ class _AmbassadorServiceMainState extends State<AmbassadorServiceMain> {
           getTranslated(context, 'as_agent_name'),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){}),
+          IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Chats()));
+          }),
           IconButton(icon: Icon(Icons.notifications_outlined , color: Colors.black,), onPressed: (){
             Navigator.of(context).push(new MaterialPageRoute(
                 builder: (BuildContext context) => new Notifications()));
