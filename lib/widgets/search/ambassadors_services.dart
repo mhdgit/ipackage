@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/widgets/chats/chats.dart';
 import 'package:ipackage/widgets/notifications.dart';
 import 'package:ipackage/widgets/search/ambassador_service_main.dart';
 
@@ -29,7 +30,10 @@ class _AmbassadorsServicesState extends State<AmbassadorsServices> {
           getTranslated(context, 'ambassadors_services'),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){}),
+          IconButton(icon: Icon(Icons.mail_outline , color: Colors.black,), onPressed: (){
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Chats()));
+          }),
           IconButton(icon: Icon(Icons.notifications_outlined , color: Colors.black,), onPressed: (){
             Navigator.of(context).push(new MaterialPageRoute(
                 builder: (BuildContext context) => new Notifications()));
