@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
+import 'package:ipackage/widgets/change_flight.dart';
 import 'package:ipackage/widgets/change_hotel.dart';
 import 'package:ipackage/widgets/hotel_details.dart';
 
@@ -1571,7 +1572,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                             ),
                           ),
                         ),
-//
+
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
@@ -1908,6 +1909,17 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                           return Container(
                             width: screenWidth * 0.84,
                             height: 150,
+                            child: Center(
+                              child: GFButton(
+                                onPressed: (){
+                                  Navigator.of(context).push(new MaterialPageRoute(
+                                      builder: (BuildContext context) => new ChangeFlight()));
+                                },
+                                color: Color(0xff07898B),
+                                textColor: Colors.white,
+                                text: 'تعديل الطيران',
+                              ),
+                            ),
                           );
                         else if (_selectedTabBar == 2)
                           return _hotelsWidget(screenWidth, screenHeight);

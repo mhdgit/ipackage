@@ -22,83 +22,281 @@ class _ChangeFlightState extends State<ChangeFlight> {
         elevation: 0.0,
         shadowColor: Colors.white,
         title: Text(
-          getTranslated(context, 'change_hotel_room'),
+          getTranslated(context, 'change_flight'),
         ),
         centerTitle: true,
       ),
 
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
             for(int index = 0 ; index < 5 ; index++)
-              Row(
-                children: [
-                  Container(
-                    width: screenWidth * 0.9,
-                    margin: EdgeInsetsDirectional.only(
-                        start: screenWidth * 0.08, top: 5.0, bottom: 10.0),
-                    child: Card(
-                      elevation: 2.0,
-                      child: Row(
+              Container(
+                margin: EdgeInsetsDirectional.only(top: 5.0, bottom: 5.0 , start: 10.0, end: 10.0),
+                child: Card(
+                  elevation: 2.0,
+                  child: Column(
+                    children: [
+                      Row(
                         children: [
                           Expanded(
-                            flex: 35,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(3.0),
-                              ),
-                              child: Image.asset('assets/images/bedroom.jpg',
-                                fit: BoxFit.cover, width: screenWidth * 0.1 , height: screenHeight * 0.15,),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 50,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth * 0.025),
-                              child: FittedBox(
-                                child: Text(
-                                  getTranslated(context, 'hotel_details_room_2'),
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 15,
+                            flex: 33,
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextButton(
-                                    style: TextButton.styleFrom(
-                                      backgroundColor: Color(0xff07898B),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        width: 25,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffFFCECF),
+                                          borderRadius: BorderRadius.circular(50),
+                                          border: Border.all(
+                                            width: 3,
+                                            color: Colors.redAccent,
+                                            style: BorderStyle.solid,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                    onPressed: () {},
-                                    child: Center(
-                                        child: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                          size: 13,
-                                        )),
-                                  ),
-                                )
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        'JED',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      '15:12:00',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black38,
+                                      ),
+                                      textAlign: TextAlign.end,
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
-                          )
+                          ),
+                          Expanded(
+                            flex: 33,
+                            child: Column(
+                              children: <Widget>[
+                                Icon(Icons.flight, color: Color(0xff07898B),),
+                                Text(
+                                  '15:12:00',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black38,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 33,
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        width: 25,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffFFCECF),
+                                          borderRadius: BorderRadius.circular(50),
+                                          border: Border.all(
+                                            width: 3,
+                                            color: Colors.redAccent,
+                                            style: BorderStyle.solid,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        'JED',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Text(
+                                  '15:12:00',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black38,
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                    ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 33,
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        width: 25,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffFFCECF),
+                                          borderRadius: BorderRadius.circular(50),
+                                          border: Border.all(
+                                            width: 3,
+                                            color: Colors.redAccent,
+                                            style: BorderStyle.solid,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        'JED',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      '15:12:00',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black38,
+                                      ),
+                                      textAlign: TextAlign.end,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 33,
+                            child: Column(
+                              children: <Widget>[
+                                Icon(Icons.flight, color: Color(0xff07898B),),
+                                Text(
+                                  '15:12:00',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black38,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 33,
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Container(
+                                        padding: EdgeInsets.all(2.0),
+                                        width: 25,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffFFCECF),
+                                          borderRadius: BorderRadius.circular(50),
+                                          border: Border.all(
+                                            width: 3,
+                                            color: Colors.redAccent,
+                                            style: BorderStyle.solid,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        'JED',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Text(
+                                  '15:12:00',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black38,
+                                  ),
+                                  textAlign: TextAlign.end,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: screenWidth * 0.4,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: Color(0xff07898B),
+                            ),
+                            onPressed: () {},
+                            child: Center(
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                  size: 13,
+                                ),),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                ],
+                ),
               ),
           ],
         ),
