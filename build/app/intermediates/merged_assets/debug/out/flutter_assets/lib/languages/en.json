@@ -2,6 +2,11 @@
   "lang_menu_arabic" : "Arabic",
   "lang_menu_english" : "English",
 
+  "company_name" : "iPackage company for tourism and travel",
+  "company_about" : "About the Company",
+  "company_about_2" : "Our services for the customer to book an integrated tourism program (hotels, transportation, tourism trips, domestic flights). The company was founded by a team of experts who provide good, creative and high quality work services. ",
+
+
   "home_title" : "Coupons Gate",
   "home_subtitle" : "Home Page",
 
@@ -359,5 +364,15 @@
   "login_google": "Continue with Google",
   "Copied": " The code has been copied ",
   "search_results": "Search results for ",
-  "skip": "skip"
+  "skip": "skip",
+
+  "OR_hint": "OR",
+  "Continue": "Continue",
+  "reset_email_error": "The email address you entered is not registered with us, please try again",
+  "reset_code_error": "The code you entered is wrong, please try again",
+  "reset_code_title": "The code",
+  "reset_code_subtitle": "Please type the code that was sent to you",
+  "reset_new_pass_title": "Create a new password",
+  "reset_new_pass_subtitle": "Please type a new password",
+  "reset_pass_subtitle": "Please reset the password using email"
 }
