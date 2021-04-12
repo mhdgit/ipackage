@@ -306,6 +306,24 @@
 
   "change_flight" : "تغيير الطيران",
 
+  "create_membership" : "إنشاء عضوية",
+  "create_membership_name" : "الاسم الأول",
+  "create_membership_email" : "البريد الالكتروني",
+  "create_membership_ID" : "رقم الهوية",
+  "create_membership_country" : "الدولة",
+  "create_membership_phone" : "رقم الهاتف",
+  "create_membership_age" : "العمر بالسنة",
+  "create_membership_pass" : "كلمة المرور",
+  "create_membership_pass_conf" : "تأكيد كلمة المرور",
+  "create_membership_continue" : "متابعة",
+  "create_membership_services" : "الخدمات التي يقدمها",
+  "create_membership_biography" : "نبذة تعريفية",
+  "create_membership_create_btn" : "إنشاء عضوية جديدة",
+
+  "settings_new_password" : "إنشاء كلمة سر جديدة",
+  "settings_blog" : "المدونة",
+
+
 
   "home_search_hint" : "ابحث عن كوبون أو متجر",
   "home_search_btn" : "ابحث",

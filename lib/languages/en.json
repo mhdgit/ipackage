@@ -2,6 +2,11 @@
   "lang_menu_arabic" : "Arabic",
   "lang_menu_english" : "English",
 
+  "company_name" : "iPackage company for tourism and travel",
+  "company_about" : "About the Company",
+  "company_about_2" : "Our services for the customer to book an integrated tourism program (hotels, transportation, tourism trips, domestic flights). The company was founded by a team of experts who provide good, creative and high quality work services. ",
+
+
   "home_title" : "Coupons Gate",
   "home_subtitle" : "Home Page",
 
@@ -306,6 +311,23 @@
   "notification_content_2" : "Hello, I am Mohamed Ahmed, and I want to communicate with you",
 
   "change_flight" : "Change flight",
+
+  "create_membership" : "Create  membership",
+  "create_membership_name" : "First name",
+  "create_membership_email" : "E-mail",
+  "create_membership_ID" : "ID Number",
+  "create_membership_country" : "Country",
+  "create_membership_phone" : "Phone Number",
+  "create_membership_age" : "Age by year",
+  "create_membership_pass" : "Password",
+  "create_membership_pass_conf" : "Confirm your password",
+  "create_membership_continue" : "Continue",
+  "create_membership_services" : "The services it provides",
+  "create_membership_biography" : "biography",
+  "create_membership_create_btn" : "Create new membership",
+
+  "settings_new_password" : "Create new password",
+  "settings_blog" : "Blog",
 
 
   "home_search_hint" : "Find a coupon or store",

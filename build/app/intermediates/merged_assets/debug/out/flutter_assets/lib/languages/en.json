@@ -307,6 +307,23 @@
 
   "change_flight" : "Change flight",
 
+  "create_membership" : "Create  membership",
+  "create_membership_name" : "First name",
+  "create_membership_email" : "E-mail",
+  "create_membership_ID" : "ID Number",
+  "create_membership_country" : "Country",
+  "create_membership_phone" : "Phone Number",
+  "create_membership_age" : "Age by year",
+  "create_membership_pass" : "Password",
+  "create_membership_pass_conf" : "Confirm your password",
+  "create_membership_continue" : "Continue",
+  "create_membership_services" : "The services it provides",
+  "create_membership_biography" : "biography",
+  "create_membership_create_btn" : "Create new membership",
+
+  "settings_new_password" : "Create new password",
+  "settings_blog" : "Blog",
+
 
   "home_search_hint" : "Find a coupon or store",
   "home_search_btn" : "Search",
