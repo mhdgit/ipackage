@@ -328,6 +328,27 @@
 
   "settings_new_password" : "Create new password",
   "settings_blog" : "Blog",
+  "settings_payment" : "Payment methods",
+
+  "confirm_book_label" : "Plan your vacation however you like",
+  "confirm_book_label_2" : "To confirm your flight, please enter the following data until the reservation you want is confirmed",
+  "confirm_book_label_3" : "Personal information",
+  "confirm_book_phone" : "Your phone number",
+  "confirm_book_members" : "Number of people",
+  "confirm_book_travel_date" : "date of Travel",
+  "confirm_book_package" : "Package name",
+  "confirm_book_btn_1" : "Please contact me",
+  "confirm_book_label_4" : "OR",
+  "confirm_book_btn_2" : "Contact us by WhatsApp",
+
+  "edit_book_delete" : "Delete",
+  "edit_book_cancel" : "Cancel",
+
+  "payment_methods_card_number" : "Card Number",
+  "payment_methods_card_name" : "Card Holder's Name",
+  "payment_methods_card_save" : "Save credit card information",
+  "payment_methods_card_confirm" : "Confirm Payment",
+
 
 
   "home_search_hint" : "Find a coupon or store",

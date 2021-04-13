@@ -4,6 +4,8 @@ import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/change_activity.dart';
+import 'package:ipackage/widgets/confirm_book.dart';
+import 'package:ipackage/widgets/edit_book.dart';
 import 'package:ipackage/widgets/home/domestic_offer_main.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -645,7 +647,11 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                   Expanded(
                     flex: 20,
                     child: TextButton(
-                      onPressed: (){},
+                      onPressed: (){
+
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) => new EditBook()));
+                      },
                       child: Text(
                         getTranslated(context, 'fo_edit'),
                         textAlign: TextAlign.start,
@@ -799,7 +805,10 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                     padding: EdgeInsetsDirectional.only(
                         start: screenWidth * 0.1),
                     child: GFButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) => new ConfirmBook()));
+                      },
                       color: Colors.black,
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),

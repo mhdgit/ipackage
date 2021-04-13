@@ -326,6 +326,25 @@
 
   "settings_new_password" : "إنشاء كلمة سر جديدة",
   "settings_blog" : "المدونة",
+  "settings_payment" : "طرق الدفع",
+
+  "confirm_book_label" : "خطط عطلتك كيفما شئت",
+  "confirm_book_label_2" : "لتأكيد رحلتك يرجى إدخال البيانات التالية حتى يتم تأكيد الحجز الذي تريده",
+  "confirm_book_label_3" : "المعلومات الشخصية",
+  "confirm_book_phone" : "رقم جوالك",
+  "confirm_book_members" : "عدد الأشخاص",
+  "confirm_book_travel_date" : "تاريخ السفر",
+  "confirm_book_package" : "اسم الباقة",
+  "confirm_book_btn_1" : "يرجى التواصل معي",
+  "confirm_book_label_4" : "أو",
+  "confirm_book_btn_2" : "تواصل معنا عن طريق الواتساب",
+
+  "edit_book_delete" : "حذف",
+  "edit_book_cancel" : "إلغاء",
+
+  "payment_methods_card_number" : "رقم البطاقة",
+  "payment_methods_card_name" : "اسم حامل البطاقة",
+  "payment_methods_card_save" : "حفظ معلومات بطاقة الائتمان",
 
 
 

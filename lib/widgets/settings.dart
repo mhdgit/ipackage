@@ -8,7 +8,9 @@ import 'package:ipackage/widgets/about.dart';
 import 'package:ipackage/widgets/blog.dart';
 import 'package:ipackage/widgets/home/home.dart';
 import 'package:ipackage/widgets/my_books.dart';
+import 'package:ipackage/widgets/payment_methods.dart';
 import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
+import 'package:ipackage/widgets/users/edit_profile.dart';
 import 'package:ipackage/widgets/users/new_membership.dart';
 
 class Settings extends StatefulWidget {
@@ -55,7 +57,11 @@ class _SettingsState extends State<Settings> {
                 child: Column(
                   children: <Widget>[
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                            new EditProfile()));
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: Row(
@@ -76,7 +82,11 @@ class _SettingsState extends State<Settings> {
                       ),
                     ),
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                            new EditProfile()));
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: Row(
@@ -97,7 +107,11 @@ class _SettingsState extends State<Settings> {
                       ),
                     ),
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                            new EditProfile()));
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: Row(
@@ -134,6 +148,30 @@ class _SettingsState extends State<Settings> {
                               flex: 80,
                               child: Text(
                               getTranslated(context, 'create_membership'),
+                              style: TextStyle(fontSize: 18,),
+                            ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: (){
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) => new PaymentMethods()));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 20,
+                              child: Icon(Icons.credit_card_outlined, color: Color(0xff07898B),),
+                            ),
+                            Expanded(
+                              flex: 80,
+                              child: Text(
+                              getTranslated(context, 'settings_payment'),
                               style: TextStyle(fontSize: 18,),
                             ),
                             ),
