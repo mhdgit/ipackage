@@ -73,9 +73,12 @@ flutter:
     - assets/images/flight.jpg
     - assets/images/forest.jpg
     - assets/images/bedroom.jpg
+    - assets/images/visa.jpg
     - assets/images/meal.png
     - assets/icons/dish.png
     - assets/icons/payment.png
+    - assets/images/paypal.png
+    - assets/images/mastercard.png
     - assets/images/users/
     - assets/images/users/i1.png
     - assets/images/users/i2.png

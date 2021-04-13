@@ -1,2 +1,0 @@
-com/tahamalas/image_viewer/BuildConfig.java
- com.tahamalas.image_viewer.BuildConfig

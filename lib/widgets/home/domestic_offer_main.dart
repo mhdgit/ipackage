@@ -4,6 +4,7 @@ import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/change_flight.dart';
 import 'package:ipackage/widgets/change_hotel.dart';
+import 'package:ipackage/widgets/confirm_book.dart';
 import 'package:ipackage/widgets/hotel_details.dart';
 
 class DomesticOfferMain extends StatefulWidget {
@@ -1821,7 +1822,10 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                   backgroundColor: Colors.black,
                   side: BorderSide(color: Colors.black, width: 2),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new ConfirmBook()));
+                },
                 child: Text(
                   getTranslated(context, 'domestic_offer_book_btn'),
                   style: TextStyle(fontSize: 14, color: Colors.white),
