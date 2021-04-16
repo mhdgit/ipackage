@@ -347,6 +347,7 @@
   "payment_methods_card_number" : "Card Number",
   "payment_methods_card_name" : "Card Holder's Name",
   "payment_methods_card_save" : "Save credit card information",
+  "payment_methods_card_confirm" : "Confirm Payment",
 
 
 

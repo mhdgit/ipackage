@@ -4,10 +4,10 @@ import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/home.dart';
 import 'package:ipackage/widgets/my_books.dart';
 import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
+import 'package:ipackage/widgets/search/countries.dart';
+import 'package:ipackage/widgets/search/packages.dart';
 import 'package:ipackage/widgets/settings.dart';
-import 'package:ipackage/widgets/search/domestic_tour.dart';
 import 'package:ipackage/widgets/search/foreign_tour.dart';
-import 'package:ipackage/widgets/search/ipackage_ambassadors.dart';
 
 class SearchYourTrip extends StatefulWidget {
   final int initialTabIndex;
@@ -50,13 +50,13 @@ class _SearchYourTripState extends State<SearchYourTrip> {
             labelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
             tabs: [
               Tab(
-                text: getTranslated(context, 'pyt_international_tourism_btn'),
+                text: getTranslated(context, 'pyt_in_t_search_btn'),
               ),
               Tab(
-                text: getTranslated(context, 'pyt_national_tourism_btn'),
+                text: getTranslated(context, 'home_b_bar_countries'),
               ),
               Tab(
-                text: getTranslated(context, 'pyt_ambassadors_btn'),
+                text: getTranslated(context, 'pyt_programs'),
               ),
             ],
           ),
@@ -64,8 +64,10 @@ class _SearchYourTripState extends State<SearchYourTrip> {
         body: TabBarView(
           children: <Widget>[
             ForeignTour(),
-            DomesticTour(),
-            IPackageAmbassadors(),
+            Countries(),
+            Packages(),
+            // DomesticTour(),
+            // IPackageAmbassadors(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
