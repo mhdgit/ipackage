@@ -26,13 +26,28 @@ class _HomeState extends State<Home> {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+
       body: Container(
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+
               SizedBox(
-                height: 50,
+                height: 30,
               ),
+
+          //logo image
+          Padding(
+            padding: const EdgeInsetsDirectional.only(
+                top: 40, end: 8.0, start: 18.0, bottom: 0),
+            child: Image.asset(
+                'assets/images/logo.jpg',
+                //height: screenHeight * 0.07,
+                fit: BoxFit.fill,
+              ),),
+
+
+              //btn
               Row(
                 children: <Widget>[
 
@@ -41,65 +56,85 @@ class _HomeState extends State<Home> {
                     child: Padding(
                       padding: const EdgeInsetsDirectional.only(
                           top: 40, end: 8.0, start: 18.0, bottom: 8.0),
-                      child: GFButton(
-                        color: Color(0xffA57432),
-                        textColor: Colors.white,
-                        text:
-                            getTranslated(context, 'home_national_tourism_btn'),
-                        size: 50.0,
-                        textStyle: TextStyle(
-                          fontSize: 16.0,
+                      child: TextButton(
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: MaterialStateProperty.all<Color>(Color(0xffA57432)),
                         ),
                         onPressed: () {
                           Navigator.of(context).push(new MaterialPageRoute(
                               builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 1,)));
                         },
-                      ),
+                        child: Column(
+                          children: [
+                            Icon((MyIcons.bus),
+                              size: 24.0,),
+                            Text(getTranslated(context, 'home_national_tourism_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
+                          ],
+                        )
+                      )
+
                     ),
                   ),
                   Expanded(
                     flex: 50,
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                          top: 40, end: 18.0, start: 8.0, bottom: 8.0),
-                      child: GFButton(
-                        color: Color(0xffF8CB4E),
-                        textColor: Colors.white,
-                        text: getTranslated(
-                            context, 'home_international_tourism_btn'),
-                        size: 50.0,
-                        textStyle: TextStyle(
-                          fontSize: 16.0,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 0,)));
-                        },
-                      ),
+                        padding: const EdgeInsetsDirectional.only(
+                            top: 40, end: 8.0, start: 18.0, bottom: 8.0),
+                        child: TextButton(
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xffF8CB4E)),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(new MaterialPageRoute(
+                                  builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 0,)));
+                            },
+                            child: Column(
+                              children: [
+                                Icon((MyIcons.plane_arrival),
+                                  size: 24.0,),
+                                Text(getTranslated(context, 'home_international_tourism_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
+                              ],
+                            )
+                        )
+
                     ),
                   ),
+
+
                 ],
               ),
               Row(
                 children: <Widget>[
+
                   Expanded(
+
                     child: Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: GFButton(
-                        color: Color(0xff07898B),
-                        textColor: Colors.white,
-                        text: getTranslated(context, 'home_ambassadors_btn'),
-                        size: 50.0,
-                        textStyle: TextStyle(
-                          fontSize: 16.0,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 2,)));
-                        },
-                      ),
+                        padding: const EdgeInsetsDirectional.only(
+                            top: 20, end: 8.0, start: 18.0, bottom: 8.0),
+                        child: TextButton(
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xff07898B)),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(new MaterialPageRoute(
+                                  builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 2,)));
+                            },
+                            child: Column(
+                              children: [
+                                Icon((Icons.people),
+                                  size: 36.0,),
+                                Text(getTranslated(context, 'home_ambassadors_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
+                              ],
+                            )
+                        )
+
                     ),
                   ),
+
+
                 ],
               ),
 
@@ -128,6 +163,36 @@ class _HomeState extends State<Home> {
               ),*/
 
 
+              //home_popular_foreign
+              Container(
+                padding: const EdgeInsets.only(top: 55.0 , bottom: 10.0 , right: 8 , left: 8),
+                child: Text(
+                  getTranslated(context, 'home_popular_foreign_label'),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "cairo",
+                  ),
+                ),
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15.0  , right: 15 , left: 15),
+                  child: Text(
+                    getTranslated(
+                        context, 'home_popular_foreign_label_2'),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: "cairo",
+                    ),
+                  ),
+                ),
+              ),
+              SpecialForeignOffers(),
+
+              //home_national_tourism_offers
               Container(
                 padding: const EdgeInsets.only(top: 35.0),
                 child: Text(
@@ -135,6 +200,7 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    fontFamily: "cairo",
                   ),
                 ),
               ),
@@ -147,14 +213,15 @@ class _HomeState extends State<Home> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
+                      fontFamily: "cairo",
                     ),
                   ),
                 ),
               ),
-
               SpecialOffers(),
 
-              Container(
+              //home_national_tourism_cities
+              /*Container(
                 padding: const EdgeInsets.only(top: 35.0),
                 child: Text(
                   getTranslated(context, 'home_national_tourism_cities_label'),
@@ -164,7 +231,6 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-
               Container(
                 margin: EdgeInsets.only(top: 5.0, left: 10.0 , bottom: 0.0),
                 height: screenHeight * 0.28,
@@ -481,9 +547,10 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-              ),
+              ),*/
 
 
+              //home_ambassadors
               Container(
                 padding: const EdgeInsets.only(top: 55.0 , bottom: 10.0 , right: 8 , left: 8),
                 child: Text(
@@ -492,10 +559,10 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    fontFamily: "cairo",
                   ),
                 ),
               ),
-
               Container(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 15.0 , bottom: 10.0 , right: 15 , left: 15),
@@ -505,11 +572,11 @@ class _HomeState extends State<Home> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
+                      fontFamily: "cairo",
                     ),
                   ),
                 ),
               ),
-
               Container(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 5.0 , bottom: 15.0 , right: 15 , left: 15),
@@ -519,11 +586,11 @@ class _HomeState extends State<Home> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
+                      fontFamily: "cairo",
                     ),
                   ),
                 ),
               ),
-
               Container(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 15.0 , bottom: 15.0 , right: 15 , left: 15),
@@ -536,33 +603,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
-              Container(
-                padding: const EdgeInsets.only(top: 55.0 , bottom: 10.0 , right: 8 , left: 8),
-                child: Text(
-                  getTranslated(context, 'home_popular_foreign_label'),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
 
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 15.0 , bottom: 10.0 , right: 15 , left: 15),
-                  child: Text(
-                    getTranslated(
-                        context, 'home_popular_foreign_label_2'),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ),
-
-              SpecialForeignOffers(),
 
               Container(
                 padding: const EdgeInsets.only(top: 55.0 , bottom: 10.0 , right: 8 , left: 8),
@@ -572,6 +613,7 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    fontFamily: "cairo",
                   ),
                 ),
               ),
@@ -616,6 +658,7 @@ class _HomeState extends State<Home> {
                                     fontSize: 19,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
+                                    fontFamily: "cairo",
                                   ),
                                   softWrap: true,
                                 ),
@@ -642,6 +685,7 @@ class _HomeState extends State<Home> {
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 14,
+                                                fontFamily: "cairo",
                                                 color: Colors.black),
                                           )),
                                     ),
@@ -892,6 +936,14 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        child: const Icon(MyIcons.chat),
+        backgroundColor: Color(0xff07898B),
+
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
