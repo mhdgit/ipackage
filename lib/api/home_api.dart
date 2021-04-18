@@ -5,10 +5,11 @@ class HomeApi {
 
   Future getSpecialOffers() async
   {
-    var uri =
-    Uri.https('www.ipackagetours.com', '/api/offers?special=1');
+
+
+    Uri uri = Uri.parse('https://ipackagetours.com/api/offers?special=1');
     var res = await http.get(uri);
-    //print(res.body);
+    print(res.body);
     //print('sending...');
 
     try {
