@@ -11,6 +11,13 @@ import 'package:ipackage/widgets/change_hotel.dart';
 import 'package:ipackage/widgets/hotel_details.dart';
 
 class DomesticOfferMain extends StatefulWidget {
+
+  final int id;
+  final String package;
+  final String rating;
+
+  DomesticOfferMain({this.id , this.package , this.rating});
+
   @override
   _DomesticOfferMainState createState() => _DomesticOfferMainState();
 }
@@ -53,7 +60,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
     super.initState();
     _tabController = new TabController(length: 4, vsync: this);
     
-    betaApiAssistant.getOffer(354, '2021-05-04').then((value) {
+    betaApiAssistant.getOffer(widget.id, '2021-05-04').then((value) {
       setState(() {
         offer = value;
         _isLoading = false;
@@ -380,7 +387,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                       :
                                   Image.network(
                                     'https://ipackagetours.com/storage/app/'+ days[index].transportationMethods.defaultTrans[0].transportation.image.toString(),
-                                    fit: BoxFit.fill,
+                                    fit: BoxFit.cover,
                                     height: height * 0.28,
                                   ),
                                 ),
@@ -1174,7 +1181,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                       :
                                   Image.network(
                                     'https://ipackagetours.com/storage/app/'+ days[index].transportationMethods.defaultTrans[0].transportation.image.toString(),
-                                    fit: BoxFit.fill,
+                                    fit: BoxFit.cover,
                                     height: height * 0.28,
                                   ),
                                 ),
@@ -1267,59 +1274,61 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                   ),
                 ),
 
-                Container(
-                  width: width * 0.84,
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(4.0),
-                    onTap: () {},
-                    child: Card(
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        side: BorderSide(color: Colors.black),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.all(0.0),
-                      color: Color(0xffFAFAFA),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(0),
-                              child: Image.asset(
-                                'assets/images/end.jpg',
-                                fit: BoxFit.fill,
-                                height: height * 0.16,
-                                width: width * 0.3,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: width * 0.54,
-                            padding: EdgeInsets.symmetric(horizontal: 20.0),
-                            child: FittedBox(
-                              child: Text(
-                                getTranslated(context, 'do_plan_label_14'),
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
 
               ],
             ),
           ),
+
+        Container(
+          width: width * 0.84,
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(4.0),
+            onTap: () {},
+            child: Card(
+              elevation: 0.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide(color: Colors.black),
+              ),
+              clipBehavior: Clip.antiAlias,
+              margin: const EdgeInsets.all(0.0),
+              color: Color(0xffFAFAFA),
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: Image.asset(
+                        'assets/images/end.jpg',
+                        fit: BoxFit.fill,
+                        height: height * 0.16,
+                        width: width * 0.3,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: width * 0.54,
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: FittedBox(
+                      child: Text(
+                        getTranslated(context, 'do_plan_label_14'),
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+
       ],
     );
   }
@@ -1573,7 +1582,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                           ),
                           child: Image.asset(
                             'assets/images/car.jpg',
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                             height: height * 0.28,
                           ),
                         ),
@@ -1674,7 +1683,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
         elevation: 0.0,
         shadowColor: Colors.white,
         title: Text(
-          getTranslated(context, 'domestic_offer_title'),
+          widget.package,
         ),
         centerTitle: true,
       ),
@@ -1757,7 +1766,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                     color: Colors.amber,
                                     borderColor: Colors.amber,
                                     allowHalfRating: true,
-                                    value: 3.5,
+                                    value: double.parse(widget.rating.toString()),
                                   ),
                                 ),
                               ),
