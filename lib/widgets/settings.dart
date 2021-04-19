@@ -11,6 +11,7 @@ import 'package:ipackage/widgets/my_books.dart';
 import 'package:ipackage/widgets/payment_methods.dart';
 import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/users/edit_profile.dart';
+import 'package:ipackage/widgets/users/new_account.dart';
 import 'package:ipackage/widgets/users/new_membership.dart';
 
 class Settings extends StatefulWidget {
@@ -134,7 +135,7 @@ class _SettingsState extends State<Settings> {
                     InkWell(
                       onTap: (){
                         Navigator.of(context).push(new MaterialPageRoute(
-                            builder: (BuildContext context) => new NewMembership()));
+                            builder: (BuildContext context) => new New_account()));
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5.0),

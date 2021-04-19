@@ -34,7 +34,7 @@ class _login extends State<login> {
                         width: screenWidth,
                       ),
                       SizedBox(height: 10,),
-                      Text(getTranslated(context, 'new_account'),style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,fontFamily: 'cairo',),textAlign: TextAlign.center,),
+                      Text(getTranslated(context, 'drawer_login'),style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,fontFamily: 'cairo',),textAlign: TextAlign.center,),
 
                       Padding(
                         padding: const EdgeInsets.all(30.0),
