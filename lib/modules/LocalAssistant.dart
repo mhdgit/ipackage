@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ipackage/modules/Country.dart';
+import 'package:ipackage/modules/Offer/Day.dart';
+import 'package:ipackage/modules/Offer/Hotel/Hotel.dart';
+import 'package:ipackage/modules/Offer/Hotel/HotelFacility.dart';
+import 'package:ipackage/modules/Offer/Offer.dart';
+import 'package:ipackage/modules/Offer/Transportations/Transportation.dart';
+import 'package:ipackage/modules/Offer/Trip.dart';
 import 'package:ipackage/modules/Package.dart';
 
 class LocalAssistant {
@@ -27,28 +33,108 @@ class LocalAssistant {
 
   }
 
-  // String getCountryByLocale(context , Country coupon , String type)
-  // {
-  //   Locale currentLocale = Localizations.localeOf(context);
-  //
-  //   if(currentLocale.languageCode == 'ar')
-  //   {
-  //     switch(type)
-  //     {
-  //       case 'name': return coupon.arName; break;
-  //       case 'des': return coupon.arDescription; break;
-  //     }
-  //   }
-  //   else
-  //   {
-  //     switch(type)
-  //     {
-  //       case 'name': return coupon.enName; break;
-  //       case 'des': return coupon.enDescription; break;
-  //     }
-  //   }
-  //
-  //   return 'empty';
-  //
-  // }
+  String getOfferByLocale(context , Offer offer , String type)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+    {
+      switch(type)
+      {
+        case 'des': return offer.descriptionAR; break;
+        case 'country': return offer.countryAR; break;
+        case 'package': return offer.packageAR; break;
+      }
+    }
+    else
+    {
+      switch(type)
+      {
+        case 'des': return offer.descriptionEN; break;
+        case 'country': return offer.countryEN; break;
+        case 'package': return offer.packageEN; break;
+      }
+    }
+
+    return 'empty';
+  }
+
+  String getTransportationByLocale(context , Transportation trans)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+      return trans.nameAR;
+    else
+      return trans.nameEN;
+
+  }
+
+  String getDayCityByLocale(context , Day day)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+      return day.cityAR;
+    else
+      return day.cityEN;
+  }
+
+  String getHotelByLocale(context , Hotel hotel , String type)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+    {
+      switch(type)
+      {
+        case 'name': return hotel.nameAR; break;
+        case 'acc': return hotel.accommodationAR; break;
+      }
+    }
+    else
+    {
+      switch(type)
+      {
+        case 'name': return hotel.nameEN; break;
+        case 'acc': return hotel.accommodationEN; break;
+      }
+    }
+
+    return 'empty';
+  }
+
+  String getHotelFacilityByLocale(context , HotelFacility hf)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+      return hf.nameAR;
+    else
+      return hf.nameEN;
+  }
+
+  String getTripByLocale(context , Trip trip , String type)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+    {
+      switch(type)
+      {
+        case 'name': return trip.nameAR; break;
+        case 'trip': return trip.tripAR; break;
+      }
+    }
+    else
+    {
+      switch(type)
+      {
+        case 'name': return trip.nameEN; break;
+        case 'trip': return trip.tripEN; break;
+      }
+    }
+
+    return 'empty';
+  }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/modules/BetaApiAssistant.dart';
+import 'package:ipackage/modules/LocalAssistant.dart';
+import 'package:ipackage/modules/Offer/Day.dart';
+import 'package:ipackage/modules/Offer/Offer.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/change_flight.dart';
 import 'package:ipackage/widgets/change_hotel.dart';
-import 'package:ipackage/widgets/confirm_book.dart';
 import 'package:ipackage/widgets/hotel_details.dart';
 
 class DomesticOfferMain extends StatefulWidget {
@@ -16,6 +19,10 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
     with TickerProviderStateMixin {
   TabController _tabController;
   int _selectedTabBar;
+  BetaApiAssistant betaApiAssistant = new BetaApiAssistant();
+  LocalAssistant localAssistant = new LocalAssistant();
+  Offer offer;
+  bool _isLoading = true;
 
   List<String> _transports = [
     "خدمة النقل الخاص من و إلى المطار",
@@ -45,6 +52,13 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
   void initState() {
     super.initState();
     _tabController = new TabController(length: 4, vsync: this);
+    
+    betaApiAssistant.getOffer(354, '2021-05-04').then((value) {
+      setState(() {
+        offer = value;
+        _isLoading = false;
+      });
+    });
   }
 
   @override
@@ -215,966 +229,1097 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
           );
   }
 
-  _dayPlanWidget(width, height) {
+  _dayPlanWidget(width, height , List<Day> days) {
+
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 10.0, bottom: 8.0),
-              child: Text(
-                getTranslated(context, 'do_plan_label'),
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Container(
-              width: width * 0.84,
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 8.0, bottom: 10.0),
-              child: Flexible(
-                child: Text(
-                  getTranslated(context, 'do_plan_label_2'),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 10.0, bottom: 8.0),
-              child: Text(
-                getTranslated(context, 'do_transfer_tab'),
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Container(
-          width: width * 0.84,
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: GestureDetector(
-            onTap: () {},
-            child: InkWell(
-              borderRadius: BorderRadius.circular(4.0),
-              onTap: () {},
-              child: Card(
-                elevation: 2.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                clipBehavior: Clip.antiAlias,
-                margin: const EdgeInsets.all(0.0),
-                color: Color(0xffFAFAFA),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: ClipPath(
-                          clipper: ShapeBorderClipper(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                          child: Image.asset(
-                            'assets/images/car.jpg',
-                            fit: BoxFit.fill,
-                            height: height * 0.28,
-                          ),
-                        ),
-                      ),
-                    ),
-//
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        getTranslated(context, 'do_plan_label_3'),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff07898B),
-                        ),
-                        softWrap: true,
-                      ),
-                    ),
+        for(int index = 0 ; index < days.length ; index++)
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
 
+                Row(
+                  children: [
                     Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      width: width * 0.8,
+                      padding: EdgeInsetsDirectional.only(
+                          start: width * 0.08, top: 10.0, bottom: 8.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
-                            flex: 50,
-                            child: FittedBox(
-                              child: GFRating(
-                                color: Colors.amber,
-                                borderColor: Colors.amber,
-                                allowHalfRating: true,
-                                value: 3.5,
+                            flex: 10,
+                            child: Icon(Icons.location_on_outlined , color: Colors.blueGrey,)
+                          ),
+                          Expanded(
+                            flex: 90,
+                            child: Text(
+                              localAssistant.getDayCityByLocale(context, offer.days[index]),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 50,
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0,
-                                    right: 0.0,
-                                    left: 0.0,
-                                    bottom: 0.0),
-                                child: Text(
-                                  ' ',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0,
-                                    right: 0.0,
-                                    left: 0.0,
-                                    bottom: 0.0),
-                                child: Text(
-                                  getTranslated(context, 'do_plan_label_4'),
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.black),
-                                )),
                           ),
                         ],
                       ),
                     ),
                   ],
                 ),
-              ),
-            ),
-          ),
-        ),
-        Row(
-          children: [
-            Container(
-              width: width * 0.84,
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 8.0, bottom: 10.0),
-              child: Flexible(
-                child: Text(
-                  getTranslated(context, 'do_plan_label_2'),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 10.0, bottom: 8.0),
-              child: Text(
-                getTranslated(context, 'do_hotels_tab'),
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Container(
-          width: width * 0.84,
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: GestureDetector(
-            onTap: () {},
-            child: InkWell(
-              borderRadius: BorderRadius.circular(4.0),
-              onTap: () {},
-              child: Card(
-                elevation: 2.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                clipBehavior: Clip.antiAlias,
-                margin: const EdgeInsets.all(0.0),
-                color: Color(0xffFAFAFA),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Image.asset(
-                          'assets/images/hotel.jpg',
-                          fit: BoxFit.fill,
-                          height: height * 0.28,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        getTranslated(context, 'do_plan_label_5'),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800,
-                          color: Color(0xff07898B),
-                        ),
-                        softWrap: true,
-                      ),
-                    ),
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 50,
-                            child: FittedBox(
-                              child: GFRating(
-                                color: Colors.amber,
-                                borderColor: Colors.amber,
-                                allowHalfRating: true,
-                                value: 3.5,
-                              ),
-                            ),
+
+                Container(
+                  padding: EdgeInsetsDirectional.only(
+                      start: width * 0.08, top: 8.0, bottom: 10.0),
+                  child: Row(
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
                           ),
-                          Expanded(
-                            flex: 35,
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0,
-                                    right: 0.0,
-                                    left: 0.0,
-                                    bottom: 0.0),
-                                child: Text(
-                                  ' ',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                )),
-                          ),
-                          Expanded(
-                            flex: 15,
-                            child: GFButton(
-                                onPressed: () {},
+                          Container(
+                            padding: EdgeInsets.all(2.0),
+                            width: 25,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(
+                                width: 2,
                                 color: Color(0xff07898B),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.white,
+                                style: BorderStyle.solid,
+                              ),
+                            ),
+                            child: Container(
+                                width: 15,
+                                height: 15,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Color(0xff07898B),
+                                )),
+                          ),
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Flexible(
+                          child: Text(
+                            getTranslated(context, 'do_transfer_tab'),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Row(
+                //   children: [
+                //     Container(
+                //       padding: EdgeInsetsDirectional.only(
+                //           start: width * 0.08, top: 10.0, bottom: 8.0),
+                //       child: Text(
+                //         getTranslated(context, 'do_transfer_tab'),
+                //         textAlign: TextAlign.start,
+                //         style: TextStyle(
+                //           fontSize: 20,
+                //           fontWeight: FontWeight.bold,
+                //           color: Colors.black,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+
+                Container(
+                  width: width * 0.84,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(4.0),
+                      onTap: () {},
+                      child: Card(
+                        elevation: 2.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        margin: const EdgeInsets.all(0.0),
+                        color: Color(0xffFAFAFA),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: ClipPath(
+                                  clipper: ShapeBorderClipper(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15)),
                                   ),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0,
-                                    right: 0.0,
-                                    left: 0.0,
-                                    bottom: 0.0),
-                                child: Text(
-                                  getTranslated(context, 'do_plan_label_4'),
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.black),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Container(
-          width: width * 0.84,
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(4.0),
-            onTap: () {},
-            child: Card(
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(color: Colors.black),
-              ),
-              clipBehavior: Clip.antiAlias,
-              margin: const EdgeInsets.all(0.0),
-              color: Color(0xffFAFAFA),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Image.asset(
-                        'assets/images/end.jpg',
-                        fit: BoxFit.fill,
-                        height: height * 0.16,
-                        width: width * 0.3,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: width * 0.54,
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    child: FittedBox(
-                      child: Text(
-                        getTranslated(context, 'do_plan_label_6'),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Container(
-          width: width * 0.82,
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: Divider(
-            color: Colors.black54,
-            thickness: 2,
-          ),
-        ),
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 10.0, bottom: 8.0),
-              child: Text(
-                getTranslated(context, 'do_plan_label_7'),
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Container(
-          padding: EdgeInsetsDirectional.only(
-              start: width * 0.08, top: 8.0, bottom: 10.0),
-          child: Row(
-            children: [
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: 2,
-                    height: height * 0.02,
-                    color: Color(0xff07898B),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(2.0),
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(
-                        width: 2,
-                        color: Color(0xff07898B),
-                        style: BorderStyle.solid,
-                      ),
-                    ),
-                    child: Container(
-                        width: 15,
-                        height: 15,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Color(0xff07898B),
-                        )),
-                  ),
-                  Container(
-                    width: 2,
-                    height: height * 0.02,
-                    color: Color(0xff07898B),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Flexible(
-                  child: Text(
-                    getTranslated(context, 'do_plan_label_8'),
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Row(
-          children: [
-            Container(
-              width: width * 0.84,
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 8.0, bottom: 10.0),
-              child: Flexible(
-                child: Text(
-                  getTranslated(context, 'do_plan_label_9'),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 10.0, bottom: 8.0),
-              child: Text(
-                getTranslated(context, 'do_transfer_tab'),
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Container(
-          width: width * 0.84,
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: GestureDetector(
-            onTap: () {},
-            child: InkWell(
-              borderRadius: BorderRadius.circular(4.0),
-              onTap: () {},
-              child: Card(
-                elevation: 2.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                clipBehavior: Clip.antiAlias,
-                margin: const EdgeInsets.all(0.0),
-                color: Color(0xffFAFAFA),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: ClipPath(
-                          clipper: ShapeBorderClipper(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                          child: Image.asset(
-                            'assets/images/car.jpg',
-                            fit: BoxFit.fill,
-                            height: height * 0.28,
-                          ),
-                        ),
-                      ),
-                    ),
-//
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        getTranslated(context, 'do_plan_label_3'),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff07898B),
-                        ),
-                        softWrap: true,
-                      ),
-                    ),
+                                  child: days[index].transportationMethods.defaultTrans == null ? Image.network(
+                                    'https://ipackagetours.com/storage/app/'+ offer.airportTransferGo[0].transportation.image.toString(),
+                                    fit: BoxFit.cover,
+                                    height: height * 0.28,
+                                  )
+                                      :
+                                  Image.network(
+                                    'https://ipackagetours.com/storage/app/'+ days[index].transportationMethods.defaultTrans[0].transportation.image.toString(),
+                                    fit: BoxFit.fill,
+                                    height: height * 0.28,
+                                  ),
+                                ),
+                              ),
+                            ),
 
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 50,
-                            child: FittedBox(
-                              child: GFRating(
-                                color: Colors.amber,
-                                borderColor: Colors.amber,
-                                allowHalfRating: true,
-                                value: 3.5,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                days[index].transportationMethods.defaultTrans == null ?
+                                localAssistant.getTransportationByLocale(context, offer.airportTransferGo[0].transportation).toString()
+                                    :
+                                localAssistant.getTransportationByLocale(context, days[index].transportationMethods.defaultTrans[0].transportation).toString(),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff07898B),
+                                ),
+                                softWrap: true,
+                              ),
+                            ),
+
+                            // Container(
+                            //   // color: Colors.white,
+                            //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.start,
+                            //     children: [
+                            //       Expanded(
+                            //         flex: 50,
+                            //         child: FittedBox(
+                            //           child: GFRating(
+                            //             color: Colors.amber,
+                            //             borderColor: Colors.amber,
+                            //             allowHalfRating: true,
+                            //             value: 3.5,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 50,
+                            //         child: Padding(
+                            //             padding: const EdgeInsets.only(
+                            //                 top: 0.0,
+                            //                 right: 0.0,
+                            //                 left: 0.0,
+                            //                 bottom: 0.0),
+                            //             child: Text(
+                            //               ' ',
+                            //               textAlign: TextAlign.start,
+                            //               style: TextStyle(
+                            //                   fontWeight: FontWeight.bold,
+                            //                   fontSize: 15,
+                            //                   color: Colors.black),
+                            //             )),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+
+                            // Container(
+                            //   // color: Colors.white,
+                            //   padding: const EdgeInsets.symmetric(
+                            //       horizontal: 8.0, vertical: 8.0),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.center,
+                            //     children: [
+                            //       Expanded(
+                            //         child: Padding(
+                            //             padding: const EdgeInsets.only(
+                            //                 top: 0.0,
+                            //                 right: 0.0,
+                            //                 left: 0.0,
+                            //                 bottom: 0.0),
+                            //             child: Text(
+                            //               getTranslated(context, 'do_plan_label_4'),
+                            //               textAlign: TextAlign.start,
+                            //               style: TextStyle(
+                            //                   fontSize: 15, color: Colors.black),
+                            //             )),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsetsDirectional.only(
+                      start: width * 0.112, top: 8.0, bottom: 0.0),
+                  child: Row(
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                          Container(
+                            width: 2,
+                            height: height * 0.04,
+                            color: Color(0xff07898B),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        flex: 90,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            getTranslated(context, 'do_plan_label_2'),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsetsDirectional.only(
+                      start: width * 0.112, top: 0.0, bottom: 0.0),
+                  child: Row(
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                          Container(
+                            width: 2,
+                            height: height * 0.04,
+                            color: Color(0xff07898B),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        flex: 90,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            getTranslated(context, 'do_plan_hotel_register') + localAssistant.getDayCityByLocale(context, offer.days[index]),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Row(
+                //   children: [
+                //     Container(
+                //       width: width * 0.84,
+                //       padding: EdgeInsetsDirectional.only(
+                //           start: width * 0.08, top: 8.0, bottom: 10.0),
+                //       child: Flexible(
+                //         child: Text(
+                //           getTranslated(context, 'do_plan_label_2'),
+                //           textAlign: TextAlign.start,
+                //           style: TextStyle(
+                //             fontSize: 16,
+                //             color: Colors.black54,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                Container(
+                  padding: EdgeInsetsDirectional.only(
+                      start: width * 0.08, top: 0.0, bottom: 10.0),
+                  child: Row(
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(2.0),
+                            width: 25,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(
+                                width: 2,
+                                color: Color(0xff07898B),
+                                style: BorderStyle.solid,
+                              ),
+                            ),
+                            child: Container(
+                                width: 15,
+                                height: 15,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Color(0xff07898B),
+                                )),
+                          ),
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Flexible(
+                          child: Text(
+                            getTranslated(context, 'do_hotels_tab'),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Row(
+                //   children: [
+                //     Container(
+                //       padding: EdgeInsetsDirectional.only(
+                //           start: width * 0.08, top: 10.0, bottom: 8.0),
+                //       child: Text(
+                //         getTranslated(context, 'do_hotels_tab'),
+                //         textAlign: TextAlign.start,
+                //         style: TextStyle(
+                //           fontSize: 20,
+                //           fontWeight: FontWeight.bold,
+                //           color: Colors.black,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+
+                Container(
+                  width: width * 0.84,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(4.0),
+                      onTap: () {},
+                      child: Card(
+                        elevation: 2.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        margin: const EdgeInsets.all(0.0),
+                        color: Color(0xffFAFAFA),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: days[index].hotels[0].images != null ? Image.network(
+                                  'https://ipackagetours.com/storage/app/' + days[index].hotels[0].images.toString(),
+                                  fit: BoxFit.fill,
+                                  height: height * 0.28,
+                                ) :
+                                Image.asset(
+                                  'assets/images/hotel.jpg',
+                                  fit: BoxFit.fill,
+                                  height: height * 0.28,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                localAssistant.getHotelByLocale(context, days[index].hotels[0], 'name').toString(),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w800,
+                                  color: Color(0xff07898B),
+                                ),
+                                softWrap: true,
+                              ),
+                            ),
+                            Container(
+                              // color: Colors.white,
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 50,
+                                    child: FittedBox(
+                                      child: GFRating(
+                                        color: Colors.amber,
+                                        borderColor: Colors.amber,
+                                        allowHalfRating: true,
+                                        value: double.parse(days[index].hotels[0].rating.toString()) ?? 0.0,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 35,
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 0.0,
+                                            right: 0.0,
+                                            left: 0.0,
+                                            bottom: 0.0),
+                                        child: Text(
+                                          ' ',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                              color: Colors.black),
+                                        )),
+                                  ),
+                                  Expanded(
+                                    flex: 15,
+                                    child: GFButton(
+                                        onPressed: () {},
+                                        color: Color(0xff07898B),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add,
+                                            color: Colors.white,
+                                          ),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Container(
+                            //   // color: Colors.white,
+                            //   padding: const EdgeInsets.symmetric(
+                            //       horizontal: 8.0, vertical: 8.0),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.center,
+                            //     children: [
+                            //       Expanded(
+                            //         child: Padding(
+                            //             padding: const EdgeInsets.only(
+                            //                 top: 0.0,
+                            //                 right: 0.0,
+                            //                 left: 0.0,
+                            //                 bottom: 0.0),
+                            //             child: Text(
+                            //               localAssistant.getHotelByLocale(context, days[index].hotels[0], 'name').toString(),
+                            //               textAlign: TextAlign.start,
+                            //               style: TextStyle(
+                            //                   fontSize: 15, color: Colors.black),
+                            //             )),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                for(int i = 0 ; i < days[index].trips.length ; i++)
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsetsDirectional.only(
+                            start: width * 0.08, top: 8.0, bottom: 8.0),
+                        child: Row(
+                          children: [
+                            Column(
+                              children: <Widget>[
+                                Container(
+                                  width: 2,
+                                  height: height * 0.02,
+                                  color: Color(0xff07898B),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(2.0),
+                                  width: 25,
+                                  height: 25,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(
+                                      width: 2,
+                                      color: Color(0xff07898B),
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+                                  child: Container(
+                                      width: 15,
+                                      height: 15,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Color(0xff07898B),
+                                      )),
+                                ),
+                                Container(
+                                  width: 2,
+                                  height: height * 0.02,
+                                  color: Color(0xff07898B),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                getTranslated(context, 'do_day_'+i.toString()+'_begin'),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Row(
+                      //   children: [
+                      //     Container(
+                      //       padding: EdgeInsetsDirectional.only(
+                      //           start: width * 0.08, top: 10.0, bottom: 8.0),
+                      //       child: Text(
+                      //         getTranslated(context, 'do_day_'+i.toString()+'_begin'),
+                      //         textAlign: TextAlign.start,
+                      //         style: TextStyle(
+                      //           fontSize: 20,
+                      //           fontWeight: FontWeight.bold,
+                      //           color: Colors.black,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+
+
+                      Container(
+                        width: width * 0.84,
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(4.0),
+                            onTap: () {},
+                            child: Card(
+                              elevation: 2.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              clipBehavior: Clip.antiAlias,
+                              margin: const EdgeInsets.all(0.0),
+                              color: Color(0xffFAFAFA),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(0),
+                                      child: Image.network(
+                                        'https://ipackagetours.com/storage/app/' + days[index].trips[i].image.toString(),
+                                        fit: BoxFit.fill,
+                                        height: height * 0.28,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      localAssistant.getTripByLocale(context, days[index].trips[i], 'name').toString(),
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w800,
+                                        color: Color(0xff07898B),
+                                      ),
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                  Container(
+                                    // color: Colors.white,
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 50,
+                                          child: FittedBox(
+                                            child: Text(
+                                              days[index].trips[i].date.toString(),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 35,
+                                          child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 0.0,
+                                                  right: 0.0,
+                                                  left: 0.0,
+                                                  bottom: 0.0),
+                                              child: Text(
+                                                ' ',
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15,
+                                                    color: Colors.black),
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 15,
+                                          child: GFButton(
+                                              onPressed: () {},
+                                              color: Color(0xff07898B),
+                                              child: Center(
+                                                child: Icon(
+                                                  Icons.add,
+                                                  color: Colors.white,
+                                                ),
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    // color: Colors.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0, vertical: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 0.0,
+                                                  right: 0.0,
+                                                  left: 0.0,
+                                                  bottom: 0.0),
+                                              child: Text(
+                                                localAssistant.getTripByLocale(context, days[index].trips[i], 'trip').toString(),
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                    fontSize: 15, color: Colors.black),
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                          Expanded(
-                            flex: 50,
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0,
-                                    right: 0.0,
-                                    left: 0.0,
-                                    bottom: 0.0),
-                                child: Text(
-                                  ' ',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                )),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
 
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0,
-                                    right: 0.0,
-                                    left: 0.0,
-                                    bottom: 0.0),
-                                child: Text(
-                                  getTranslated(context, 'do_plan_label_4'),
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.black),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 10.0, bottom: 8.0),
-              child: Text(
-                getTranslated(context, 'do_plan_label_10'),
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Container(
-          width: width * 0.84,
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: GestureDetector(
-            onTap: () {},
-            child: InkWell(
-              borderRadius: BorderRadius.circular(4.0),
-              onTap: () {},
-              child: Card(
-                elevation: 2.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                clipBehavior: Clip.antiAlias,
-                margin: const EdgeInsets.all(0.0),
-                color: Color(0xffFAFAFA),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: ClipPath(
-                          clipper: ShapeBorderClipper(
+
+
+                      Container(
+                        width: width * 0.84,
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(4.0),
+                          onTap: () {},
+                          child: Card(
+                            elevation: 0.0,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                          child: Image.asset(
-                            'assets/images/castle.jpg',
-                            fit: BoxFit.fill,
-                            height: height * 0.28,
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(color: Colors.black),
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            margin: const EdgeInsets.all(0.0),
+                            color: Color(0xffFAFAFA),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(0),
+                                    child: Image.asset(
+                                      'assets/images/end.jpg',
+                                      fit: BoxFit.fill,
+                                      height: height * 0.16,
+                                      width: width * 0.3,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: width * 0.54,
+                                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: FittedBox(
+                                    child: Text(
+                                      getTranslated(context, 'do_day_'+i.toString()+'_end'),
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-//
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        getTranslated(context, 'do_plan_label_10'),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff07898B),
-                        ),
-                        softWrap: true,
-                      ),
-                    ),
+                      // Container(
+                      //   width: width * 0.82,
+                      //   padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      //   child: Divider(
+                      //     color: Colors.black54,
+                      //     thickness: 2,
+                      //   ),
+                      // ),
 
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    ],
+                  ),
+
+                Container(
+                  padding: EdgeInsetsDirectional.only(
+                      start: width * 0.112, top: 0.0, bottom: 0.0),
+                  child: Row(
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                          Container(
+                            width: 2,
+                            height: height * 0.04,
+                            color: Color(0xff07898B),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        flex: 90,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            getTranslated(context, 'do_plan_hotel_checkout') + localAssistant.getDayCityByLocale(context, offer.days[index]),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsetsDirectional.only(
+                      start: width * 0.08, top: 0.0, bottom: 0.0),
+                  child: Row(
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(2.0),
+                            width: 25,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(
+                                width: 2,
+                                color: Color(0xff07898B),
+                                style: BorderStyle.solid,
+                              ),
+                            ),
+                            child: Container(
+                                width: 15,
+                                height: 15,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Color(0xff07898B),
+                                )),
+                          ),
+                          Container(
+                            width: 2,
+                            height: height * 0.02,
+                            color: Color(0xff07898B),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Flexible(
+                          child: Text(
+                            getTranslated(context, 'do_transfer_tab'),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Container(
+                  width: width * 0.84,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(4.0),
+                      onTap: () {},
+                      child: Card(
+                        elevation: 2.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        margin: const EdgeInsets.all(0.0),
+                        color: Color(0xffFAFAFA),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: ClipPath(
+                                  clipper: ShapeBorderClipper(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15)),
+                                  ),
+                                  child: days[index].transportationMethods.defaultTrans == null ? Image.network(
+                                    'https://ipackagetours.com/storage/app/'+ offer.airportTransferBack[0].transportation.image.toString(),
+                                    fit: BoxFit.cover,
+                                    height: height * 0.28,
+                                  )
+                                      :
+                                  Image.network(
+                                    'https://ipackagetours.com/storage/app/'+ days[index].transportationMethods.defaultTrans[0].transportation.image.toString(),
+                                    fit: BoxFit.fill,
+                                    height: height * 0.28,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                days[index].transportationMethods.defaultTrans == null ?
+                                localAssistant.getTransportationByLocale(context, offer.airportTransferGo[0].transportation).toString()
+                                    :
+                                localAssistant.getTransportationByLocale(context, days[index].transportationMethods.defaultTrans[0].transportation).toString(),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff07898B),
+                                ),
+                                softWrap: true,
+                              ),
+                            ),
+
+                            // Container(
+                            //   // color: Colors.white,
+                            //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.start,
+                            //     children: [
+                            //       Expanded(
+                            //         flex: 50,
+                            //         child: FittedBox(
+                            //           child: GFRating(
+                            //             color: Colors.amber,
+                            //             borderColor: Colors.amber,
+                            //             allowHalfRating: true,
+                            //             value: 3.5,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 50,
+                            //         child: Padding(
+                            //             padding: const EdgeInsets.only(
+                            //                 top: 0.0,
+                            //                 right: 0.0,
+                            //                 left: 0.0,
+                            //                 bottom: 0.0),
+                            //             child: Text(
+                            //               ' ',
+                            //               textAlign: TextAlign.start,
+                            //               style: TextStyle(
+                            //                   fontWeight: FontWeight.bold,
+                            //                   fontSize: 15,
+                            //                   color: Colors.black),
+                            //             )),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+
+                            // Container(
+                            //   // color: Colors.white,
+                            //   padding: const EdgeInsets.symmetric(
+                            //       horizontal: 8.0, vertical: 8.0),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.center,
+                            //     children: [
+                            //       Expanded(
+                            //         child: Padding(
+                            //             padding: const EdgeInsets.only(
+                            //                 top: 0.0,
+                            //                 right: 0.0,
+                            //                 left: 0.0,
+                            //                 bottom: 0.0),
+                            //             child: Text(
+                            //               getTranslated(context, 'do_plan_label_4'),
+                            //               textAlign: TextAlign.start,
+                            //               style: TextStyle(
+                            //                   fontSize: 15, color: Colors.black),
+                            //             )),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                Container(
+                  width: width * 0.84,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    onTap: () {},
+                    child: Card(
+                      elevation: 0.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: Colors.black),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      margin: const EdgeInsets.all(0.0),
+                      color: Color(0xffFAFAFA),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 50,
-                            child: FittedBox(
-                              child: GFRating(
-                                color: Colors.amber,
-                                borderColor: Colors.amber,
-                                allowHalfRating: true,
-                                value: 3.5,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Image.asset(
+                                'assets/images/end.jpg',
+                                fit: BoxFit.fill,
+                                height: height * 0.16,
+                                width: width * 0.3,
                               ),
                             ),
                           ),
-                          Expanded(
-                            flex: 50,
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0,
-                                    right: 0.0,
-                                    left: 0.0,
-                                    bottom: 0.0),
-                                child: Text(
-                                  ' ',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                )),
+                          Container(
+                            width: width * 0.54,
+                            padding: EdgeInsets.symmetric(horizontal: 20.0),
+                            child: FittedBox(
+                              child: Text(
+                                getTranslated(context, 'do_plan_label_14'),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
                     ),
+                  ),
+                ),
 
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0,
-                                    right: 0.0,
-                                    left: 0.0,
-                                    bottom: 0.0),
-                                child: Text(
-                                  getTranslated(context, 'do_plan_label_4'),
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.black),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              ],
             ),
           ),
-        ),
-        Container(
-          width: width * 0.84,
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(4.0),
-            onTap: () {},
-            child: Card(
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(color: Colors.black),
-              ),
-              clipBehavior: Clip.antiAlias,
-              margin: const EdgeInsets.all(0.0),
-              color: Color(0xffFAFAFA),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Image.asset(
-                        'assets/images/end.jpg',
-                        fit: BoxFit.fill,
-                        height: height * 0.16,
-                        width: width * 0.3,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: width * 0.54,
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: FittedBox(
-                      child: Text(
-                        getTranslated(context, 'do_plan_label_11'),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 10.0, bottom: 8.0),
-              child: Text(
-                getTranslated(context, 'do_plan_label_12'),
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Container(
-          padding: EdgeInsetsDirectional.only(
-              start: width * 0.08, top: 8.0, bottom: 10.0),
-          child: Row(
-            children: [
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: 2,
-                    height: height * 0.02,
-                    color: Color(0xff07898B),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(2.0),
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(
-                        width: 2,
-                        color: Color(0xff07898B),
-                        style: BorderStyle.solid,
-                      ),
-                    ),
-                    child: Container(
-                        width: 15,
-                        height: 15,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Color(0xff07898B),
-                        )),
-                  ),
-                  Container(
-                    width: 2,
-                    height: height * 0.02,
-                    color: Color(0xff07898B),
-                  ),
-                ],
-              ),
-              Container(
-                width: width * 0.84,
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: Text(
-                        getTranslated(context, 'do_plan_label_13'),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          width: width * 0.84,
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(4.0),
-            onTap: () {},
-            child: Card(
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(color: Colors.black),
-              ),
-              clipBehavior: Clip.antiAlias,
-              margin: const EdgeInsets.all(0.0),
-              color: Color(0xffFAFAFA),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Image.asset(
-                        'assets/images/end.jpg',
-                        fit: BoxFit.fill,
-                        height: height * 0.16,
-                        width: width * 0.3,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: width * 0.54,
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: FittedBox(
-                      child: Text(
-                        getTranslated(context, 'do_plan_label_14'),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Row(
-          children: [
-            Container(
-              padding: EdgeInsetsDirectional.only(
-                  start: width * 0.08, top: 10.0, bottom: 8.0),
-              child: Text(
-                getTranslated(context, 'do_plan_label_15'),
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-        _activityBar(width, height, getTranslated(context, 'do_plan_label_16'),
-            _transports),
-        _activityBar(width, height, getTranslated(context, 'do_plan_label_18'),
-            _residence),
-        _activityBar(
-            width, height, getTranslated(context, 'do_plan_label_21'), _tours),
-        _activityBar(width, height, getTranslated(context, 'do_plan_label_23'),
-            _hotelActivities),
       ],
     );
   }
@@ -1210,6 +1355,8 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                     Container(
                                       width: width * 0.35,
                                       child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: AlignmentDirectional.centerStart,
                                         child: Text(
                                           getTranslated(
                                               context, 'do_comments_username'),
@@ -1531,7 +1678,16 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: _isLoading ?
+      Center(
+        child: GFLoader(
+          type:GFLoaderType.circle,
+          loaderColorOne: Color(0xff07898B),
+          loaderColorTwo: Color(0xff07898B),
+          loaderColorThree: Color(0xff07898B),
+        ),
+      ) :
+      SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -1565,8 +1721,8 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                               ),
-                              child: Image.asset(
-                                'assets/images/c4.jpg',
+                              child: Image.network(
+                                'https://ipackagetours.com/storage/app/'+ offer.image,
                                 fit: BoxFit.fill,
                                 height: screenHeight * 0.28,
                               ),
@@ -1577,7 +1733,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            getTranslated(context, 'home_offer_card_city'),
+                            localAssistant.getOfferByLocale(context, offer, 'des').toString(),
                             textAlign: TextAlign.start,
                             style: TextStyle(
                               fontSize: 18,
@@ -1641,7 +1797,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                         left: 0.0,
                                         bottom: 0.0),
                                     child: Text(
-                                      getTranslated(
+                                      offer.daysNumber.toString() +' '+ getTranslated(
                                           context, 'home_offer_card_days'),
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
@@ -1823,8 +1979,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                   side: BorderSide(color: Colors.black, width: 2),
                 ),
                 onPressed: () {
-                  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new ConfirmBook()));
+
                 },
                 child: Text(
                   getTranslated(context, 'domestic_offer_book_btn'),
@@ -1907,8 +2062,10 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                     width: screenWidth,
                     child: Builder(
                       builder: (BuildContext context) {
-                        if (_selectedTabBar == 0)
-                          return _dayPlanWidget(screenWidth, screenHeight);
+                        if (_selectedTabBar == 3)
+                          return _transportWidget(screenWidth, screenHeight);
+                        else if (_selectedTabBar == 2)
+                          return _hotelsWidget(screenWidth, screenHeight);
                         else if (_selectedTabBar == 1)
                           return Container(
                             width: screenWidth * 0.84,
@@ -1925,10 +2082,8 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                               ),
                             ),
                           );
-                        else if (_selectedTabBar == 2)
-                          return _hotelsWidget(screenWidth, screenHeight);
                         else
-                          return _transportWidget(screenWidth, screenHeight);
+                          return _dayPlanWidget(screenWidth, screenHeight , offer.days);
                       },
                     )),
               ],
