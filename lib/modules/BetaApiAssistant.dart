@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ipackage/modules/Country.dart';
 import 'package:http/http.dart' as http;
+import 'package:ipackage/modules/Offer/Offer.dart';
 import 'package:ipackage/modules/Package.dart';
 
 class BetaApiAssistant
@@ -9,6 +10,7 @@ class BetaApiAssistant
 
   List<Country> _countries = [];
   List<Package> _packages = [];
+  Offer _offer;
 
   Future<List<Country>> getCountries() async
   {
@@ -42,5 +44,17 @@ class BetaApiAssistant
     // print('users length is : ' + _countries.length.toString());
 
     return _packages;
+  }
+
+  Future<Offer> getOffer(int offerId , String offerDate) async
+  {
+    var res = await http.get(Uri.parse('https://ipackagetours.com/api/offer?id='+offerId.toString()+'&date='+offerDate),
+        headers: {"Accept": "application/json"});
+    var body = json.decode(res.body);
+    print(body);
+
+    _offer = Offer.fromJson(body['data']);
+
+    return _offer;
   }
 }
