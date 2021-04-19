@@ -1,4 +1,4 @@
-#Fri Apr 16 15:17:43 EDT 2021
-base.0=E\:\\Android_Studio_Projects\\ipackage\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Fri Apr 16 03:58:10 EEST 2021
+base.0=/Users/sh/Documents/work/ipackage/ipackage/ipackage/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
