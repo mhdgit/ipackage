@@ -7,6 +7,8 @@ import 'package:ipackage/modules/Offer/Offer.dart';
 import 'package:ipackage/modules/Offer/Transportations/Transportation.dart';
 import 'package:ipackage/modules/Offer/Trip.dart';
 import 'package:ipackage/modules/Package.dart';
+import 'package:ipackage/modules/SpecialDomesticOffer.dart';
+import 'package:ipackage/modules/SpecialForeignOffer.dart';
 
 class LocalAssistant {
 
@@ -132,6 +134,58 @@ class LocalAssistant {
       {
         case 'name': return trip.nameEN; break;
         case 'trip': return trip.tripEN; break;
+      }
+    }
+
+    return 'empty';
+  }
+
+  String getSpecialDomesticOfferByLocale(context , SpecialDomesticOffer sdo , String type)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+    {
+      switch(type)
+      {
+        case 'country': return sdo.countryAR; break;
+        case 'package': return sdo.packageAR; break;
+        case 'desc': return sdo.descriptionAR; break;
+      }
+    }
+    else
+    {
+      switch(type)
+      {
+        case 'country': return sdo.countryEN; break;
+        case 'package': return sdo.packageEN; break;
+        case 'desc': return sdo.descriptionEN; break;
+      }
+    }
+
+    return 'empty';
+  }
+
+  String getSpecialForeignOfferByLocale(context , SpecialForeignOffer sfo , String type)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+    {
+      switch(type)
+      {
+        case 'country': return sfo.countryAR; break;
+        case 'package': return sfo.packageAR; break;
+        case 'desc': return sfo.descriptionAR; break;
+      }
+    }
+    else
+    {
+      switch(type)
+      {
+        case 'country': return sfo.countryEN; break;
+        case 'package': return sfo.packageEN; break;
+        case 'desc': return sfo.descriptionEN; break;
       }
     }
 
