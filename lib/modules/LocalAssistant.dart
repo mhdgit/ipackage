@@ -148,6 +148,7 @@ class LocalAssistant {
     {
       switch(type)
       {
+        case 'title': return sdo.descriptionAR; break;
         case 'country': return sdo.countryAR; break;
         case 'package': return sdo.packageAR; break;
         case 'desc': return sdo.descriptionAR; break;
@@ -157,6 +158,7 @@ class LocalAssistant {
     {
       switch(type)
       {
+        case 'title': return sdo.descriptionEN; break;
         case 'country': return sdo.countryEN; break;
         case 'package': return sdo.packageEN; break;
         case 'desc': return sdo.descriptionEN; break;
@@ -174,6 +176,7 @@ class LocalAssistant {
     {
       switch(type)
       {
+        case 'title': return sfo.descriptionAR; break;
         case 'country': return sfo.countryAR; break;
         case 'package': return sfo.packageAR; break;
         case 'desc': return sfo.descriptionAR; break;
@@ -183,6 +186,7 @@ class LocalAssistant {
     {
       switch(type)
       {
+        case 'title': return sfo.descriptionEN; break;
         case 'country': return sfo.countryEN; break;
         case 'package': return sfo.packageEN; break;
         case 'desc': return sfo.descriptionEN; break;

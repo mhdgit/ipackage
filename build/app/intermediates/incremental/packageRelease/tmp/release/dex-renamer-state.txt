@@ -1,0 +1,4 @@
+#Tue Apr 20 03:24:03 EEST 2021
+base.0=/Users/sh/Documents/work/ipackage/ipackage/ipackage/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

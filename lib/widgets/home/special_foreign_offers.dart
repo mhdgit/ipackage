@@ -70,7 +70,9 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
             width: screenWidth * 0.6,
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+
+              },
               child: InkWell(
                 borderRadius: BorderRadius.circular(4.0),
                 onTap: () {
@@ -89,7 +91,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                   color: Color(0xffFAFAFA),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(0),
@@ -151,7 +153,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          localAssistant.getSpecialForeignOfferByLocale(context, _specialForeignOffers[index], 'country'),
+                          localAssistant.getSpecialForeignOfferByLocale(context, _specialForeignOffers[index], 'title'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             fontSize: 18,

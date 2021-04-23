@@ -429,5 +429,20 @@
   "reset_code_subtitle": "Please type the code that was sent to you",
   "reset_new_pass_title": "Create a new password",
   "reset_new_pass_subtitle": "Please type a new password",
-  "reset_pass_subtitle": "Please reset the password using email"
+  "reset_pass_subtitle": "Please reset the password using email",
+
+  "Selectـtheـcountryـkey" : "Select the country key",
+  "MobileـPhoneـNumber": "Mobile Phone Number",
+  "Nationality": "Nationality",
+  "Wrong_data": "Wrong data",
+  "Please enter the name": "Please enter the name",
+  "Please enter an email": "Please enter an email",
+  "Please enter the password": "Please enter the password",
+  "Please enter confirmation password": "Please enter confirmation password",
+  "Passwords do not match": "Passwords do not match",
+  "Please select a country key": "Please select a country key",
+  "Please enter the phone number": "Please enter the phone number",
+  "Please select the nationality": "Please select the nationality"
+
+
 }
