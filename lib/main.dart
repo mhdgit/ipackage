@@ -77,6 +77,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primaryColor: Colors.white,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'cairo',
         ),
         debugShowCheckedModeBanner: false,
         routes: {

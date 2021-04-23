@@ -60,7 +60,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
     ) :
     Container(
       margin: EdgeInsets.symmetric(vertical: 5.0),
-      height: screenHeight * 0.65,
+      height: screenHeight * 0.66,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _specialDomesticOffers.length,
@@ -228,7 +228,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                               context, 'home_offer_card_details'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 11,
                             color: Colors.brown,
                           ),
                           softWrap: true,
@@ -255,7 +255,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                         color: Colors.white,
                                       ),
                                       Container(
-                                        margin: const EdgeInsets.only(top: 6.0),
+                                        margin: const EdgeInsets.only(top: 4.0),
                                         child: FittedBox(
                                           child: Text(
                                             getTranslated(
@@ -284,7 +284,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                         color: Colors.white,
                                       ),
                                       Container(
-                                        margin: const EdgeInsets.only(top: 6.0),
+                                        margin: const EdgeInsets.only(top: 4.0),
                                         child: FittedBox(
                                           child: Text(
                                             getTranslated(
@@ -312,7 +312,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                           'assets/icons/dish.png'
                                       ),
                                       Container(
-                                        margin: const EdgeInsets.only(top: 6.0),
+                                        margin: const EdgeInsets.only(top: 4.0),
                                         child: FittedBox(
                                           child: Text(
                                             getTranslated(
@@ -340,7 +340,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                                         color: Colors.white,
                                       ),
                                       Container(
-                                        margin: const EdgeInsets.only(top: 6.0),
+                                        margin: const EdgeInsets.only(top: 4.0),
                                         child: FittedBox(
                                           child: Text(
                                             getTranslated(

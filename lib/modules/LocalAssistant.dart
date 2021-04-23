@@ -10,6 +10,8 @@ import 'package:ipackage/modules/Package.dart';
 import 'package:ipackage/modules/SpecialDomesticOffer.dart';
 import 'package:ipackage/modules/SpecialForeignOffer.dart';
 
+import 'Offer/Airport.dart';
+
 class LocalAssistant {
 
 
@@ -190,5 +192,15 @@ class LocalAssistant {
     }
 
     return 'empty';
+  }
+
+  String getAirportByLocale(context , Airport airport)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+      return airport.nameAR;
+    else
+      return airport.nameEN;
   }
 }
