@@ -10,6 +10,8 @@ import 'package:ipackage/widgets/change_flight.dart';
 import 'package:ipackage/widgets/change_hotel.dart';
 import 'package:ipackage/widgets/hotel_details.dart';
 
+import '../../modules/Offer/Hotel/Hotel.dart';
+
 class DomesticOfferMain extends StatefulWidget {
 
   final int id;
@@ -30,40 +32,35 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
   LocalAssistant localAssistant = new LocalAssistant();
   Offer offer;
   bool _isLoading = true;
-
-  List<String> _transports = [
-    "خدمة النقل الخاص من و إلى المطار",
-  ];
-  List<String> _residence = [
-    "قضاء ليلتان في اسطنبول",
-    "إفطار يومي لشخصين",
-  ];
-  List<String> _tours = [
-    "رحلة إلى حافة العالم",
-  ];
-  List<String> _hotelActivities = [
-    "إفطار يومي في الغرفة",
-    "كعكة استقبال للأطفال",
-    "ديكورات جميلة داخل الغرفة",
-    "عصير فواكه",
-    "خدمة واي فاي مجانية",
-    "تسجيل الخروج المتأخر لغاية الساعة 2 مساء.(يعتمد على توفر الغرف)"
-  ];
+  List<Hotel> offerHotels = [];
+  int dayIndex = -1;
 
   List<String> _comments = [
     "لقد كانت رحلة رائعة لقد كانت رحلة رائعة لقد كانت رحلة رائعة",
     "لقد كانت رحلة رائعة",
   ];
 
+  void buildHotelsList(Offer offer)
+  {
+    for(var day in offer.days)
+    {
+      setState(() {
+        offerHotels = List.of(offerHotels)..addAll(day.hotels);
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(length: 4, vsync: this);
+    _tabController = new TabController(length: 5, vsync: this);
     
     betaApiAssistant.getOffer(widget.id, '2021-05-04').then((value) {
       setState(() {
         offer = value;
         _isLoading = false;
+
+        buildHotelsList(offer);
       });
     });
   }
@@ -449,30 +446,37 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                             //   ),
                             // ),
 
-                            // Container(
-                            //   // color: Colors.white,
-                            //   padding: const EdgeInsets.symmetric(
-                            //       horizontal: 8.0, vertical: 8.0),
-                            //   child: Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: [
-                            //       Expanded(
-                            //         child: Padding(
-                            //             padding: const EdgeInsets.only(
-                            //                 top: 0.0,
-                            //                 right: 0.0,
-                            //                 left: 0.0,
-                            //                 bottom: 0.0),
-                            //             child: Text(
-                            //               getTranslated(context, 'do_plan_label_4'),
-                            //               textAlign: TextAlign.start,
-                            //               style: TextStyle(
-                            //                   fontSize: 15, color: Colors.black),
-                            //             )),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
+                            Container(
+                              // color: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 0.0,
+                                            right: 0.0,
+                                            left: 0.0,
+                                            bottom: 0.0),
+                                        child: Text(
+                                          days[index].transportationMethods.defaultTrans == null && index == 0 ?
+                                          getTranslated(context, 'do_plan_car_from')
+                                              + localAssistant.getAirportByLocale(context, offer.airportGo).toString()
+                                              + getTranslated(context, 'do_plan_car_to'):
+                                          getTranslated(context, 'do_plan_car_from')
+                                              + localAssistant.getDayCityByLocale(context, offer.days[index-1]).toString()
+                                              + getTranslated(context, 'do_plan_car_to_2')
+                                              + localAssistant.getDayCityByLocale(context, offer.days[index]).toString(),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontSize: 15, color: Colors.black),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -737,7 +741,8 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15,
                                               color: Colors.black),
-                                        )),
+                                        ),
+                                    ),
                                   ),
                                   Expanded(
                                     flex: 15,
@@ -786,263 +791,270 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                 ),
 
                 for(int i = 0 ; i < days[index].trips.length ; i++)
-                  Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsetsDirectional.only(
-                            start: width * 0.08, top: 8.0, bottom: 8.0),
-                        child: Row(
-                          children: [
-                            Column(
-                              children: <Widget>[
-                                Container(
-                                  width: 2,
-                                  height: height * 0.02,
-                                  color: Color(0xff07898B),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(2.0),
-                                  width: 25,
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
+                  Builder(
+                    builder: (context){
+                        dayIndex++;
+                        // print(dayIndex);
+
+                      return Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsetsDirectional.only(
+                                start: width * 0.08, top: 8.0, bottom: 8.0),
+                            child: Row(
+                              children: [
+                                Column(
+                                  children: <Widget>[
+                                    Container(
                                       width: 2,
+                                      height: height * 0.02,
                                       color: Color(0xff07898B),
-                                      style: BorderStyle.solid,
                                     ),
-                                  ),
-                                  child: Container(
-                                      width: 15,
-                                      height: 15,
+                                    Container(
+                                      padding: EdgeInsets.all(2.0),
+                                      width: 25,
+                                      height: 25,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(50),
-                                        color: Color(0xff07898B),
-                                      )),
+                                        border: Border.all(
+                                          width: 2,
+                                          color: Color(0xff07898B),
+                                          style: BorderStyle.solid,
+                                        ),
+                                      ),
+                                      child: Container(
+                                          width: 15,
+                                          height: 15,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(50),
+                                            color: Color(0xff07898B),
+                                          )),
+                                    ),
+                                    Container(
+                                      width: 2,
+                                      height: height * 0.02,
+                                      color: Color(0xff07898B),
+                                    ),
+                                  ],
                                 ),
-                                Container(
-                                  width: 2,
-                                  height: height * 0.02,
-                                  color: Color(0xff07898B),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    getTranslated(context, 'do_day_'+dayIndex.toString()+'_begin'),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                getTranslated(context, 'do_day_'+i.toString()+'_begin'),
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Row(
-                      //   children: [
-                      //     Container(
-                      //       padding: EdgeInsetsDirectional.only(
-                      //           start: width * 0.08, top: 10.0, bottom: 8.0),
-                      //       child: Text(
-                      //         getTranslated(context, 'do_day_'+i.toString()+'_begin'),
-                      //         textAlign: TextAlign.start,
-                      //         style: TextStyle(
-                      //           fontSize: 20,
-                      //           fontWeight: FontWeight.bold,
-                      //           color: Colors.black,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
+                          ),
+                          // Row(
+                          //   children: [
+                          //     Container(
+                          //       padding: EdgeInsetsDirectional.only(
+                          //           start: width * 0.08, top: 10.0, bottom: 8.0),
+                          //       child: Text(
+                          //         getTranslated(context, 'do_day_'+i.toString()+'_begin'),
+                          //         textAlign: TextAlign.start,
+                          //         style: TextStyle(
+                          //           fontSize: 20,
+                          //           fontWeight: FontWeight.bold,
+                          //           color: Colors.black,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
 
 
-                      Container(
-                        width: width * 0.84,
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(4.0),
-                            onTap: () {},
-                            child: Card(
-                              elevation: 2.0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              clipBehavior: Clip.antiAlias,
-                              margin: const EdgeInsets.all(0.0),
-                              color: Color(0xffFAFAFA),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(0),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(0),
-                                      child: Image.network(
-                                        'https://ipackagetours.com/storage/app/' + days[index].trips[i].image.toString(),
-                                        fit: BoxFit.fill,
-                                        height: height * 0.28,
-                                      ),
-                                    ),
+                          Container(
+                            width: width * 0.84,
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(4.0),
+                                onTap: () {},
+                                child: Card(
+                                  elevation: 2.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      localAssistant.getTripByLocale(context, days[index].trips[i], 'name').toString(),
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w800,
-                                        color: Color(0xff07898B),
-                                      ),
-                                      softWrap: true,
-                                    ),
-                                  ),
-                                  Container(
-                                    // color: Colors.white,
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          flex: 50,
-                                          child: FittedBox(
-                                            child: Text(
-                                              days[index].trips[i].date.toString(),
-                                            ),
+                                  clipBehavior: Clip.antiAlias,
+                                  margin: const EdgeInsets.all(0.0),
+                                  color: Color(0xffFAFAFA),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(0),
+                                          child: Image.network(
+                                            'https://ipackagetours.com/storage/app/' + days[index].trips[i].image.toString(),
+                                            fit: BoxFit.fill,
+                                            height: height * 0.28,
                                           ),
                                         ),
-                                        Expanded(
-                                          flex: 35,
-                                          child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 0.0,
-                                                  right: 0.0,
-                                                  left: 0.0,
-                                                  bottom: 0.0),
-                                              child: Text(
-                                                ' ',
-                                                textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
-                                                    color: Colors.black),
-                                              )),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          localAssistant.getTripByLocale(context, days[index].trips[i], 'name').toString(),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w800,
+                                            color: Color(0xff07898B),
+                                          ),
+                                          softWrap: true,
                                         ),
-                                        Expanded(
-                                          flex: 15,
-                                          child: GFButton(
-                                              onPressed: () {},
-                                              color: Color(0xff07898B),
-                                              child: Center(
-                                                child: Icon(
-                                                  Icons.add,
-                                                  color: Colors.white,
+                                      ),
+                                      Container(
+                                        // color: Colors.white,
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              flex: 50,
+                                              child: FittedBox(
+                                                child: Text(
+                                                  days[index].trips[i].date.toString(),
                                                 ),
-                                              )),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 35,
+                                              child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      top: 0.0,
+                                                      right: 0.0,
+                                                      left: 0.0,
+                                                      bottom: 0.0),
+                                                  child: Text(
+                                                    ' ',
+                                                    textAlign: TextAlign.start,
+                                                    style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 15,
+                                                        color: Colors.black),
+                                                  )),
+                                            ),
+                                            Expanded(
+                                              flex: 15,
+                                              child: GFButton(
+                                                  onPressed: () {},
+                                                  color: Color(0xff07898B),
+                                                  child: Center(
+                                                    child: Icon(
+                                                      Icons.add,
+                                                      color: Colors.white,
+                                                    ),
+                                                  )),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    // color: Colors.white,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0, vertical: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 0.0,
-                                                  right: 0.0,
-                                                  left: 0.0,
-                                                  bottom: 0.0),
-                                              child: Text(
-                                                localAssistant.getTripByLocale(context, days[index].trips[i], 'trip').toString(),
-                                                textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                    fontSize: 15, color: Colors.black),
-                                              )),
+                                      ),
+                                      Container(
+                                        // color: Colors.white,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0, vertical: 8.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      top: 0.0,
+                                                      right: 0.0,
+                                                      left: 0.0,
+                                                      bottom: 0.0),
+                                                  child: Text(
+                                                    localAssistant.getTripByLocale(context, days[index].trips[i], 'trip').toString(),
+                                                    textAlign: TextAlign.start,
+                                                    style: TextStyle(
+                                                        fontSize: 15, color: Colors.black),
+                                                  )),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
 
 
 
-                      Container(
-                        width: width * 0.84,
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(4.0),
-                          onTap: () {},
-                          child: Card(
-                            elevation: 0.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(color: Colors.black),
-                            ),
-                            clipBehavior: Clip.antiAlias,
-                            margin: const EdgeInsets.all(0.0),
-                            color: Color(0xffFAFAFA),
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(0),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(0),
-                                    child: Image.asset(
-                                      'assets/images/end.jpg',
-                                      fit: BoxFit.fill,
-                                      height: height * 0.16,
-                                      width: width * 0.3,
-                                    ),
-                                  ),
+                          Container(
+                            width: width * 0.84,
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(4.0),
+                              onTap: () {},
+                              child: Card(
+                                elevation: 0.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(color: Colors.black),
                                 ),
-                                Container(
-                                  width: width * 0.54,
-                                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: FittedBox(
-                                    child: Text(
-                                      getTranslated(context, 'do_day_'+i.toString()+'_end'),
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                clipBehavior: Clip.antiAlias,
+                                margin: const EdgeInsets.all(0.0),
+                                color: Color(0xffFAFAFA),
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(0),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: Image.asset(
+                                          'assets/images/end.jpg',
+                                          fit: BoxFit.fill,
+                                          height: height * 0.16,
+                                          width: width * 0.3,
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    Container(
+                                      width: width * 0.54,
+                                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                      child: FittedBox(
+                                        child: Text(
+                                          getTranslated(context, 'do_day_'+dayIndex.toString()+'_end'),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      // Container(
-                      //   width: width * 0.82,
-                      //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      //   child: Divider(
-                      //     color: Colors.black54,
-                      //     thickness: 2,
-                      //   ),
-                      // ),
+                          // Container(
+                          //   width: width * 0.82,
+                          //   padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          //   child: Divider(
+                          //     color: Colors.black54,
+                          //     thickness: 2,
+                          //   ),
+                          // ),
 
-                    ],
+                        ],
+                      );
+                    }
                   ),
 
                 Container(
@@ -1087,6 +1099,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                   ),
                 ),
 
+                index == days.length -1 ?
                 Container(
                   padding: EdgeInsetsDirectional.only(
                       start: width * 0.08, top: 0.0, bottom: 0.0),
@@ -1142,8 +1155,10 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                       ),
                     ],
                   ),
-                ),
+                )
+                :Container(width: 1,height: 1,),
 
+                index == days.length -1 ?
                 Container(
                   width: width * 0.84,
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -1192,7 +1207,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 days[index].transportationMethods.defaultTrans == null ?
-                                localAssistant.getTransportationByLocale(context, offer.airportTransferGo[0].transportation).toString()
+                                localAssistant.getTransportationByLocale(context, offer.airportTransferBack[0].transportation).toString()
                                     :
                                 localAssistant.getTransportationByLocale(context, days[index].transportationMethods.defaultTrans[0].transportation).toString(),
                                 textAlign: TextAlign.start,
@@ -1243,36 +1258,38 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                             //   ),
                             // ),
 
-                            // Container(
-                            //   // color: Colors.white,
-                            //   padding: const EdgeInsets.symmetric(
-                            //       horizontal: 8.0, vertical: 8.0),
-                            //   child: Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: [
-                            //       Expanded(
-                            //         child: Padding(
-                            //             padding: const EdgeInsets.only(
-                            //                 top: 0.0,
-                            //                 right: 0.0,
-                            //                 left: 0.0,
-                            //                 bottom: 0.0),
-                            //             child: Text(
-                            //               getTranslated(context, 'do_plan_label_4'),
-                            //               textAlign: TextAlign.start,
-                            //               style: TextStyle(
-                            //                   fontSize: 15, color: Colors.black),
-                            //             )),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
+                            Container(
+                              // color: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 0.0,
+                                            right: 0.0,
+                                            left: 0.0,
+                                            bottom: 0.0),
+                                        child: Text(
+                                            getTranslated(context, 'do_plan_car_from_2')
+                                            + localAssistant.getAirportByLocale(context, offer.airportBack).toString(),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontSize: 15, color: Colors.black),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ),
                   ),
-                ),
+                )
+                    :Container(width: 1,height: 1,),
 
 
               ],
@@ -1420,6 +1437,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        for(int i = 0 ; i < offerHotels.length ; i++)
         Container(
           width: width * 0.84,
           padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -1447,7 +1465,12 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                       padding: const EdgeInsets.all(0),
                       child: Padding(
                         padding: const EdgeInsets.all(0),
-                        child: Image.asset(
+                        child: offerHotels[i].images != null ? Image.network(
+                          'https://ipackagetours.com/storage/app/' + offerHotels[i].images.toString(),
+                          fit: BoxFit.fill,
+                          height: height * 0.28,
+                        ) :
+                        Image.asset(
                           'assets/images/hotel.jpg',
                           fit: BoxFit.fill,
                           height: height * 0.28,
@@ -1457,7 +1480,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        getTranslated(context, 'do_plan_label_5'),
+                        localAssistant.getHotelByLocale(context, offerHotels[i], 'name').toString(),
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 18,
@@ -1480,7 +1503,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                 color: Colors.amber,
                                 borderColor: Colors.amber,
                                 allowHalfRating: true,
-                                value: 3.5,
+                                value: double.parse(offerHotels[i].rating.toString()) ?? 0.0,
                               ),
                             ),
                           ),
@@ -1516,27 +1539,27 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                         ],
                       ),
                     ),
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
-                                child: Text(
-                                  getTranslated(context, 'do_plan_label_4'),
-                                  textAlign: TextAlign.start,
-                                  style:
-                                      TextStyle(fontSize: 15, color: Colors.black),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   // color: Colors.white,
+                    //   padding: const EdgeInsets.symmetric(
+                    //       horizontal: 8.0, vertical: 8.0),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       Flexible(
+                    //         child: Padding(
+                    //             padding: const EdgeInsets.only(
+                    //                 top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                    //             child: Text(
+                    //               getTranslated(context, 'do_plan_label_4'),
+                    //               textAlign: TextAlign.start,
+                    //               style:
+                    //                   TextStyle(fontSize: 15, color: Colors.black),
+                    //             )),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -1547,124 +1570,532 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
     );
   }
 
-  _transportWidget(width, height) {
+  _transportWidget(width, height , List<Day> days) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: width * 0.84,
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: GestureDetector(
-            onTap: () {},
-            child: InkWell(
-              borderRadius: BorderRadius.circular(4.0),
-              onTap: () {},
-              child: Card(
-                elevation: 2.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                clipBehavior: Clip.antiAlias,
-                margin: const EdgeInsets.all(0.0),
-                color: Color(0xffFAFAFA),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: ClipPath(
-                          clipper: ShapeBorderClipper(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                          child: Image.asset(
-                            'assets/images/car.jpg',
-                            fit: BoxFit.cover,
-                            height: height * 0.28,
-                          ),
-                        ),
-                      ),
-                    ),
-//
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        getTranslated(context, 'do_plan_label_3'),
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff07898B),
-                        ),
-                        softWrap: true,
-                      ),
-                    ),
 
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+        for(int index = 0 ; index < days.length ; index++ )
+          Column(
+            children: [
+              Container(
+                width: width * 0.84,
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    onTap: () {},
+                    child: Card(
+                      elevation: 2.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      margin: const EdgeInsets.all(0.0),
+                      color: Color(0xffFAFAFA),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Expanded(
-                            flex: 50,
-                            child: FittedBox(
-                              child: GFRating(
-                                color: Colors.amber,
-                                borderColor: Colors.amber,
-                                allowHalfRating: true,
-                                value: 3.5,
+                          Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: ClipPath(
+                                clipper: ShapeBorderClipper(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
+                                ),
+                                child: days[index].transportationMethods.defaultTrans == null ? Image.network(
+                                  'https://ipackagetours.com/storage/app/'+ offer.airportTransferGo[0].transportation.image.toString(),
+                                  fit: BoxFit.cover,
+                                  height: height * 0.28,
+                                )
+                                    :
+                                Image.network(
+                                  'https://ipackagetours.com/storage/app/'+ days[index].transportationMethods.defaultTrans[0].transportation.image.toString(),
+                                  fit: BoxFit.cover,
+                                  height: height * 0.28,
+                                ),
                               ),
                             ),
                           ),
-                          Expanded(
-                            flex: 50,
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
-                                child: Text(
-                                  ' ',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
 
-                    Container(
-                      // color: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
-                                child: Text(
-                                  getTranslated(context, 'do_plan_label_4'),
-                                  textAlign: TextAlign.start,
-                                  style:
-                                      TextStyle(fontSize: 15, color: Colors.black),
-                                )),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              days[index].transportationMethods.defaultTrans == null ?
+                              localAssistant.getTransportationByLocale(context, offer.airportTransferGo[0].transportation).toString()
+                                  :
+                              localAssistant.getTransportationByLocale(context, days[index].transportationMethods.defaultTrans[0].transportation).toString(),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff07898B),
+                              ),
+                              softWrap: true,
+                            ),
+                          ),
+
+                          // Container(
+                          //   // color: Colors.white,
+                          //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          //   child: Row(
+                          //     mainAxisAlignment: MainAxisAlignment.start,
+                          //     children: [
+                          //       Expanded(
+                          //         flex: 50,
+                          //         child: FittedBox(
+                          //           child: GFRating(
+                          //             color: Colors.amber,
+                          //             borderColor: Colors.amber,
+                          //             allowHalfRating: true,
+                          //             value: 3.5,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //       Expanded(
+                          //         flex: 50,
+                          //         child: Padding(
+                          //             padding: const EdgeInsets.only(
+                          //                 top: 0.0,
+                          //                 right: 0.0,
+                          //                 left: 0.0,
+                          //                 bottom: 0.0),
+                          //             child: Text(
+                          //               ' ',
+                          //               textAlign: TextAlign.start,
+                          //               style: TextStyle(
+                          //                   fontWeight: FontWeight.bold,
+                          //                   fontSize: 15,
+                          //                   color: Colors.black),
+                          //             )),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+
+                          Container(
+                            // color: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 0.0,
+                                          right: 0.0,
+                                          left: 0.0,
+                                          bottom: 0.0),
+                                      child: Text(
+                                        days[index].transportationMethods.defaultTrans == null && index == 0 ?
+                                        getTranslated(context, 'do_plan_car_from')
+                                            + localAssistant.getAirportByLocale(context, offer.airportGo).toString()
+                                            + getTranslated(context, 'do_plan_car_to'):
+                                        getTranslated(context, 'do_plan_car_from')
+                                            + localAssistant.getDayCityByLocale(context, offer.days[index-1]).toString()
+                                            + getTranslated(context, 'do_plan_car_to_2')
+                                            + localAssistant.getDayCityByLocale(context, offer.days[index]).toString(),
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.black),
+                                      )),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  ],
+                  ),
+                ),
+              ),
+
+              index == days.length -1 ?
+              Container(
+                width: width * 0.84,
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    onTap: () {},
+                    child: Card(
+                      elevation: 2.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      margin: const EdgeInsets.all(0.0),
+                      color: Color(0xffFAFAFA),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: ClipPath(
+                                clipper: ShapeBorderClipper(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
+                                ),
+                                child: days[index].transportationMethods.defaultTrans == null ? Image.network(
+                                  'https://ipackagetours.com/storage/app/'+ offer.airportTransferBack[0].transportation.image.toString(),
+                                  fit: BoxFit.cover,
+                                  height: height * 0.28,
+                                )
+                                    :
+                                Image.network(
+                                  'https://ipackagetours.com/storage/app/'+ days[index].transportationMethods.defaultTrans[0].transportation.image.toString(),
+                                  fit: BoxFit.cover,
+                                  height: height * 0.28,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              days[index].transportationMethods.defaultTrans == null ?
+                              localAssistant.getTransportationByLocale(context, offer.airportTransferBack[0].transportation).toString()
+                                  :
+                              localAssistant.getTransportationByLocale(context, days[index].transportationMethods.defaultTrans[0].transportation).toString(),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff07898B),
+                              ),
+                              softWrap: true,
+                            ),
+                          ),
+
+                          // Container(
+                          //   // color: Colors.white,
+                          //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          //   child: Row(
+                          //     mainAxisAlignment: MainAxisAlignment.start,
+                          //     children: [
+                          //       Expanded(
+                          //         flex: 50,
+                          //         child: FittedBox(
+                          //           child: GFRating(
+                          //             color: Colors.amber,
+                          //             borderColor: Colors.amber,
+                          //             allowHalfRating: true,
+                          //             value: 3.5,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //       Expanded(
+                          //         flex: 50,
+                          //         child: Padding(
+                          //             padding: const EdgeInsets.only(
+                          //                 top: 0.0,
+                          //                 right: 0.0,
+                          //                 left: 0.0,
+                          //                 bottom: 0.0),
+                          //             child: Text(
+                          //               ' ',
+                          //               textAlign: TextAlign.start,
+                          //               style: TextStyle(
+                          //                   fontWeight: FontWeight.bold,
+                          //                   fontSize: 15,
+                          //                   color: Colors.black),
+                          //             )),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+
+                          Container(
+                            // color: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 0.0,
+                                          right: 0.0,
+                                          left: 0.0,
+                                          bottom: 0.0),
+                                      child: Text(
+                                        getTranslated(context, 'do_plan_car_from_2')
+                                            + localAssistant.getAirportByLocale(context, offer.airportBack).toString(),
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.black),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+                  :Container(width: 1,height: 1,),
+
+            ],
+          ),
+
+//         Container(
+//           width: width * 0.84,
+//           padding: const EdgeInsets.symmetric(vertical: 10.0),
+//           child: GestureDetector(
+//             onTap: () {},
+//             child: InkWell(
+//               borderRadius: BorderRadius.circular(4.0),
+//               onTap: () {},
+//               child: Card(
+//                 elevation: 2.0,
+//                 shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.circular(15),
+//                 ),
+//                 clipBehavior: Clip.antiAlias,
+//                 margin: const EdgeInsets.all(0.0),
+//                 color: Color(0xffFAFAFA),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.stretch,
+//                   mainAxisAlignment: MainAxisAlignment.end,
+//                   children: [
+//                     Padding(
+//                       padding: const EdgeInsets.all(0),
+//                       child: Padding(
+//                         padding: const EdgeInsets.all(0),
+//                         child: ClipPath(
+//                           clipper: ShapeBorderClipper(
+//                             shape: RoundedRectangleBorder(
+//                                 borderRadius: BorderRadius.circular(15)),
+//                           ),
+//                           child: Image.asset(
+//                             'assets/images/car.jpg',
+//                             fit: BoxFit.cover,
+//                             height: height * 0.28,
+//                           ),
+//                         ),
+//                       ),
+//                     ),
+// //
+//                     Padding(
+//                       padding: const EdgeInsets.all(8.0),
+//                       child: Text(
+//                         getTranslated(context, 'do_plan_label_3'),
+//                         textAlign: TextAlign.start,
+//                         style: TextStyle(
+//                           fontSize: 18,
+//                           fontWeight: FontWeight.bold,
+//                           color: Color(0xff07898B),
+//                         ),
+//                         softWrap: true,
+//                       ),
+//                     ),
+//
+//                     Container(
+//                       // color: Colors.white,
+//                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+//                       child: Row(
+//                         mainAxisAlignment: MainAxisAlignment.start,
+//                         children: [
+//                           Expanded(
+//                             flex: 50,
+//                             child: FittedBox(
+//                               child: GFRating(
+//                                 color: Colors.amber,
+//                                 borderColor: Colors.amber,
+//                                 allowHalfRating: true,
+//                                 value: 3.5,
+//                               ),
+//                             ),
+//                           ),
+//                           Expanded(
+//                             flex: 50,
+//                             child: Padding(
+//                                 padding: const EdgeInsets.only(
+//                                     top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+//                                 child: Text(
+//                                   ' ',
+//                                   textAlign: TextAlign.start,
+//                                   style: TextStyle(
+//                                       fontWeight: FontWeight.bold,
+//                                       fontSize: 15,
+//                                       color: Colors.black),
+//                                 )),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//
+//                     Container(
+//                       // color: Colors.white,
+//                       padding: const EdgeInsets.symmetric(
+//                           horizontal: 8.0, vertical: 8.0),
+//                       child: Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           Expanded(
+//                             child: Padding(
+//                                 padding: const EdgeInsets.only(
+//                                     top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+//                                 child: Text(
+//                                   getTranslated(context, 'do_plan_label_4'),
+//                                   textAlign: TextAlign.start,
+//                                   style:
+//                                       TextStyle(fontSize: 15, color: Colors.black),
+//                                 )),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+      ],
+    );
+  }
+
+  _activitiesWidget(width , height)
+  {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        for(int index = 0 ; index < offer.days.length ; index++)
+          for(int tIndex = 0 ; tIndex < offer.days[index].trips.length ; tIndex++)
+            Container(
+              width: width * 0.84,
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(4.0),
+                  onTap: () {},
+                  child: Card(
+                    elevation: 2.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    margin: const EdgeInsets.all(0.0),
+                    color: Color(0xffFAFAFA),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: Image.network(
+                              'https://ipackagetours.com/storage/app/' + offer.days[index].trips[tIndex].image.toString(),
+                              fit: BoxFit.fill,
+                              height: height * 0.28,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            localAssistant.getTripByLocale(context, offer.days[index].trips[tIndex], 'name').toString(),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xff07898B),
+                            ),
+                            softWrap: true,
+                          ),
+                        ),
+                        Container(
+                          // color: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 50,
+                                child: FittedBox(
+                                  child: Text(
+                                    offer.days[index].trips[tIndex].date.toString(),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 35,
+                                child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 0.0,
+                                        right: 0.0,
+                                        left: 0.0,
+                                        bottom: 0.0),
+                                    child: Text(
+                                      ' ',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.black),
+                                    )),
+                              ),
+                              Expanded(
+                                flex: 15,
+                                child: GFButton(
+                                    onPressed: () {},
+                                    color: Color(0xff07898B),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      ),
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          // color: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 0.0,
+                                        right: 0.0,
+                                        left: 0.0,
+                                        bottom: 0.0),
+                                    child: Text(
+                                      localAssistant.getTripByLocale(context, offer.days[index].trips[tIndex], 'trip').toString(),
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.black),
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
       ],
     );
   }
@@ -1867,7 +2298,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                         ),
                                         Container(
                                           margin:
-                                              const EdgeInsets.only(top: 6.0),
+                                              const EdgeInsets.only(top: 4.0),
                                           child: FittedBox(
                                             child: Text(
                                               getTranslated(context,
@@ -1896,7 +2327,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                         ),
                                         Container(
                                           margin:
-                                              const EdgeInsets.only(top: 6.0),
+                                              const EdgeInsets.only(top: 4.0),
                                           child: FittedBox(
                                             child: Text(
                                               getTranslated(context,
@@ -1922,7 +2353,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                         Image.asset('assets/icons/dish.png'),
                                         Container(
                                           margin:
-                                              const EdgeInsets.only(top: 6.0),
+                                              const EdgeInsets.only(top: 4.0),
                                           child: FittedBox(
                                             child: Text(
                                               getTranslated(context,
@@ -1951,7 +2382,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                         ),
                                         Container(
                                           margin:
-                                              const EdgeInsets.only(top: 6.0),
+                                              const EdgeInsets.only(top: 4.0),
                                           child: FittedBox(
                                             child: Text(
                                               getTranslated(context,
@@ -2046,6 +2477,11 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                         _selectedTabBar = 3;
                       });
                       break;
+                    case 4:
+                      setState(() {
+                        _selectedTabBar = 4;
+                      });
+                      break;
                   }
                 },
                 tabs: [
@@ -2061,6 +2497,9 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                   Tab(
                     text: getTranslated(context, 'do_transfer_tab'),
                   ),
+                  Tab(
+                    text: getTranslated(context, 'do_activities_tab'),
+                  ),
                 ],
               ),
             ),
@@ -2071,8 +2510,10 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                     width: screenWidth,
                     child: Builder(
                       builder: (BuildContext context) {
-                        if (_selectedTabBar == 3)
-                          return _transportWidget(screenWidth, screenHeight);
+                        if (_selectedTabBar == 4)
+                          return _activitiesWidget(screenWidth, screenHeight);
+                        else if (_selectedTabBar == 3)
+                          return _transportWidget(screenWidth, screenHeight , offer.days);
                         else if (_selectedTabBar == 2)
                           return _hotelsWidget(screenWidth, screenHeight);
                         else if (_selectedTabBar == 1)
@@ -2137,7 +2578,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
               padding: EdgeInsetsDirectional.only(
                   start: screenWidth * 0.06, top: 8.0, bottom: 20.0),
               child: Container(
-                height: screenHeight * 0.65,
+                height: screenHeight * 0.66,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
@@ -2301,7 +2742,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                         context, 'home_offer_card_details'),
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 11,
                                       color: Colors.brown,
                                     ),
                                     softWrap: true,
@@ -2360,7 +2801,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                 ),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -2388,7 +2829,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                     'assets/icons/dish.png'),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -2418,7 +2859,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                 ),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -2602,7 +3043,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                         context, 'home_offer_card_details'),
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 11,
                                       color: Colors.brown,
                                     ),
                                     softWrap: true,
@@ -2631,7 +3072,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                 ),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -2661,7 +3102,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                 ),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -2689,7 +3130,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                     'assets/icons/dish.png'),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -2719,7 +3160,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                 ),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -2903,7 +3344,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                         context, 'home_offer_card_details'),
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 11,
                                       color: Colors.brown,
                                     ),
                                     softWrap: true,
@@ -2932,7 +3373,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                 ),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -2962,7 +3403,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                 ),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -2990,7 +3431,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                     'assets/icons/dish.png'),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,
@@ -3020,7 +3461,7 @@ class _DomesticOfferMainState extends State<DomesticOfferMain>
                                                 ),
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      top: 6.0),
+                                                      top: 4.0),
                                                   child: FittedBox(
                                                     child: Text(
                                                       getTranslated(context,

@@ -3,7 +3,6 @@ import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/SpecialForeignOffer.dart';
 import 'package:ipackage/modules/my_icons.dart';
-
 import '../../modules/BetaApiAssistant.dart';
 import '../../modules/LocalAssistant.dart';
 import 'foreign_offer_main.dart';
@@ -20,7 +19,6 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
   BetaApiAssistant betaApiAssistant = new BetaApiAssistant();
   LocalAssistant localAssistant = new LocalAssistant();
   bool _isLoading = true;
-
 
   @override
   void initState() {
@@ -60,7 +58,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
     ) :
     Container(
       margin: EdgeInsets.symmetric(vertical: 5.0),
-      height: screenHeight * 0.65,
+      height: screenHeight * 0.66,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _specialForeignOffers.length,
@@ -77,7 +75,10 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                 borderRadius: BorderRadius.circular(4.0),
                 onTap: () {
                   Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context) => new ForeignOfferMain(),
+                    builder: (BuildContext context) => new ForeignOfferMain(
+                      id: _specialForeignOffers[index].id,
+                      package: localAssistant.getSpecialForeignOfferByLocale(context, _specialForeignOffers[index], 'package'),
+                      rating: _specialForeignOffers[index].rating.toString(),),
                   ));
                 },
                 child: Card(
@@ -226,7 +227,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                               context, 'home_offer_card_details'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 11,
                             color: Colors.brown,
                           ),
                           softWrap: true,
@@ -253,7 +254,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                                         color: Colors.white,
                                       ),
                                       Container(
-                                        margin: const EdgeInsets.only(top: 6.0),
+                                        margin: const EdgeInsets.only(top: 4.0),
                                         child: FittedBox(
                                           child: Text(
                                             getTranslated(
@@ -282,7 +283,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                                         color: Colors.white,
                                       ),
                                       Container(
-                                        margin: const EdgeInsets.only(top: 6.0),
+                                        margin: const EdgeInsets.only(top: 4.0),
                                         child: FittedBox(
                                           child: Text(
                                             getTranslated(
@@ -310,7 +311,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                                           'assets/icons/dish.png'
                                       ),
                                       Container(
-                                        margin: const EdgeInsets.only(top: 6.0),
+                                        margin: const EdgeInsets.only(top: 4.0),
                                         child: FittedBox(
                                           child: Text(
                                             getTranslated(
@@ -338,7 +339,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                                         color: Colors.white,
                                       ),
                                       Container(
-                                        margin: const EdgeInsets.only(top: 6.0),
+                                        margin: const EdgeInsets.only(top: 4.0),
                                         child: FittedBox(
                                           child: Text(
                                             getTranslated(
