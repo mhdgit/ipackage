@@ -19,6 +19,8 @@
   "login_password_hint" : "كلمة المرور",
   "login_facebook_btn" : "الإستمرار بإستخدام فيسبوك",
   "login_google_btn" : "الإستمرار بإستخدام جوجل",
+  "login_twitter_btn" : "الإستمرار بإستخدام تويتر",
+  "login_apple_btn" : "الإستمرار بإستخدام Apple",
   "login_country_btn" : "اختر دولتك",
   "login_country_d_title" : "اختر دولتك",
   "login_alert_d_cancel" : "إلغاء",
@@ -446,5 +448,9 @@
   "Passwords do not match": "كلمتا المرور غير متطابقتان",
   "Please select a country key": "يرجى اختيار مفتاح الدولة",
   "Please enter the phone number": "يرجى إدخال رقم الهاتف",
-  "Please select the nationality": "يرجى تحديد الجنسية"
+  "Please select the nationality": "يرجى تحديد الجنسية",
+  "The email is already used in another account": "الايميل مستخدم في حساب آخر",
+
+  "Already have an account": "لديك حساب بالفعل؟",
+  "You do not have an account": "ليس لديك حساب؟"
 }

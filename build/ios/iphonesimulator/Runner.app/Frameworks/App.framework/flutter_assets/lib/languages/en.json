@@ -20,6 +20,8 @@
   "login_password_hint" : "Password",
   "login_facebook_btn" : "Continue using Facebook",
   "login_google_btn" : "Continue using Google",
+  "login_twitter_btn" : "Continue using Twitter",
+  "login_apple_btn" : "Continue using Apple",
   "login_country_btn" : "Choose your country",
   "login_country_d_title" : "Choose your country",
   "login_alert_d_cancel" : "Cancel",
@@ -164,8 +166,12 @@
   "domestic_offer_plan_label" : "Itinerary",
   "do_plan_tab" : "Day plan",
   "do_plan_city" : "City",
-  "do_plan_hotel_register" : "Check-in at the hotel in",
+  "do_plan_hotel_register" : "Check-in at the hotel in ",
   "do_plan_hotel_checkout" : "Check out the hotel in ",
+  "do_plan_car_from" : "Moving from ",
+  "do_plan_car_from_2" : "Moving from the Hotel to ",
+  "do_plan_car_to" : " to Hotel",
+  "do_plan_car_to_2" : " to ",
   "do_day_0_begin": "First day",
   "do_day_1_begin": "The second day",
   "do_day_2_begin": "The third day",
@@ -240,6 +246,9 @@
   "fo_details" : "Details",
   "fo_label_2" : "I had a great time",
   "fo_add_btn" : "Add activity",
+  "fo_trip_plan" : "Trip plan",
+  "fo_residence" : "Residence",
+
 
   "book_trip_label" : "Select your destination",
   "book_trip_label_2" : "Choose package",
@@ -442,7 +451,10 @@
   "Passwords do not match": "Passwords do not match",
   "Please select a country key": "Please select a country key",
   "Please enter the phone number": "Please enter the phone number",
-  "Please select the nationality": "Please select the nationality"
+  "Please select the nationality": "Please select the nationality",
+  "The email is already used in another account": "The email is already used in another account",
+  "Already have an account": "Already have an account?",
+  "You do not have an account": "You do not have an account?"
 
 
 }

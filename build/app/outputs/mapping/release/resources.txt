@@ -621,7 +621,6 @@ Referenced Strings:
   centerY
   center_crop
   center_inside
-  channel
   character
   class
   clear
@@ -775,7 +774,6 @@ Referenced Strings:
   getLineSpacingMultiplier
   getMaxAvailableHeight
   getParentNodeId
-  getPlatformVersion
   getResId
   getResPackage
   getResource
@@ -1023,7 +1021,6 @@ Referenced Strings:
   scanCode
   search
   search_suggest_query
-  searchable_dropdown
   selectionBase
   selectionExtent
   selector

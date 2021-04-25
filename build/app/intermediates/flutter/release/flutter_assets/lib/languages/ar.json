@@ -164,6 +164,10 @@
   "do_plan_city" : "مدينة",
   "do_plan_hotel_register" : "تسجيل الدخول في الفندق في ",
   "do_plan_hotel_checkout" : "تسجيل الخروج من الفندق في ",
+  "do_plan_car_from" : "الانتقال من ",
+  "do_plan_car_from_2" : "الانتقال من الفندق إلى ",
+  "do_plan_car_to" : " إلى الفندق",
+  "do_plan_car_to_2" : " إلى ",
   "do_day_0_begin" : "اليوم الأول",
   "do_day_1_begin" : "اليوم الثاني",
   "do_day_2_begin" : "اليوم الثالث",
@@ -238,6 +242,8 @@
   "fo_details" : "التفاصيل",
   "fo_label_2" : "لقد قضيت وقتاً ممتعاً",
   "fo_add_btn" : "أضف نشاطاً",
+  "fo_trip_plan" : "مسار الرحلة",
+  "fo_residence" : "الإقامة",
 
   "book_trip_label" : "حدد وجهتك",
   "book_trip_label_2" : "اختار الباقة",
@@ -428,5 +434,17 @@
   "reset_code_subtitle": "يرجى كتابة الكود الذي أرسل إليك",
   "reset_new_pass_title": "إنشاء كلمة مرور جديدة",
   "reset_new_pass_subtitle": "يرجى كتابة كلمة مرور جديدة",
-  "reset_pass_subtitle": "يرجى إعادة ضبط كلمة المرور باستخدام البريد الإلكتروني"
+  "reset_pass_subtitle": "يرجى إعادة ضبط كلمة المرور باستخدام البريد الإلكتروني",
+  "Selectـtheـcountryـkey" : "اختر مفتاح الدولة",
+  "MobileـPhoneـNumber": "رقم الهاتف المحمول",
+  "Nationality": "الجنسية",
+  "Wrong_data": "بيانات خاطئة",
+  "Please enter the name": "يرجى إدخال الاسم",
+  "Please enter an email": "يرجى إدخال البريد الالكتروني",
+  "Please enter the password": "يرجى إدخال كلمة المرور",
+  "Please enter confirmation password": "يرجى إدخال تأكيد كلمة المرور",
+  "Passwords do not match": "كلمتا المرور غير متطابقتان",
+  "Please select a country key": "يرجى اختيار مفتاح الدولة",
+  "Please enter the phone number": "يرجى إدخال رقم الهاتف",
+  "Please select the nationality": "يرجى تحديد الجنسية"
 }

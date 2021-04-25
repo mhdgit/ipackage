@@ -462,7 +462,6 @@ kotlin.PreconditionsKt__PreconditionsKt
 androidx.core.view.accessibility.AccessibilityManagerCompat$TouchExplorationStateChangeListener
 kotlin.coroutines.experimental.migration.ExperimentalSuspendFunction2Migration
 com.facebook.common.activitylistener.ActivityListenerManager
-bsi.iceman.searchable_dropdown.R$style
 kotlin.jvm.internal.markers.KMutableCollection
 kotlin.internal.InlineOnly
 androidx.collection.SparseArrayCompat:
@@ -597,6 +596,7 @@ io.flutter.embedding.engine.systemchannels.KeyEventChannel:
 kotlin.ranges.LongProgressionIterator
 kotlin.collections.ArraysKt___ArraysJvmKt$asList$4
 io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding:
+    public io.flutter.embedding.engine.FlutterEngine getFlutterEngine()
     public io.flutter.view.TextureRegistry getTextureRegistry()
     public io.flutter.plugin.platform.PlatformViewRegistry getPlatformViewRegistry()
     public io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterAssets getFlutterAssets()
@@ -714,8 +714,7 @@ com.facebook.imagepipeline.animated.factory.AnimatedFactoryProvider:
 androidx.vectordrawable.graphics.drawable.VectorDrawableCompat$VectorDrawableCompatState:
     int[] mCachedThemeAttrs
 kotlin.text.UStringsKt
-kotlin.jvm.internal.DefaultConstructorMarker:
-    private void <init>()
+kotlin.jvm.internal.DefaultConstructorMarker
 com.facebook.cache.disk.SettableCacheEvent:
     public com.facebook.cache.common.CacheKey getCacheKey()
     public java.lang.String getResourceId()
@@ -885,7 +884,6 @@ androidx.vectordrawable.graphics.drawable.VectorDrawableCompat$VFullPath:
     private static final int FILL_TYPE_WINDING
 kotlin.coroutines.experimental.ContinuationInterceptor
 io.flutter.plugin.common.EventChannel$IncomingStreamRequestHandler$EventSinkImplementation
-bsi.iceman.searchable_dropdown.R$string
 androidx.appcompat.widget.TooltipCompatHandler:
     private static final java.lang.String TAG
     private static final long LONG_CLICK_HIDE_TIMEOUT_MS
@@ -1410,7 +1408,6 @@ com.facebook.drawee.drawable.ScaleTypeDrawable:
     public android.graphics.PointF getFocusPoint()
 io.flutter.plugin.platform.PlatformViewRegistry:
     public abstract boolean registerViewFactory(java.lang.String,io.flutter.plugin.platform.PlatformViewFactory)
-bsi.iceman.searchable_dropdown.R$styleable
 kotlin.UByteArrayKt
 com.facebook.imagepipeline.debug.CloseableReferenceLeakTracker$Listener
 com.facebook.common.executors.ConstrainedExecutorService$1
@@ -1540,7 +1537,6 @@ androidx.core.graphics.TypefaceCompatBaseImpl:
     private static final int INVALID_KEY
 com.facebook.soloader.Elf64_Ehdr
 androidx.core.view.ViewCompat$NestedScrollType
-bsi.iceman.searchable_dropdown.R
 androidx.fragment.app.FragmentManagerImpl$1
 androidx.loader.R$styleable
 androidx.appcompat.app.AppCompatViewInflater:
@@ -2126,8 +2122,6 @@ io.flutter.view.AccessibilityBridge:
     private static final int ROOT_NODE_ID
     private static final int MIN_ENGINE_GENERATED_NODE_ID
 androidx.appcompat.app.ActionBar$DisplayOptions
-bsi.iceman.searchable_dropdown.SearchableDropdownPlugin$Companion:
-    public final void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
 io.flutter.plugin.common.EventChannel$StreamHandler
 kotlin.jvm.internal.Ref$DoubleRef
 androidx.fragment.app.FragmentTransitionImpl$3
@@ -2282,10 +2276,10 @@ kotlin.time.MonoClock
 androidx.legacy.widget.Space
 kotlin.sequences.SequencesKt__SequencesJVMKt
 androidx.customview.widget.FocusStrategy
-androidx.fragment.app.Fragment$4
 androidx.appcompat.widget.ViewUtils:
     private void <init>()
     private static final java.lang.String TAG
+androidx.fragment.app.Fragment$4
 io.flutter.embedding.android.AndroidTouchProcessor:
     private static final int POINTER_DATA_FIELD_COUNT
     private static final int BYTES_PER_FIELD
@@ -3887,7 +3881,6 @@ kotlin.jvm.functions.Function21
 androidx.appcompat.view.menu.StandardMenuPopup:
     public android.os.Parcelable onSaveInstanceState()
     public void onRestoreInstanceState(android.os.Parcelable)
-bsi.iceman.searchable_dropdown.R$dimen
 io.flutter.plugin.common.ErrorLogResult
 androidx.appcompat.widget.DialogTitle:
     public void <init>(android.content.Context,android.util.AttributeSet,int)
@@ -4696,7 +4689,6 @@ androidx.swiperefreshlayout.widget.CircleImageView$OvalShadow
 kotlin.jvm.Strictfp
 androidx.core.content.ContentResolverCompat
 androidx.lifecycle.viewmodel.R
-bsi.iceman.searchable_dropdown.R$layout
 androidx.appcompat.widget.ActivityChooserView$5
 androidx.lifecycle.ReportFragment
 kotlin.collections.ArraysKt___ArraysKt$asSequence$$inlined$Sequence$2
@@ -4963,7 +4955,6 @@ com.stfalcon.frescoimageviewer.ImageViewerView:
     public java.lang.String getUrl()
 kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt$createCoroutineUnintercepted$$inlined$createCoroutineFromSuspendFunction$IntrinsicsKt__IntrinsicsJvmKt$1
 androidx.appcompat.widget.ActivityChooserModel$OnChooseActivityListener
-bsi.iceman.searchable_dropdown.R$integer
 kotlin.jvm.internal.FunctionImpl
 kotlin.collections.unsigned.UArraysKt___UArraysJvmKt$asList$3
 com.facebook.imagepipeline.cache.BitmapMemoryCacheTrimStrategy$1
@@ -5512,8 +5503,6 @@ io.flutter.plugin.common.PluginRegistry$PluginRegistrantCallback
 kotlin.collections.AbstractMutableSet
 androidx.core.view.accessibility.AccessibilityNodeInfoCompat$CollectionInfoCompat
 org.jetbrains.annotations.Nls
-bsi.iceman.searchable_dropdown.SearchableDropdownPlugin:
-    public static final void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
 com.facebook.drawee.generic.GenericDraweeHierarchy:
     private void setChildDrawableAtIndex(int,android.graphics.drawable.Drawable)
     private boolean hasScaleTypeDrawableAtIndex(int)
@@ -6049,7 +6038,6 @@ kotlin.io.LinesSequence$iterator$1
 com.facebook.imagepipeline.producers.DecodeProducer$ProgressiveDecoder:
     private static final int DECODE_EXCEPTION_MESSAGE_NUM_HEADER_BYTES
 androidx.core.app.JobIntentService$GenericWorkItem
-bsi.iceman.searchable_dropdown.BuildConfig
 androidx.appcompat.widget.AppCompatAutoCompleteTextView:
     public void <init>(android.content.Context)
 kotlin.comparisons.ComparisonsKt___ComparisonsKt
@@ -6181,7 +6169,6 @@ androidx.core.view.GestureDetectorCompat$GestureDetectorCompatImpl:
     public abstract void setIsLongpressEnabled(boolean)
 androidx.annotation.LongDef
 kotlin.comparisons.NaturalOrderComparator
-bsi.iceman.searchable_dropdown.R$color
 kotlin.collections.AbstractMutableList
 com.facebook.imagepipeline.systrace.DefaultFrescoSystrace:
     public com.facebook.imagepipeline.systrace.FrescoSystrace$ArgsBuilder beginSectionWithArgs(java.lang.String)
@@ -6794,6 +6781,7 @@ io.flutter.embedding.engine.systemchannels.LocalizationChannel:
     private static final java.lang.String TAG
 androidx.core.app.JobIntentService$WorkEnqueuer
 kotlin.sequences.SequencesKt__SequenceBuilderKt
+com.example.ipackage.MainActivity
 androidx.appcompat.app.ToolbarActionBar:
     void <init>(androidx.appcompat.widget.Toolbar,java.lang.CharSequence,android.view.Window$Callback)
     private android.view.Menu getMenu()
@@ -7016,7 +7004,6 @@ androidx.core.view.MenuItemCompat$1
 com.facebook.imagepipeline.memory.DefaultBitmapPoolParams:
     private void <init>()
     private static final int MAX_SIZE_SOFT_CAP
-bsi.iceman.searchable_dropdown.R$attr
 com.facebook.imagepipeline.memory.PoolStatsTracker:
     public static final java.lang.String BUCKETS_USED_PREFIX
     public static final java.lang.String USED_COUNT
@@ -7087,8 +7074,8 @@ com.facebook.imagepipeline.cache.CountingLruMap:
     public synchronized boolean contains(java.lang.Object)
     public synchronized java.util.ArrayList removeAll(com.facebook.common.internal.Predicate)
     public synchronized java.util.ArrayList clear()
-kotlin.coroutines.experimental.SafeContinuation
 kotlin.coroutines.experimental.CombinedContext$toString$1
+kotlin.coroutines.experimental.SafeContinuation
 com.facebook.drawee.backends.pipeline.R$attr
 org.intellij.lang.annotations.Identifier
 androidx.core.app.NotificationCompat$CarExtender$UnreadConversation
@@ -7290,7 +7277,6 @@ com.facebook.imagepipeline.cache.CountingMemoryCache:
     public synchronized int getEvictionQueueSizeInBytes()
 com.ipackage.R$drawable
 kotlin.jvm.internal.SpreadBuilder
-bsi.iceman.searchable_dropdown.R$id
 kotlin.UByte
 com.facebook.imagepipeline.image.CloseableImage:
     private static final java.lang.String TAG
@@ -7858,7 +7844,6 @@ androidx.fragment.app.FragmentState
 android.support.v4.os.IResultReceiver$Stub
 kotlin.text.RegexOption
 android.support.v4.app.INotificationSideChannel$Stub$Proxy
-bsi.iceman.searchable_dropdown.R$drawable
 androidx.lifecycle.MediatorLiveData
 kotlin.ULongKt
 kotlin.jvm.internal.ArrayFloatIterator
@@ -8190,11 +8175,11 @@ com.facebook.imagepipeline.producers.DecodeProducer$ProgressiveDecoder$1:
 com.facebook.common.util.SecureHashUtil:
     static final byte[] HEX_CHAR_TABLE
 io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterPluginBinding:
+    private final io.flutter.embedding.engine.FlutterEngine flutterEngine
     private final io.flutter.view.TextureRegistry textureRegistry
     private final io.flutter.plugin.platform.PlatformViewRegistry platformViewRegistry
     private final io.flutter.embedding.engine.plugins.FlutterPlugin$FlutterAssets flutterAssets
 androidx.savedstate.SavedStateRegistry$AutoRecreated
-kotlin.jvm.internal.DefaultConstructorMarker
 com.facebook.cache.disk.SettableCacheEvent:
     private java.lang.String mResourceId
     private long mItemSize
@@ -8279,7 +8264,6 @@ com.facebook.imagepipeline.core.ProducerSequenceFactory:
     java.util.Map mCloseableImagePrefetchSequences
 androidx.core.provider.SelfDestructiveThread$3:
     final synthetic androidx.core.provider.SelfDestructiveThread this$0
-bsi.iceman.searchable_dropdown.SearchableDropdownPlugin$Companion
 bolts.Task$10:
     final synthetic bolts.Task this$0
 androidx.core.R$id:
@@ -8471,8 +8455,6 @@ io.flutter.embedding.engine.systemchannels.PlatformViewsChannel$1$1:
     final synthetic io.flutter.embedding.engine.systemchannels.PlatformViewsChannel$1 this$1
 io.flutter.plugin.mouse.MouseCursorPlugin$2:
     final synthetic io.flutter.plugin.mouse.MouseCursorPlugin this$0
-bsi.iceman.searchable_dropdown.SearchableDropdownPlugin:
-    public static final bsi.iceman.searchable_dropdown.SearchableDropdownPlugin$Companion Companion
 androidx.appcompat.widget.ThemeUtils:
     static final int[] ACTIVATED_STATE_SET
     static final int[] SELECTED_STATE_SET

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:ipackage/api/PlanYourTrip_api.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/City.dart';
 import 'package:ipackage/modules/my_icons.dart';
@@ -18,6 +19,8 @@ class _PlanYourTripState extends State<PlanYourTrip>
   TabController _tabController;
   int _selectedTabBar = 0;
 
+  List _countries = [];
+  List _packages = [];
   //Stage 0
   List<City> _cities = [
     City(id: 1, enName: 'Egypt', arName: 'مصر'),
@@ -56,10 +59,31 @@ class _PlanYourTripState extends State<PlanYourTrip>
   final TextEditingController _budgetController = new TextEditingController();
   final TextEditingController _notesController = new TextEditingController();
 
+  PlanYourTripApi _PlanYourTripApi = new PlanYourTripApi();
+
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(length: 6, vsync: this);
+
+    _PlanYourTripApi.get_counteries().then((value) {
+      setState(() {
+        print(value['data'].toString());
+        _countries = List.of(value['data']);
+
+        //_isLoading = false;
+      });
+    });
+
+    _PlanYourTripApi.get_packages().then((value) {
+      setState(() {
+        print(value['data'].toString());
+        _packages = List.of(value['data']);
+
+        //_isLoading = false;
+      });
+    });
+
   }
 
   @override
@@ -72,27 +96,25 @@ class _PlanYourTripState extends State<PlanYourTrip>
     showDialog(
         context: context,
         builder: (BuildContext bc) {
-          return SingleChildScrollView(
-            child: Padding(
+          return  Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.66,
+                top: 40,bottom: 40,
               ),
               child: Dialog(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                    borderRadius: BorderRadius.all(Radius.circular(10),
                 )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
-                    padding: EdgeInsets.all(8.0),
-                    height: screenHeight * 0.17,
-                    width: screenWidth * 0.9,
-                    child: Column(
+                    padding: EdgeInsets.all(40),
+                    /*height: screenHeight,
+                    width: screenWidth,*/
+                    child: SingleChildScrollView(
+                    child:Column(
                       children: <Widget>[
-                        for (int i = 0; i < _cities.length; i++)
-                          Row(
+                        for (int i = 0; i < _countries.length; i++)
+                          Column(
                             children: <Widget>[
                               InkWell(
                                 onTap: () {},
@@ -100,22 +122,26 @@ class _PlanYourTripState extends State<PlanYourTrip>
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0),
                                   child: Text(
-                                    _cities[i].arName,
+                                    _countries[i]['name_ar'],
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 14,
+                                      fontSize: 16,
                                       color: Colors.black,
                                     ),
                                   ),
                                 ),
                               ),
+                              Divider(
+                                color: Colors.grey,
+                              ),
                             ],
                           ),
+
                       ],
-                    ),
+                    ),)
                   );
                 }),
-              ),
+
             ),
           );
         });
@@ -128,14 +154,11 @@ class _PlanYourTripState extends State<PlanYourTrip>
           return SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.7,
+                top: 40,
               ),
               child: Dialog(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                )),
+                    borderRadius: BorderRadius.all(Radius.circular(20),)),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
@@ -145,8 +168,8 @@ class _PlanYourTripState extends State<PlanYourTrip>
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          for (int i = 0; i < _types.length; i++)
-                            Row(
+                          for (int i = 0; i < _packages.length; i++)
+                            Column(
                               children: <Widget>[
                                 InkWell(
                                   onTap: () {},
@@ -154,7 +177,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0),
                                     child: Text(
-                                      _types[i].toString(),
+                                      _packages[i]['name_ar'],
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,
@@ -163,6 +186,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                                     ),
                                   ),
                                 ),
+                                Divider(color: Colors.grey,)
                               ],
                             ),
                         ],

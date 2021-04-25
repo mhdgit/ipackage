@@ -5,7 +5,6 @@ INJECTED from /Users/sh/Documents/work/ipackage/ipackage/ipackage/android/app/sr
 INJECTED from /Users/sh/Documents/work/ipackage/ipackage/ipackage/android/app/src/main/AndroidManifest.xml:1:1-44:12
 INJECTED from /Users/sh/Documents/work/ipackage/ipackage/ipackage/android/app/src/main/AndroidManifest.xml:1:1-44:12
 MERGED from [:shared_preferences] /Users/sh/Documents/work/ipackage/ipackage/ipackage/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
-MERGED from [:searchable_dropdown] /Users/sh/Documents/work/ipackage/ipackage/ipackage/build/searchable_dropdown/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:image_viewer] /Users/sh/Documents/work/ipackage/ipackage/ipackage/build/image_viewer/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [com.github.stfalcon:frescoimageviewer:0.5.0] /Users/sh/.gradle/caches/transforms-2/files-2.1/66872f9fec15f4669871bdebb840a36b/jetified-frescoimageviewer-0.5.0/AndroidManifest.xml:2:1-12:12
 MERGED from [com.facebook.fresco:fresco:2.0.0] /Users/sh/.gradle/caches/transforms-2/files-2.1/e41f293945b89b0dab419846f6b441ae/jetified-fresco-2.0.0/AndroidManifest.xml:2:1-9:12
@@ -128,8 +127,6 @@ INJECTED from /Users/sh/Documents/work/ipackage/ipackage/ipackage/android/app/sr
 INJECTED from /Users/sh/Documents/work/ipackage/ipackage/ipackage/android/app/src/main/AndroidManifest.xml
 MERGED from [:shared_preferences] /Users/sh/Documents/work/ipackage/ipackage/ipackage/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] /Users/sh/Documents/work/ipackage/ipackage/ipackage/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:searchable_dropdown] /Users/sh/Documents/work/ipackage/ipackage/ipackage/build/searchable_dropdown/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:searchable_dropdown] /Users/sh/Documents/work/ipackage/ipackage/ipackage/build/searchable_dropdown/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:image_viewer] /Users/sh/Documents/work/ipackage/ipackage/ipackage/build/image_viewer/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:image_viewer] /Users/sh/Documents/work/ipackage/ipackage/ipackage/build/image_viewer/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [com.github.stfalcon:frescoimageviewer:0.5.0] /Users/sh/.gradle/caches/transforms-2/files-2.1/66872f9fec15f4669871bdebb840a36b/jetified-frescoimageviewer-0.5.0/AndroidManifest.xml:8:5-10:41
