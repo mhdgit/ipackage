@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/rating/gf_rating.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:intl/intl.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/Offer/Hotel/Hotel.dart';
 import 'package:ipackage/modules/my_icons.dart';
@@ -37,6 +38,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   int activitiesNumber = 0;
   List<Hotel> offerHotels = [];
   List<String> _imageList = [];
+  int _adultsNumber = 1;
+  int _childrenNumber = 0;
+  int _babiesNumber = 0;
+  var now = new DateTime.now();
+  var formatter = new DateFormat('MM/dd');
+  var _pickedDate;
+  int _totalPassengersNumber = 1;
 
   List<String> _comments = [
     "لقد كانت رحلة رائعة لقد كانت رحلة رائعة لقد كانت رحلة رائعة",
@@ -51,26 +59,23 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     }
   }
 
-  void calculateOfferNumber(Offer offer)
-  {
-    for(int i = 0; i < offer.days.length ; i++)
-      {
+  void calculateOfferNumber(Offer offer) {
+    for (int i = 0; i < offer.days.length; i++) {
+      setState(() {
+        transferNumber++;
+      });
+
+      if (i == offer.days.length - 1)
         setState(() {
           transferNumber++;
         });
 
-        if(i == offer.days.length -1)
-          setState(() {
-            transferNumber++;
-          });
-
-        for(int index = 0 ; index < offer.days[i].trips.length ; index++)
-          {
-            setState(() {
-              activitiesNumber++;
-            });
-          }
+      for (int index = 0; index < offer.days[i].trips.length; index++) {
+        setState(() {
+          activitiesNumber++;
+        });
       }
+    }
   }
 
   _activityBar(width, height, String head) {
@@ -215,7 +220,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                         Container(
                           width: screenWidth * 0.8,
                           padding: EdgeInsetsDirectional.only(
-                              start: screenWidth * 0.04,
+                              start: screenWidth * 0.044,
                               top: 10.0,
                               bottom: 0.0),
                           child: Row(
@@ -250,13 +255,50 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       children: [
                         Container(
                           padding: EdgeInsetsDirectional.only(
-                              start: screenWidth * 0.08, top: 5.0),
+                              start: screenWidth * 0.048, top: 5.0),
                           child: Row(
                             children: <Widget>[
-                              Container(
-                                width: 2,
-                                height: screenHeight * 0.06,
-                                color: Color(0xff07898B),
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    width: 2,
+                                    height: screenHeight * 0.04,
+                                    color: Color(0xff07898B),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    width: 25,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Color(0xff07898B),
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.directions_car_rounded,
+                                        color: Color(0xff07898B),
+                                        size: 15,
+                                      ),
+                                    ),
+                                    // Container(
+                                    //     width: 15,
+                                    //     height: 15,
+                                    //     decoration: BoxDecoration(
+                                    //       borderRadius: BorderRadius.circular(50),
+                                    //       color: Color(0xff07898B),
+                                    //     ),
+                                    // ),
+                                  ),
+                                  Container(
+                                    width: 2,
+                                    height: screenHeight * 0.04,
+                                    color: Color(0xff07898B),
+                                  ),
+                                ],
                               ),
                               Container(
                                 width: screenWidth * 0.8,
@@ -268,12 +310,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        getTranslated(context, 'do_transfer_tab'),
+                                        getTranslated(
+                                            context, 'do_transfer_tab'),
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black,
+                                          color: Color(0xff07898B),
                                         ),
                                       ),
                                     ),
@@ -301,30 +344,30 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(0),
                                   child: offer.days[index].transportationMethods
-                                      .defaultTrans ==
-                                      null
+                                              .defaultTrans ==
+                                          null
                                       ? Image.network(
-                                    'https://ipackagetours.com/storage/app/' +
-                                        offer.airportTransferGo[0]
-                                            .transportation.image
-                                            .toString(),
-                                    fit: BoxFit.cover,
-                                    height: screenHeight * 0.16,
-                                    width: screenWidth * 0.3,
-                                  )
+                                          'https://ipackagetours.com/storage/app/' +
+                                              offer.airportTransferGo[0]
+                                                  .transportation.image
+                                                  .toString(),
+                                          fit: BoxFit.cover,
+                                          height: screenHeight * 0.16,
+                                          width: screenWidth * 0.3,
+                                        )
                                       : Image.network(
-                                    'https://ipackagetours.com/storage/app/' +
-                                        offer
-                                            .days[index]
-                                            .transportationMethods
-                                            .defaultTrans[0]
-                                            .transportation
-                                            .image
-                                            .toString(),
-                                    fit: BoxFit.cover,
-                                    height: screenHeight * 0.16,
-                                    width: screenWidth * 0.3,
-                                  ),
+                                          'https://ipackagetours.com/storage/app/' +
+                                              offer
+                                                  .days[index]
+                                                  .transportationMethods
+                                                  .defaultTrans[0]
+                                                  .transportation
+                                                  .image
+                                                  .toString(),
+                                          fit: BoxFit.cover,
+                                          height: screenHeight * 0.16,
+                                          width: screenWidth * 0.3,
+                                        ),
                                 ),
                               ),
                               Column(
@@ -337,27 +380,31 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                       children: <Widget>[
                                         Flexible(
                                           child: Padding(
-                                            padding: const EdgeInsetsDirectional.only(
-                                                start: 4.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .only(start: 4.0),
                                             child: Text(
-                                              offer.days[index].transportationMethods
-                                                  .defaultTrans ==
-                                                  null
+                                              offer
+                                                          .days[index]
+                                                          .transportationMethods
+                                                          .defaultTrans ==
+                                                      null
                                                   ? localAssistant
-                                                  .getTransportationByLocale(
-                                                  context,
-                                                  offer.airportTransferGo[0]
-                                                      .transportation)
-                                                  .toString()
+                                                      .getTransportationByLocale(
+                                                          context,
+                                                          offer
+                                                              .airportTransferGo[
+                                                                  0]
+                                                              .transportation)
+                                                      .toString()
                                                   : localAssistant
-                                                  .getTransportationByLocale(
-                                                  context,
-                                                  offer
-                                                      .days[index]
-                                                      .transportationMethods
-                                                      .defaultTrans[0]
-                                                      .transportation)
-                                                  .toString(),
+                                                      .getTransportationByLocale(
+                                                          context,
+                                                          offer
+                                                              .days[index]
+                                                              .transportationMethods
+                                                              .defaultTrans[0]
+                                                              .transportation)
+                                                      .toString(),
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
@@ -376,33 +423,39 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                       children: <Widget>[
                                         Flexible(
                                           child: Padding(
-                                            padding: const EdgeInsetsDirectional.only(
-                                                start: 4.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .only(start: 4.0),
                                             child: Text(
-                                              offer.days[index].transportationMethods
-                                                  .defaultTrans ==
-                                                  null &&
-                                                  index == 0
+                                              offer
+                                                              .days[index]
+                                                              .transportationMethods
+                                                              .defaultTrans ==
+                                                          null &&
+                                                      index == 0
                                                   ? getTranslated(context,
-                                                  'do_plan_car_from') +
-                                                  localAssistant
-                                                      .getAirportByLocale(context,
-                                                      offer.airportGo)
-                                                      .toString() +
-                                                  getTranslated(
-                                                      context, 'do_plan_car_to')
+                                                          'do_plan_car_from') +
+                                                      localAssistant
+                                                          .getAirportByLocale(
+                                                              context,
+                                                              offer.airportGo)
+                                                          .toString() +
+                                                      getTranslated(
+                                                          context, 'do_plan_car_to')
                                                   : getTranslated(context,
-                                                  'do_plan_car_from') +
-                                                  localAssistant
-                                                      .getDayCityByLocale(context,
-                                                      offer.days[index - 1])
-                                                      .toString() +
-                                                  getTranslated(context,
-                                                      'do_plan_car_to_2') +
-                                                  localAssistant
-                                                      .getDayCityByLocale(context,
-                                                      offer.days[index])
-                                                      .toString(),
+                                                          'do_plan_car_from') +
+                                                      localAssistant
+                                                          .getDayCityByLocale(
+                                                              context,
+                                                              offer.days[
+                                                                  index - 1])
+                                                          .toString() +
+                                                      getTranslated(context,
+                                                          'do_plan_car_to_2') +
+                                                      localAssistant
+                                                          .getDayCityByLocale(
+                                                              context,
+                                                              offer.days[index])
+                                                          .toString(),
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
                                                   fontSize: 14,
@@ -526,13 +579,50 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       children: [
                         Container(
                           padding: EdgeInsetsDirectional.only(
-                              start: screenWidth * 0.08, top: 5.0),
+                              start: screenWidth * 0.048, top: 5.0),
                           child: Row(
                             children: <Widget>[
-                              Container(
-                                width: 2,
-                                height: screenHeight * 0.06,
-                                color: Color(0xff07898B),
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    width: 2,
+                                    height: screenHeight * 0.04,
+                                    color: Color(0xff07898B),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    width: 25,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Color(0xff07898B),
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.apartment,
+                                        color: Color(0xff07898B),
+                                        size: 15,
+                                      ),
+                                    ),
+                                    // Container(
+                                    //     width: 15,
+                                    //     height: 15,
+                                    //     decoration: BoxDecoration(
+                                    //       borderRadius: BorderRadius.circular(50),
+                                    //       color: Color(0xff07898B),
+                                    //     ),
+                                    // ),
+                                  ),
+                                  Container(
+                                    width: 2,
+                                    height: screenHeight * 0.04,
+                                    color: Color(0xff07898B),
+                                  ),
+                                ],
                               ),
                               Container(
                                 width: screenWidth * 0.8,
@@ -549,7 +639,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black,
+                                          color: Color(0xff07898B),
                                         ),
                                       ),
                                     ),
@@ -784,6 +874,85 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       ),
                     ),
 
+                    // Trips label
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsetsDirectional.only(
+                              start: screenWidth * 0.048, top: 0.0),
+                          child: Row(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    width: 2,
+                                    height: screenHeight * 0.04,
+                                    color: Color(0xff07898B),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    width: 25,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Color(0xff07898B),
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.terrain,
+                                        color: Color(0xff07898B),
+                                        size: 15,
+                                      ),
+                                    ),
+                                    // Container(
+                                    //     width: 15,
+                                    //     height: 15,
+                                    //     decoration: BoxDecoration(
+                                    //       borderRadius: BorderRadius.circular(50),
+                                    //       color: Color(0xff07898B),
+                                    //     ),
+                                    // ),
+                                  ),
+                                  Container(
+                                    width: 2,
+                                    height: screenHeight * 0.04,
+                                    color: Color(0xff07898B),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                width: screenWidth * 0.8,
+                                padding: EdgeInsetsDirectional.only(
+                                    start: screenWidth * 0.04,
+                                    top: 0.0,
+                                    bottom: 0.0),
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        getTranslated(
+                                            context, 'do_plan_label_16'),
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xff07898B),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+
                     for (int i = 0; i < offer.days[index].trips.length; i++)
                       Builder(builder: (context) {
                         dayIndex++;
@@ -794,13 +963,44 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                               children: [
                                 Container(
                                   padding: EdgeInsetsDirectional.only(
-                                      start: screenWidth * 0.08, top: 10.0),
+                                      start: screenWidth * 0.048, top: 0.0),
                                   child: Row(
                                     children: <Widget>[
-                                      Container(
-                                        width: 2,
-                                        height: screenHeight * 0.06,
-                                        color: Color(0xff07898B),
+                                      Column(
+                                        children: <Widget>[
+                                          Container(
+                                            width: 2,
+                                            height: screenHeight * 0.04,
+                                            color: Color(0xff07898B),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.all(2.0),
+                                            width: 25,
+                                            height: 25,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              border: Border.all(
+                                                width: 2,
+                                                color: Color(0xff07898B),
+                                                style: BorderStyle.solid,
+                                              ),
+                                            ),
+                                            child: Container(
+                                                width: 15,
+                                                height: 15,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                  color: Color(0xff07898B),
+                                                )),
+                                          ),
+                                          Container(
+                                            width: 2,
+                                            height: screenHeight * 0.04,
+                                            color: Color(0xff07898B),
+                                          ),
+                                        ],
                                       ),
                                       Container(
                                         width: screenWidth * 0.8,
@@ -1013,225 +1213,242 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
 
                     index == offer.days.length - 1
                         ? Container(
-                      width: screenWidth * 0.9,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(4.0),
-                        child: Card(
-                          child: Row(
-                            children: <Widget>[
-                              ClipPath(
-                                clipper: ShapeBorderClipper(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.0)),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(0),
-                                  child: offer.days[index].transportationMethods
-                                      .defaultTrans ==
-                                      null
-                                      ? Image.network(
-                                    'https://ipackagetours.com/storage/app/' +
-                                        offer.airportTransferBack[0]
-                                            .transportation.image
-                                            .toString(),
-                                    fit: BoxFit.cover,
-                                    height: screenHeight * 0.16,
-                                    width: screenWidth * 0.3,
-                                  )
-                                      : Image.network(
-                                    'https://ipackagetours.com/storage/app/' +
-                                        offer
-                                            .days[index]
-                                            .transportationMethods
-                                            .defaultTrans[0]
-                                            .transportation
-                                            .image
-                                            .toString(),
-                                    fit: BoxFit.cover,
-                                    height: screenHeight * 0.16,
-                                    width: screenWidth * 0.3,
-                                  ),
-                                ),
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    width: screenWidth * 0.56,
-                                    padding: const EdgeInsets.all(0),
-                                    child: Row(
+                            width: screenWidth * 0.9,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(4.0),
+                              child: Card(
+                                child: Row(
+                                  children: <Widget>[
+                                    ClipPath(
+                                      clipper: ShapeBorderClipper(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4.0)),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: offer
+                                                    .days[index]
+                                                    .transportationMethods
+                                                    .defaultTrans ==
+                                                null
+                                            ? Image.network(
+                                                'https://ipackagetours.com/storage/app/' +
+                                                    offer.airportTransferBack[0]
+                                                        .transportation.image
+                                                        .toString(),
+                                                fit: BoxFit.cover,
+                                                height: screenHeight * 0.16,
+                                                width: screenWidth * 0.3,
+                                              )
+                                            : Image.network(
+                                                'https://ipackagetours.com/storage/app/' +
+                                                    offer
+                                                        .days[index]
+                                                        .transportationMethods
+                                                        .defaultTrans[0]
+                                                        .transportation
+                                                        .image
+                                                        .toString(),
+                                                fit: BoxFit.cover,
+                                                height: screenHeight * 0.16,
+                                                width: screenWidth * 0.3,
+                                              ),
+                                      ),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .only(start: 4.0),
-                                            child: Text(
-                                              offer
-                                                  .days[index]
-                                                  .transportationMethods
-                                                  .defaultTrans ==
-                                                  null
-                                                  ? localAssistant
-                                                  .getTransportationByLocale(
-                                                  context,
-                                                  offer
-                                                      .airportTransferBack[
-                                                  0]
-                                                      .transportation)
-                                                  .toString()
-                                                  : localAssistant
-                                                  .getTransportationByLocale(
-                                                  context,
-                                                  offer
-                                                      .days[index]
-                                                      .transportationMethods
-                                                      .defaultTrans[0]
-                                                      .transportation)
-                                                  .toString(),
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
-                                                  color: Colors.black),
-                                            ),
+                                        Container(
+                                          width: screenWidth * 0.56,
+                                          padding: const EdgeInsets.all(0),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Flexible(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .only(start: 4.0),
+                                                  child: Text(
+                                                    offer
+                                                                .days[index]
+                                                                .transportationMethods
+                                                                .defaultTrans ==
+                                                            null
+                                                        ? localAssistant
+                                                            .getTransportationByLocale(
+                                                                context,
+                                                                offer
+                                                                    .airportTransferBack[
+                                                                        0]
+                                                                    .transportation)
+                                                            .toString()
+                                                        : localAssistant
+                                                            .getTransportationByLocale(
+                                                                context,
+                                                                offer
+                                                                    .days[index]
+                                                                    .transportationMethods
+                                                                    .defaultTrans[
+                                                                        0]
+                                                                    .transportation)
+                                                            .toString(),
+                                                    textAlign: TextAlign.start,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 15,
+                                                        color: Colors.black),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: screenWidth * 0.56,
-                                    padding: const EdgeInsets.all(0),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .only(start: 4.0),
-                                            child: Text(
-                                              getTranslated(context, 'do_plan_car_from_2')
-                                                  + localAssistant.getAirportByLocale(context, offer.airportBack).toString(),
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.black54),
-                                            ),
+                                        Container(
+                                          width: screenWidth * 0.56,
+                                          padding: const EdgeInsets.all(0),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Flexible(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .only(start: 4.0),
+                                                  child: Text(
+                                                    getTranslated(context,
+                                                            'do_plan_car_from_2') +
+                                                        localAssistant
+                                                            .getAirportByLocale(
+                                                                context,
+                                                                offer
+                                                                    .airportBack)
+                                                            .toString(),
+                                                    textAlign: TextAlign.start,
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors.black54),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
 
-                                  // Container(
-                                  //   height: screenHeight * 0.05,
-                                  //   width: screenWidth * 0.56,
-                                  //   padding: const EdgeInsets.all(4.0),
-                                  //   child: Row(
-                                  //     mainAxisAlignment: MainAxisAlignment.start,
-                                  //     children: [
-                                  //       Expanded(
-                                  //         flex: 50,
-                                  //         child: FittedBox(
-                                  //           child: GFRating(
-                                  //             color: Colors.amber,
-                                  //             borderColor: Colors.amber,
-                                  //             allowHalfRating: true,
-                                  //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //       Expanded(
-                                  //         flex: 50,
-                                  //         child: Padding(
-                                  //           padding: const EdgeInsets.only(
-                                  //               top: 0.0,
-                                  //               right: 0.0,
-                                  //               left: 0.0,
-                                  //               bottom: 0.0),
-                                  //           child: Text(
-                                  //             ' ',
-                                  //             textAlign: TextAlign.start,
-                                  //             style: TextStyle(
-                                  //                 fontWeight: FontWeight.bold,
-                                  //                 fontSize: 15,
-                                  //                 color: Colors.black),
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  Container(
-                                    height: screenHeight * 0.06,
-                                    width: screenWidth * 0.56,
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Expanded(
-                                          flex: 56,
-                                          child: Text(''),
-                                        ),
-                                        Expanded(
-                                          flex: 22,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: GFButton(
-                                              onPressed: () {},
-                                              color: Colors.teal,
-                                              child: Icon(
-                                                Icons.edit,
-                                                size: 14,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 22,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: GFButton(
-                                              color: Colors.redAccent,
-                                              onPressed: () {},
-                                              child: Icon(
-                                                Icons.delete,
-                                                size: 14,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.all(2.0),
-                                        //   child: IconButton(
-                                        //     color: Colors.teal,
-                                        //     icon: Icon(Icons.edit , size: 20),
-                                        //     onPressed: (){},
+                                        // Container(
+                                        //   height: screenHeight * 0.05,
+                                        //   width: screenWidth * 0.56,
+                                        //   padding: const EdgeInsets.all(4.0),
+                                        //   child: Row(
+                                        //     mainAxisAlignment: MainAxisAlignment.start,
+                                        //     children: [
+                                        //       Expanded(
+                                        //         flex: 50,
+                                        //         child: FittedBox(
+                                        //           child: GFRating(
+                                        //             color: Colors.amber,
+                                        //             borderColor: Colors.amber,
+                                        //             allowHalfRating: true,
+                                        //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //       Expanded(
+                                        //         flex: 50,
+                                        //         child: Padding(
+                                        //           padding: const EdgeInsets.only(
+                                        //               top: 0.0,
+                                        //               right: 0.0,
+                                        //               left: 0.0,
+                                        //               bottom: 0.0),
+                                        //           child: Text(
+                                        //             ' ',
+                                        //             textAlign: TextAlign.start,
+                                        //             style: TextStyle(
+                                        //                 fontWeight: FontWeight.bold,
+                                        //                 fontSize: 15,
+                                        //                 color: Colors.black),
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ],
                                         //   ),
                                         // ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.all(2.0),
-                                        //   child: IconButton(
-                                        //     color: Colors.redAccent,
-                                        //     icon: Icon(Icons.delete , size: 20,),
-                                        //     onPressed: (){},
-                                        //   ),
-                                        // ),
+                                        Container(
+                                          height: screenHeight * 0.06,
+                                          width: screenWidth * 0.56,
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Expanded(
+                                                flex: 56,
+                                                child: Text(''),
+                                              ),
+                                              Expanded(
+                                                flex: 22,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: GFButton(
+                                                    onPressed: () {},
+                                                    color: Colors.teal,
+                                                    child: Icon(
+                                                      Icons.edit,
+                                                      size: 14,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 22,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: GFButton(
+                                                    color: Colors.redAccent,
+                                                    onPressed: () {},
+                                                    child: Icon(
+                                                      Icons.delete,
+                                                      size: 14,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              // Padding(
+                                              //   padding: const EdgeInsets.all(2.0),
+                                              //   child: IconButton(
+                                              //     color: Colors.teal,
+                                              //     icon: Icon(Icons.edit , size: 20),
+                                              //     onPressed: (){},
+                                              //   ),
+                                              // ),
+                                              // Padding(
+                                              //   padding: const EdgeInsets.all(2.0),
+                                              //   child: IconButton(
+                                              //     color: Colors.redAccent,
+                                              //     icon: Icon(Icons.delete , size: 20,),
+                                              //     onPressed: (){},
+                                              //   ),
+                                              // ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
+                            ),
+                          )
                         : Container(
-                      width: 1,
-                      height: 1,
-                    ),
+                            width: 1,
+                            height: 1,
+                          ),
 
                     Container(
                       width: screenWidth,
@@ -1377,6 +1594,23 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   _hotelWidget(screenWidth, screenHeight) {
     return Column(
       children: <Widget>[
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsetsDirectional.only(
+                  start: screenWidth * 0.08, top: 20.0, bottom: 10.0),
+              child: Text(
+                getTranslated(context, 'do_hotels_tab'),
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+          ],
+        ),
         for (int index = 0; index < offerHotels.length; index++)
           // Hotel
           Container(
@@ -1554,6 +1788,23 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   _transportWidget(screenWidth, screenHeight) {
     return Column(
       children: <Widget>[
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsetsDirectional.only(
+                  start: screenWidth * 0.08, top: 20.0, bottom: 10.0),
+              child: Text(
+                getTranslated(context, 'do_transfer_tab'),
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+          ],
+        ),
         for (int index = 0; index < offer.days.length; index++)
           Column(
             children: [
@@ -1889,8 +2140,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                             padding: const EdgeInsetsDirectional
                                                 .only(start: 4.0),
                                             child: Text(
-                                              getTranslated(context, 'do_plan_car_from_2')
-                                                  + localAssistant.getAirportByLocale(context, offer.airportBack).toString(),
+                                              getTranslated(context,
+                                                      'do_plan_car_from_2') +
+                                                  localAssistant
+                                                      .getAirportByLocale(
+                                                          context,
+                                                          offer.airportBack)
+                                                      .toString(),
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
                                                   fontSize: 14,
@@ -2018,13 +2274,31 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     );
   }
 
-  _activitiesWidget(screenWidth , screenHeight)
-  {
+  _activitiesWidget(screenWidth, screenHeight) {
     return Column(
       children: <Widget>[
-        for(int index = 0 ; index < offer.days.length ; index++)
-          for(int tIndex = 0 ; tIndex < offer.days[index].trips.length ; tIndex++)
-          // Trip
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsetsDirectional.only(
+                  start: screenWidth * 0.08, top: 20.0, bottom: 10.0),
+              child: Text(
+                getTranslated(context, 'do_activities_tab'),
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+          ],
+        ),
+        for (int index = 0; index < offer.days.length; index++)
+          for (int tIndex = 0;
+              tIndex < offer.days[index].trips.length;
+              tIndex++)
+            // Trip
             Container(
               width: screenWidth * 0.9,
               child: InkWell(
@@ -2035,15 +2309,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       ClipPath(
                         clipper: ShapeBorderClipper(
                           shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(4.0)),
+                              borderRadius: BorderRadius.circular(4.0)),
                         ),
                         child: Padding(
                             padding: const EdgeInsets.all(0),
                             child: Image.network(
                               'https://ipackagetours.com/storage/app/' +
-                                  offer.days[index].trips[tIndex]
-                                      .image
+                                  offer.days[index].trips[tIndex].image
                                       .toString(),
                               fit: BoxFit.fill,
                               height: screenHeight * 0.16,
@@ -2051,8 +2323,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                             )),
                       ),
                       Column(
-                        mainAxisAlignment:
-                        MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
                             width: screenWidth * 0.56,
@@ -2061,22 +2332,18 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                               children: <Widget>[
                                 Flexible(
                                   child: Padding(
-                                    padding:
-                                    const EdgeInsetsDirectional
-                                        .only(start: 4.0),
+                                    padding: const EdgeInsetsDirectional.only(
+                                        start: 4.0),
                                     child: Text(
                                       localAssistant
                                           .getTripByLocale(
-                                          context,
-                                          offer.days[index]
-                                              .trips[tIndex],
-                                          'name')
+                                              context,
+                                              offer.days[index].trips[tIndex],
+                                              'name')
                                           .toString(),
-                                      textAlign:
-                                      TextAlign.start,
+                                      textAlign: TextAlign.start,
                                       style: TextStyle(
-                                          fontWeight:
-                                          FontWeight.bold,
+                                          fontWeight: FontWeight.bold,
                                           fontSize: 15,
                                           color: Colors.black),
                                     ),
@@ -2130,8 +2397,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                             width: screenWidth * 0.56,
                             padding: const EdgeInsets.all(4.0),
                             child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Expanded(
                                   flex: 56,
@@ -2140,9 +2406,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                 Expanded(
                                   flex: 22,
                                   child: Padding(
-                                    padding:
-                                    const EdgeInsets.all(
-                                        2.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: GFButton(
                                       onPressed: () {},
                                       color: Colors.teal,
@@ -2157,9 +2421,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                 Expanded(
                                   flex: 22,
                                   child: Padding(
-                                    padding:
-                                    const EdgeInsets.all(
-                                        2.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: GFButton(
                                       color: Colors.redAccent,
                                       onPressed: () {},
@@ -2201,16 +2463,481 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     );
   }
 
-  _widgetRouter(screenWidth , screenHeight)
-  {
-    switch(widgetIndex)
-    {
-      case 0: return _tripPlanWidget(screenWidth, screenHeight);break;
-      case 1: return _hotelWidget(screenWidth, screenHeight);break;
-      case 2: return Container(width:1 , height:1);break;
-      case 3: return _transportWidget(screenWidth, screenHeight);break;
-      case 4: return _activitiesWidget(screenWidth, screenHeight);break;
+  _flightsWidget(screenWidth, screenHeight) {
+    return Column(
+      children: <Widget>[
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsetsDirectional.only(
+                  start: screenWidth * 0.08, top: 20.0, bottom: 10.0),
+              child: Text(
+                getTranslated(context, 'do_flights_tab'),
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  _widgetRouter(screenWidth, screenHeight) {
+    switch (widgetIndex) {
+      case 0:
+        return _tripPlanWidget(screenWidth, screenHeight);
+        break;
+      case 1:
+        return _hotelWidget(screenWidth, screenHeight);
+        break;
+      case 2:
+        return _flightsWidget(screenWidth, screenHeight);
+        break;
+      case 3:
+        return _transportWidget(screenWidth, screenHeight);
+        break;
+      case 4:
+        return _activitiesWidget(screenWidth, screenHeight);
+        break;
     }
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+        confirmText: 'Set',
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2018),
+        lastDate: DateTime.now(),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              primaryColor: Color(0xff07898B),
+              accentColor: Color(0xff07898B),
+              colorScheme: ColorScheme.light(primary: const Color(0xff07898B)),
+              buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            ),
+            child: child,
+          );
+        }).then((selectedDate) {
+      if (selectedDate == null) return;
+      setState(() {
+        _pickedDate = selectedDate;
+      });
+    });
+  }
+
+  void increaseProperty(index)
+  {
+    setState(() {
+      index++;
+    });
+  }
+
+  void decreaseProperty(index)
+  {
+    setState(() {
+      index--;
+    });
+  }
+
+  _openEditPackageWidget(screenWidth, screenHeight) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return Container(
+              padding: EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: screenHeight * 0.1,
+                      width: screenWidth * 0.9,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 50,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0),
+                              child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Text(
+                                  getTranslated(
+                                      context, 'book_trip_adults_number'),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 40,
+                            child: FittedBox(
+                              child: Row(
+                                children: <Widget>[
+                                  MaterialButton(
+                                    padding: const EdgeInsets.all(2.0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                          width: 2,
+                                          color: Color(0xff07898B),
+                                          style: BorderStyle.solid),
+                                    ),
+                                    child: Icon(
+                                      MyIcons.minus,
+                                      size: 10,
+                                      color: Color(0xff07898B),
+                                    ),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      if (_adultsNumber > 1)
+                                        setState(() {
+                                          _adultsNumber -= 1;
+                                          _totalPassengersNumber = _adultsNumber + _childrenNumber + _babiesNumber;
+                                        });
+                                    },
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      _adultsNumber.toString(),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff07898B),
+                                      ),
+                                    ),
+                                  ),
+                                  MaterialButton(
+                                    padding: const EdgeInsets.all(2.0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                          width: 2,
+                                          color: Color(0xff07898B),
+                                          style: BorderStyle.solid),
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 15,
+                                      color: Color(0xff07898B),
+                                    ),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      if (_adultsNumber < 50)
+                                        setState(() {
+                                          _adultsNumber += 1;
+                                        });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: screenHeight * 0.1,
+                      width: screenWidth * 0.9,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 50,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Text(
+                                  getTranslated(
+                                      context, 'book_trip_children_number'),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 40,
+                            child: FittedBox(
+                              child: Row(
+                                children: <Widget>[
+                                  MaterialButton(
+                                    padding: const EdgeInsets.all(2.0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                          width: 2,
+                                          color: Color(0xff07898B),
+                                          style: BorderStyle.solid),
+                                    ),
+                                    child: Icon(
+                                      MyIcons.minus,
+                                      size: 10,
+                                      color: Color(0xff07898B),
+                                    ),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      if (_childrenNumber > 0)
+                                        setState(() {
+                                          _childrenNumber -= 1;
+                                        });
+                                    },
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      _childrenNumber.toString(),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff07898B),
+                                      ),
+                                    ),
+                                  ),
+                                  MaterialButton(
+                                    padding: const EdgeInsets.all(2.0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                          width: 2,
+                                          color: Color(0xff07898B),
+                                          style: BorderStyle.solid),
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 15,
+                                      color: Color(0xff07898B),
+                                    ),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      if (_childrenNumber < 50)
+                                        setState(() {
+                                          _childrenNumber += 1;
+                                        });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: screenHeight * 0.1,
+                      width: screenWidth * 0.9,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 50,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Text(
+                                  getTranslated(
+                                      context, 'book_trip_babies_number'),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 40,
+                            child: FittedBox(
+                              child: Row(
+                                children: <Widget>[
+                                  MaterialButton(
+                                    padding: const EdgeInsets.all(2.0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                          width: 2,
+                                          color: Color(0xff07898B),
+                                          style: BorderStyle.solid),
+                                    ),
+                                    child: Icon(
+                                      MyIcons.minus,
+                                      size: 10,
+                                      color: Color(0xff07898B),
+                                    ),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      if (_babiesNumber > 0)
+                                        setState(() {
+                                          _babiesNumber -= 1;
+                                        });
+                                    },
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      _babiesNumber.toString(),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff07898B),
+                                      ),
+                                    ),
+                                  ),
+                                  MaterialButton(
+                                    padding: const EdgeInsets.all(2.0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                          width: 2,
+                                          color: Color(0xff07898B),
+                                          style: BorderStyle.solid),
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 15,
+                                      color: Color(0xff07898B),
+                                    ),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      if (_babiesNumber < 50)
+                                        setState(() {
+                                          _babiesNumber += 1;
+                                        });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: screenWidth * 0.9,
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Container(
+                        width: screenWidth * 0.84,
+                        padding:
+                        EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            side: BorderSide(color: Colors.black, width: 1),
+                          ),
+                          onPressed: () {
+                            _presentDatePicker();
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(
+                                flex: 90,
+                                child: Text(
+                                  getTranslated(context, 'pyt_in_t_date_btn'),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0XFFbbbbbb),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 10,
+                                child: Icon(
+                                  Icons.date_range_outlined,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: screenWidth * 0.9,
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        // controller: _emailController,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                        textAlign: TextAlign.start,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 1.0 , horizontal: 6.0),
+                            hintText: getTranslated(context, 'book_trip_email'),
+                            hintStyle: TextStyle(
+                              fontSize: 14.0,
+                              color: Color(0xffC3C2C3),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: Colors.black,
+                              ),
+                            ),
+                            fillColor: Colors.white,
+                            focusColor: Colors.black,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: Colors.black,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                              borderSide: BorderSide(
+                                width: 1,
+                                color: Colors.black,
+                              ),
+                            ),
+                            filled: true),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                      child: GFButton(
+                        color: Color(0xff07898b),
+                        textColor: Colors.white,
+                        fullWidthButton: true,
+                        text: getTranslated(context, 'fo_edit_save'),
+                        size: 50.0,
+                        textStyle: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        onPressed: () {
+                          setState((){
+                            _totalPassengersNumber = _adultsNumber + _childrenNumber + _babiesNumber;
+                          });
+
+                          Navigator.pop(context);
+
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          });
+        });
   }
 
   @override
@@ -2224,6 +2951,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         getOfferImages();
         buildHotelsList(offer);
         calculateOfferNumber(offer);
+        _pickedDate = DateFormat('MM/dd').parse(offer.days[0].trips[0].date.toString());
       });
     });
   }
@@ -2259,6 +2987,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                     Container(
                                       width: width * 0.35,
                                       child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: AlignmentDirectional.centerStart,
                                         child: Text(
                                           getTranslated(
                                               context, 'do_comments_username'),
@@ -2325,14 +3055,103 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xffE9F7F8),
+        // backgroundColor: Color(0xffE9F7F8),
+        backgroundColor: Colors.white,
         elevation: 0.0,
         shadowColor: Colors.white,
-        title: Text(
-          widget.package,
-        ),
+        // title: Text(
+        //   widget.package,
+        // ),
         centerTitle: true,
       ),
+      floatingActionButton: GFButton(
+        onPressed: () {
+          Navigator.of(context).push(new MaterialPageRoute(
+            builder: (BuildContext context) => new ConfirmBook()));
+        },
+        size: 40,
+        shape: GFButtonShape.pills,
+        color: Color(0xff07898B),
+        child: Container(
+          width: screenWidth * 0.6,
+          height: screenHeight * 0.07,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 60,
+                child: Text(
+                  '550 \$',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 40,
+                child: Text(
+                  getTranslated(context, 'domestic_offer_book_btn'),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 16,
+                    // fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        textStyle: TextStyle(
+          fontFamily: 'cairo',
+        ),
+      ),
+      // Container(
+      //   width: screenWidth * 1.02,
+      //   child: Stack(
+      //     fit: StackFit.passthrough,
+      //     children: <Widget>[
+      //
+      //       Padding(
+      //         padding: const EdgeInsets.all(0),
+      //         child: Flex(
+      //           direction: Axis.vertical,
+      //           mainAxisAlignment:
+      //           MainAxisAlignment.end,
+      //           children: <Widget>[
+      //             Opacity(
+      //               opacity: 0.4,
+      //               child: Container(
+      //                 color: Colors.blueGrey,
+      //                 width: screenWidth * 1.02,
+      //                 height: screenHeight * 0.07,
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //
+      //     //   Row(
+      //     //   children: <Widget>[
+      //     //     Expanded(
+      //     //       flex: 70,
+      //     //       child: Text(
+      //     //         '550 \$',
+      //     //         textAlign: TextAlign.start,
+      //     //         style: TextStyle(
+      //     //           fontSize: 18,
+      //     //           fontWeight: FontWeight.bold,
+      //     //           color: Color(0xff07898B),
+      //     //         ),
+      //     //       ),
+      //     //     ),
+      //     //   ],
+      //     // ),
+      //     ],
+      //   ),
+      // ),
       body: _isLoading
           ? Center(
               child: GFLoader(
@@ -2475,7 +3294,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       Container(
                         width: screenWidth * 0.84,
                         padding: EdgeInsetsDirectional.only(
-                            start: screenWidth * 0.08, top: 20.0, bottom: 10.0),
+                            start: screenWidth * 0.08, top: 20.0, bottom: 5.0),
                         child: Row(
                           children: [
                             Flexible(
@@ -2501,18 +3320,37 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                   Row(
                     children: [
                       Container(
-                        width: screenWidth * 0.84,
+                        width: screenWidth * 0.9,
                         padding: EdgeInsetsDirectional.only(
-                            start: screenWidth * 0.08, top: 20.0, bottom: 10.0),
+                            start: screenWidth * 0.08, top: 10.0, bottom: 10.0),
                         child: Row(
                           children: [
-                            Flexible(
+                            Expanded(
+                              flex: 40,
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      offer.daysNumber.toString() +
+                                          ' ' +
+                                          getTranslated(
+                                              context, 'home_offer_card_days'),
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 60,
                               child: Text(
-                                offer.daysNumber.toString() +
-                                    ' ' +
-                                    getTranslated(
-                                        context, 'home_offer_card_days'),
-                                textAlign: TextAlign.start,
+                                widget.package.toString(),
+                                textAlign: TextAlign.end,
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -2543,10 +3381,10 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                     child: Row(
                       children: <Widget>[
                         Expanded(
-                          flex: 30,
+                          flex: 25,
                           child: FittedBox(
                             child: Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(0.0),
                               child: Text(
                                 localAssistant
                                     .getOfferByLocale(context, offer, 'country')
@@ -2562,11 +3400,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                           ),
                         ),
                         Expanded(
-                          flex: 30,
+                          flex: 35,
                           child: FittedBox(
+                              fit: BoxFit.scaleDown,
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Text(
+                                _totalPassengersNumber.toString() + ' ' +
                                 getTranslated(context, 'fo_passengers'),
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
@@ -2580,10 +3420,11 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                         Expanded(
                           flex: 20,
                           child: FittedBox(
+                            fit: BoxFit.scaleDown,
                             child: Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(0.0),
                               child: Text(
-                                offer.days[0].trips[0].date.toString(),
+                                formatter.format(_pickedDate).toString(),
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontSize: 15,
@@ -2597,16 +3438,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                             flex: 20,
                             child: TextButton(
                               onPressed: () {
-                                Navigator.of(context).push(
-                                    new MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            new EditBook()));
+                                _openEditPackageWidget(screenWidth, screenHeight);
                               },
                               child: Text(
                                 getTranslated(context, 'fo_edit'),
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 14,
                                   color: Color(0xff07898B),
                                 ),
                               ),
@@ -2660,13 +3498,17 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                               onPressed: () {
                                 setState(() {
                                   widgetIndex = 0;
-                                  dayIndex = 0;
+                                  dayIndex = -1;
                                 });
                               },
                               color: Colors.white,
                               textColor: Colors.black,
                               elevation: 3.0,
                               text: getTranslated(context, 'fo_trip_plan'),
+                              textStyle: TextStyle(
+                                fontFamily: 'cairo',
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                           Padding(
@@ -2682,6 +3524,10 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                               textColor: Colors.black,
                               elevation: 3.0,
                               text: getTranslated(context, 'do_hotels_tab'),
+                              textStyle: TextStyle(
+                                fontFamily: 'cairo',
+                                color: Colors.black,
+                              ),
                               icon: GFBadge(
                                 color: Color(0xffBDBDBD),
                                 textColor: Colors.black,
@@ -2708,6 +3554,10 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                               textColor: Colors.black,
                               elevation: 3.0,
                               text: getTranslated(context, 'do_flights_tab'),
+                              textStyle: TextStyle(
+                                fontFamily: 'cairo',
+                                color: Colors.black,
+                              ),
                               icon: GFBadge(
                                 color: Color(0xffBDBDBD),
                                 textColor: Colors.black,
@@ -2734,6 +3584,10 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                               textColor: Colors.black,
                               elevation: 3.0,
                               text: getTranslated(context, 'do_transfer_tab'),
+                              textStyle: TextStyle(
+                                fontFamily: 'cairo',
+                                color: Colors.black,
+                              ),
                               icon: GFBadge(
                                 color: Color(0xffBDBDBD),
                                 textColor: Colors.black,
@@ -2760,6 +3614,10 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                               textColor: Colors.black,
                               elevation: 3.0,
                               text: getTranslated(context, 'do_activities_tab'),
+                              textStyle: TextStyle(
+                                fontFamily: 'cairo',
+                                color: Colors.black,
+                              ),
                               icon: GFBadge(
                                 color: Color(0xffBDBDBD),
                                 textColor: Colors.black,
@@ -2777,7 +3635,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       ),
                     ),
                   ),
-                  
+
                   _widgetRouter(screenWidth, screenHeight),
 
                   Row(
@@ -2833,9 +3691,10 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(4.0),
                                 onTap: () {
-                                  Navigator.of(context).push(new MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                      new DomesticOfferMain()));
+                                  Navigator.of(context).push(
+                                      new MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              new DomesticOfferMain()));
                                 },
                                 child: Card(
                                   shadowColor: Colors.white,
@@ -2847,7 +3706,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                   margin: const EdgeInsets.all(0.0),
                                   color: Color(0xffFAFAFA),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Padding(
@@ -2861,7 +3721,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                 clipper: ShapeBorderClipper(
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(15)),
+                                                          BorderRadius.circular(
+                                                              15)),
                                                 ),
                                                 child: Image.asset(
                                                   'assets/images/c4.jpg',
@@ -2875,20 +3736,24 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               child: Flex(
                                                 direction: Axis.horizontal,
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.end,
+                                                    MainAxisAlignment.end,
                                                 children: <Widget>[
                                                   Container(
                                                     padding:
-                                                    const EdgeInsets.all(3.0),
-                                                    margin: const EdgeInsets.only(
-                                                        top: 20.0),
-                                                    constraints: BoxConstraints(),
+                                                        const EdgeInsets.all(
+                                                            3.0),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            top: 20.0),
+                                                    constraints:
+                                                        BoxConstraints(),
                                                     decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       border: Border.all(
                                                         color: Colors.white,
                                                       ),
-                                                      borderRadius: BorderRadius.all(
+                                                      borderRadius:
+                                                          BorderRadius.all(
                                                         Radius.circular(10.0),
                                                       ),
                                                     ),
@@ -2927,22 +3792,25 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8.0),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Expanded(
                                               flex: 50,
                                               child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 0.0,
-                                                      right: 0.0,
-                                                      left: 0.0,
-                                                      bottom: 0.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 0.0,
+                                                          right: 0.0,
+                                                          left: 0.0,
+                                                          bottom: 0.0),
                                                   child: Text(
                                                     getTranslated(context,
                                                         'home_offer_card_days'),
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 15,
                                                         color: Colors.black),
                                                   )),
@@ -2965,8 +3833,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          getTranslated(
-                                              context, 'home_offer_card_price') +
+                                          getTranslated(context,
+                                                  'home_offer_card_price') +
                                               ' 220\$',
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
@@ -2981,8 +3849,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8.0),
                                         child: Text(
-                                          getTranslated(
-                                              context, 'home_offer_card_details'),
+                                          getTranslated(context,
+                                              'home_offer_card_details'),
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                             fontSize: 11,
@@ -3000,12 +3868,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                           height: screenHeight * 0.11,
                                           child: Row(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                                CrossAxisAlignment.stretch,
                                             children: <Widget>[
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Icon(
@@ -3013,17 +3882,19 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                         color: Colors.white,
                                                       ),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 6.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 6.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_rate'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3035,25 +3906,29 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Icon(
-                                                        Icons.airplanemode_inactive,
+                                                        Icons
+                                                            .airplanemode_inactive,
                                                         color: Colors.white,
                                                       ),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_flight'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3065,23 +3940,26 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Image.asset(
                                                           'assets/icons/dish.png'),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_breakfast'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3093,25 +3971,29 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Icon(
-                                                        Icons.directions_car_outlined,
+                                                        Icons
+                                                            .directions_car_outlined,
                                                         color: Colors.white,
                                                       ),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_transportation'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3148,7 +4030,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                   margin: const EdgeInsets.all(0.0),
                                   color: Color(0xffFAFAFA),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Padding(
@@ -3162,7 +4045,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                 clipper: ShapeBorderClipper(
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(15)),
+                                                          BorderRadius.circular(
+                                                              15)),
                                                 ),
                                                 child: Image.asset(
                                                   'assets/images/c4.jpg',
@@ -3176,20 +4060,24 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               child: Flex(
                                                 direction: Axis.horizontal,
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.end,
+                                                    MainAxisAlignment.end,
                                                 children: <Widget>[
                                                   Container(
                                                     padding:
-                                                    const EdgeInsets.all(3.0),
-                                                    margin: const EdgeInsets.only(
-                                                        top: 20.0),
-                                                    constraints: BoxConstraints(),
+                                                        const EdgeInsets.all(
+                                                            3.0),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            top: 20.0),
+                                                    constraints:
+                                                        BoxConstraints(),
                                                     decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       border: Border.all(
                                                         color: Colors.white,
                                                       ),
-                                                      borderRadius: BorderRadius.all(
+                                                      borderRadius:
+                                                          BorderRadius.all(
                                                         Radius.circular(10.0),
                                                       ),
                                                     ),
@@ -3228,22 +4116,25 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8.0),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Expanded(
                                               flex: 50,
                                               child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 0.0,
-                                                      right: 0.0,
-                                                      left: 0.0,
-                                                      bottom: 0.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 0.0,
+                                                          right: 0.0,
+                                                          left: 0.0,
+                                                          bottom: 0.0),
                                                   child: Text(
                                                     getTranslated(context,
                                                         'home_offer_card_days'),
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 15,
                                                         color: Colors.black),
                                                   )),
@@ -3266,8 +4157,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          getTranslated(
-                                              context, 'home_offer_card_price') +
+                                          getTranslated(context,
+                                                  'home_offer_card_price') +
                                               ' 220\$',
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
@@ -3282,8 +4173,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8.0),
                                         child: Text(
-                                          getTranslated(
-                                              context, 'home_offer_card_details'),
+                                          getTranslated(context,
+                                              'home_offer_card_details'),
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                             fontSize: 11,
@@ -3301,12 +4192,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                           height: screenHeight * 0.11,
                                           child: Row(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                                CrossAxisAlignment.stretch,
                                             children: <Widget>[
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Icon(
@@ -3314,17 +4206,19 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                         color: Colors.white,
                                                       ),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_rate'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3336,25 +4230,29 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Icon(
-                                                        Icons.airplanemode_inactive,
+                                                        Icons
+                                                            .airplanemode_inactive,
                                                         color: Colors.white,
                                                       ),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_flight'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3366,23 +4264,26 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Image.asset(
                                                           'assets/icons/dish.png'),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_breakfast'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3394,25 +4295,29 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Icon(
-                                                        Icons.directions_car_outlined,
+                                                        Icons
+                                                            .directions_car_outlined,
                                                         color: Colors.white,
                                                       ),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_transportation'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3449,7 +4354,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                   margin: const EdgeInsets.all(0.0),
                                   color: Color(0xffFAFAFA),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Padding(
@@ -3463,7 +4369,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                 clipper: ShapeBorderClipper(
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(15)),
+                                                          BorderRadius.circular(
+                                                              15)),
                                                 ),
                                                 child: Image.asset(
                                                   'assets/images/c4.jpg',
@@ -3477,20 +4384,24 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               child: Flex(
                                                 direction: Axis.horizontal,
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.end,
+                                                    MainAxisAlignment.end,
                                                 children: <Widget>[
                                                   Container(
                                                     padding:
-                                                    const EdgeInsets.all(3.0),
-                                                    margin: const EdgeInsets.only(
-                                                        top: 20.0),
-                                                    constraints: BoxConstraints(),
+                                                        const EdgeInsets.all(
+                                                            3.0),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            top: 20.0),
+                                                    constraints:
+                                                        BoxConstraints(),
                                                     decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       border: Border.all(
                                                         color: Colors.white,
                                                       ),
-                                                      borderRadius: BorderRadius.all(
+                                                      borderRadius:
+                                                          BorderRadius.all(
                                                         Radius.circular(10.0),
                                                       ),
                                                     ),
@@ -3529,22 +4440,25 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8.0),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Expanded(
                                               flex: 50,
                                               child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 0.0,
-                                                      right: 0.0,
-                                                      left: 0.0,
-                                                      bottom: 0.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 0.0,
+                                                          right: 0.0,
+                                                          left: 0.0,
+                                                          bottom: 0.0),
                                                   child: Text(
                                                     getTranslated(context,
                                                         'home_offer_card_days'),
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 15,
                                                         color: Colors.black),
                                                   )),
@@ -3567,8 +4481,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          getTranslated(
-                                              context, 'home_offer_card_price') +
+                                          getTranslated(context,
+                                                  'home_offer_card_price') +
                                               ' 220\$',
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
@@ -3583,8 +4497,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 8.0),
                                         child: Text(
-                                          getTranslated(
-                                              context, 'home_offer_card_details'),
+                                          getTranslated(context,
+                                              'home_offer_card_details'),
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                             fontSize: 11,
@@ -3602,12 +4516,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                           height: screenHeight * 0.11,
                                           child: Row(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                                CrossAxisAlignment.stretch,
                                             children: <Widget>[
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Icon(
@@ -3615,17 +4530,19 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                         color: Colors.white,
                                                       ),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_rate'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3637,25 +4554,29 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Icon(
-                                                        Icons.airplanemode_inactive,
+                                                        Icons
+                                                            .airplanemode_inactive,
                                                         color: Colors.white,
                                                       ),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_flight'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3667,23 +4588,26 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Image.asset(
                                                           'assets/icons/dish.png'),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_breakfast'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -3695,25 +4619,29 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               Expanded(
                                                 flex: 25,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(2.0),
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
                                                   child: Column(
                                                     children: <Widget>[
                                                       Icon(
-                                                        Icons.directions_car_outlined,
+                                                        Icons
+                                                            .directions_car_outlined,
                                                         color: Colors.white,
                                                       ),
                                                       Container(
-                                                        margin: const EdgeInsets.only(
-                                                            top: 4.0),
+                                                        margin: const EdgeInsets
+                                                            .only(top: 4.0),
                                                         child: FittedBox(
                                                           child: Text(
-                                                            getTranslated(context,
+                                                            getTranslated(
+                                                                context,
                                                                 'home_offer_card_transportation'),
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: TextStyle(
                                                               fontSize: 12,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
