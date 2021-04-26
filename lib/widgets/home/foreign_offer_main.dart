@@ -2879,7 +2879,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                         textAlign: TextAlign.start,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 1.0 , horizontal: 6.0),
-                            hintText: getTranslated(context, 'book_trip_email'),
+                            hintText: getTranslated(context, 'pyt_in_t_source_btn'),
                             hintStyle: TextStyle(
                               fontSize: 14.0,
                               color: Color(0xffC3C2C3),
@@ -2909,6 +2909,10 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                             ),
                             filled: true),
                       ),
+                    ),
+                    Visibility(
+                      visible: false,
+                      child: Container(width: screenWidth * 0.9,),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
@@ -3054,16 +3058,16 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        // backgroundColor: Color(0xffE9F7F8),
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        shadowColor: Colors.white,
-        // title: Text(
-        //   widget.package,
-        // ),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Color(0xffE9F7F8),
+      //   backgroundColor: Colors.white,
+      //   elevation: 0.0,
+      //   shadowColor: Colors.white,
+      //   title: Text(
+      //     widget.package,
+      //   ),
+      //   centerTitle: true,
+      // ),
       floatingActionButton: GFButton(
         onPressed: () {
           Navigator.of(context).push(new MaterialPageRoute(
@@ -3166,19 +3170,20 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    width: screenWidth * 0.84,
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    width: screenWidth,
+                    height: 250,
+                    padding: const EdgeInsets.only(bottom: 10.0),
                     child: GestureDetector(
                       onTap: () {},
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(4.0),
+                        // borderRadius: BorderRadius.circular(4.0),
                         onTap: () {},
                         child: Card(
                           shadowColor: Colors.white,
                           elevation: 0.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                          // shape: RoundedRectangleBorder(
+                          //   borderRadius: BorderRadius.circular(15),
+                          // ),
                           clipBehavior: Clip.antiAlias,
                           margin: const EdgeInsets.all(0.0),
                           color: Color(0xffFAFAFA),
@@ -3218,10 +3223,10 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                           Container(
                                             padding: const EdgeInsets.all(0.0),
                                             margin: EdgeInsets.only(
-                                                top: screenHeight * 0.17),
+                                                top: screenHeight * 0.32),
                                             constraints: BoxConstraints(),
                                             child: Container(
-                                              width: 100,
+                                              width: 120,
                                               padding:
                                                   const EdgeInsets.all(3.0),
                                               child: FittedBox(
@@ -3247,54 +3252,54 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       ),
                     ),
                   ),
-                  Container(
-                    width: screenWidth * 0.84,
-                    child: Column(
-                      children: <Widget>[
-                        ResponsiveGridRow(
-                          children: [
-                            for (var i = 0; i < _imageList.length; i++)
-                              ResponsiveGridCol(
-                                xs: 3,
-                                md: 3,
-                                child: Container(
-                                    margin: const EdgeInsets.all(5.0),
-                                    padding: const EdgeInsets.all(0.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    alignment: Alignment(0, 0),
-                                    //color: Colors.grey,
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: Card(
-                                        margin: const EdgeInsets.all(0),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(7),
-                                        ),
-                                        clipBehavior: Clip.antiAlias,
-                                        child: Image.network(
-                                          'https://ipackagetours.com/storage/app/' +
-                                              _imageList[i].toString(),
-                                          fit: BoxFit.fill,
-                                          height: screenHeight * 0.07,
-                                          width: screenWidth * 0.2,
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   width: screenWidth * 0.84,
+                  //   child: Column(
+                  //     children: <Widget>[
+                  //       ResponsiveGridRow(
+                  //         children: [
+                  //           for (var i = 0; i < _imageList.length; i++)
+                  //             ResponsiveGridCol(
+                  //               xs: 3,
+                  //               md: 3,
+                  //               child: Container(
+                  //                   margin: const EdgeInsets.all(5.0),
+                  //                   padding: const EdgeInsets.all(0.0),
+                  //                   decoration: BoxDecoration(
+                  //                     borderRadius: BorderRadius.circular(10),
+                  //                   ),
+                  //                   alignment: Alignment(0, 0),
+                  //                   //color: Colors.grey,
+                  //                   child: InkWell(
+                  //                     onTap: () {},
+                  //                     child: Card(
+                  //                       margin: const EdgeInsets.all(0),
+                  //                       shape: RoundedRectangleBorder(
+                  //                         borderRadius:
+                  //                             BorderRadius.circular(7),
+                  //                       ),
+                  //                       clipBehavior: Clip.antiAlias,
+                  //                       child: Image.network(
+                  //                         'https://ipackagetours.com/storage/app/' +
+                  //                             _imageList[i].toString(),
+                  //                         fit: BoxFit.fill,
+                  //                         height: screenHeight * 0.07,
+                  //                         width: screenWidth * 0.2,
+                  //                       ),
+                  //                     ),
+                  //                   )),
+                  //             ),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Row(
                     children: [
                       Container(
-                        width: screenWidth * 0.84,
+                        width: screenWidth * 0.9,
                         padding: EdgeInsetsDirectional.only(
-                            start: screenWidth * 0.08, top: 20.0, bottom: 5.0),
+                            start: screenWidth * 0.08, top: 5.0, bottom: 5.0),
                         child: Row(
                           children: [
                             Flexible(
