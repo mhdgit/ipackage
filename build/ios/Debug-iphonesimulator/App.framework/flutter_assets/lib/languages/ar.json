@@ -239,13 +239,14 @@
 
   "foreign_offer_title" : "باقة عائلية",
   "fo_label" : "باقة أسبوع العائلة في اسطنبول : اكتشاف المعالم الأثرية و المشي على الشاطئ",
-  "fo_passengers" : "مسافرين",
+  "fo_passengers" : " مسافرين",
   "fo_edit" : "تعديل",
   "fo_details" : "التفاصيل",
   "fo_label_2" : "لقد قضيت وقتاً ممتعاً",
   "fo_add_btn" : "أضف نشاطاً",
   "fo_trip_plan" : "مسار الرحلة",
   "fo_residence" : "الإقامة",
+  "fo_edit_save" : "تطبيق",
 
   "book_trip_label" : "حدد وجهتك",
   "book_trip_label_2" : "اختار الباقة",
