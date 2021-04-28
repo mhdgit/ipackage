@@ -38,6 +38,7 @@ dependencies:
   responsive_grid: ^1.2.1+1
   http: ^0.13.1
   intl: ^0.17.0
+  giffy_dialog: ^1.8.0
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,7 @@ flutter:
     - assets/icons/payment.png
     - assets/images/paypal.png
     - assets/images/mastercard.png
+    - assets/images/alert.png
     - assets/images/users/
     - assets/images/users/i1.png
     - assets/images/users/i2.png

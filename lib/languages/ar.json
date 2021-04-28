@@ -245,6 +245,8 @@
   "fo_trip_plan" : "مسار الرحلة",
   "fo_residence" : "الإقامة",
   "fo_edit_save" : "تطبيق",
+  "fo_remove_note" : "سيتم إزالة وسيلة النقل بشكل نهائي",
+  "fo_change_trans_title" : "المزيد من وسائل النقل",
 
   "book_trip_label" : "حدد وجهتك",
   "book_trip_label_2" : "اختار الباقة",

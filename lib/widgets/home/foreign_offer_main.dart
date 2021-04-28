@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/rating/gf_rating.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/Offer/Hotel/Hotel.dart';
+import 'package:ipackage/modules/Offer/Transportations/MinTransportation.dart';
+import 'package:ipackage/modules/Offer/Transportations/Transportation.dart';
 import 'package:ipackage/modules/my_icons.dart';
-import 'package:ipackage/widgets/change_activity.dart';
 import 'package:ipackage/widgets/confirm_book.dart';
-import 'package:ipackage/widgets/edit_book.dart';
 import 'package:ipackage/widgets/home/domestic_offer_main.dart';
-import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../modules/BetaApiAssistant.dart';
 import '../../modules/LocalAssistant.dart';
@@ -45,6 +45,9 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   var formatter = new DateFormat('MM/dd');
   var _pickedDate;
   int _totalPassengersNumber = 1;
+  MinTransportation shiftTransportation;
+  int _totalOfferPrice = 0;
+  int carNumber = 0;
 
   List<String> _comments = [
     "لقد كانت رحلة رائعة لقد كانت رحلة رائعة لقد كانت رحلة رائعة",
@@ -76,6 +79,196 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         });
       }
     }
+  }
+
+  changeTransportationVisibility(Transportation transportation) {
+    showDialog(
+        context: context,
+        builder: (_) => AssetGiffyDialog(
+          onlyOkButton: true,
+          buttonCancelText: Text(getTranslated(context, 'login_alert_d_cancel'),
+              style: TextStyle(fontSize: 16)),
+          buttonOkText: Text(getTranslated(context, 'edit_book_delete'),
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white)),
+          buttonOkColor: Colors.redAccent,
+          image: Image.asset('assets/images/alert.png', fit: BoxFit.cover),
+          title: Text(
+            getTranslated(context, 'home_alert_login_title'),
+            style: TextStyle(
+                fontSize: 18.0,
+                color: Colors.teal),
+          ),
+          description: Text(
+            getTranslated(context, 'fo_remove_note'),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16),
+          ),
+          onOkButtonPressed: () {
+            setState(() {
+              transportation.visibility = false;
+              dayIndex = -1;
+            });
+            Navigator.pop(context);
+          },
+        ));
+  }
+
+  void changeTransportation(context , screenWidth , screenHeight , type , dIndex , List<MinTransportation> transportationList)
+  {
+    showDialog(
+        context: context, builder: (BuildContext bc){
+      return Dialog(
+        child: Container(
+          width: screenWidth * 0.9,
+          height: screenHeight * 0.7,
+          child: Column(
+            children: [
+              Container(
+                width: screenWidth * 0.9,
+                color: Color(0xff07898B),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    getTranslated(context, 'fo_change_trans_title'),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16 , color: Colors.white),
+                  ),
+                ),
+              ),
+              ListView.builder(
+                itemCount: transportationList.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context , index){
+                return Container(
+                  width: screenWidth * 0.8,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    child: Card(
+                      elevation: 2.0,
+                      child: Row(
+                        children: <Widget>[
+                          ClipPath(
+                            clipper: ShapeBorderClipper(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Image.network(
+                                'https://ipackagetours.com/storage/app/' +
+                                    transportationList[index].transportation.image
+                                        .toString(),
+                                fit: BoxFit.cover,
+                                height: screenHeight * 0.16,
+                                width: screenWidth * 0.3,
+                              ),
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                width: screenWidth * 0.45,
+                                padding: const EdgeInsets.all(0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .only(start: 4.0),
+                                        child: Text(
+                                          localAssistant
+                                              .getTransportationByLocale(
+                                              context,
+                                              transportationList[index].transportation)
+                                              .toString(),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              Container(
+                                height: screenHeight * 0.06,
+                                width: screenWidth * 0.45,
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Expanded(
+                                      flex: 78,
+                                      child: Text(''),
+                                    ),
+                                    Expanded(
+                                      flex: 22,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: GFButton(
+                                          onPressed: () {
+                                            if(type == 2)
+                                              {
+                                                setState(() {
+                                                  shiftTransportation = offer.airportTransferBack[0];
+                                                  offer.airportTransferBack[0] = transportationList[index];
+                                                  transportationList[index] = shiftTransportation;
+                                                  dayIndex = -1;
+                                                });
+                                                Navigator.pop(context);
+                                              }
+                                            else if(type == 1)
+                                              {
+                                                setState(() {
+                                                  shiftTransportation = offer.days[dIndex].transportationMethods.additionalTrans[0];
+                                                  offer.days[dIndex].transportationMethods.additionalTrans[0] = transportationList[index];
+                                                  transportationList[index] = shiftTransportation;
+                                                  dayIndex = -1;
+                                                });
+                                                Navigator.pop(context);
+                                              }
+                                            else
+                                            {
+                                              setState(() {
+                                                shiftTransportation = offer.airportTransferGo[0];
+                                                offer.airportTransferGo[0] = transportationList[index];
+                                                transportationList[index] = shiftTransportation;
+                                                dayIndex = -1;
+                                              });
+                                              Navigator.pop(context);
+                                            }
+                                          },
+                                          color: Colors.teal,
+                                          child: Icon(
+                                            Icons.add,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ],
+          ),
+        ),
+      );
+    });
   }
 
   _activityBar(width, height, String head) {
@@ -329,246 +522,425 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       ],
                     ),
 
-                    Container(
-                      width: screenWidth * 0.9,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(4.0),
-                        child: Card(
-                          child: Row(
-                            children: <Widget>[
-                              ClipPath(
-                                clipper: ShapeBorderClipper(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.0)),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(0),
-                                  child: offer.days[index].transportationMethods
-                                              .defaultTrans ==
-                                          null
-                                      ? Image.network(
-                                          'https://ipackagetours.com/storage/app/' +
-                                              offer.airportTransferGo[0]
-                                                  .transportation.image
-                                                  .toString(),
-                                          fit: BoxFit.cover,
-                                          height: screenHeight * 0.16,
-                                          width: screenWidth * 0.3,
-                                        )
-                                      : Image.network(
-                                          'https://ipackagetours.com/storage/app/' +
-                                              offer
-                                                  .days[index]
-                                                  .transportationMethods
-                                                  .defaultTrans[0]
-                                                  .transportation
-                                                  .image
-                                                  .toString(),
-                                          fit: BoxFit.cover,
-                                          height: screenHeight * 0.16,
-                                          width: screenWidth * 0.3,
-                                        ),
-                                ),
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    width: screenWidth * 0.56,
+                    index == 0 ?
+                    Visibility(
+                      visible:offer.airportTransferGo[0].transportation.visibility,
+                      child: Container(
+                        width: screenWidth * 0.9,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(4.0),
+                          child: Card(
+                            child: Row(
+                              children: <Widget>[
+                                ClipPath(
+                                  clipper: ShapeBorderClipper(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(4.0)),
+                                  ),
+                                  child: Padding(
                                     padding: const EdgeInsets.all(0),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .only(start: 4.0),
-                                            child: Text(
-                                              offer
-                                                          .days[index]
-                                                          .transportationMethods
-                                                          .defaultTrans ==
-                                                      null
-                                                  ? localAssistant
-                                                      .getTransportationByLocale(
-                                                          context,
-                                                          offer
-                                                              .airportTransferGo[
-                                                                  0]
-                                                              .transportation)
-                                                      .toString()
-                                                  : localAssistant
-                                                      .getTransportationByLocale(
-                                                          context,
-                                                          offer
-                                                              .days[index]
-                                                              .transportationMethods
-                                                              .defaultTrans[0]
-                                                              .transportation)
-                                                      .toString(),
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
-                                                  color: Colors.black),
+                                    child: Image.network(
+                                            'https://ipackagetours.com/storage/app/' +
+                                                offer.airportTransferGo[0]
+                                                    .transportation.image
+                                                    .toString(),
+                                            fit: BoxFit.cover,
+                                            height: screenHeight * 0.16,
+                                            width: screenWidth * 0.3,
+                                          ),
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      width: screenWidth * 0.56,
+                                      padding: const EdgeInsets.all(0),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Flexible(
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .only(start: 4.0),
+                                              child: Text(
+                                                localAssistant
+                                                        .getTransportationByLocale(
+                                                            context,
+                                                            offer
+                                                                .airportTransferGo[
+                                                                    0]
+                                                                .transportation)
+                                                        .toString(),
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15,
+                                                    color: Colors.black),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    width: screenWidth * 0.56,
-                                    padding: const EdgeInsets.all(0),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .only(start: 4.0),
-                                            child: Text(
-                                              offer
-                                                              .days[index]
-                                                              .transportationMethods
-                                                              .defaultTrans ==
-                                                          null &&
-                                                      index == 0
-                                                  ? getTranslated(context,
-                                                          'do_plan_car_from') +
-                                                      localAssistant
-                                                          .getAirportByLocale(
-                                                              context,
-                                                              offer.airportGo)
-                                                          .toString() +
-                                                      getTranslated(
-                                                          context, 'do_plan_car_to')
-                                                  : getTranslated(context,
-                                                          'do_plan_car_from') +
-                                                      localAssistant
-                                                          .getDayCityByLocale(
-                                                              context,
-                                                              offer.days[
-                                                                  index - 1])
-                                                          .toString() +
-                                                      getTranslated(context,
-                                                          'do_plan_car_to_2') +
-                                                      localAssistant
-                                                          .getDayCityByLocale(
-                                                              context,
-                                                              offer.days[index])
-                                                          .toString(),
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.black54),
+                                    Container(
+                                      width: screenWidth * 0.56,
+                                      padding: const EdgeInsets.all(0),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Flexible(
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .only(start: 4.0),
+                                              child: Text(
+                                                getTranslated(context,
+                                                            'do_plan_car_from') +
+                                                        localAssistant
+                                                            .getAirportByLocale(
+                                                                context,
+                                                                offer.airportGo)
+                                                            .toString() +
+                                                        getTranslated(
+                                                            context, 'do_plan_car_to'),
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black54),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
 
-                                  // Container(
-                                  //   height: screenHeight * 0.05,
-                                  //   width: screenWidth * 0.56,
-                                  //   padding: const EdgeInsets.all(4.0),
-                                  //   child: Row(
-                                  //     mainAxisAlignment: MainAxisAlignment.start,
-                                  //     children: [
-                                  //       Expanded(
-                                  //         flex: 50,
-                                  //         child: FittedBox(
-                                  //           child: GFRating(
-                                  //             color: Colors.amber,
-                                  //             borderColor: Colors.amber,
-                                  //             allowHalfRating: true,
-                                  //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //       Expanded(
-                                  //         flex: 50,
-                                  //         child: Padding(
-                                  //           padding: const EdgeInsets.only(
-                                  //               top: 0.0,
-                                  //               right: 0.0,
-                                  //               left: 0.0,
-                                  //               bottom: 0.0),
-                                  //           child: Text(
-                                  //             ' ',
-                                  //             textAlign: TextAlign.start,
-                                  //             style: TextStyle(
-                                  //                 fontWeight: FontWeight.bold,
-                                  //                 fontSize: 15,
-                                  //                 color: Colors.black),
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  Container(
-                                    height: screenHeight * 0.06,
-                                    width: screenWidth * 0.56,
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Expanded(
-                                          flex: 56,
-                                          child: Text(''),
-                                        ),
-                                        Expanded(
-                                          flex: 22,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: GFButton(
-                                              onPressed: () {},
-                                              color: Colors.teal,
-                                              child: Icon(
-                                                Icons.edit,
-                                                size: 14,
-                                                color: Colors.white,
+                                    // Container(
+                                    //   height: screenHeight * 0.05,
+                                    //   width: screenWidth * 0.56,
+                                    //   padding: const EdgeInsets.all(4.0),
+                                    //   child: Row(
+                                    //     mainAxisAlignment: MainAxisAlignment.start,
+                                    //     children: [
+                                    //       Expanded(
+                                    //         flex: 50,
+                                    //         child: FittedBox(
+                                    //           child: GFRating(
+                                    //             color: Colors.amber,
+                                    //             borderColor: Colors.amber,
+                                    //             allowHalfRating: true,
+                                    //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //       Expanded(
+                                    //         flex: 50,
+                                    //         child: Padding(
+                                    //           padding: const EdgeInsets.only(
+                                    //               top: 0.0,
+                                    //               right: 0.0,
+                                    //               left: 0.0,
+                                    //               bottom: 0.0),
+                                    //           child: Text(
+                                    //             ' ',
+                                    //             textAlign: TextAlign.start,
+                                    //             style: TextStyle(
+                                    //                 fontWeight: FontWeight.bold,
+                                    //                 fontSize: 15,
+                                    //                 color: Colors.black),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                    Container(
+                                      height: screenHeight * 0.06,
+                                      width: screenWidth * 0.56,
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Expanded(
+                                            flex: 56,
+                                            child: Text(''),
+                                          ),
+                                          Expanded(
+                                            flex: 22,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(2.0),
+                                              child: GFButton(
+                                                onPressed: () {
+                                                  changeTransportation(context , screenWidth, screenHeight, 0 , index, offer.airportTransferGo);
+                                                },
+                                                color: Colors.teal,
+                                                child: Icon(
+                                                  Icons.edit,
+                                                  size: 14,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Expanded(
-                                          flex: 22,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: GFButton(
-                                              color: Colors.redAccent,
-                                              onPressed: () {},
-                                              child: Icon(
-                                                Icons.delete,
-                                                size: 14,
-                                                color: Colors.white,
+                                          Expanded(
+                                            flex: 22,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(2.0),
+                                              child: GFButton(
+                                                color: Colors.redAccent,
+                                                onPressed: () {
+                                                  print(index);
+                                                  changeTransportationVisibility(offer.airportTransferGo[0].transportation);
+                                                },
+                                                child: Icon(
+                                                  Icons.delete,
+                                                  size: 14,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.all(2.0),
-                                        //   child: IconButton(
-                                        //     color: Colors.teal,
-                                        //     icon: Icon(Icons.edit , size: 20),
-                                        //     onPressed: (){},
-                                        //   ),
-                                        // ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.all(2.0),
-                                        //   child: IconButton(
-                                        //     color: Colors.redAccent,
-                                        //     icon: Icon(Icons.delete , size: 20,),
-                                        //     onPressed: (){},
-                                        //   ),
-                                        // ),
-                                      ],
+                                          // Padding(
+                                          //   padding: const EdgeInsets.all(2.0),
+                                          //   child: IconButton(
+                                          //     color: Colors.teal,
+                                          //     icon: Icon(Icons.edit , size: 20),
+                                          //     onPressed: (){},
+                                          //   ),
+                                          // ),
+                                          // Padding(
+                                          //   padding: const EdgeInsets.all(2.0),
+                                          //   child: IconButton(
+                                          //     color: Colors.redAccent,
+                                          //     icon: Icon(Icons.delete , size: 20,),
+                                          //     onPressed: (){},
+                                          //   ),
+                                          // ),
+                                        ],
+                                      ),
                                     ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                    :
+                    Visibility(
+                      visible:offer
+                          .days[index]
+                          .transportationMethods
+                          .defaultTrans[0]
+                          .transportation.visibility,
+                      child: Container(
+                        width: screenWidth * 0.9,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(4.0),
+                          child: Card(
+                            child: Row(
+                              children: <Widget>[
+                                ClipPath(
+                                  clipper: ShapeBorderClipper(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(4.0)),
                                   ),
-                                ],
-                              ),
-                            ],
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(0),
+                                    child: Image.network(
+                                            'https://ipackagetours.com/storage/app/' +
+                                                offer
+                                                    .days[index]
+                                                    .transportationMethods
+                                                    .defaultTrans[0]
+                                                    .transportation
+                                                    .image
+                                                    .toString(),
+                                            fit: BoxFit.cover,
+                                            height: screenHeight * 0.16,
+                                            width: screenWidth * 0.3,
+                                          ),
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      width: screenWidth * 0.56,
+                                      padding: const EdgeInsets.all(0),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Flexible(
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .only(start: 4.0),
+                                              child: Text(
+                                                localAssistant
+                                                        .getTransportationByLocale(
+                                                            context,
+                                                            offer
+                                                                .days[index]
+                                                                .transportationMethods
+                                                                .defaultTrans[0]
+                                                                .transportation)
+                                                        .toString(),
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15,
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: screenWidth * 0.56,
+                                      padding: const EdgeInsets.all(0),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Flexible(
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .only(start: 4.0),
+                                              child: Text(
+                                                getTranslated(context,
+                                                            'do_plan_car_from') +
+                                                        localAssistant
+                                                            .getDayCityByLocale(
+                                                                context,
+                                                                offer.days[
+                                                                    index - 1])
+                                                            .toString() +
+                                                        getTranslated(context,
+                                                            'do_plan_car_to_2') +
+                                                        localAssistant
+                                                            .getDayCityByLocale(
+                                                                context,
+                                                                offer.days[index])
+                                                            .toString(),
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black54),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    // Container(
+                                    //   height: screenHeight * 0.05,
+                                    //   width: screenWidth * 0.56,
+                                    //   padding: const EdgeInsets.all(4.0),
+                                    //   child: Row(
+                                    //     mainAxisAlignment: MainAxisAlignment.start,
+                                    //     children: [
+                                    //       Expanded(
+                                    //         flex: 50,
+                                    //         child: FittedBox(
+                                    //           child: GFRating(
+                                    //             color: Colors.amber,
+                                    //             borderColor: Colors.amber,
+                                    //             allowHalfRating: true,
+                                    //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //       Expanded(
+                                    //         flex: 50,
+                                    //         child: Padding(
+                                    //           padding: const EdgeInsets.only(
+                                    //               top: 0.0,
+                                    //               right: 0.0,
+                                    //               left: 0.0,
+                                    //               bottom: 0.0),
+                                    //           child: Text(
+                                    //             ' ',
+                                    //             textAlign: TextAlign.start,
+                                    //             style: TextStyle(
+                                    //                 fontWeight: FontWeight.bold,
+                                    //                 fontSize: 15,
+                                    //                 color: Colors.black),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                    Container(
+                                      height: screenHeight * 0.06,
+                                      width: screenWidth * 0.56,
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Expanded(
+                                            flex: 56,
+                                            child: Text(''),
+                                          ),
+                                          Expanded(
+                                            flex: 22,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(2.0),
+                                              child: GFButton(
+                                                onPressed: () {
+                                                  changeTransportation(context , screenWidth, screenHeight, 1 , index, offer.days[index].transportationMethods.additionalTrans);
+                                                },
+                                                color: Colors.teal,
+                                                child: Icon(
+                                                  Icons.edit,
+                                                  size: 14,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 22,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(2.0),
+                                              child: GFButton(
+                                                color: Colors.redAccent,
+                                                onPressed: () {
+                                                  print(index);
+                                                  changeTransportationVisibility(offer
+                                                      .days[index]
+                                                      .transportationMethods
+                                                      .defaultTrans[0]
+                                                      .transportation);
+                                                },
+                                                child: Icon(
+                                                  Icons.delete,
+                                                  size: 14,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          // Padding(
+                                          //   padding: const EdgeInsets.all(2.0),
+                                          //   child: IconButton(
+                                          //     color: Colors.teal,
+                                          //     icon: Icon(Icons.edit , size: 20),
+                                          //     onPressed: (){},
+                                          //   ),
+                                          // ),
+                                          // Padding(
+                                          //   padding: const EdgeInsets.all(2.0),
+                                          //   child: IconButton(
+                                          //     color: Colors.redAccent,
+                                          //     icon: Icon(Icons.delete , size: 20,),
+                                          //     onPressed: (){},
+                                          //   ),
+                                          // ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -1212,239 +1584,213 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       }),
 
                     index == offer.days.length - 1
-                        ? Container(
-                            width: screenWidth * 0.9,
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(4.0),
-                              child: Card(
-                                child: Row(
-                                  children: <Widget>[
-                                    ClipPath(
-                                      clipper: ShapeBorderClipper(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(4.0)),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(0),
-                                        child: offer
-                                                    .days[index]
-                                                    .transportationMethods
-                                                    .defaultTrans ==
-                                                null
-                                            ? Image.network(
-                                                'https://ipackagetours.com/storage/app/' +
-                                                    offer.airportTransferBack[0]
-                                                        .transportation.image
-                                                        .toString(),
-                                                fit: BoxFit.cover,
-                                                height: screenHeight * 0.16,
-                                                width: screenWidth * 0.3,
-                                              )
-                                            : Image.network(
-                                                'https://ipackagetours.com/storage/app/' +
-                                                    offer
-                                                        .days[index]
-                                                        .transportationMethods
-                                                        .defaultTrans[0]
-                                                        .transportation
-                                                        .image
-                                                        .toString(),
-                                                fit: BoxFit.cover,
-                                                height: screenHeight * 0.16,
-                                                width: screenWidth * 0.3,
-                                              ),
-                                      ),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Container(
-                                          width: screenWidth * 0.56,
+                        ? Visibility(
+                      visible: offer.airportTransferBack[0].transportation.visibility,
+                          child: Container(
+                              width: screenWidth * 0.9,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(4.0),
+                                child: Card(
+                                  child: Row(
+                                    children: <Widget>[
+                                      ClipPath(
+                                        clipper: ShapeBorderClipper(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(4.0)),
+                                        ),
+                                        child: Padding(
                                           padding: const EdgeInsets.all(0),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Flexible(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .only(start: 4.0),
-                                                  child: Text(
-                                                    offer
-                                                                .days[index]
-                                                                .transportationMethods
-                                                                .defaultTrans ==
-                                                            null
-                                                        ? localAssistant
-                                                            .getTransportationByLocale(
-                                                                context,
-                                                                offer
-                                                                    .airportTransferBack[
-                                                                        0]
-                                                                    .transportation)
-                                                            .toString()
-                                                        : localAssistant
-                                                            .getTransportationByLocale(
-                                                                context,
-                                                                offer
-                                                                    .days[index]
-                                                                    .transportationMethods
-                                                                    .defaultTrans[
-                                                                        0]
-                                                                    .transportation)
-                                                            .toString(),
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 15,
-                                                        color: Colors.black),
+                                          child: Image.network(
+                                                  'https://ipackagetours.com/storage/app/' +
+                                                      offer.airportTransferBack[0]
+                                                          .transportation.image
+                                                          .toString(),
+                                                  fit: BoxFit.cover,
+                                                  height: screenHeight * 0.16,
+                                                  width: screenWidth * 0.3,
+                                                )
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            width: screenWidth * 0.56,
+                                            padding: const EdgeInsets.all(0),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Flexible(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .only(start: 4.0),
+                                                    child: Text(
+                                                      localAssistant
+                                                              .getTransportationByLocale(
+                                                                  context,
+                                                                  offer
+                                                                      .airportTransferBack[
+                                                                          0]
+                                                                      .transportation)
+                                                              .toString(),
+                                                      textAlign: TextAlign.start,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15,
+                                                          color: Colors.black),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        Container(
-                                          width: screenWidth * 0.56,
-                                          padding: const EdgeInsets.all(0),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Flexible(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .only(start: 4.0),
-                                                  child: Text(
-                                                    getTranslated(context,
-                                                            'do_plan_car_from_2') +
-                                                        localAssistant
-                                                            .getAirportByLocale(
-                                                                context,
-                                                                offer
-                                                                    .airportBack)
-                                                            .toString(),
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.black54),
+                                          Container(
+                                            width: screenWidth * 0.56,
+                                            padding: const EdgeInsets.all(0),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Flexible(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .only(start: 4.0),
+                                                    child: Text(
+                                                      getTranslated(context,
+                                                              'do_plan_car_from_2') +
+                                                          localAssistant
+                                                              .getAirportByLocale(
+                                                                  context,
+                                                                  offer
+                                                                      .airportBack)
+                                                              .toString(),
+                                                      textAlign: TextAlign.start,
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black54),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
 
-                                        // Container(
-                                        //   height: screenHeight * 0.05,
-                                        //   width: screenWidth * 0.56,
-                                        //   padding: const EdgeInsets.all(4.0),
-                                        //   child: Row(
-                                        //     mainAxisAlignment: MainAxisAlignment.start,
-                                        //     children: [
-                                        //       Expanded(
-                                        //         flex: 50,
-                                        //         child: FittedBox(
-                                        //           child: GFRating(
-                                        //             color: Colors.amber,
-                                        //             borderColor: Colors.amber,
-                                        //             allowHalfRating: true,
-                                        //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        //       Expanded(
-                                        //         flex: 50,
-                                        //         child: Padding(
-                                        //           padding: const EdgeInsets.only(
-                                        //               top: 0.0,
-                                        //               right: 0.0,
-                                        //               left: 0.0,
-                                        //               bottom: 0.0),
-                                        //           child: Text(
-                                        //             ' ',
-                                        //             textAlign: TextAlign.start,
-                                        //             style: TextStyle(
-                                        //                 fontWeight: FontWeight.bold,
-                                        //                 fontSize: 15,
-                                        //                 color: Colors.black),
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        //     ],
-                                        //   ),
-                                        // ),
-                                        Container(
-                                          height: screenHeight * 0.06,
-                                          width: screenWidth * 0.56,
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Expanded(
-                                                flex: 56,
-                                                child: Text(''),
-                                              ),
-                                              Expanded(
-                                                flex: 22,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: GFButton(
-                                                    onPressed: () {},
-                                                    color: Colors.teal,
-                                                    child: Icon(
-                                                      Icons.edit,
-                                                      size: 14,
-                                                      color: Colors.white,
+                                          // Container(
+                                          //   height: screenHeight * 0.05,
+                                          //   width: screenWidth * 0.56,
+                                          //   padding: const EdgeInsets.all(4.0),
+                                          //   child: Row(
+                                          //     mainAxisAlignment: MainAxisAlignment.start,
+                                          //     children: [
+                                          //       Expanded(
+                                          //         flex: 50,
+                                          //         child: FittedBox(
+                                          //           child: GFRating(
+                                          //             color: Colors.amber,
+                                          //             borderColor: Colors.amber,
+                                          //             allowHalfRating: true,
+                                          //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
+                                          //           ),
+                                          //         ),
+                                          //       ),
+                                          //       Expanded(
+                                          //         flex: 50,
+                                          //         child: Padding(
+                                          //           padding: const EdgeInsets.only(
+                                          //               top: 0.0,
+                                          //               right: 0.0,
+                                          //               left: 0.0,
+                                          //               bottom: 0.0),
+                                          //           child: Text(
+                                          //             ' ',
+                                          //             textAlign: TextAlign.start,
+                                          //             style: TextStyle(
+                                          //                 fontWeight: FontWeight.bold,
+                                          //                 fontSize: 15,
+                                          //                 color: Colors.black),
+                                          //           ),
+                                          //         ),
+                                          //       ),
+                                          //     ],
+                                          //   ),
+                                          // ),
+                                          Container(
+                                            height: screenHeight * 0.06,
+                                            width: screenWidth * 0.56,
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Expanded(
+                                                  flex: 56,
+                                                  child: Text(''),
+                                                ),
+                                                Expanded(
+                                                  flex: 22,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(2.0),
+                                                    child: GFButton(
+                                                      onPressed: () {
+                                                        changeTransportation(context , screenWidth, screenHeight, 2 , index, offer.airportTransferBack);
+                                                      },
+                                                      color: Colors.teal,
+                                                      child: Icon(
+                                                        Icons.edit,
+                                                        size: 14,
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              Expanded(
-                                                flex: 22,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(2.0),
-                                                  child: GFButton(
-                                                    color: Colors.redAccent,
-                                                    onPressed: () {},
-                                                    child: Icon(
-                                                      Icons.delete,
-                                                      size: 14,
-                                                      color: Colors.white,
+                                                Expanded(
+                                                  flex: 22,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(2.0),
+                                                    child: GFButton(
+                                                      color: Colors.redAccent,
+                                                      onPressed: () {
+                                                        changeTransportationVisibility(offer.airportTransferBack[0].transportation);
+                                                      },
+                                                      child: Icon(
+                                                        Icons.delete,
+                                                        size: 14,
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              // Padding(
-                                              //   padding: const EdgeInsets.all(2.0),
-                                              //   child: IconButton(
-                                              //     color: Colors.teal,
-                                              //     icon: Icon(Icons.edit , size: 20),
-                                              //     onPressed: (){},
-                                              //   ),
-                                              // ),
-                                              // Padding(
-                                              //   padding: const EdgeInsets.all(2.0),
-                                              //   child: IconButton(
-                                              //     color: Colors.redAccent,
-                                              //     icon: Icon(Icons.delete , size: 20,),
-                                              //     onPressed: (){},
-                                              //   ),
-                                              // ),
-                                            ],
+                                                // Padding(
+                                                //   padding: const EdgeInsets.all(2.0),
+                                                //   child: IconButton(
+                                                //     color: Colors.teal,
+                                                //     icon: Icon(Icons.edit , size: 20),
+                                                //     onPressed: (){},
+                                                //   ),
+                                                // ),
+                                                // Padding(
+                                                //   padding: const EdgeInsets.all(2.0),
+                                                //   child: IconButton(
+                                                //     color: Colors.redAccent,
+                                                //     icon: Icon(Icons.delete , size: 20,),
+                                                //     onPressed: (){},
+                                                //   ),
+                                                // ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          )
+                        )
                         : Container(
                             width: 1,
                             height: 1,
@@ -1808,462 +2154,637 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         for (int index = 0; index < offer.days.length; index++)
           Column(
             children: [
-              Container(
-                width: screenWidth * 0.9,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(4.0),
-                  child: Card(
-                    child: Row(
-                      children: <Widget>[
-                        ClipPath(
-                          clipper: ShapeBorderClipper(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4.0)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: offer.days[index].transportationMethods
-                                        .defaultTrans ==
-                                    null
-                                ? Image.network(
-                                    'https://ipackagetours.com/storage/app/' +
-                                        offer.airportTransferGo[0]
-                                            .transportation.image
-                                            .toString(),
-                                    fit: BoxFit.cover,
-                                    height: screenHeight * 0.16,
-                                    width: screenWidth * 0.3,
-                                  )
-                                : Image.network(
-                                    'https://ipackagetours.com/storage/app/' +
-                                        offer
-                                            .days[index]
-                                            .transportationMethods
-                                            .defaultTrans[0]
-                                            .transportation
-                                            .image
-                                            .toString(),
-                                    fit: BoxFit.cover,
-                                    height: screenHeight * 0.16,
-                                    width: screenWidth * 0.3,
-                                  ),
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              width: screenWidth * 0.56,
+              index == 0 ?
+              Visibility(
+                visible:offer.airportTransferGo[0].transportation.visibility,
+                child: Container(
+                  width: screenWidth * 0.9,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    child: Card(
+                      child: Row(
+                        children: <Widget>[
+                          ClipPath(
+                            clipper: ShapeBorderClipper(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0)),
+                            ),
+                            child: Padding(
                               padding: const EdgeInsets.all(0),
-                              child: Row(
-                                children: <Widget>[
-                                  Flexible(
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.only(
-                                          start: 4.0),
-                                      child: Text(
-                                        offer.days[index].transportationMethods
-                                                    .defaultTrans ==
-                                                null
-                                            ? localAssistant
-                                                .getTransportationByLocale(
-                                                    context,
-                                                    offer.airportTransferGo[0]
-                                                        .transportation)
-                                                .toString()
-                                            : localAssistant
-                                                .getTransportationByLocale(
-                                                    context,
-                                                    offer
-                                                        .days[index]
-                                                        .transportationMethods
-                                                        .defaultTrans[0]
-                                                        .transportation)
-                                                .toString(),
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                            color: Colors.black),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              child: Image.network(
+                                'https://ipackagetours.com/storage/app/' +
+                                    offer.airportTransferGo[0]
+                                        .transportation.image
+                                        .toString(),
+                                fit: BoxFit.cover,
+                                height: screenHeight * 0.16,
+                                width: screenWidth * 0.3,
                               ),
                             ),
-                            Container(
-                              width: screenWidth * 0.56,
-                              padding: const EdgeInsets.all(0),
-                              child: Row(
-                                children: <Widget>[
-                                  Flexible(
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.only(
-                                          start: 4.0),
-                                      child: Text(
-                                        offer.days[index].transportationMethods
-                                                        .defaultTrans ==
-                                                    null &&
-                                                index == 0
-                                            ? getTranslated(context,
-                                                    'do_plan_car_from') +
-                                                localAssistant
-                                                    .getAirportByLocale(context,
-                                                        offer.airportGo)
-                                                    .toString() +
-                                                getTranslated(
-                                                    context, 'do_plan_car_to')
-                                            : getTranslated(context,
-                                                    'do_plan_car_from') +
-                                                localAssistant
-                                                    .getDayCityByLocale(context,
-                                                        offer.days[index - 1])
-                                                    .toString() +
-                                                getTranslated(context,
-                                                    'do_plan_car_to_2') +
-                                                localAssistant
-                                                    .getDayCityByLocale(context,
-                                                        offer.days[index])
-                                                    .toString(),
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.black54),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                width: screenWidth * 0.56,
+                                padding: const EdgeInsets.all(0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .only(start: 4.0),
+                                        child: Text(
+                                          localAssistant
+                                              .getTransportationByLocale(
+                                              context,
+                                              offer
+                                                  .airportTransferGo[
+                                              0]
+                                                  .transportation)
+                                              .toString(),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                              color: Colors.black),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
+                              Container(
+                                width: screenWidth * 0.56,
+                                padding: const EdgeInsets.all(0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .only(start: 4.0),
+                                        child: Text(
+                                          getTranslated(context,
+                                              'do_plan_car_from') +
+                                              localAssistant
+                                                  .getAirportByLocale(
+                                                  context,
+                                                  offer.airportGo)
+                                                  .toString() +
+                                              getTranslated(
+                                                  context, 'do_plan_car_to'),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.black54),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
 
-                            // Container(
-                            //   height: screenHeight * 0.05,
-                            //   width: screenWidth * 0.56,
-                            //   padding: const EdgeInsets.all(4.0),
-                            //   child: Row(
-                            //     mainAxisAlignment: MainAxisAlignment.start,
-                            //     children: [
-                            //       Expanded(
-                            //         flex: 50,
-                            //         child: FittedBox(
-                            //           child: GFRating(
-                            //             color: Colors.amber,
-                            //             borderColor: Colors.amber,
-                            //             allowHalfRating: true,
-                            //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       Expanded(
-                            //         flex: 50,
-                            //         child: Padding(
-                            //           padding: const EdgeInsets.only(
-                            //               top: 0.0,
-                            //               right: 0.0,
-                            //               left: 0.0,
-                            //               bottom: 0.0),
-                            //           child: Text(
-                            //             ' ',
-                            //             textAlign: TextAlign.start,
-                            //             style: TextStyle(
-                            //                 fontWeight: FontWeight.bold,
-                            //                 fontSize: 15,
-                            //                 color: Colors.black),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
-                            Container(
-                              height: screenHeight * 0.06,
-                              width: screenWidth * 0.56,
-                              padding: const EdgeInsets.all(4.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Expanded(
-                                    flex: 56,
-                                    child: Text(''),
-                                  ),
-                                  Expanded(
-                                    flex: 22,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: GFButton(
-                                        onPressed: () {},
-                                        color: Colors.teal,
-                                        child: Icon(
-                                          Icons.edit,
-                                          size: 14,
-                                          color: Colors.white,
+                              // Container(
+                              //   height: screenHeight * 0.05,
+                              //   width: screenWidth * 0.56,
+                              //   padding: const EdgeInsets.all(4.0),
+                              //   child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.start,
+                              //     children: [
+                              //       Expanded(
+                              //         flex: 50,
+                              //         child: FittedBox(
+                              //           child: GFRating(
+                              //             color: Colors.amber,
+                              //             borderColor: Colors.amber,
+                              //             allowHalfRating: true,
+                              //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
+                              //           ),
+                              //         ),
+                              //       ),
+                              //       Expanded(
+                              //         flex: 50,
+                              //         child: Padding(
+                              //           padding: const EdgeInsets.only(
+                              //               top: 0.0,
+                              //               right: 0.0,
+                              //               left: 0.0,
+                              //               bottom: 0.0),
+                              //           child: Text(
+                              //             ' ',
+                              //             textAlign: TextAlign.start,
+                              //             style: TextStyle(
+                              //                 fontWeight: FontWeight.bold,
+                              //                 fontSize: 15,
+                              //                 color: Colors.black),
+                              //           ),
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              Container(
+                                height: screenHeight * 0.06,
+                                width: screenWidth * 0.56,
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Expanded(
+                                      flex: 56,
+                                      child: Text(''),
+                                    ),
+                                    Expanded(
+                                      flex: 22,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: GFButton(
+                                          onPressed: () {
+                                            changeTransportation(context , screenWidth, screenHeight, 0 , index, offer.airportTransferGo);
+                                          },
+                                          color: Colors.teal,
+                                          child: Icon(
+                                            Icons.edit,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 22,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: GFButton(
-                                        color: Colors.redAccent,
-                                        onPressed: () {},
-                                        child: Icon(
-                                          Icons.delete,
-                                          size: 14,
-                                          color: Colors.white,
+                                    Expanded(
+                                      flex: 22,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: GFButton(
+                                          color: Colors.redAccent,
+                                          onPressed: () {
+                                            print(index);
+                                            changeTransportationVisibility(offer.airportTransferGo[0].transportation);
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  // Padding(
-                                  //   padding: const EdgeInsets.all(2.0),
-                                  //   child: IconButton(
-                                  //     color: Colors.teal,
-                                  //     icon: Icon(Icons.edit , size: 20),
-                                  //     onPressed: (){},
-                                  //   ),
-                                  // ),
-                                  // Padding(
-                                  //   padding: const EdgeInsets.all(2.0),
-                                  //   child: IconButton(
-                                  //     color: Colors.redAccent,
-                                  //     icon: Icon(Icons.delete , size: 20,),
-                                  //     onPressed: (){},
-                                  //   ),
-                                  // ),
-                                ],
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(2.0),
+                                    //   child: IconButton(
+                                    //     color: Colors.teal,
+                                    //     icon: Icon(Icons.edit , size: 20),
+                                    //     onPressed: (){},
+                                    //   ),
+                                    // ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(2.0),
+                                    //   child: IconButton(
+                                    //     color: Colors.redAccent,
+                                    //     icon: Icon(Icons.delete , size: 20,),
+                                    //     onPressed: (){},
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+                  :
+              Visibility(
+                visible:offer
+                    .days[index]
+                    .transportationMethods
+                    .defaultTrans[0]
+                    .transportation.visibility,
+                child: Container(
+                  width: screenWidth * 0.9,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    child: Card(
+                      child: Row(
+                        children: <Widget>[
+                          ClipPath(
+                            clipper: ShapeBorderClipper(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Image.network(
+                                'https://ipackagetours.com/storage/app/' +
+                                    offer
+                                        .days[index]
+                                        .transportationMethods
+                                        .defaultTrans[0]
+                                        .transportation
+                                        .image
+                                        .toString(),
+                                fit: BoxFit.cover,
+                                height: screenHeight * 0.16,
+                                width: screenWidth * 0.3,
                               ),
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                width: screenWidth * 0.56,
+                                padding: const EdgeInsets.all(0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .only(start: 4.0),
+                                        child: Text(
+                                          localAssistant
+                                              .getTransportationByLocale(
+                                              context,
+                                              offer
+                                                  .days[index]
+                                                  .transportationMethods
+                                                  .defaultTrans[0]
+                                                  .transportation)
+                                              .toString(),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                width: screenWidth * 0.56,
+                                padding: const EdgeInsets.all(0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .only(start: 4.0),
+                                        child: Text(
+                                          getTranslated(context,
+                                              'do_plan_car_from') +
+                                              localAssistant
+                                                  .getDayCityByLocale(
+                                                  context,
+                                                  offer.days[
+                                                  index - 1])
+                                                  .toString() +
+                                              getTranslated(context,
+                                                  'do_plan_car_to_2') +
+                                              localAssistant
+                                                  .getDayCityByLocale(
+                                                  context,
+                                                  offer.days[index])
+                                                  .toString(),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.black54),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              // Container(
+                              //   height: screenHeight * 0.05,
+                              //   width: screenWidth * 0.56,
+                              //   padding: const EdgeInsets.all(4.0),
+                              //   child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.start,
+                              //     children: [
+                              //       Expanded(
+                              //         flex: 50,
+                              //         child: FittedBox(
+                              //           child: GFRating(
+                              //             color: Colors.amber,
+                              //             borderColor: Colors.amber,
+                              //             allowHalfRating: true,
+                              //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
+                              //           ),
+                              //         ),
+                              //       ),
+                              //       Expanded(
+                              //         flex: 50,
+                              //         child: Padding(
+                              //           padding: const EdgeInsets.only(
+                              //               top: 0.0,
+                              //               right: 0.0,
+                              //               left: 0.0,
+                              //               bottom: 0.0),
+                              //           child: Text(
+                              //             ' ',
+                              //             textAlign: TextAlign.start,
+                              //             style: TextStyle(
+                              //                 fontWeight: FontWeight.bold,
+                              //                 fontSize: 15,
+                              //                 color: Colors.black),
+                              //           ),
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              Container(
+                                height: screenHeight * 0.06,
+                                width: screenWidth * 0.56,
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Expanded(
+                                      flex: 56,
+                                      child: Text(''),
+                                    ),
+                                    Expanded(
+                                      flex: 22,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: GFButton(
+                                          onPressed: () {
+                                            changeTransportation(context , screenWidth, screenHeight, 1 , index, offer.days[index].transportationMethods.additionalTrans);
+                                          },
+                                          color: Colors.teal,
+                                          child: Icon(
+                                            Icons.edit,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 22,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: GFButton(
+                                          color: Colors.redAccent,
+                                          onPressed: () {
+                                            print(index);
+                                            changeTransportationVisibility(offer
+                                                .days[index]
+                                                .transportationMethods
+                                                .defaultTrans[0]
+                                                .transportation);
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(2.0),
+                                    //   child: IconButton(
+                                    //     color: Colors.teal,
+                                    //     icon: Icon(Icons.edit , size: 20),
+                                    //     onPressed: (){},
+                                    //   ),
+                                    // ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(2.0),
+                                    //   child: IconButton(
+                                    //     color: Colors.redAccent,
+                                    //     icon: Icon(Icons.delete , size: 20,),
+                                    //     onPressed: (){},
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
               index == offer.days.length - 1
-                  ? Container(
-                      width: screenWidth * 0.9,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(4.0),
-                        child: Card(
-                          child: Row(
+                  ? Visibility(
+                visible: offer.airportTransferBack[0].transportation.visibility,
+                child: Container(
+                  width: screenWidth * 0.9,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    child: Card(
+                      child: Row(
+                        children: <Widget>[
+                          ClipPath(
+                            clipper: ShapeBorderClipper(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(4.0)),
+                            ),
+                            child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: Image.network(
+                                  'https://ipackagetours.com/storage/app/' +
+                                      offer.airportTransferBack[0]
+                                          .transportation.image
+                                          .toString(),
+                                  fit: BoxFit.cover,
+                                  height: screenHeight * 0.16,
+                                  width: screenWidth * 0.3,
+                                )
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
                             children: <Widget>[
-                              ClipPath(
-                                clipper: ShapeBorderClipper(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.0)),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(0),
-                                  child: offer.days[index].transportationMethods
-                                              .defaultTrans ==
-                                          null
-                                      ? Image.network(
-                                          'https://ipackagetours.com/storage/app/' +
-                                              offer.airportTransferBack[0]
-                                                  .transportation.image
-                                                  .toString(),
-                                          fit: BoxFit.cover,
-                                          height: screenHeight * 0.16,
-                                          width: screenWidth * 0.3,
-                                        )
-                                      : Image.network(
-                                          'https://ipackagetours.com/storage/app/' +
+                              Container(
+                                width: screenWidth * 0.56,
+                                padding: const EdgeInsets.all(0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Padding(
+                                        padding:
+                                        const EdgeInsetsDirectional
+                                            .only(start: 4.0),
+                                        child: Text(
+                                          localAssistant
+                                              .getTransportationByLocale(
+                                              context,
                                               offer
-                                                  .days[index]
-                                                  .transportationMethods
-                                                  .defaultTrans[0]
-                                                  .transportation
-                                                  .image
-                                                  .toString(),
-                                          fit: BoxFit.cover,
-                                          height: screenHeight * 0.16,
-                                          width: screenWidth * 0.3,
+                                                  .airportTransferBack[
+                                              0]
+                                                  .transportation)
+                                              .toString(),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight:
+                                              FontWeight.bold,
+                                              fontSize: 15,
+                                              color: Colors.black),
                                         ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    width: screenWidth * 0.56,
-                                    padding: const EdgeInsets.all(0),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .only(start: 4.0),
-                                            child: Text(
-                                              offer
-                                                          .days[index]
-                                                          .transportationMethods
-                                                          .defaultTrans ==
-                                                      null
-                                                  ? localAssistant
-                                                      .getTransportationByLocale(
-                                                          context,
-                                                          offer
-                                                              .airportTransferBack[
-                                                                  0]
-                                                              .transportation)
-                                                      .toString()
-                                                  : localAssistant
-                                                      .getTransportationByLocale(
-                                                          context,
-                                                          offer
-                                                              .days[index]
-                                                              .transportationMethods
-                                                              .defaultTrans[0]
-                                                              .transportation)
-                                                      .toString(),
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
-                                                  color: Colors.black),
-                                            ),
-                                          ),
+                              Container(
+                                width: screenWidth * 0.56,
+                                padding: const EdgeInsets.all(0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Padding(
+                                        padding:
+                                        const EdgeInsetsDirectional
+                                            .only(start: 4.0),
+                                        child: Text(
+                                          getTranslated(context,
+                                              'do_plan_car_from_2') +
+                                              localAssistant
+                                                  .getAirportByLocale(
+                                                  context,
+                                                  offer
+                                                      .airportBack)
+                                                  .toString(),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.black54),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    width: screenWidth * 0.56,
-                                    padding: const EdgeInsets.all(0),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .only(start: 4.0),
-                                            child: Text(
-                                              getTranslated(context,
-                                                      'do_plan_car_from_2') +
-                                                  localAssistant
-                                                      .getAirportByLocale(
-                                                          context,
-                                                          offer.airportBack)
-                                                      .toString(),
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.black54),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  ],
+                                ),
+                              ),
 
-                                  // Container(
-                                  //   height: screenHeight * 0.05,
-                                  //   width: screenWidth * 0.56,
-                                  //   padding: const EdgeInsets.all(4.0),
-                                  //   child: Row(
-                                  //     mainAxisAlignment: MainAxisAlignment.start,
-                                  //     children: [
-                                  //       Expanded(
-                                  //         flex: 50,
-                                  //         child: FittedBox(
-                                  //           child: GFRating(
-                                  //             color: Colors.amber,
-                                  //             borderColor: Colors.amber,
-                                  //             allowHalfRating: true,
-                                  //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //       Expanded(
-                                  //         flex: 50,
-                                  //         child: Padding(
-                                  //           padding: const EdgeInsets.only(
-                                  //               top: 0.0,
-                                  //               right: 0.0,
-                                  //               left: 0.0,
-                                  //               bottom: 0.0),
-                                  //           child: Text(
-                                  //             ' ',
-                                  //             textAlign: TextAlign.start,
-                                  //             style: TextStyle(
-                                  //                 fontWeight: FontWeight.bold,
-                                  //                 fontSize: 15,
-                                  //                 color: Colors.black),
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  Container(
-                                    height: screenHeight * 0.06,
-                                    width: screenWidth * 0.56,
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Expanded(
-                                          flex: 56,
-                                          child: Text(''),
-                                        ),
-                                        Expanded(
-                                          flex: 22,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: GFButton(
-                                              onPressed: () {},
-                                              color: Colors.teal,
-                                              child: Icon(
-                                                Icons.edit,
-                                                size: 14,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 22,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: GFButton(
-                                              color: Colors.redAccent,
-                                              onPressed: () {},
-                                              child: Icon(
-                                                Icons.delete,
-                                                size: 14,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.all(2.0),
-                                        //   child: IconButton(
-                                        //     color: Colors.teal,
-                                        //     icon: Icon(Icons.edit , size: 20),
-                                        //     onPressed: (){},
-                                        //   ),
-                                        // ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.all(2.0),
-                                        //   child: IconButton(
-                                        //     color: Colors.redAccent,
-                                        //     icon: Icon(Icons.delete , size: 20,),
-                                        //     onPressed: (){},
-                                        //   ),
-                                        // ),
-                                      ],
+                              // Container(
+                              //   height: screenHeight * 0.05,
+                              //   width: screenWidth * 0.56,
+                              //   padding: const EdgeInsets.all(4.0),
+                              //   child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.start,
+                              //     children: [
+                              //       Expanded(
+                              //         flex: 50,
+                              //         child: FittedBox(
+                              //           child: GFRating(
+                              //             color: Colors.amber,
+                              //             borderColor: Colors.amber,
+                              //             allowHalfRating: true,
+                              //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
+                              //           ),
+                              //         ),
+                              //       ),
+                              //       Expanded(
+                              //         flex: 50,
+                              //         child: Padding(
+                              //           padding: const EdgeInsets.only(
+                              //               top: 0.0,
+                              //               right: 0.0,
+                              //               left: 0.0,
+                              //               bottom: 0.0),
+                              //           child: Text(
+                              //             ' ',
+                              //             textAlign: TextAlign.start,
+                              //             style: TextStyle(
+                              //                 fontWeight: FontWeight.bold,
+                              //                 fontSize: 15,
+                              //                 color: Colors.black),
+                              //           ),
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              Container(
+                                height: screenHeight * 0.06,
+                                width: screenWidth * 0.56,
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.end,
+                                  children: [
+                                    Expanded(
+                                      flex: 56,
+                                      child: Text(''),
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      flex: 22,
+                                      child: Padding(
+                                        padding:
+                                        const EdgeInsets.all(2.0),
+                                        child: GFButton(
+                                          onPressed: () {
+                                            changeTransportation(context , screenWidth, screenHeight, 2 , index, offer.airportTransferBack);
+                                          },
+                                          color: Colors.teal,
+                                          child: Icon(
+                                            Icons.edit,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 22,
+                                      child: Padding(
+                                        padding:
+                                        const EdgeInsets.all(2.0),
+                                        child: GFButton(
+                                          color: Colors.redAccent,
+                                          onPressed: () {
+                                            changeTransportationVisibility(offer.airportTransferBack[0].transportation);
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(2.0),
+                                    //   child: IconButton(
+                                    //     color: Colors.teal,
+                                    //     icon: Icon(Icons.edit , size: 20),
+                                    //     onPressed: (){},
+                                    //   ),
+                                    // ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(2.0),
+                                    //   child: IconButton(
+                                    //     color: Colors.redAccent,
+                                    //     icon: Icon(Icons.delete , size: 20,),
+                                    //     onPressed: (){},
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
+                        ],
                       ),
-                    )
+                    ),
+                  ),
+                ),
+              )
                   : Container(
                       width: 1,
                       height: 1,
@@ -2546,402 +3067,517 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     });
   }
 
-  _openEditPackageWidget(screenWidth, screenHeight) {
-    showModalBottomSheet(
+  void calculatePassengersNumber()
+  {
+    setState((){
+      _totalPassengersNumber = _adultsNumber + _childrenNumber + _babiesNumber;
+      dayIndex = -1;
+    });
+  }
+
+  _openEditPackageWidget(context , screenWidth, screenHeight) {
+    showDialog(
         context: context,
-        builder: (context) {
-          return StatefulBuilder(builder: (context, setState) {
-            return Container(
-              padding: EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      height: screenHeight * 0.1,
-                      width: screenWidth * 0.9,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Expanded(
-                            flex: 50,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0),
+        builder: (BuildContext bc) {
+          return Dialog(
+            child: StatefulBuilder(builder: (context, setState) {
+              return Container(
+                padding: EdgeInsets.all(0.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: screenWidth * 0.9,
+                        color: Color(0xff07898B),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            getTranslated(context, 'fo_edit'),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 16 , color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: screenHeight * 0.1,
+                        width: screenWidth * 0.9,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 50,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0),
+                                child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text(
+                                    getTranslated(
+                                        context, 'book_trip_adults_number'),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 40,
                               child: FittedBox(
+                                child: Row(
+                                  children: <Widget>[
+                                    MaterialButton(
+                                      padding: const EdgeInsets.all(2.0),
+                                      shape: CircleBorder(
+                                        side: BorderSide(
+                                            width: 2,
+                                            color: Color(0xff07898B),
+                                            style: BorderStyle.solid),
+                                      ),
+                                      child: Icon(
+                                        MyIcons.minus,
+                                        size: 10,
+                                        color: Color(0xff07898B),
+                                      ),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        if (_adultsNumber > 1)
+                                          setState(() {
+                                            _adultsNumber -= 1;
+                                          });
+                                      },
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        _adultsNumber.toString(),
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xff07898B),
+                                        ),
+                                      ),
+                                    ),
+                                    MaterialButton(
+                                      padding: const EdgeInsets.all(2.0),
+                                      shape: CircleBorder(
+                                        side: BorderSide(
+                                            width: 2,
+                                            color: Color(0xff07898B),
+                                            style: BorderStyle.solid),
+                                      ),
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 15,
+                                        color: Color(0xff07898B),
+                                      ),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        if (_adultsNumber < 50)
+                                          setState(() {
+                                            _adultsNumber += 1;
+                                          });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: screenHeight * 0.1,
+                        width: screenWidth * 0.9,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 50,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0),
+                                child: FittedBox(
                                   fit: BoxFit.scaleDown,
-                                alignment: AlignmentDirectional.centerStart,
-                                child: Text(
-                                  getTranslated(
-                                      context, 'book_trip_adults_number'),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: Colors.black,
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text(
+                                    getTranslated(
+                                        context, 'book_trip_children_number'),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Container(
-                            height: 40,
-                            child: FittedBox(
-                              child: Row(
-                                children: <Widget>[
-                                  MaterialButton(
-                                    padding: const EdgeInsets.all(2.0),
-                                    shape: CircleBorder(
-                                      side: BorderSide(
-                                          width: 2,
-                                          color: Color(0xff07898B),
-                                          style: BorderStyle.solid),
-                                    ),
-                                    child: Icon(
-                                      MyIcons.minus,
-                                      size: 10,
-                                      color: Color(0xff07898B),
-                                    ),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      if (_adultsNumber > 1)
-                                        setState(() {
-                                          _adultsNumber -= 1;
-                                          _totalPassengersNumber = _adultsNumber + _childrenNumber + _babiesNumber;
-                                        });
-                                    },
-                                  ),
-                                  Container(
-                                    child: Text(
-                                      _adultsNumber.toString(),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xff07898B),
-                                      ),
-                                    ),
-                                  ),
-                                  MaterialButton(
-                                    padding: const EdgeInsets.all(2.0),
-                                    shape: CircleBorder(
-                                      side: BorderSide(
-                                          width: 2,
-                                          color: Color(0xff07898B),
-                                          style: BorderStyle.solid),
-                                    ),
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 15,
-                                      color: Color(0xff07898B),
-                                    ),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      if (_adultsNumber < 50)
-                                        setState(() {
-                                          _adultsNumber += 1;
-                                        });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: screenHeight * 0.1,
-                      width: screenWidth * 0.9,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Expanded(
-                            flex: 50,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0),
+                            Container(
+                              height: 40,
                               child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                alignment: AlignmentDirectional.centerStart,
-                                child: Text(
-                                  getTranslated(
-                                      context, 'book_trip_children_number'),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: Colors.black,
+                                child: Row(
+                                  children: <Widget>[
+                                    MaterialButton(
+                                      padding: const EdgeInsets.all(2.0),
+                                      shape: CircleBorder(
+                                        side: BorderSide(
+                                            width: 2,
+                                            color: Color(0xff07898B),
+                                            style: BorderStyle.solid),
+                                      ),
+                                      child: Icon(
+                                        MyIcons.minus,
+                                        size: 10,
+                                        color: Color(0xff07898B),
+                                      ),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        if (_childrenNumber > 0)
+                                          setState(() {
+                                            _childrenNumber -= 1;
+                                          });
+                                      },
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        _childrenNumber.toString(),
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xff07898B),
+                                        ),
+                                      ),
+                                    ),
+                                    MaterialButton(
+                                      padding: const EdgeInsets.all(2.0),
+                                      shape: CircleBorder(
+                                        side: BorderSide(
+                                            width: 2,
+                                            color: Color(0xff07898B),
+                                            style: BorderStyle.solid),
+                                      ),
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 15,
+                                        color: Color(0xff07898B),
+                                      ),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        if (_childrenNumber < 50)
+                                          setState(() {
+                                            _childrenNumber += 1;
+                                          });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: screenHeight * 0.1,
+                        width: screenWidth * 0.9,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 50,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0),
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text(
+                                    getTranslated(
+                                        context, 'book_trip_babies_number'),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Container(
-                            height: 40,
-                            child: FittedBox(
-                              child: Row(
-                                children: <Widget>[
-                                  MaterialButton(
-                                    padding: const EdgeInsets.all(2.0),
-                                    shape: CircleBorder(
-                                      side: BorderSide(
-                                          width: 2,
-                                          color: Color(0xff07898B),
-                                          style: BorderStyle.solid),
-                                    ),
-                                    child: Icon(
-                                      MyIcons.minus,
-                                      size: 10,
-                                      color: Color(0xff07898B),
-                                    ),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      if (_childrenNumber > 0)
-                                        setState(() {
-                                          _childrenNumber -= 1;
-                                        });
-                                    },
-                                  ),
-                                  Container(
-                                    child: Text(
-                                      _childrenNumber.toString(),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xff07898B),
-                                      ),
-                                    ),
-                                  ),
-                                  MaterialButton(
-                                    padding: const EdgeInsets.all(2.0),
-                                    shape: CircleBorder(
-                                      side: BorderSide(
-                                          width: 2,
-                                          color: Color(0xff07898B),
-                                          style: BorderStyle.solid),
-                                    ),
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 15,
-                                      color: Color(0xff07898B),
-                                    ),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      if (_childrenNumber < 50)
-                                        setState(() {
-                                          _childrenNumber += 1;
-                                        });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: screenHeight * 0.1,
-                      width: screenWidth * 0.9,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Expanded(
-                            flex: 50,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0),
+                            Container(
+                              height: 40,
                               child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                alignment: AlignmentDirectional.centerStart,
-                                child: Text(
-                                  getTranslated(
-                                      context, 'book_trip_babies_number'),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
+                                child: Row(
+                                  children: <Widget>[
+                                    MaterialButton(
+                                      padding: const EdgeInsets.all(2.0),
+                                      shape: CircleBorder(
+                                        side: BorderSide(
+                                            width: 2,
+                                            color: Color(0xff07898B),
+                                            style: BorderStyle.solid),
+                                      ),
+                                      child: Icon(
+                                        MyIcons.minus,
+                                        size: 10,
+                                        color: Color(0xff07898B),
+                                      ),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        if (_babiesNumber > 0)
+                                          setState(() {
+                                            _babiesNumber -= 1;
+                                          });
+                                      },
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        _babiesNumber.toString(),
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xff07898B),
+                                        ),
+                                      ),
+                                    ),
+                                    MaterialButton(
+                                      padding: const EdgeInsets.all(2.0),
+                                      shape: CircleBorder(
+                                        side: BorderSide(
+                                            width: 2,
+                                            color: Color(0xff07898B),
+                                            style: BorderStyle.solid),
+                                      ),
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 15,
+                                        color: Color(0xff07898B),
+                                      ),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        if (_babiesNumber < 50)
+                                          setState(() {
+                                            _babiesNumber += 1;
+                                          });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: screenWidth * 0.9,
+                        padding: const EdgeInsets.symmetric(vertical: 10.0 , horizontal: 8.0),
+                        child: Container(
+                          width: screenWidth * 0.84,
+                          padding:
+                          EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              side: BorderSide(color: Colors.black, width: 1),
+                            ),
+                            onPressed: () {
+                              _presentDatePicker();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 90,
+                                  child: Text(
+                                    getTranslated(context, 'pyt_in_t_date_btn'),
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0XFFbbbbbb),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 10,
+                                  child: Icon(
+                                    Icons.date_range_outlined,
                                     color: Colors.black,
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
-                          Container(
-                            height: 40,
-                            child: FittedBox(
-                              child: Row(
-                                children: <Widget>[
-                                  MaterialButton(
-                                    padding: const EdgeInsets.all(2.0),
-                                    shape: CircleBorder(
-                                      side: BorderSide(
-                                          width: 2,
-                                          color: Color(0xff07898B),
-                                          style: BorderStyle.solid),
-                                    ),
-                                    child: Icon(
-                                      MyIcons.minus,
-                                      size: 10,
-                                      color: Color(0xff07898B),
-                                    ),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      if (_babiesNumber > 0)
-                                        setState(() {
-                                          _babiesNumber -= 1;
-                                        });
-                                    },
-                                  ),
-                                  Container(
-                                    child: Text(
-                                      _babiesNumber.toString(),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xff07898B),
-                                      ),
-                                    ),
-                                  ),
-                                  MaterialButton(
-                                    padding: const EdgeInsets.all(2.0),
-                                    shape: CircleBorder(
-                                      side: BorderSide(
-                                          width: 2,
-                                          color: Color(0xff07898B),
-                                          style: BorderStyle.solid),
-                                    ),
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 15,
-                                      color: Color(0xff07898B),
-                                    ),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      if (_babiesNumber < 50)
-                                        setState(() {
-                                          _babiesNumber += 1;
-                                        });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      width: screenWidth * 0.9,
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Container(
-                        width: screenWidth * 0.84,
-                        padding:
-                        EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            side: BorderSide(color: Colors.black, width: 1),
+                      Container(
+                        width: screenWidth * 0.9,
+                        padding: const EdgeInsets.symmetric(vertical: 10.0 , horizontal: 8.0),
+                        child: TextField(
+                          keyboardType: TextInputType.text,
+                          // controller: _emailController,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
                           ),
-                          onPressed: () {
-                            _presentDatePicker();
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                flex: 90,
-                                child: Text(
-                                  getTranslated(context, 'pyt_in_t_date_btn'),
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0XFFbbbbbb),
-                                  ),
-                                ),
+                          textAlign: TextAlign.start,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(vertical: 1.0 , horizontal: 6.0),
+                              hintText: getTranslated(context, 'pyt_in_t_source_btn'),
+                              hintStyle: TextStyle(
+                                fontSize: 14.0,
+                                color: Color(0xffC3C2C3),
                               ),
-                              Expanded(
-                                flex: 10,
-                                child: Icon(
-                                  Icons.date_range_outlined,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                                borderSide: BorderSide(
+                                  width: 1,
                                   color: Colors.black,
                                 ),
                               ),
-                            ],
+                              fillColor: Colors.white,
+                              focusColor: Colors.black,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                                borderSide: BorderSide(
+                                  width: 1,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                                borderSide: BorderSide(
+                                  width: 1,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              filled: true),
+                        ),
+                      ),
+                      Visibility(
+                        visible: false,
+                        child: Container(width: screenWidth * 0.9,),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                        child: GFButton(
+                          color: Color(0xff07898b),
+                          textColor: Colors.white,
+                          fullWidthButton: true,
+                          text: getTranslated(context, 'fo_edit_save'),
+                          size: 50.0,
+                          textStyle: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: 'cairo',
+                            fontWeight: FontWeight.bold,
                           ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: screenWidth * 0.9,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        // controller: _emailController,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                        ),
-                        textAlign: TextAlign.start,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 1.0 , horizontal: 6.0),
-                            hintText: getTranslated(context, 'pyt_in_t_source_btn'),
-                            hintStyle: TextStyle(
-                              fontSize: 14.0,
-                              color: Color(0xffC3C2C3),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                            ),
-                            fillColor: Colors.white,
-                            focusColor: Colors.black,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                            ),
-                            filled: true),
-                      ),
-                    ),
-                    Visibility(
-                      visible: false,
-                      child: Container(width: screenWidth * 0.9,),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
-                      child: GFButton(
-                        color: Color(0xff07898b),
-                        textColor: Colors.white,
-                        fullWidthButton: true,
-                        text: getTranslated(context, 'fo_edit_save'),
-                        size: 50.0,
-                        textStyle: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        onPressed: () {
-                          setState((){
-                            _totalPassengersNumber = _adultsNumber + _childrenNumber + _babiesNumber;
-                          });
+                          onPressed: () {
 
-                          Navigator.pop(context);
+                            Navigator.of(context).pop();
+                            calculatePassengersNumber();
 
-                        },
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            );
-          });
+              );
+            }),
+          );
         });
+  }
+
+  void calculateOfferPrice() {
+    for (int index = 0; index < offer.days.length; index++) {
+      for (int dIndex = 0; dIndex < offer.days[index].trips.length; dIndex++) {
+        //Adults price
+        if (_adultsNumber == 1)
+          setState(() {
+            _totalOfferPrice += offer.days[index].trips[dIndex].pricePerson ?? 0;
+          });
+        else if (_adultsNumber == 2)
+          setState(() {
+            _totalOfferPrice += offer.days[index].trips[dIndex].pricePerson2 ?? 0;
+          });
+        else if (_adultsNumber == 3)
+          setState(() {
+            _totalOfferPrice += offer.days[index].trips[dIndex].pricePerson3 ?? 0;
+          });
+        else
+          setState(() {
+            _totalOfferPrice +=
+                offer.days[index].trips[dIndex].pricePerson * _adultsNumber ?? 0;
+          });
+
+        //Children price
+        setState(() {
+          _totalOfferPrice +=
+              offer.days[index].trips[dIndex].priceChild ?? 0 * _childrenNumber;
+        });
+      }
+
+      //Car Price
+      if (index == 0) {
+        if (offer.airportTransferGo[0].transportation.visibility == true)
+          if (offer.airportTransferGo[0].priceChild == null &&
+              offer.airportTransferGo[0].priceIndividuals == null)
+            setState(() {
+              carNumber = (_totalPassengersNumber /
+                  offer.airportTransferGo[0].transportation.peopleNumber)
+                  .round();
+              _totalOfferPrice +=
+                  carNumber * offer.airportTransferGo[0].carPrice;
+            });
+          else
+        setState(() {
+          _totalOfferPrice +=
+          offer.airportTransferGo[0].priceChild != null ? offer
+              .airportTransferGo[0].priceChild * _childrenNumber : 0
+              + offer.airportTransferGo[0].priceIndividuals != null ? offer
+              .airportTransferGo[0].priceIndividuals * _adultsNumber : 0;
+        });
+      }
+
+      if (index != 0 && offer.days[index].transportationMethods.defaultTrans[0].transportation
+          .visibility == true)
+        if (offer.days[index].transportationMethods.defaultTrans[0].priceChild == null &&
+            offer.days[index].transportationMethods.defaultTrans[0].priceIndividuals == null)
+          setState(() {
+            carNumber = (_totalPassengersNumber /
+                offer.days[index].transportationMethods.defaultTrans[0].transportation.peopleNumber)
+                .round();
+            _totalOfferPrice +=
+                carNumber * offer.days[index].transportationMethods.defaultTrans[0].carPrice;
+          });
+        else
+          setState(() {
+            _totalOfferPrice +=
+            offer.days[index].transportationMethods.defaultTrans[0].priceChild != null ?
+            offer.days[index].transportationMethods.defaultTrans[0].priceChild * _childrenNumber : 0
+                + offer.days[index].transportationMethods.defaultTrans[0].priceIndividuals != null ?
+            offer.days[index].transportationMethods.defaultTrans[0].priceIndividuals * _adultsNumber : 0;
+          });
+
+      if (index == offer.days.length - 1) {
+        if (offer.airportTransferBack[0].transportation.visibility == true)
+          if (offer.airportTransferBack[0].priceChild == null &&
+              offer.airportTransferBack[0].priceIndividuals == null)
+            setState(() {
+              carNumber = (_totalPassengersNumber /
+                  offer.airportTransferBack[0].transportation.peopleNumber)
+                  .round();
+              _totalOfferPrice +=
+                  carNumber * offer.airportTransferBack[0].carPrice;
+            });
+          else
+            setState(() {
+              _totalOfferPrice +=
+              offer.airportTransferBack[0].priceChild != null ? offer
+                  .airportTransferBack[0].priceChild * _childrenNumber : 0
+                  + offer.airportTransferBack[0].priceIndividuals != null ? offer
+                  .airportTransferBack[0].priceIndividuals * _adultsNumber : 0;
+            });
+      }
+    }
   }
 
   @override
@@ -2951,6 +3587,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     betaApiAssistant.getOffer(widget.id, '2021-05-04').then((value) {
       setState(() {
         offer = value;
+        calculateOfferPrice();
         _isLoading = false;
         getOfferImages();
         buildHotelsList(offer);
@@ -3083,8 +3720,16 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
             children: <Widget>[
               Expanded(
                 flex: 60,
-                child: Text(
-                  '550 \$',
+                child: _isLoading ? Center(
+                  child: GFLoader(
+                    type: GFLoaderType.circle,
+                    loaderColorOne: Colors.white,
+                    loaderColorTwo: Colors.white,
+                    loaderColorThree: Colors.white,
+                  ),
+                ) :
+                Text(
+                  _totalOfferPrice.toString() + ' \$',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
@@ -3178,75 +3823,65 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       child: InkWell(
                         // borderRadius: BorderRadius.circular(4.0),
                         onTap: () {},
-                        child: Card(
-                          shadowColor: Colors.white,
-                          elevation: 0.0,
-                          // shape: RoundedRectangleBorder(
-                          //   borderRadius: BorderRadius.circular(15),
-                          // ),
-                          clipBehavior: Clip.antiAlias,
-                          margin: const EdgeInsets.all(0.0),
-                          color: Color(0xffFAFAFA),
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Stack(
-                              fit: StackFit.passthrough,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(0),
-                                  child: ClipPath(
-                                    clipper: ShapeBorderClipper(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(7.0)),
-                                    ),
-                                    child: Image.network(
-                                      'https://ipackagetours.com/storage/app/' +
-                                          offer.image.toString(),
-                                      fit: BoxFit.fill,
-                                      height: screenHeight * 0.26,
-                                    ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Stack(
+                            fit: StackFit.passthrough,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: ClipPath(
+                                  clipper: ShapeBorderClipper(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(0.0)),
+                                  ),
+                                  child: Image.network(
+                                    'https://ipackagetours.com/storage/app/' +
+                                        offer.image.toString(),
+                                    fit: BoxFit.fill,
+                                    height: screenHeight * 0.26,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(6),
-                                  child: Flex(
-                                    direction: Axis.horizontal,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.all(0.0),
-                                            margin: EdgeInsets.only(
-                                                top: screenHeight * 0.32),
-                                            constraints: BoxConstraints(),
-                                            child: Container(
-                                              width: 120,
-                                              padding:
-                                                  const EdgeInsets.all(3.0),
-                                              child: FittedBox(
-                                                child: GFRating(
-                                                  color: Colors.amber,
-                                                  borderColor: Colors.amber,
-                                                  allowHalfRating: true,
-                                                  value: double.parse(
-                                                      widget.rating.toString()),
-                                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(6),
+                                child: Flex(
+                                  direction: Axis.horizontal,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(0.0),
+                                          margin: EdgeInsets.only(
+                                              top: screenHeight * 0.32),
+                                          constraints: BoxConstraints(),
+                                          child: Container(
+                                            width: 120,
+                                            padding:
+                                                const EdgeInsets.all(3.0),
+                                            child: FittedBox(
+                                              child: GFRating(
+                                                color: Colors.amber,
+                                                borderColor: Colors.amber,
+                                                allowHalfRating: true,
+                                                value: double.parse(
+                                                    widget.rating.toString()),
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -3443,7 +4078,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                             flex: 20,
                             child: TextButton(
                               onPressed: () {
-                                _openEditPackageWidget(screenWidth, screenHeight);
+                                _openEditPackageWidget(context , screenWidth, screenHeight);
                               },
                               child: Text(
                                 getTranslated(context, 'fo_edit'),

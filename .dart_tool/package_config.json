@@ -68,6 +68,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flare_dart",
+      "rootUri": "file:///C:/Flutter%20SDK/flutter/.pub-cache/hosted/pub.dartlang.org/flare_dart-2.3.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "flare_flutter",
+      "rootUri": "file:///C:/Flutter%20SDK/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-2.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/Flutter%20SDK/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -94,6 +106,12 @@
     {
       "name": "getwidget",
       "rootUri": "file:///C:/Flutter%20SDK/flutter/.pub-cache/hosted/pub.dartlang.org/getwidget-1.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
+      "name": "giffy_dialog",
+      "rootUri": "file:///C:/Flutter%20SDK/flutter/.pub-cache/hosted/pub.dartlang.org/giffy_dialog-1.8.0",
       "packageUri": "lib/",
       "languageVersion": "2.2"
     },
@@ -302,7 +320,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-04-25T09:53:46.214928Z",
+  "generated": "2021-04-26T16:44:33.685115Z",
   "generator": "pub",
   "generatorVersion": "2.12.0"
 }
