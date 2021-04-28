@@ -22,18 +22,12 @@ class _PlanYourTripState extends State<PlanYourTrip>
   List _countries = [];
   List _packages = [];
   //Stage 0
-  List<City> _cities = [
-    City(id: 1, enName: 'Egypt', arName: 'مصر'),
-    City(id: 2, enName: 'Turkey', arName: 'تركيا'),
-    City(id: 3, enName: 'Italy', arName: 'إيطاليا'),
-  ];
 
-  List<String> _types = [
-    'باقة عائلية',
-    'سياحة',
-    'مجموعة سياحية',
-    'تخييم',
-  ];
+  String book_trip_label = '';
+  String book_trip_label2 = '';
+
+  int destination_id = 0;
+  int pakage_id = 0;
 
   //Stage 1
   var _pickedDate;
@@ -83,7 +77,6 @@ class _PlanYourTripState extends State<PlanYourTrip>
         //_isLoading = false;
       });
     });
-
   }
 
   @override
@@ -92,59 +85,83 @@ class _PlanYourTripState extends State<PlanYourTrip>
     _tabController.dispose();
   }
 
+  //stage 0
+  void _updateSelectedCountry(String text) {
+    setState(() {
+      book_trip_label = text;
+    });
+  }
+
   void _showCitiesDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
-          return  Padding(
-              padding: EdgeInsets.only(
-                top: 40,bottom: 40,
-              ),
-              child: Dialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10),
-                )),
-                elevation: 16,
-                child: StatefulBuilder(builder: (context, setState) {
-                  return Container(
+          return Padding(
+            padding: EdgeInsets.only(
+              top: 40,
+              bottom: 40,
+            ),
+            child: Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              )),
+              elevation: 16,
+              child: StatefulBuilder(builder: (context, setState) {
+                return Container(
                     padding: EdgeInsets.all(40),
                     /*height: screenHeight,
                     width: screenWidth,*/
                     child: SingleChildScrollView(
-                    child:Column(
-                      children: <Widget>[
-                        for (int i = 0; i < _countries.length; i++)
-                          Column(
-                            children: <Widget>[
-                              InkWell(
-                                onTap: () {},
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Text(
-                                    _countries[i]['name_ar'],
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: Colors.black,
+                      child: Column(
+                        children: <Widget>[
+                          for (int i = 0; i < _countries.length; i++)
+                            Column(
+                              children: <Widget>[
+                                InkWell(
+                                  onTap: () {
+                                    _updateSelectedCountry(
+                                        _countries[i]['name_ar']);
+                                    destination_id = _countries[i]['id'];
+                                    Navigator.pop(context);
+
+                                    /*setState(() {
+                                    book_trip_label = _countries[i]['name_ar'];
+                                    print (book_trip_label);
+
+                                  });*/
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Text(
+                                      _countries[i]['name_ar'],
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Divider(
-                                color: Colors.grey,
-                              ),
-                            ],
-                          ),
-
-                      ],
-                    ),)
-                  );
-                }),
-
+                                Divider(
+                                  color: Colors.grey,
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                    ));
+              }),
             ),
           );
         });
+  }
+
+  void _updateSelectedPackage(String text) {
+    setState(() {
+      book_trip_label2 = text;
+    });
   }
 
   void _showTypesDialog(context, screenHeight, screenWidth) {
@@ -158,7 +175,9 @@ class _PlanYourTripState extends State<PlanYourTrip>
               ),
               child: Dialog(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20),)),
+                    borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
@@ -172,7 +191,12 @@ class _PlanYourTripState extends State<PlanYourTrip>
                             Column(
                               children: <Widget>[
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    _updateSelectedPackage(
+                                        _packages[i]['name_ar']);
+                                    pakage_id = _packages[i]['id'];
+                                    Navigator.pop(context);
+                                  },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0),
@@ -186,7 +210,9 @@ class _PlanYourTripState extends State<PlanYourTrip>
                                     ),
                                   ),
                                 ),
-                                Divider(color: Colors.grey,)
+                                Divider(
+                                  color: Colors.grey,
+                                )
                               ],
                             ),
                         ],
@@ -199,6 +225,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
           );
         });
   }
+  ////////////
 
   _navigationBar(width, height) {
     return Container(
@@ -768,6 +795,14 @@ class _PlanYourTripState extends State<PlanYourTrip>
   }
 
   _stage0Widget(width, height) {
+    if (book_trip_label == '') {
+      book_trip_label = getTranslated(context, 'book_trip_label');
+    }
+
+    if (book_trip_label2 == '') {
+      book_trip_label2 = getTranslated(context, 'book_trip_label_2');
+    }
+
     return Column(
       children: <Widget>[
         Container(
@@ -801,6 +836,16 @@ class _PlanYourTripState extends State<PlanYourTrip>
           child: Container(
             width: width * 0.84,
             padding:
+            EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+            child: Text(getTranslated(context, 'plan_your_trip_enter_text'),style: TextStyle(fontSize: 18),),
+          ),
+        ),
+        Container(
+          width: width * 0.9,
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Container(
+            width: width * 0.84,
+            padding:
                 EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
             child: TextButton(
               style: TextButton.styleFrom(
@@ -816,7 +861,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   Expanded(
                     flex: 90,
                     child: Text(
-                      getTranslated(context, 'book_trip_label'),
+                      book_trip_label,
                       style: TextStyle(
                         fontSize: 14,
                         color: Color(0XFFbbbbbb),
@@ -855,7 +900,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   Expanded(
                     flex: 90,
                     child: Text(
-                      getTranslated(context, 'book_trip_label_2'),
+                      book_trip_label2,
                       style: TextStyle(
                         fontSize: 14,
                         color: Color(0XFFbbbbbb),
@@ -874,7 +919,59 @@ class _PlanYourTripState extends State<PlanYourTrip>
             ),
           ),
         ),
-        _navigationBar(width, height),
+        //_navigationBar(width, height),
+
+        Container(
+          width: width * 0.9,
+          height: height * 0.13,
+          color: Color(0xff07898B),
+          margin: EdgeInsets.symmetric(vertical: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: GFButton(
+                    size: 50,
+                    onPressed: () {
+                      print(destination_id);
+                      print(pakage_id);
+                      if (destination_id == 0 || pakage_id == 0) {
+
+                      } else {
+
+                        if (_selectedTabBar < 5)
+                          setState(() {
+                            _selectedTabBar += 1;
+                          });
+                      }
+                    },
+                    color: Colors.white,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated(context, 'book_trip_next'),
+                            style: TextStyle(fontSize: 18, color: Colors.black,fontFamily: 'Cairo'),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                            size: 15.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -1522,7 +1619,6 @@ class _PlanYourTripState extends State<PlanYourTrip>
                 filled: true),
           ),
         ),
-
         Container(
           width: width * 0.9,
           padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -1586,7 +1682,6 @@ class _PlanYourTripState extends State<PlanYourTrip>
                 filled: true),
           ),
         ),
-
         Container(
           width: width * 0.9,
           padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -1650,7 +1745,6 @@ class _PlanYourTripState extends State<PlanYourTrip>
                 filled: true),
           ),
         ),
-
         Container(
           width: width * 0.9,
           padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -1714,7 +1808,6 @@ class _PlanYourTripState extends State<PlanYourTrip>
                 filled: true),
           ),
         ),
-
         Container(
           width: width * 0.9,
           padding: const EdgeInsets.symmetric(vertical: 10.0),

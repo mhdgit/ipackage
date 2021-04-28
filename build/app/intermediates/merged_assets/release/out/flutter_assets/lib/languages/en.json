@@ -20,6 +20,8 @@
   "login_password_hint" : "Password",
   "login_facebook_btn" : "Continue using Facebook",
   "login_google_btn" : "Continue using Google",
+  "login_twitter_btn" : "Continue using Twitter",
+  "login_apple_btn" : "Continue using Apple",
   "login_country_btn" : "Choose your country",
   "login_country_d_title" : "Choose your country",
   "login_alert_d_cancel" : "Cancel",
@@ -239,13 +241,14 @@
 
   "foreign_offer_title" : "Family package",
   "fo_label" : "Istanbul Family Week Package: Discovering monuments and walking on the beach",
-  "fo_passengers" : "Two passengers",
+  "fo_passengers" : " passengers",
   "fo_edit" : "Edit",
   "fo_details" : "Details",
   "fo_label_2" : "I had a great time",
   "fo_add_btn" : "Add activity",
   "fo_trip_plan" : "Trip plan",
   "fo_residence" : "Residence",
+  "fo_edit_save" : "Save",
 
 
   "book_trip_label" : "Select your destination",
@@ -449,7 +452,10 @@
   "Passwords do not match": "Passwords do not match",
   "Please select a country key": "Please select a country key",
   "Please enter the phone number": "Please enter the phone number",
-  "Please select the nationality": "Please select the nationality"
+  "Please select the nationality": "Please select the nationality",
+  "The email is already used in another account": "The email is already used in another account",
+  "Already have an account": "Already have an account?",
+  "You do not have an account": "You do not have an account?"
 
 
 }
