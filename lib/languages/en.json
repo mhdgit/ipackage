@@ -249,6 +249,8 @@
   "fo_trip_plan" : "Trip plan",
   "fo_residence" : "Residence",
   "fo_edit_save" : "Save",
+  "fo_remove_note" : "The means of transport will be permanently removed",
+  "fo_change_trans_title" : "More transportation",
 
 
   "book_trip_label" : "Select your destination",

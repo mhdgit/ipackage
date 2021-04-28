@@ -7,6 +7,7 @@ class Transportation {
   String imageSm;
   String imageMd;
   int peopleNumber;
+  bool visibility;
 
 
   Transportation({
@@ -17,6 +18,7 @@ class Transportation {
     this.imageMd,
     this.imageSm,
     this.peopleNumber,
+    this.visibility,
   });
 
   factory Transportation.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class Transportation {
       imageMd: json['image_md'] as String,
       imageSm: json['image_sm'] as String,
       peopleNumber: json['num_person'] as int,
+      visibility: true,
     );
   }
 }
