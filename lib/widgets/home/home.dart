@@ -11,6 +11,7 @@ import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/settings.dart';
 import 'package:ipackage/widgets/search/search_your_trip.dart';
 import 'package:ipackage/widgets/users/new_account.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -51,7 +52,7 @@ class _HomeState extends State<Home> {
               Row(
                 children: <Widget>[
 
-                  Expanded(
+                  /*Expanded(
                     flex: 50,
                     child: Padding(
                       padding: const EdgeInsetsDirectional.only(
@@ -75,16 +76,16 @@ class _HomeState extends State<Home> {
                       )
 
                     ),
-                  ),
+                  ),*/
                   Expanded(
                     flex: 50,
                     child: Padding(
                         padding: const EdgeInsetsDirectional.only(
-                            top: 40, end: 8.0, start: 18.0, bottom: 8.0),
+                            top: 20, end: 8.0, start: 18.0, bottom: 8.0),
                         child: TextButton(
                             style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xffF8CB4E)),
+                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xffA57432)),
                             ),
                             onPressed: () {
                               Navigator.of(context).push(new MaterialPageRoute(
@@ -92,8 +93,9 @@ class _HomeState extends State<Home> {
                             },
                             child: Column(
                               children: [
-                                Icon((MyIcons.plane_arrival),
-                                  size: 24.0,),
+                                /*Icon((MyIcons.plane_arrival),
+                                  size: 36.0,),*/
+                                Image.asset('assets/images/beach.png',width: 200,height: 67,),
                                 Text(getTranslated(context, 'home_international_tourism_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
                               ],
                             )
@@ -102,14 +104,8 @@ class _HomeState extends State<Home> {
                     ),
                   ),
 
-
-                ],
-              ),
-              Row(
-                children: <Widget>[
-
                   Expanded(
-
+                    flex: 50,
                     child: Padding(
                         padding: const EdgeInsetsDirectional.only(
                             top: 20, end: 8.0, start: 18.0, bottom: 8.0),
@@ -124,8 +120,7 @@ class _HomeState extends State<Home> {
                             },
                             child: Column(
                               children: [
-                                Icon((Icons.people),
-                                  size: 36.0,),
+                                Image.asset('assets/images/teamwork.png',width: 200,height: 67,),
                                 Text(getTranslated(context, 'home_ambassadors_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
                               ],
                             )
@@ -134,9 +129,9 @@ class _HomeState extends State<Home> {
                     ),
                   ),
 
-
                 ],
               ),
+
 
               //account btn
               /*Row(

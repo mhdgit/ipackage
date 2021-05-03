@@ -32,6 +32,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
   //Stage 1
   var _pickedDate;
   int _daysNumber = 2;
+  var is_select_days = false;
 
   //Stage 2
   bool _is3Star = false;
@@ -307,6 +308,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
     );
   }
 
+  ////stage 1/////
   void _presentDatePicker() {
     showDatePicker(
         confirmText: 'Set',
@@ -332,116 +334,133 @@ class _PlanYourTripState extends State<PlanYourTrip>
     });
   }
 
+  void _updateSelectedDaysNumber() {
+    setState(() {
+      is_select_days = true;
+    });
+  }
+
   void _showDaysDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(
-                top: screenHeight * 0.7,
-              ),
-              child: Dialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                )),
-                elevation: 16,
-                child: StatefulBuilder(builder: (context, setState) {
-                  return Container(
-                    padding: EdgeInsets.all(8.0),
-                    height: screenHeight * 0.1,
-                    width: screenWidth * 0.9,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(
-                                getTranslated(context, 'book_trip_days_2'),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                ),
-                              ),
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            )),
+            elevation: 20,
+            child: StatefulBuilder(builder: (context, setState) {
+              return Container(
+                padding: EdgeInsets.all(8.0),
+                height: 125,
+                width: screenWidth * 0.9,
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            getTranslated(context, 'book_trip_days_2'),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              color: Colors.black,
                             ),
-                            Container(
-                              height: 40,
-                              child: FittedBox(
-                                child: Row(
-                                  children: <Widget>[
-                                    MaterialButton(
-                                      padding: const EdgeInsets.all(2.0),
-                                      shape: CircleBorder(
-                                        side: BorderSide(
-                                            width: 2,
-                                            color: Color(0xff07898B),
-                                            style: BorderStyle.solid),
-                                      ),
-                                      child: Icon(
-                                        MyIcons.minus,
-                                        size: 10,
-                                        color: Color(0xff07898B),
-                                      ),
-                                      color: Colors.white,
-                                      onPressed: () {
-                                        if (_daysNumber > 1)
-                                          setState(() {
-                                            _daysNumber -= 1;
-                                          });
-                                      },
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        _daysNumber.toString(),
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff07898B),
-                                        ),
-                                      ),
-                                    ),
-                                    MaterialButton(
-                                      padding: const EdgeInsets.all(2.0),
-                                      shape: CircleBorder(
-                                        side: BorderSide(
-                                            width: 2,
-                                            color: Color(0xff07898B),
-                                            style: BorderStyle.solid),
-                                      ),
-                                      child: Icon(
-                                        Icons.add,
-                                        size: 15,
-                                        color: Color(0xff07898B),
-                                      ),
-                                      color: Colors.white,
-                                      onPressed: () {
-                                        if (_daysNumber < 50)
-                                          setState(() {
-                                            _daysNumber += 1;
-                                          });
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
+                          ),
                         ),
+                        Container(
+                          //height: 120,
+                          child: FittedBox(
+                            child: Row(
+                              children: <Widget>[
+                                MaterialButton(
+                                  padding: const EdgeInsets.all(2.0),
+                                  shape: CircleBorder(
+                                    side: BorderSide(
+                                        width: 2,
+                                        color: Color(0xff07898B),
+                                        style: BorderStyle.solid),
+                                  ),
+                                  child: Icon(
+                                    MyIcons.minus,
+                                    size: 10,
+                                    color: Color(0xff07898B),
+                                  ),
+                                  color: Colors.white,
+                                  onPressed: () {
+                                    if (_daysNumber > 1)
+                                      setState(() {
+                                        _daysNumber -= 1;
+                                      });
+                                  },
+                                ),
+                                Container(
+                                  child: Text(
+                                    _daysNumber.toString(),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff000000),
+                                    ),
+                                  ),
+                                ),
+                                MaterialButton(
+                                  padding: const EdgeInsets.all(2.0),
+                                  shape: CircleBorder(
+                                    side: BorderSide(
+                                        width: 2,
+                                        color: Color(0xff07898B),
+                                        style: BorderStyle.solid),
+                                  ),
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 15,
+                                    color: Color(0xff07898B),
+                                  ),
+                                  color: Colors.white,
+                                  onPressed: () {
+                                    if (_daysNumber < 50)
+                                      setState(() {
+                                        _daysNumber += 1;
+                                      });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                       ],
                     ),
-                  );
-                }),
-              ),
-            ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              _updateSelectedDaysNumber();
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Set',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff07898B)),
+                            ))
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }),
           );
         });
   }
+
+  //////////
 
   void _showAdultsDialog(context, screenHeight, screenWidth) {
     showDialog(
@@ -836,8 +855,11 @@ class _PlanYourTripState extends State<PlanYourTrip>
           child: Container(
             width: width * 0.84,
             padding:
-            EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
-            child: Text(getTranslated(context, 'plan_your_trip_enter_text'),style: TextStyle(fontSize: 18),),
+                EdgeInsets.only(top: 0.0, right: 0.0, left: 0.0, bottom: 0.0),
+            child: Text(
+              getTranslated(context, 'plan_your_trip_enter_text'),
+              style: TextStyle(fontSize: 18),
+            ),
           ),
         ),
         Container(
@@ -939,9 +961,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                       print(destination_id);
                       print(pakage_id);
                       if (destination_id == 0 || pakage_id == 0) {
-
                       } else {
-
                         if (_selectedTabBar < 5)
                           setState(() {
                             _selectedTabBar += 1;
@@ -956,7 +976,10 @@ class _PlanYourTripState extends State<PlanYourTrip>
                         children: [
                           Text(
                             getTranslated(context, 'book_trip_next'),
-                            style: TextStyle(fontSize: 18, color: Colors.black,fontFamily: 'Cairo'),
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                                fontFamily: 'Cairo'),
                           ),
                           Icon(
                             Icons.arrow_forward_ios,
@@ -979,6 +1002,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
   _stage1Widget(width, height) {
     return Column(
       children: <Widget>[
+        //image
         Container(
           width: width * 0.9,
           padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -1004,6 +1028,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
             ),
           ),
         ),
+        //datepicker
         Container(
           width: width * 0.9,
           padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -1025,10 +1050,16 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   Expanded(
                     flex: 90,
                     child: Text(
-                      getTranslated(context, 'pyt_in_t_date_btn'),
+                      //getTranslated(context, 'pyt_in_t_date_btn'),
+                      _pickedDate == null
+                          ? _pickedDate =
+                              getTranslated(context, 'pyt_in_t_date_btn')
+                          : _pickedDate
+                              .toString()
+                              .replaceAll('00:00:00.000', ''),
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0XFFbbbbbb),
+                        fontSize: 16,
+                        color: Color(0XFF000000),
                       ),
                     ),
                   ),
@@ -1036,7 +1067,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                     flex: 10,
                     child: Icon(
                       Icons.date_range_outlined,
-                      color: Colors.black,
+                      color: Color(0xff07898B),
                     ),
                   ),
                 ],
@@ -1044,6 +1075,8 @@ class _PlanYourTripState extends State<PlanYourTrip>
             ),
           ),
         ),
+
+        //daysNumber
         Container(
           width: width * 0.9,
           child: Container(
@@ -1064,10 +1097,12 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   Expanded(
                     flex: 90,
                     child: Text(
-                      getTranslated(context, 'book_trip_days'),
+                      is_select_days
+                          ? _daysNumber.toString()
+                          : getTranslated(context, 'book_trip_days'),
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0XFFbbbbbb),
+                        fontSize: 16,
+                        color: Color(0XFF000000),
                       ),
                     ),
                   ),
@@ -1083,7 +1118,90 @@ class _PlanYourTripState extends State<PlanYourTrip>
             ),
           ),
         ),
-        _navigationBar(width, height),
+
+        Container(
+          width: width * 0.9,
+          height: height * 0.13,
+          color: Color(0xff07898B),
+          margin: EdgeInsets.symmetric(vertical: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 50,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: GFButton(
+                    size: 50,
+                    onPressed: () {
+                      if (_selectedTabBar > 0)
+                        setState(() {
+                          _selectedTabBar -= 1;
+                        });
+                    },
+                    color: Color(0xffFECD44),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black,
+                            size: 15.0,
+                          ),
+                          Text(
+                            getTranslated(context, 'book_trip_previous'),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Cairo',
+                                fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 50,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: GFButton(
+                    size: 50,
+                    onPressed: () {
+                      if (_selectedTabBar < 5)
+                        setState(() {
+                          _selectedTabBar += 1;
+                        });
+                    },
+                    color: Colors.white,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated(context, 'book_trip_next'),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontFamily: 'cairo'),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                            size: 15.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

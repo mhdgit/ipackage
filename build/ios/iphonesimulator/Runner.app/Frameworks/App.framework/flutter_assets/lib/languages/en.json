@@ -107,7 +107,7 @@
   "bottom_bar_trip_plan_btn" : "Plan your trip",
 
   "home_national_tourism_btn" : "Domestic Tourism",
-  "home_international_tourism_btn" : "Foreign Tourism",
+  "home_international_tourism_btn" : "Tourist offers",
 
   "home_ambassadors_btn" : "iPackage Ambassadors ",
   "home_ambassadors_btn_2" : "Destination",
@@ -249,6 +249,8 @@
   "fo_trip_plan" : "Trip plan",
   "fo_residence" : "Residence",
   "fo_edit_save" : "Save",
+  "fo_remove_note" : "The means of transport will be permanently removed",
+  "fo_change_trans_title" : "More transportation",
 
 
   "book_trip_label" : "Select your destination",
