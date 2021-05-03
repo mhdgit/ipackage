@@ -11,7 +11,6 @@ import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/settings.dart';
 import 'package:ipackage/widgets/search/search_your_trip.dart';
 import 'package:ipackage/widgets/users/new_account.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -52,40 +51,40 @@ class _HomeState extends State<Home> {
               Row(
                 children: <Widget>[
 
-                  /*Expanded(
-                    flex: 50,
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                          top: 40, end: 8.0, start: 18.0, bottom: 8.0),
-                      child: TextButton(
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor: MaterialStateProperty.all<Color>(Color(0xffA57432)),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 1,)));
-                        },
-                        child: Column(
-                          children: [
-                            Icon((MyIcons.bus),
-                              size: 24.0,),
-                            Text(getTranslated(context, 'home_national_tourism_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
-                          ],
-                        )
-                      )
-
-                    ),
-                  ),*/
+                  // Expanded(
+                  //   flex: 50,
+                  //   child: Padding(
+                  //     padding: const EdgeInsetsDirectional.only(
+                  //         top: 40, end: 8.0, start: 18.0, bottom: 8.0),
+                  //     child: TextButton(
+                  //       style: ButtonStyle(
+                  //         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                  //         backgroundColor: MaterialStateProperty.all<Color>(Color(0xffA57432)),
+                  //       ),
+                  //       onPressed: () {
+                  //         Navigator.of(context).push(new MaterialPageRoute(
+                  //             builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 1,)));
+                  //       },
+                  //       child: Column(
+                  //         children: [
+                  //           Icon((MyIcons.bus),
+                  //             size: 24.0,),
+                  //           Text(getTranslated(context, 'home_national_tourism_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
+                  //         ],
+                  //       )
+                  //     )
+                  //
+                  //   ),
+                  // ),
                   Expanded(
                     flex: 50,
                     child: Padding(
                         padding: const EdgeInsetsDirectional.only(
-                            top: 20, end: 8.0, start: 18.0, bottom: 8.0),
+                            top: 40, end: 8.0, start: 18.0, bottom: 8.0),
                         child: TextButton(
                             style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xffA57432)),
+                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xffF8CB4E)),
                             ),
                             onPressed: () {
                               Navigator.of(context).push(new MaterialPageRoute(
@@ -93,9 +92,8 @@ class _HomeState extends State<Home> {
                             },
                             child: Column(
                               children: [
-                                /*Icon((MyIcons.plane_arrival),
-                                  size: 36.0,),*/
-                                Image.asset('assets/images/beach.png',width: 200,height: 67,),
+                                Icon((MyIcons.plane_arrival),
+                                  size: 24.0,),
                                 Text(getTranslated(context, 'home_international_tourism_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
                               ],
                             )
@@ -104,8 +102,14 @@ class _HomeState extends State<Home> {
                     ),
                   ),
 
+
+                ],
+              ),
+              Row(
+                children: <Widget>[
+
                   Expanded(
-                    flex: 50,
+
                     child: Padding(
                         padding: const EdgeInsetsDirectional.only(
                             top: 20, end: 8.0, start: 18.0, bottom: 8.0),
@@ -120,7 +124,8 @@ class _HomeState extends State<Home> {
                             },
                             child: Column(
                               children: [
-                                Image.asset('assets/images/teamwork.png',width: 200,height: 67,),
+                                Icon((Icons.people),
+                                  size: 36.0,),
                                 Text(getTranslated(context, 'home_ambassadors_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
                               ],
                             )
@@ -129,9 +134,9 @@ class _HomeState extends State<Home> {
                     ),
                   ),
 
+
                 ],
               ),
-
 
               //account btn
               /*Row(
@@ -601,7 +606,7 @@ class _HomeState extends State<Home> {
 
 
               Container(
-                padding: const EdgeInsets.only(top: 55.0 , bottom: 10.0 , right: 8 , left: 8),
+                padding: const EdgeInsets.only(top: 55.0 , bottom: 20.0 , right: 8 , left: 8),
                 child: Text(
                   getTranslated(context, 'home_help_label'),
                   textAlign: TextAlign.center,
@@ -613,321 +618,483 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: screenWidth * 0.5,
-                    height: screenHeight * 0.35,
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(4.0),
-                        onTap: () {},
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+              Container(
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.4,
+                margin: const EdgeInsets.symmetric(vertical: 5.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    onTap: () {},
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      elevation: 2,
+                      margin: const EdgeInsets.all(0.0),
+                      color: Colors.white,
+                      child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child:
+                            Container(height: screenHeight * 0.15,
+                                child: Image.asset('assets/images/payment-method.jpg',fit: BoxFit.fill,)),
                           ),
-                          clipBehavior: Clip.antiAlias,
-                          elevation: 0.5,
-                          margin: const EdgeInsets.all(0.0),
-                          color: Colors.white,
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(0),
-                                child:
-                                  Container(height: screenHeight * 0.1,
-                                  child: Image.asset('assets/icons/payment.png',fit: BoxFit.fill,)),
-                              ),
 
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  getTranslated(
-                                      context, 'home_payment_choices_title'),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                    fontFamily: "cairo",
-                                  ),
-                                  softWrap: true,
-                                ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              getTranslated(
+                                  context, 'home_payment_choices_title'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontFamily: "cairo",
                               ),
-
-                              Container(
-                                color: Colors.white,
-                                margin: const EdgeInsets.all(8.0),
-                                padding: const EdgeInsets.all(0.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      flex: 50,
-                                      child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 0.0,
-                                              right: 8.0,
-                                              left: 0.0,
-                                              bottom: 0.0),
-                                          child: Text(
-                                            getTranslated(context,
-                                                'home_payment_choices_title'),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily: "cairo",
-                                                color: Colors.black),
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                              softWrap: true,
+                            ),
                           ),
-                        ),
+
+                          Container(
+                            color: Colors.white,
+                            margin: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  flex: 50,
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 0.0,
+                                          right: 8.0,
+                                          left: 0.0,
+                                          bottom: 0.0),
+                                      child: Text(
+                                        getTranslated(context,
+                                            'home_payment_choices'),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: "cairo",
+                                            color: Colors.black),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  Container(
-                    width: screenWidth * 0.5,
-                    height: screenHeight * 0.35,
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(4.0),
-                        onTap: () {},
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          elevation: 0.5,
-                          margin: const EdgeInsets.all(0.0),
-                          color: Colors.white,
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(0),
-                                child:
-                                Container(height: screenHeight * 0.1,
-                                    child: Image.asset('assets/icons/payment.png',fit: BoxFit.fill,)),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  getTranslated(
-                                      context, 'home_payment_choices_title'),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                  softWrap: true,
-                                ),
-                              ),
-
-                              Container(
-                                color: Colors.white,
-                                margin: const EdgeInsets.all(8.0),
-                                padding: const EdgeInsets.all(0.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      flex: 50,
-                                      child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 0.0,
-                                              right: 8.0,
-                                              left: 0.0,
-                                              bottom: 0.0),
-                                          child: Text(
-                                            getTranslated(context,
-                                                'home_payment_choices_title'),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black),
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: screenWidth * 0.5,
-                    height: screenHeight * 0.35,
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(4.0),
-                        onTap: () {},
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+              Container(
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.4,
+                margin: const EdgeInsets.symmetric(vertical: 5.0),
+                padding: const EdgeInsets.all(0.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    onTap: () {},
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      elevation: 2,
+                      margin: const EdgeInsets.all(0.0),
+                      color: Colors.white,
+                      child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child:
+                            Container(height: screenHeight * 0.15,
+                                child: Image.asset('assets/images/customer-services.jpg',fit: BoxFit.fill,)),
                           ),
-                          clipBehavior: Clip.antiAlias,
-                          elevation: 0.5,
-                          margin: const EdgeInsets.all(0.0),
-                          color: Colors.white,
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(0),
-                                child:
-                                Container(height: screenHeight * 0.1,
-                                    child: Image.asset('assets/icons/payment.png',fit: BoxFit.fill,)),
-                              ),
 
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  getTranslated(
-                                      context, 'home_payment_choices_title'),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                  softWrap: true,
-                                ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              getTranslated(
+                                  context, 'home_agent_services_title'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontFamily: "cairo",
                               ),
-
-                              Container(
-                                color: Colors.white,
-                                margin: const EdgeInsets.all(8.0),
-                                padding: const EdgeInsets.all(0.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      flex: 50,
-                                      child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 0.0,
-                                              right: 8.0,
-                                              left: 0.0,
-                                              bottom: 0.0),
-                                          child: Text(
-                                            getTranslated(context,
-                                                'home_payment_choices_title'),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black),
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                              softWrap: true,
+                            ),
                           ),
-                        ),
+
+                          Container(
+                            color: Colors.white,
+                            margin: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  flex: 50,
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 0.0,
+                                          right: 8.0,
+                                          left: 0.0,
+                                          bottom: 0.0),
+                                      child: Text(
+                                        getTranslated(context,
+                                            'home_agent_services'),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: "cairo",
+                                            color: Colors.black),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  Container(
-                    width: screenWidth * 0.5,
-                    height: screenHeight * 0.35,
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(4.0),
-                        onTap: () {},
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          elevation: 0.5,
-                          margin: const EdgeInsets.all(0.0),
-                          color: Colors.white,
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(0),
-                                child:
-                                Container(height: screenHeight * 0.1,
-                                    child: Image.asset('assets/icons/payment.png',fit: BoxFit.fill,)),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  getTranslated(
-                                      context, 'home_payment_choices_title'),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                  softWrap: true,
-                                ),
-                              ),
-
-                              Container(
-                                color: Colors.white,
-                                margin: const EdgeInsets.all(8.0),
-                                padding: const EdgeInsets.all(0.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      flex: 50,
-                                      child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 0.0,
-                                              right: 8.0,
-                                              left: 0.0,
-                                              bottom: 0.0),
-                                          child: Text(
-                                            getTranslated(context,
-                                                'home_payment_choices_title'),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black),
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
+              Container(
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.4,
+                margin: const EdgeInsets.symmetric(vertical: 5.0),
+                padding: const EdgeInsets.all(0.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    onTap: () {},
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      elevation: 2,
+                      margin: const EdgeInsets.all(0.0),
+                      color: Colors.white,
+                      child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child:
+                            Container(height: screenHeight * 0.15,
+                                child: Image.asset('assets/images/premium.jpg',fit: BoxFit.fill,)),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              getTranslated(
+                                  context, 'home_agent_ratings_title'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontFamily: "cairo",
+                              ),
+                              softWrap: true,
+                            ),
+                          ),
+
+                          Container(
+                            color: Colors.white,
+                            margin: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  flex: 50,
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 0.0,
+                                          right: 8.0,
+                                          left: 0.0,
+                                          bottom: 0.0),
+                                      child: Text(
+                                        getTranslated(context,
+                                            'home_agent_ratings'),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: "cairo",
+                                            color: Colors.black),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.4,
+                margin: const EdgeInsets.symmetric(vertical: 5.0),
+                padding: const EdgeInsets.all(0.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4.0),
+                    onTap: () {},
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      elevation: 2,
+                      margin: const EdgeInsets.all(0.0),
+                      color: Colors.white,
+                      child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child:
+                            Container(height: screenHeight * 0.15,
+                                child: Image.asset('assets/images/placeholder.jpg',fit: BoxFit.fill,)),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              getTranslated(
+                                  context, 'home_best_hotels_title'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontFamily: "cairo",
+                              ),
+                              softWrap: true,
+                            ),
+                          ),
+
+                          Container(
+                            color: Colors.white,
+                            margin: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  flex: 50,
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 0.0,
+                                          right: 8.0,
+                                          left: 0.0,
+                                          bottom: 0.0),
+                                      child: Text(
+                                        getTranslated(context,
+                                            'home_best_hotels'),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: "cairo",
+                                            color: Colors.black),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: screenHeight * 0.15,
+              ),
+              // Row(
+              //   children: <Widget>[
+              //     Container(
+              //       width: screenWidth * 0.5,
+              //       height: screenHeight * 0.35,
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: GestureDetector(
+              //         onTap: () {},
+              //         child: InkWell(
+              //           borderRadius: BorderRadius.circular(4.0),
+              //           onTap: () {},
+              //           child: Card(
+              //             shape: RoundedRectangleBorder(
+              //               borderRadius: BorderRadius.circular(15),
+              //             ),
+              //             clipBehavior: Clip.antiAlias,
+              //             elevation: 0.5,
+              //             margin: const EdgeInsets.all(0.0),
+              //             color: Colors.white,
+              //             child: Column(
+              //               // crossAxisAlignment: CrossAxisAlignment.stretch,
+              //               mainAxisAlignment: MainAxisAlignment.start,
+              //               children: [
+              //                 Padding(
+              //                   padding: const EdgeInsets.all(0),
+              //                   child:
+              //                     Container(height: screenHeight * 0.1,
+              //                     child: Image.asset('assets/images/payment-method.jpg',fit: BoxFit.fill,)),
+              //                 ),
+              //
+              //                 Padding(
+              //                   padding: const EdgeInsets.all(8.0),
+              //                   child: Text(
+              //                     getTranslated(
+              //                         context, 'home_payment_choices_title'),
+              //                     textAlign: TextAlign.center,
+              //                     style: TextStyle(
+              //                       fontSize: 19,
+              //                       fontWeight: FontWeight.bold,
+              //                       color: Colors.black,
+              //                       fontFamily: "cairo",
+              //                     ),
+              //                     softWrap: true,
+              //                   ),
+              //                 ),
+              //
+              //                 Container(
+              //                   color: Colors.white,
+              //                   margin: const EdgeInsets.all(8.0),
+              //                   padding: const EdgeInsets.all(0.0),
+              //                   child: Row(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     children: [
+              //                       Expanded(
+              //                         flex: 50,
+              //                         child: Padding(
+              //                             padding: const EdgeInsets.only(
+              //                                 top: 0.0,
+              //                                 right: 8.0,
+              //                                 left: 0.0,
+              //                                 bottom: 0.0),
+              //                             child: Text(
+              //                               getTranslated(context,
+              //                                   'home_payment_choices'),
+              //                               textAlign: TextAlign.center,
+              //                               style: TextStyle(
+              //                                   fontSize: 14,
+              //                                   fontFamily: "cairo",
+              //                                   color: Colors.black),
+              //                             )),
+              //                       ),
+              //                     ],
+              //                   ),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     Container(
+              //       width: screenWidth * 0.5,
+              //       height: screenHeight * 0.35,
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: GestureDetector(
+              //         onTap: () {},
+              //         child: InkWell(
+              //           borderRadius: BorderRadius.circular(4.0),
+              //           onTap: () {},
+              //           child: Card(
+              //             shape: RoundedRectangleBorder(
+              //               borderRadius: BorderRadius.circular(15),
+              //             ),
+              //             clipBehavior: Clip.antiAlias,
+              //             elevation: 0.5,
+              //             margin: const EdgeInsets.all(0.0),
+              //             color: Colors.white,
+              //             child: Column(
+              //               // crossAxisAlignment: CrossAxisAlignment.stretch,
+              //               mainAxisAlignment: MainAxisAlignment.start,
+              //               children: [
+              //                 Padding(
+              //                   padding: const EdgeInsets.all(0),
+              //                   child:
+              //                   Container(height: screenHeight * 0.1,
+              //                       child: Image.asset('assets/icons/payment.png',fit: BoxFit.fill,)),
+              //                 ),
+              //
+              //                 Padding(
+              //                   padding: const EdgeInsets.all(8.0),
+              //                   child: Text(
+              //                     getTranslated(
+              //                         context, 'home_payment_choices_title'),
+              //                     textAlign: TextAlign.center,
+              //                     style: TextStyle(
+              //                       fontSize: 19,
+              //                       fontWeight: FontWeight.bold,
+              //                       color: Colors.black,
+              //                     ),
+              //                     softWrap: true,
+              //                   ),
+              //                 ),
+              //
+              //                 Container(
+              //                   color: Colors.white,
+              //                   margin: const EdgeInsets.all(8.0),
+              //                   padding: const EdgeInsets.all(0.0),
+              //                   child: Row(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     children: [
+              //                       Expanded(
+              //                         flex: 50,
+              //                         child: Padding(
+              //                             padding: const EdgeInsets.only(
+              //                                 top: 0.0,
+              //                                 right: 8.0,
+              //                                 left: 0.0,
+              //                                 bottom: 0.0),
+              //                             child: Text(
+              //                               getTranslated(context,
+              //                                   'home_payment_choices_title'),
+              //                               textAlign: TextAlign.center,
+              //                               style: TextStyle(
+              //                                   fontSize: 14,
+              //                                   color: Colors.black),
+              //                             )),
+              //                       ),
+              //                     ],
+              //                   ),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+
             ],
           ),
         ),
