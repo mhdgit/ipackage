@@ -2,16 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="635e63dd-f7b8-415a-a66f-415dd4a44b0f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/beach.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/home/hotels.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/home/paymentOption.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/home/raiting.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/home/support.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/people.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/plane.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/teamwork.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/plane.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/svg/people.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/.filecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/app.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/debug_ios_bundle_flutter_assets.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/debug_ios_bundle_flutter_assets.stamp" afterDir="false" />
@@ -20,43 +10,31 @@
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/kernel_snapshot.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/kernel_snapshot.stamp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/outputs.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/3c3f497d98d8b15a8fe3ec2cc2191cc5/outputs.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/AssetManifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/NOTICES" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/lib/languages/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/lib/languages/ar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/lib/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/lib/languages/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/AssetManifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/lib/languages/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/lib/languages/ar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/lib/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/lib/languages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/AssetManifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/NOTICES" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/lib/languages/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/lib/languages/ar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/lib/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/lib/languages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/languages/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/ar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/home.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/plan_your_trip/plan_your_trip.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/plan_your_trip/plan_your_trip.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,45 +141,45 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="462" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1615601599401" />
-    <state width="1398" height="212" key="GridCell.Tab.0.bottom" timestamp="1619782146189">
-      <screen x="0" y="25" width="1440" height="799" />
+    <state width="1398" height="212" key="GridCell.Tab.0.bottom" timestamp="1620078457318">
+      <screen x="0" y="25" width="1440" height="797" />
     </state>
     <state width="1308" height="147" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1616388010376" />
     <state width="1398" height="212" key="GridCell.Tab.0.bottom/0.25.1440.794@0.25.1440.794" timestamp="1619475371201" />
-    <state width="1398" height="212" key="GridCell.Tab.0.bottom/0.25.1440.797@0.25.1440.797" timestamp="1619726292173" />
+    <state width="1398" height="212" key="GridCell.Tab.0.bottom/0.25.1440.797@0.25.1440.797" timestamp="1620078457318" />
     <state width="1398" height="212" key="GridCell.Tab.0.bottom/0.25.1440.799@0.25.1440.799" timestamp="1619782146189" />
     <state width="1398" height="212" key="GridCell.Tab.0.bottom/0.25.1440.801@0.25.1440.801" timestamp="1619690116252" />
     <state width="1398" height="214" key="GridCell.Tab.0.bottom/0.25.1440.804@0.25.1440.804" timestamp="1619363301160" />
     <state width="1398" height="213" key="GridCell.Tab.0.bottom/0.25.1440.805@0.25.1440.805" timestamp="1618878124443" />
     <state width="1398" height="214" key="GridCell.Tab.0.bottom/0.25.1440.809@0.25.1440.809" timestamp="1619121848448" />
-    <state width="1398" height="212" key="GridCell.Tab.0.center" timestamp="1619782146189">
-      <screen x="0" y="25" width="1440" height="799" />
+    <state width="1398" height="212" key="GridCell.Tab.0.center" timestamp="1620078457317">
+      <screen x="0" y="25" width="1440" height="797" />
     </state>
     <state width="1308" height="147" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1616388010374" />
     <state width="1398" height="212" key="GridCell.Tab.0.center/0.25.1440.794@0.25.1440.794" timestamp="1619475371201" />
-    <state width="1398" height="212" key="GridCell.Tab.0.center/0.25.1440.797@0.25.1440.797" timestamp="1619726292171" />
+    <state width="1398" height="212" key="GridCell.Tab.0.center/0.25.1440.797@0.25.1440.797" timestamp="1620078457317" />
     <state width="1398" height="212" key="GridCell.Tab.0.center/0.25.1440.799@0.25.1440.799" timestamp="1619782146189" />
     <state width="1398" height="212" key="GridCell.Tab.0.center/0.25.1440.801@0.25.1440.801" timestamp="1619690116251" />
     <state width="1398" height="214" key="GridCell.Tab.0.center/0.25.1440.804@0.25.1440.804" timestamp="1619363301160" />
     <state width="1398" height="213" key="GridCell.Tab.0.center/0.25.1440.805@0.25.1440.805" timestamp="1618878124443" />
     <state width="1398" height="214" key="GridCell.Tab.0.center/0.25.1440.809@0.25.1440.809" timestamp="1619121848446" />
-    <state width="1398" height="212" key="GridCell.Tab.0.left" timestamp="1619782146189">
-      <screen x="0" y="25" width="1440" height="799" />
+    <state width="1398" height="212" key="GridCell.Tab.0.left" timestamp="1620078457317">
+      <screen x="0" y="25" width="1440" height="797" />
     </state>
     <state width="1308" height="147" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1616388010374" />
     <state width="1398" height="212" key="GridCell.Tab.0.left/0.25.1440.794@0.25.1440.794" timestamp="1619475371200" />
-    <state width="1398" height="212" key="GridCell.Tab.0.left/0.25.1440.797@0.25.1440.797" timestamp="1619726292171" />
+    <state width="1398" height="212" key="GridCell.Tab.0.left/0.25.1440.797@0.25.1440.797" timestamp="1620078457317" />
     <state width="1398" height="212" key="GridCell.Tab.0.left/0.25.1440.799@0.25.1440.799" timestamp="1619782146189" />
     <state width="1398" height="212" key="GridCell.Tab.0.left/0.25.1440.801@0.25.1440.801" timestamp="1619690116250" />
     <state width="1398" height="214" key="GridCell.Tab.0.left/0.25.1440.804@0.25.1440.804" timestamp="1619363301160" />
     <state width="1398" height="213" key="GridCell.Tab.0.left/0.25.1440.805@0.25.1440.805" timestamp="1618878124439" />
     <state width="1398" height="214" key="GridCell.Tab.0.left/0.25.1440.809@0.25.1440.809" timestamp="1619121848445" />
-    <state width="1398" height="212" key="GridCell.Tab.0.right" timestamp="1619782146189">
-      <screen x="0" y="25" width="1440" height="799" />
+    <state width="1398" height="212" key="GridCell.Tab.0.right" timestamp="1620078457318">
+      <screen x="0" y="25" width="1440" height="797" />
     </state>
     <state width="1308" height="147" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1616388010374" />
     <state width="1398" height="212" key="GridCell.Tab.0.right/0.25.1440.794@0.25.1440.794" timestamp="1619475371201" />
-    <state width="1398" height="212" key="GridCell.Tab.0.right/0.25.1440.797@0.25.1440.797" timestamp="1619726292171" />
+    <state width="1398" height="212" key="GridCell.Tab.0.right/0.25.1440.797@0.25.1440.797" timestamp="1620078457318" />
     <state width="1398" height="212" key="GridCell.Tab.0.right/0.25.1440.799@0.25.1440.799" timestamp="1619782146189" />
     <state width="1398" height="212" key="GridCell.Tab.0.right/0.25.1440.801@0.25.1440.801" timestamp="1619690116252" />
     <state width="1398" height="214" key="GridCell.Tab.0.right/0.25.1440.804@0.25.1440.804" timestamp="1619363301160" />

@@ -8,6 +8,7 @@ import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/home.dart';
 import 'package:ipackage/widgets/my_books.dart';
 import 'package:ipackage/widgets/settings.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class PlanYourTrip extends StatefulWidget {
   @override
@@ -33,6 +34,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
   var _pickedDate;
   int _daysNumber = 2;
   var is_select_days = false;
+  var is_select_date = false;
 
   //Stage 2
   bool _is3Star = false;
@@ -169,8 +171,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
     showDialog(
         context: context,
         builder: (BuildContext bc) {
-          return SingleChildScrollView(
-            child: Padding(
+          return Padding(
               padding: EdgeInsets.only(
                 top: 40,
               ),
@@ -183,8 +184,8 @@ class _PlanYourTripState extends State<PlanYourTrip>
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
                     padding: EdgeInsets.all(8.0),
-                    height: screenHeight * 0.17,
-                    width: screenWidth * 0.9,
+                    //height: screenHeight * 0.17,
+                    //width: screenWidth * 0.9,
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
@@ -222,7 +223,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   );
                 }),
               ),
-            ),
+
           );
         });
   }
@@ -885,8 +886,8 @@ class _PlanYourTripState extends State<PlanYourTrip>
                     child: Text(
                       book_trip_label,
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0XFFbbbbbb),
+                        fontSize: 16,
+                        color: Color(0XFF000000),
                       ),
                     ),
                   ),
@@ -924,8 +925,8 @@ class _PlanYourTripState extends State<PlanYourTrip>
                     child: Text(
                       book_trip_label2,
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0XFFbbbbbb),
+                        fontSize: 16,
+                        color: Color(0XFF000000),
                       ),
                     ),
                   ),
@@ -961,6 +962,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                       print(destination_id);
                       print(pakage_id);
                       if (destination_id == 0 || pakage_id == 0) {
+                        _show_alert(context,'','يرجى تعبئة جميع الحقول');
                       } else {
                         if (_selectedTabBar < 5)
                           setState(() {
@@ -1134,10 +1136,12 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   child: GFButton(
                     size: 50,
                     onPressed: () {
+
                       if (_selectedTabBar > 0)
                         setState(() {
                           _selectedTabBar -= 1;
                         });
+
                     },
                     color: Color(0xffFECD44),
                     child: Padding(
@@ -1170,10 +1174,20 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   child: GFButton(
                     size: 50,
                     onPressed: () {
-                      if (_selectedTabBar < 5)
-                        setState(() {
-                          _selectedTabBar += 1;
-                        });
+
+                      if(_pickedDate == null || is_select_days == false)
+                      {
+
+                        _show_alert(context,'','يرجى تعبئة جميع الحقول');
+                      }else{
+
+                        if (_selectedTabBar < 5)
+                          setState(() {
+                            _selectedTabBar += 1;
+                          });
+                      }
+
+
                     },
                     color: Colors.white,
                     child: Padding(
@@ -2323,5 +2337,35 @@ class _PlanYourTripState extends State<PlanYourTrip>
       Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new Settings()));
     }
+  }
+
+  _show_alert(context, String text, String des) {
+    Alert(
+      context: context,
+      type: AlertType.warning,
+      title: text,
+      desc: des,
+      alertAnimation: fadeAlertAnimation,
+      buttons: [
+        DialogButton(
+          child: Text(
+            "OK",
+            style: TextStyle(color: Colors.white,fontFamily: 'Cairo', fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xff07898b),
+          radius: BorderRadius.circular(3.0),
+        ),
+      ],
+    ).show();
+  }
+
+  Widget fadeAlertAnimation(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child,) {
+    return Align(
+      child: FadeTransition(
+        opacity: animation,
+        child: child,
+      ),
+    );
   }
 }

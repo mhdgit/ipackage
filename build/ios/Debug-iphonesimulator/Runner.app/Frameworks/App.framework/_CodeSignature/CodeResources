@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		XouKOx0NfHNapCnckfz61h8qN20=
+		wi/DDjNCqBAZ8jJta+Y1e+R29MM=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -68,6 +68,10 @@
 		<data>
 		3KVrYbP7EG6s4gVtix0TXK9C2BM=
 		</data>
+		<key>flutter_assets/assets/images/customer-services.jpg</key>
+		<data>
+		vr2Ogvu3CtMlau9MQ+EDJQI9lsQ=
+		</data>
 		<key>flutter_assets/assets/images/end.jpg</key>
 		<data>
 		HUW8PHZEDX3IyHQcf98G95ZmfcI=
@@ -108,6 +112,10 @@
 		<data>
 		eT0zf5sUYD49FufvwRaIgvDkW04=
 		</data>
+		<key>flutter_assets/assets/images/payment-method.jpg</key>
+		<data>
+		E6FZvfnHPxJODOgyAUCGCNrCxlc=
+		</data>
 		<key>flutter_assets/assets/images/paypal.png</key>
 		<data>
 		JJtMcrp8API9EXsjpYZUvGx9aoQ=
@@ -116,9 +124,17 @@
 		<data>
 		j15kVuI2i7DXPdik3dN+sJhMZ98=
 		</data>
+		<key>flutter_assets/assets/images/placeholder.jpg</key>
+		<data>
+		+EG2/v+7SiDgwKHlDIAEoHsyBaA=
+		</data>
 		<key>flutter_assets/assets/images/plane.png</key>
 		<data>
 		Pdu1q68NP9HlWDwy6WIFebr6CQY=
+		</data>
+		<key>flutter_assets/assets/images/premium.jpg</key>
+		<data>
+		mufwt95XLISFey/aQWR4/DXrXEY=
 		</data>
 		<key>flutter_assets/assets/images/profile.jpg</key>
 		<data>
@@ -158,15 +174,15 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		fhFp0zn8s8L7STy9cHgSCkDH104=
+		tYzf7/o3VpkBWYNSTX5Rkee7UQk=
 		</data>
 		<key>flutter_assets/lib/languages/ar.json</key>
 		<data>
-		dVmvxTnTZ1ojjiwn3879b+wgVSc=
+		qtk/ZNR8NiIr31pC/OL4915g8oQ=
 		</data>
 		<key>flutter_assets/lib/languages/en.json</key>
 		<data>
-		hFk+ZepNqdB2ZB1uepS8ZDLS4q4=
+		zMpzO0cP5Gy2cRarT8+mEltclb0=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -243,11 +259,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			XouKOx0NfHNapCnckfz61h8qN20=
+			wi/DDjNCqBAZ8jJta+Y1e+R29MM=
 			</data>
 			<key>hash2</key>
 			<data>
-			bX0JRn/UpWn3ekgyoQ7WsefRVYz9s4HBwGMiVpWY0u8=
+			2JNT8fXUbjnhdd7jGONhwH+QAijILaTYG6gsc2eI3GY=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -404,6 +420,17 @@
 			KfyoP2pvkWQjxtoH7CEdDciG+71vprph+mstgij0o+g=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/customer-services.jpg</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vr2Ogvu3CtMlau9MQ+EDJQI9lsQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			jgAuBjrGR2Aq3yeyo/ATMYVImAJsui9ytr0pepKF/rI=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/images/end.jpg</key>
 		<dict>
 			<key>hash</key>
@@ -514,6 +541,17 @@
 			xDL3hKniFSbcxr7nw7D5Piz68gn8K9AE3Xn2Rt51H+I=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/payment-method.jpg</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			E6FZvfnHPxJODOgyAUCGCNrCxlc=
+			</data>
+			<key>hash2</key>
+			<data>
+			xH3WZU+MWij711+4wLbGCy4dgJr2YSB/trT6u5bfaEU=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/images/paypal.png</key>
 		<dict>
 			<key>hash</key>
@@ -536,6 +574,17 @@
 			REEKnFlxGFXOaPasQnDuAyVj8R5apSrrVEzwCh7NW4g=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/placeholder.jpg</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+EG2/v+7SiDgwKHlDIAEoHsyBaA=
+			</data>
+			<key>hash2</key>
+			<data>
+			Z9fzfrTljWzhFk5rtJvRo3xmwQbFFKZrpz1AjfwpC1U=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/images/plane.png</key>
 		<dict>
 			<key>hash</key>
@@ -545,6 +594,17 @@
 			<key>hash2</key>
 			<data>
 			IvdjWKAIYodqvYUhYtou2R6nJOqA+qzH5oMGb/m0Wb8=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/premium.jpg</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			mufwt95XLISFey/aQWR4/DXrXEY=
+			</data>
+			<key>hash2</key>
+			<data>
+			ebbXNKRJkjOX7DTkC9f4/TwLexVV6JjMfvDqwm/kLcw=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/profile.jpg</key>
@@ -650,33 +710,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fhFp0zn8s8L7STy9cHgSCkDH104=
+			tYzf7/o3VpkBWYNSTX5Rkee7UQk=
 			</data>
 			<key>hash2</key>
 			<data>
-			CDKUHsnaliwf/aoCGLFuJbyHVxjxwMdd0CT13qYqunM=
+			Jh3wP26RzHW3VvN//sgeLtFFh/Lqz+oXJkRIvCizwr8=
 			</data>
 		</dict>
 		<key>flutter_assets/lib/languages/ar.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dVmvxTnTZ1ojjiwn3879b+wgVSc=
+			qtk/ZNR8NiIr31pC/OL4915g8oQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			di1JeUGwuBtjvyLwcDRO7B6ZFX/sMlUPJew/PuCp2XU=
+			kWXylt0M7vEEc5u8RsP/q9spqSrL73S9fmI0OFCbziU=
 			</data>
 		</dict>
 		<key>flutter_assets/lib/languages/en.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			hFk+ZepNqdB2ZB1uepS8ZDLS4q4=
+			zMpzO0cP5Gy2cRarT8+mEltclb0=
 			</data>
 			<key>hash2</key>
 			<data>
-			yfrXHkkFNaqSFsGxpbU+6dbxiwlL4drHHqrj6NzXBAY=
+			qv9Ko6bw4+1957dJq+qrr0iqWve/rmw2VTO0G1By4zU=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
