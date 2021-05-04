@@ -4,6 +4,8 @@ import 'package:getwidget/getwidget.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/modules/Offer/Airport.dart';
+import 'package:ipackage/modules/Offer/Flight/Flight.dart';
 import 'package:ipackage/modules/Offer/Hotel/Hotel.dart';
 import 'package:ipackage/modules/Offer/Transportations/MinTransportation.dart';
 import 'package:ipackage/modules/Offer/Transportations/Transportation.dart';
@@ -43,17 +45,49 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   int _babiesNumber = 0;
   var now = new DateTime.now();
   var formatter = new DateFormat('MM/dd');
+  var fullFormatter = new DateFormat('yyyy-MM-dd');
   var _pickedDate;
+  var _backDate;
   int _totalPassengersNumber = 1;
   MinTransportation shiftTransportation;
   int _totalOfferPrice = 0;
   int carNumber = 0;
+  String _originCode = 'AAA';
+  String _destinationCode;
+  List<Flight> _flights = [];
+  List<Flight> _flightsBack = [];
+  List<Airport> _airports = [];
+  bool _isPriceLoading = true;
+  bool _isAirportResults = false;
+  bool _isAirportLoading = true;
+  final TextEditingController _nameController = new TextEditingController();
+  int totalTripDays = 0;
+  String firstFlightDate;
+  String lastFlightDate;
+  String day;
+  String month;
+  String year;
+
 
   List<String> _comments = [
     "لقد كانت رحلة رائعة لقد كانت رحلة رائعة لقد كانت رحلة رائعة",
     "لقد كانت رحلة رائعة",
   ];
 
+  void calculateFlightsDates()
+  {
+    setState(() {
+
+      // Calculate total trip days
+      for(int index = 0; index < offer.days.length; index++)
+        for(int pointer = 0; pointer < offer.days[index].trips.length; pointer++)
+          totalTripDays += 1;
+
+      // Generate last flight date
+      lastFlightDate = fullFormatter.format(DateTime.parse(firstFlightDate).add(Duration(days: totalTripDays))).toString();
+      print(lastFlightDate);
+    });
+  }
   void buildHotelsList(Offer offer) {
     for (var day in offer.days) {
       setState(() {
@@ -444,6 +478,243 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                         ),
                       ],
                     ),
+
+                    // Flight label
+                    if(index == 0)
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsetsDirectional.only(
+                              start: screenWidth * 0.048, top: 5.0),
+                          child: Row(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    width: 2,
+                                    height: screenHeight * 0.04,
+                                    color: Color(0xff07898B),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(2.0),
+                                    width: 25,
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Color(0xff07898B),
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.airplanemode_active,
+                                        color: Color(0xff07898B),
+                                        size: 15,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 2,
+                                    height: screenHeight * 0.04,
+                                    color: Color(0xff07898B),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                width: screenWidth * 0.8,
+                                padding: EdgeInsetsDirectional.only(
+                                    start: screenWidth * 0.04,
+                                    top: 0.0,
+                                    bottom: 0.0),
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        getTranslated(
+                                            context, 'do_flights_tab'),
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xff07898B),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    if(index == 0)
+                    _flights.length == 0 ?
+                        Container(
+                          width: screenWidth * 0.9,
+                        child: Card(
+                          color: Color(0xffCCE5FF),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    getTranslated(
+                                        context, 'fo_no_flight'),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Color(0xff0040A2),
+
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        )
+                    :
+                        Container(
+                          width: screenWidth * 0.9,
+                          child: Card(
+                            elevation: 2.0,
+                            child: Column(
+                              children: <Widget>[
+                                for(int index = 0 ; index < _flights[0].originDestinationOptions[0].flightSegments.length ; index++)
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 33,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Row(
+                                              // mainAxisAlignment: MainAxisAlignment.end,
+                                              children: <Widget>[
+                                                Align(
+                                                  alignment: AlignmentDirectional.centerStart,
+                                                  child: Padding(
+                                                    padding: EdgeInsetsDirectional.only(start: screenWidth * 0.07),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(4.0),
+                                                      child: Container(
+                                                        padding: EdgeInsets.all(2.0),
+                                                        width: 25,
+                                                        height: 25,
+                                                        decoration: BoxDecoration(
+                                                          color: Color(0xffFFCECF),
+                                                          borderRadius: BorderRadius.circular(50),
+                                                          border: Border.all(
+                                                            width: 3,
+                                                            color: Colors.redAccent,
+                                                            style: BorderStyle.solid,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                    _flights[0].originDestinationOptions[0].flightSegments[index].departureAirportLocationCode.toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  _flights[0].originDestinationOptions[0].flightSegments[index].departureDateTime.toString().substring(11),
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black38,
+                                                  ),
+                                                  textAlign: TextAlign.end,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 33,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Icon(Icons.flight, color: Color(0xff07898B),),
+                                            Text(
+                                              _flights[0].originDestinationOptions[0].flightSegments[index].journeyDuration.toString(),
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black38,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 33,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Row(
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding: const EdgeInsets.all(4.0),
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(2.0),
+                                                    width: 25,
+                                                    height: 25,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0xffFFCECF),
+                                                      borderRadius: BorderRadius.circular(50),
+                                                      border: Border.all(
+                                                        width: 3,
+                                                        color: Colors.redAccent,
+                                                        style: BorderStyle.solid,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                    _flights[0].originDestinationOptions[0].flightSegments[index].arrivalAirportLocationCode.toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            Text(
+                                              _flights[0].originDestinationOptions[0].flightSegments[index].arrivalDateTime.toString().substring(11),
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black38,
+                                              ),
+                                              textAlign: TextAlign.end,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
 
                     // Transfer label
                     Row(
@@ -1798,6 +2069,243 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                             height: 1,
                           ),
 
+                    // Flight label
+                    if(index == offer.days.length - 1)
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsetsDirectional.only(
+                                start: screenWidth * 0.048, top: 5.0),
+                            child: Row(
+                              children: <Widget>[
+                                Column(
+                                  children: <Widget>[
+                                    Container(
+                                      width: 2,
+                                      height: screenHeight * 0.04,
+                                      color: Color(0xff07898B),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(2.0),
+                                      width: 25,
+                                      height: 25,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        border: Border.all(
+                                          width: 2,
+                                          color: Color(0xff07898B),
+                                          style: BorderStyle.solid,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.airplanemode_active,
+                                          color: Color(0xff07898B),
+                                          size: 15,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 2,
+                                      height: screenHeight * 0.04,
+                                      color: Color(0xff07898B),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  width: screenWidth * 0.8,
+                                  padding: EdgeInsetsDirectional.only(
+                                      start: screenWidth * 0.04,
+                                      top: 0.0,
+                                      bottom: 0.0),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+                                          getTranslated(
+                                              context, 'do_flights_tab'),
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xff07898B),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+
+                    if(index == offer.days.length - 1)
+                      _flightsBack.length == 0 ?
+                      Container(
+                        width: screenWidth * 0.9,
+                        child: Card(
+                          color: Color(0xffCCE5FF),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    getTranslated(
+                                        context, 'fo_no_flight'),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Color(0xff0040A2),
+
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                          :
+                      Container(
+                        width: screenWidth * 0.9,
+                        child: Card(
+                          elevation: 2.0,
+                          child: Column(
+                            children: <Widget>[
+                              for(int index = 0 ; index < _flightsBack[0].originDestinationOptions[0].flightSegments.length ; index++)
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 33,
+                                      child: Column(
+                                        children: <Widget>[
+                                          Row(
+                                            // mainAxisAlignment: MainAxisAlignment.end,
+                                            children: <Widget>[
+                                              Align(
+                                                alignment: AlignmentDirectional.centerStart,
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional.only(start: screenWidth * 0.07),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(4.0),
+                                                    child: Container(
+                                                      padding: EdgeInsets.all(2.0),
+                                                      width: 25,
+                                                      height: 25,
+                                                      decoration: BoxDecoration(
+                                                        color: Color(0xffFFCECF),
+                                                        borderRadius: BorderRadius.circular(50),
+                                                        border: Border.all(
+                                                          width: 3,
+                                                          color: Colors.redAccent,
+                                                          style: BorderStyle.solid,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: Text(
+                                                  _flightsBack[0].originDestinationOptions[0].flightSegments[index].departureAirportLocationCode.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                _flightsBack[0].originDestinationOptions[0].flightSegments[index].departureDateTime.toString().substring(11),
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.black38,
+                                                ),
+                                                textAlign: TextAlign.end,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 33,
+                                      child: Column(
+                                        children: <Widget>[
+                                          Icon(Icons.flight, color: Color(0xff07898B),),
+                                          Text(
+                                            _flightsBack[0].originDestinationOptions[0].flightSegments[index].journeyDuration.toString(),
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.black38,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 33,
+                                      child: Column(
+                                        children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: Container(
+                                                  padding: EdgeInsets.all(2.0),
+                                                  width: 25,
+                                                  height: 25,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xffFFCECF),
+                                                    borderRadius: BorderRadius.circular(50),
+                                                    border: Border.all(
+                                                      width: 3,
+                                                      color: Colors.redAccent,
+                                                      style: BorderStyle.solid,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: Text(
+                                                  _flightsBack[0].originDestinationOptions[0].flightSegments[index].arrivalAirportLocationCode.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Text(
+                                            _flightsBack[0].originDestinationOptions[0].flightSegments[index].arrivalDateTime.toString().substring(11),
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.black38,
+                                            ),
+                                            textAlign: TextAlign.end,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+
                     Container(
                       width: screenWidth,
                       child: GFAccordion(
@@ -3050,7 +3558,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         }).then((selectedDate) {
       if (selectedDate == null) return;
       setState(() {
-        _pickedDate = selectedDate;
+        firstFlightDate = fullFormatter.format(selectedDate).toString();
       });
     });
   }
@@ -3077,7 +3585,22 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     });
   }
 
+  void clearAirportList(){
+      setState(() {
+        _airports.clear();
+        setState(() {
+
+        });
+      });
+  }
+
   _openEditPackageWidget(context , screenWidth, screenHeight) {
+
+    setState(() {
+      _airports.clear();
+      dayIndex = -1;
+    });
+
     showDialog(
         context: context,
         builder: (BuildContext bc) {
@@ -3414,6 +3937,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                         width: screenWidth * 0.9,
                         padding: const EdgeInsets.symmetric(vertical: 10.0 , horizontal: 8.0),
                         child: TextField(
+                          controller: _nameController,
                           keyboardType: TextInputType.text,
                           // controller: _emailController,
                           style: TextStyle(
@@ -3452,11 +3976,109 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                 ),
                               ),
                               filled: true),
+
+                          onChanged: (key){
+
+                            setState((){
+                              dayIndex = -1;
+                            });
+
+                            if(_nameController.text == '')
+                                setState((){
+                                  _isAirportResults = false;
+                                });
+                            else
+                              {
+                                setState((){
+                                  _isAirportResults = true;
+
+                                  betaApiAssistant.getAirport(key).then((value) {
+                                    _airports = List.of(value);
+                                    setState((){
+                                      _isAirportLoading = false;
+                                      dayIndex = -1;
+                                    });
+                                  });
+                                });
+                              }
+                          },
                         ),
                       ),
                       Visibility(
-                        visible: false,
-                        child: Container(width: screenWidth * 0.9,),
+                        visible: _isAirportResults,
+                        child: Container(
+                          width: screenWidth * 0.9,
+                          child: _isAirportLoading ?
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: GFLoader(
+                                type: GFLoaderType.circle,
+                                loaderColorOne: Color(0xff07898B),
+                                loaderColorTwo: Color(0xff07898B),
+                                loaderColorThree: Color(0xff07898B),
+                              ),
+                            ),
+                          )
+                          :
+                              Container(
+                                child: _airports.length == 0 ?
+                                Center(child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    getTranslated(context, 'fo_no_airports'),
+                                  ),
+                                ),)
+                                :
+                                Column(
+                                  children: <Widget>[
+                                    for(int index = 0 ; index < _airports.length ; index++)
+                                      ListTile(
+                                        onTap: (){
+
+                                          setState((){
+                                            _originCode = _airports[index].iata;
+                                            _nameController.text = localAssistant.getAirportByLocale(context,
+                                                _airports[index]).toString() + '-' + _airports[index].iata;
+                                            betaApiAssistant.getFlightPath(_originCode, _destinationCode, firstFlightDate).then((value) {
+                                              setState((){
+                                                _flights = List.of(value);
+                                              });
+                                            });
+
+                                            betaApiAssistant.getFlightPath(_destinationCode, _originCode, lastFlightDate).then((value2) {
+                                              setState((){
+                                                _flightsBack = List.of(value2);
+                                                _isAirportResults = false;
+                                                dayIndex = -1;
+                                              });
+                                            });
+
+                                          });
+                                        },
+                                        contentPadding:const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
+                                        leading: Icon(MyIcons.plane_arrival, color: Color(0xff07898B),),
+                                        title: Text(
+                                          localAssistant.getAirportByLocale(context,
+                                            _airports[index]).toString(),
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontFamily: 'cairo',
+                                          ),
+                                        ),
+                                        trailing: Text(
+                                          _airports[index].iata.toString(),
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontFamily: 'cairo',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      )
+                                  ],
+                                ),
+                              ),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
@@ -3591,15 +4213,24 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   void initState() {
     super.initState();
 
-    betaApiAssistant.getOffer(widget.id, '2021-05-04').then((value) {
+    setState(() {
+      firstFlightDate = fullFormatter.format(DateTime.now().add(Duration(days: 15))).toString();
+    });
+    print(firstFlightDate);
+
+    betaApiAssistant.getOffer(widget.id, firstFlightDate).then((value) {
       setState(() {
         offer = value;
         calculateOfferPrice();
-        _isLoading = false;
-        getOfferImages();
+        // getOfferImages();
         buildHotelsList(offer);
         calculateOfferNumber(offer);
         _pickedDate = DateFormat('MM/dd').parse(offer.days[0].trips[0].date.toString());
+        calculateFlightsDates();
+        // _firstDate = DateFormat('MM-dd').parse(offer.days[0].trips[0].date.toString());
+        _destinationCode = offer.airportGo.iata.toString();
+        _isLoading = false;
+        _isPriceLoading = false;
       });
     });
   }
@@ -4071,7 +4702,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                             child: Padding(
                               padding: const EdgeInsets.all(0.0),
                               child: Text(
-                                formatter.format(_pickedDate).toString(),
+                                firstFlightDate,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontSize: 15,

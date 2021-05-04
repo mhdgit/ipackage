@@ -253,7 +253,9 @@
   "fo_edit_save" : "Save",
   "fo_remove_note" : "The means of transport will be permanently removed",
   "fo_change_trans_title" : "More transportation",
-
+  "fo_no_flight" : "You have not specified the airport of departure, so we were unable to determine which flights would be suitable for you. Please select the airport of departure so that we can determine the best flight for you.",
+  "fo_no_flight_2" : "There are currently no flights available.",
+  "fo_no_airports" : "No results",
 
   "book_trip_label" : "Select your destination",
   "book_trip_label_2" : "Choose package",

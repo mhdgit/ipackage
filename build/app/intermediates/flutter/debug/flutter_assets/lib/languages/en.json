@@ -131,9 +131,13 @@
   "home_popular_foreign_label_2" : "Learn about the packages most requested by tourists",
   "home_help_label" : "Why choose iPackage",
   "home_payment_choices_title" : "Payment options",
-  "home_customer_services_title" : "Customer service 24 hours ",
+  "home_payment_choices" : "Various payment options such as Visa, MasterCard and bank transfers",
+  "home_customer_services_title" : "Customer service 24 hours",
+  "home_customer_services" : "To answer all your inquiries and meet all your needs throughout the week",
   "home_customer_ratings_title" : "Customer ratings",
+  "home_customer_ratings" : "All tourism offers are highly rated and distinguished by service",
   "home_best_hotels_title" : "Best hotels",
+  "home_best_hotels" : "A selection of distinctive hotels is selected and the hotel reviews link is attached to the offer",
 
   "pyt_national_tourism_btn" : "Domestic Tourism",
   "pyt_n_t_label" : "Discover the beauty of Saudi Arabia ",
@@ -249,7 +253,9 @@
   "fo_edit_save" : "Save",
   "fo_remove_note" : "The means of transport will be permanently removed",
   "fo_change_trans_title" : "More transportation",
-
+  "fo_no_flight" : "You have not specified the airport of departure, so we were unable to determine which flights would be suitable for you. Please select the airport of departure so that we can determine the best flight for you.",
+  "fo_no_flight_2" : "There are currently no flights available.",
+  "fo_no_airports" : "No results",
 
   "book_trip_label" : "Select your destination",
   "book_trip_label_2" : "Choose package",
