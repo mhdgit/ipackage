@@ -11,6 +11,7 @@ class Flight {
   String fareSourceCode;
   AirItineraryPricingInfo airItineraryPricingInfo;
   List<OriginDestinationOptions> originDestinationOptions;
+  bool visibility = true;
 
   Flight({
     this.isPassportMandatory,
