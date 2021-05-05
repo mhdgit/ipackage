@@ -3588,9 +3588,6 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   void clearAirportList(){
       setState(() {
         _airports.clear();
-        setState(() {
-
-        });
       });
   }
 
@@ -3992,14 +3989,21 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                 setState((){
                                   _isAirportResults = true;
 
+                                    _isAirportLoading = true;
+                                });
+
                                   betaApiAssistant.getAirport(key).then((value) {
+                                    clearAirportList();
+                                    _airports.clear();
                                     _airports = List.of(value);
-                                    setState((){
+
+                              setState((){
                                       _isAirportLoading = false;
                                       dayIndex = -1;
-                                    });
+                              });
+
                                   });
-                                });
+
                               }
                           },
                         ),

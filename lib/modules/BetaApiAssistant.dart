@@ -188,15 +188,17 @@ class BetaApiAssistant {
 
   Future<List<Airport>> getAirport(String keyword) async{
     var res = await http.get(
-        Uri.parse('http://new2.ipackagetours.com/api/airports?name='+ keyword),
+        Uri.parse('https://ipackagetours.com/api/airports?name='+ keyword),
         headers: {"Accept": "application/json"});
     var body = json.decode(res.body);
     print(body);
     Airport tAirport;
 
     try{
+      _airports.clear();
       for (var airport in body['data']) {
         tAirport = Airport.fromJson(airport);
+
         _airports.add(tAirport);
       }
       print('_airports length is : ' + _airports.length.toString());

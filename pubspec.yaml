@@ -41,6 +41,7 @@ dependencies:
   giffy_dialog: ^1.8.0
   rflutter_alert: ^2.0.2
   flutter_svg: ^0.22.0
+  email_validator: ^2.0.1
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -48,6 +51,9 @@ class _PlanYourTripState extends State<PlanYourTrip>
   int _adultsNumber = 2;
   int _childrenNumber = 2;
   int _babiesNumber = 2;
+  var is_select_AdultsNumber = false;
+  var is_select_childrenNumber = false;
+  var is_select_babiesNumber = false;
 
   //Stage 4
   final TextEditingController _nameController = new TextEditingController();
@@ -463,27 +469,30 @@ class _PlanYourTripState extends State<PlanYourTrip>
 
   //////////
 
+  void _updateAdultsNumber() {
+    setState(() {
+      is_select_AdultsNumber = true;
+    });
+  }
   void _showAdultsDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
-          return SingleChildScrollView(
-            child: Padding(
+          return Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.36,
+                //top: screenHeight * 0.36,
               ),
               child: Dialog(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                    borderRadius: BorderRadius.all(
+                  Radius.circular(20),
                 )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
                     padding: EdgeInsets.all(8.0),
-                    height: screenHeight * 0.1,
-                    width: screenWidth * 0.9,
+                    height: 125,
+                    //width: screenWidth * 0.9,
                     child: Column(
                       children: [
                         Row(
@@ -494,21 +503,20 @@ class _PlanYourTripState extends State<PlanYourTrip>
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: FittedBox(
-                                  child: Text(
+                                child: Text(
                                     getTranslated(
                                         context, 'book_trip_adults_number'),
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
+                                      //fontWeight: FontWeight.bold,
+                                      fontSize: 16,
                                       color: Colors.black,
-                                    ),
+
                                   ),
                                 ),
                               ),
                             ),
                             Container(
-                              height: 40,
+                              //height: 40,
                               child: FittedBox(
                                 child: Row(
                                   children: <Widget>[
@@ -570,37 +578,58 @@ class _PlanYourTripState extends State<PlanYourTrip>
                             )
                           ],
                         ),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  _updateAdultsNumber();
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  'Set',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff07898B)),
+                                ))
+                          ],
+                        ),
                       ],
                     ),
                   );
                 }),
               ),
-            ),
+
           );
         });
   }
 
+  void _updateChildrenNumber() {
+    setState(() {
+      is_select_childrenNumber = true;
+    });
+  }
   void _showChildrenDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
-          return SingleChildScrollView(
-            child: Padding(
+          return Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.505,
+                //top: screenHeight * 0.505,
               ),
               child: Dialog(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                    borderRadius: BorderRadius.all(
+                  Radius.circular(20),
                 )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
                     padding: EdgeInsets.all(8.0),
-                    height: screenHeight * 0.1,
-                    width: screenWidth * 0.9,
+                    height: 125,
+                    //width: screenWidth * 0.9,
                     child: Column(
                       children: [
                         Row(
@@ -611,15 +640,14 @@ class _PlanYourTripState extends State<PlanYourTrip>
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: FittedBox(
-                                  child: Text(
-                                    getTranslated(
-                                        context, 'book_trip_children_number'),
+                                child:  Text(
+                                  getTranslated(
+                                      context, 'book_trip_children_number'),
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
+                                      //fontWeight: FontWeight.bold,
+                                      fontSize: 16,
                                       color: Colors.black,
-                                    ),
+
                                   ),
                                 ),
                               ),
@@ -687,37 +715,59 @@ class _PlanYourTripState extends State<PlanYourTrip>
                             )
                           ],
                         ),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  _updateChildrenNumber();
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  'Set',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff07898B)),
+                                ))
+                          ],
+                        ),
+
                       ],
                     ),
                   );
                 }),
               ),
-            ),
+
           );
         });
+  }
+
+  void _updateBabiesNumber() {
+    setState(() {
+      is_select_babiesNumber = true;
+    });
   }
 
   void _showBabiesDialog(context, screenHeight, screenWidth) {
     showDialog(
         context: context,
         builder: (BuildContext bc) {
-          return SingleChildScrollView(
-            child: Padding(
+          return Padding(
               padding: EdgeInsets.only(
-                top: screenHeight * 0.66,
+                //top: screenHeight * 0.66,
               ),
               child: Dialog(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                    borderRadius: BorderRadius.all(
+                  Radius.circular(20),
                 )),
                 elevation: 16,
                 child: StatefulBuilder(builder: (context, setState) {
                   return Container(
                     padding: EdgeInsets.all(8.0),
-                    height: screenHeight * 0.1,
-                    width: screenWidth * 0.9,
+                    height: 125,
                     child: Column(
                       children: [
                         Row(
@@ -728,15 +778,14 @@ class _PlanYourTripState extends State<PlanYourTrip>
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: FittedBox(
-                                  child: Text(
+                                child: Text(
                                     getTranslated(
                                         context, 'book_trip_babies_number'),
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
+                                      //fontWeight: FontWeight.bold,
+                                      fontSize: 16,
                                       color: Colors.black,
-                                    ),
+
                                   ),
                                 ),
                               ),
@@ -804,12 +853,31 @@ class _PlanYourTripState extends State<PlanYourTrip>
                             )
                           ],
                         ),
+
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  _updateBabiesNumber();
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  'Set',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff07898B)),
+                                ))
+                          ],
+                        ),
                       ],
                     ),
                   );
                 }),
               ),
-            ),
+
           );
         });
   }
@@ -1267,6 +1335,9 @@ class _PlanYourTripState extends State<PlanYourTrip>
                     onPressed: () {
                       setState(() {
                         _is3Star = !_is3Star;
+                        _is4Star = false;
+                        _is5Star = false;
+                        _isAllStar = false;
                       });
                     },
                     child: Text(
@@ -1292,6 +1363,9 @@ class _PlanYourTripState extends State<PlanYourTrip>
                     onPressed: () {
                       setState(() {
                         _is4Star = !_is4Star;
+                        _is3Star = false;
+                        _is5Star = false;
+                        _isAllStar = false;
                       });
                     },
                     child: Text(
@@ -1326,6 +1400,9 @@ class _PlanYourTripState extends State<PlanYourTrip>
                     onPressed: () {
                       setState(() {
                         _is5Star = !_is5Star;
+                        _is3Star = false;
+                        _is4Star = false;
+                        _isAllStar = false;
                       });
                     },
                     child: Text(
@@ -1351,6 +1428,9 @@ class _PlanYourTripState extends State<PlanYourTrip>
                     onPressed: () {
                       setState(() {
                         _isAllStar = !_isAllStar;
+                        _is3Star = false;
+                        _is4Star = false;
+                        _is5Star = false;
                       });
                     },
                     child: Text(
@@ -1492,7 +1572,102 @@ class _PlanYourTripState extends State<PlanYourTrip>
             ],
           ),
         ),
-        _navigationBar(width, height),
+        //_navigationBar(width, height),
+
+        Container(
+          width: width * 0.9,
+          height: height * 0.13,
+          color: Color(0xff07898B),
+          margin: EdgeInsets.symmetric(vertical: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 50,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: GFButton(
+                    size: 50,
+                    onPressed: () {
+
+                      if (_selectedTabBar > 0)
+                        setState(() {
+                          _selectedTabBar -= 1;
+                        });
+
+                    },
+                    color: Color(0xffFECD44),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black,
+                            size: 15.0,
+                          ),
+                          Text(
+                            getTranslated(context, 'book_trip_previous'),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Cairo',
+                                fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 50,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: GFButton(
+                    size: 50,
+                    onPressed: () {
+
+                      if(_is3Star == false && _is4Star == false && _is5Star == false && _isAllStar == false)
+                      {
+                        _show_alert(context,'','يرجى اختيار تصنيف الفندق');
+                      }else{
+
+                        if (_selectedTabBar < 5)
+                          setState(() {
+                            _selectedTabBar += 1;
+                          });
+                      }
+
+
+                    },
+                    color: Colors.white,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated(context, 'book_trip_next'),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontFamily: 'cairo'),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                            size: 15.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -1541,10 +1716,11 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   Expanded(
                     flex: 90,
                     child: Text(
-                      getTranslated(context, 'book_trip_adults_number'),
+                      is_select_AdultsNumber ? _adultsNumber.toString():
+                      getTranslated(context, 'book_trip_adults_number') ,
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0XFFbbbbbb),
+                        fontSize: 16,
+                        color: Color(0XFF000000),
                       ),
                     ),
                   ),
@@ -1569,6 +1745,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                 padding: EdgeInsetsDirectional.only(
                     start: 10.0, top: 0.0, bottom: 0.0),
                 child: Text(
+
                   getTranslated(context, 'book_trip_children_number'),
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -1601,10 +1778,11 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   Expanded(
                     flex: 90,
                     child: Text(
+                      is_select_childrenNumber? _childrenNumber.toString():
                       getTranslated(context, 'book_trip_children_number'),
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0XFFbbbbbb),
+                        fontSize: 16,
+                        color: Color(0XFF000000),
                       ),
                     ),
                   ),
@@ -1661,10 +1839,11 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   Expanded(
                     flex: 90,
                     child: Text(
+                      is_select_babiesNumber? _babiesNumber.toString():
                       getTranslated(context, 'book_trip_babies_number'),
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0XFFbbbbbb),
+                        fontSize: 16,
+                        color: Color(0XFF000000),
                       ),
                     ),
                   ),
@@ -1680,7 +1859,102 @@ class _PlanYourTripState extends State<PlanYourTrip>
             ),
           ),
         ),
-        _navigationBar(width, height),
+
+        Container(
+          width: width * 0.9,
+          height: height * 0.13,
+          color: Color(0xff07898B),
+          margin: EdgeInsets.symmetric(vertical: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 50,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: GFButton(
+                    size: 50,
+                    onPressed: () {
+
+                      if (_selectedTabBar > 0)
+                        setState(() {
+                          _selectedTabBar -= 1;
+                        });
+
+                    },
+                    color: Color(0xffFECD44),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black,
+                            size: 15.0,
+                          ),
+                          Text(
+                            getTranslated(context, 'book_trip_previous'),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Cairo',
+                                fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 50,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  child: GFButton(
+                    size: 50,
+                    onPressed: () {
+
+                      if(is_select_babiesNumber == false || is_select_AdultsNumber == false || is_select_childrenNumber == false)
+                      {
+
+                        _show_alert(context,'','يرجى تعبئة جميع الحقول');
+                      }else{
+
+                        if (_selectedTabBar < 5)
+                          setState(() {
+                            _selectedTabBar += 1;
+                          });
+                      }
+
+
+                    },
+                    color: Colors.white,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated(context, 'book_trip_next'),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontFamily: 'cairo'),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                            size: 15.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -1716,14 +1990,14 @@ class _PlanYourTripState extends State<PlanYourTrip>
             controller: _nameController,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 14,
+              fontSize: 16,
             ),
             textAlign: TextAlign.start,
             decoration: InputDecoration(
                 hintText: getTranslated(context, 'book_trip_full_name'),
                 hintStyle: TextStyle(
-                  fontSize: 14.0,
-                  color: Color(0xffC3C2C3),
+                  fontSize: 16.0,
+                  color: Color(0xff999999),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
@@ -1775,18 +2049,18 @@ class _PlanYourTripState extends State<PlanYourTrip>
         Container(
           width: width * 0.9,
           child: TextField(
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.emailAddress,
             controller: _emailController,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 14,
+              fontSize: 16,
             ),
             textAlign: TextAlign.start,
             decoration: InputDecoration(
                 hintText: getTranslated(context, 'book_trip_email'),
                 hintStyle: TextStyle(
-                  fontSize: 14.0,
-                  color: Color(0xffC3C2C3),
+                  fontSize: 16.0,
+                  color: Color(0xff999999),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
@@ -1838,18 +2112,18 @@ class _PlanYourTripState extends State<PlanYourTrip>
         Container(
           width: width * 0.9,
           child: TextField(
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.number,
             controller: _whatsAppController,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 14,
+              fontSize: 16,
             ),
             textAlign: TextAlign.start,
             decoration: InputDecoration(
                 hintText: getTranslated(context, 'book_trip_whats_app'),
                 hintStyle: TextStyle(
-                  fontSize: 14.0,
-                  color: Color(0xffC3C2C3),
+                  fontSize: 16.0,
+                  color: Color(0xff999999),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
@@ -1905,14 +2179,14 @@ class _PlanYourTripState extends State<PlanYourTrip>
             controller: _budgetController,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 14,
+              fontSize: 16,
             ),
             textAlign: TextAlign.start,
             decoration: InputDecoration(
                 hintText: getTranslated(context, 'book_trip_budget'),
                 hintStyle: TextStyle(
-                  fontSize: 14.0,
-                  color: Color(0xffC3C2C3),
+                  fontSize: 16.0,
+                  color: Color(0xff999999),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
@@ -1970,14 +2244,14 @@ class _PlanYourTripState extends State<PlanYourTrip>
             minLines: 3,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 14,
+              fontSize: 16,
             ),
             textAlign: TextAlign.start,
             decoration: InputDecoration(
                 hintText: getTranslated(context, 'book_trip_note'),
                 hintStyle: TextStyle(
-                  fontSize: 14.0,
-                  color: Color(0xffC3C2C3),
+                  fontSize: 16.0,
+                  color: Color(0xff999999),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
@@ -2038,7 +2312,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                           ),
                           Text(
                             getTranslated(context, 'book_trip_previous'),
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.black,fontFamily: "cairo",fontSize: 16),
                           ),
                         ],
                       ),
@@ -2053,10 +2327,53 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   child: GFButton(
                     size: 50,
                     onPressed: () {
-                      if (_selectedTabBar < 5)
-                        setState(() {
-                          _selectedTabBar += 1;
-                        });
+                      if(_nameController.text.trim().isEmpty || _emailController.text.trim().isEmpty || _whatsAppController.text.trim().isEmpty || _budgetController.text.trim().isEmpty )
+                      {
+
+                        _show_alert(context,'','يرجى تعبئة جميع الحقول');
+                      }else{
+
+                        bool isValid = EmailValidator.validate(_emailController.text.trim());
+
+                        if(isValid == false)
+                          {
+                            _show_alert(context,'','يرجى ادخال ايميل صحيح');
+                          }else
+                          {
+                            print ('country: '+destination_id.toString());
+                            print ('package: '+pakage_id.toString());
+                            print ('date: '+_pickedDate.toString().replaceAll(' 00:00:00.000', ''));
+                            print ('days: '+_daysNumber.toString());
+
+                            int stars = 0;
+                            if(_is3Star == true)
+                            {
+                              stars = 3;
+                            }else if(_is4Star == true)
+                            {
+                              stars = 4;
+                            }else if(_is5Star == true)
+                            {
+                              stars = 5;
+                            }
+                            print ('stars: '+stars.toString());
+                            print ('car: '+_isTransfer.toString());
+                            print ('mail: '+_isBreakfast.toString());
+                            print ('adults: '+_adultsNumber.toString());
+                            print ('children: '+_childrenNumber.toString());
+                            print ('babies: '+_babiesNumber.toString());
+                            print ('name: '+_nameController.text.toString());
+                            print ('email: '+_emailController.text.toString());
+                            print ('whatsapp: '+_whatsAppController.text.toString());
+                            print ('budget: '+_budgetController.text.toString());
+                            print ('notes: '+_notesController.text.toString());
+                          }
+
+                        /*if (_selectedTabBar < 5)
+                          setState(() {
+                            _selectedTabBar += 1;
+                          });*/
+                      }
                     },
                     color: Colors.white,
                     child: Padding(
@@ -2066,7 +2383,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                         children: [
                           Text(
                             getTranslated(context, 'book_trip_finish'),
-                            style: TextStyle(fontSize: 14, color: Colors.black),
+                            style: TextStyle( color: Colors.black,fontFamily: "cairo",fontSize: 16),
                           ),
                           Icon(
                             Icons.arrow_forward_ios,
