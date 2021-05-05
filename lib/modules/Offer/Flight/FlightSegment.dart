@@ -9,7 +9,11 @@ class FlightSegment {
   int journeyDurationPerMinute;
   int connectionTimePerMinute;
   String departureAirportLocationCode;
+  String departureAirportArName = ' ';
+  String departureAirportEnName = ' ';
   String arrivalAirportLocationCode;
+  String arrivalAirportArName = ' ';
+  String arrivalAirportEnName = ' ';
   String marketingAirlineCode;
   int cabinClassCode;
 
@@ -23,7 +27,11 @@ class FlightSegment {
     this.journeyDurationPerMinute,
     this.connectionTimePerMinute,
     this.departureAirportLocationCode,
+    this.departureAirportArName,
+    this.departureAirportEnName,
     this.arrivalAirportLocationCode,
+    this.arrivalAirportArName,
+    this.arrivalAirportEnName,
     this.marketingAirlineCode,
     this.cabinClassCode,
   });

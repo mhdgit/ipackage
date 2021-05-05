@@ -4,6 +4,7 @@ import 'package:ipackage/modules/Country.dart';
 import 'package:http/http.dart' as http;
 import 'package:ipackage/modules/Offer/Airport.dart';
 import 'package:ipackage/modules/Offer/Flight/Flight.dart';
+import 'package:ipackage/modules/Offer/Flight/FlightSegment.dart';
 import 'package:ipackage/modules/Offer/Offer.dart';
 import 'package:ipackage/modules/Package.dart';
 import 'package:ipackage/modules/SpecialDomesticOffer.dart';
@@ -17,6 +18,8 @@ class BetaApiAssistant {
   List<SpecialForeignOffer> _sfo = [];
   List<Flight> _flights = [];
   List<Airport> _airports = [];
+  List<Airport> _flightDepAirports = [];
+  List<Airport> _flightArrAirports = [];
   Offer _offer;
 
   Future<List<Country>> getCountries() async {
@@ -175,9 +178,37 @@ class BetaApiAssistant {
     else if(body['Success'] == true)
       {
         Flight tFlight;
+        _flightDepAirports.clear();
+        _flightArrAirports.clear();
+        _flights.clear();
 
         for (var flight in body['PricedItineraries']) {
           tFlight = Flight.fromJson(flight);
+          // for(var od in tFlight.originDestinationOptions)
+          //   for(var fs in od.flightSegments)
+          //     {
+          //       getAirport(fs.departureAirportLocationCode).then((value) {
+          //         _flightDepAirports = List.of(value);
+          //
+          //         for(var a in _flightDepAirports)
+          //           if(a.iata == fs.departureAirportLocationCode)
+          //             {
+          //               fs.departureAirportArName = _flightDepAirports.elementAt(0).nameAR;
+          //               fs.departureAirportEnName = _flightDepAirports.elementAt(0).nameEN;
+          //             }
+          //       });
+          //
+          //       getAirport(fs.arrivalAirportLocationCode).then((value) {
+          //         _flightArrAirports = List.of(value);
+          //
+          //         for(var a in _flightArrAirports)
+          //           if(a.iata == fs.arrivalAirportLocationCode)
+          //           {
+          //             fs.arrivalAirportArName = _flightArrAirports.elementAt(0).nameAR;
+          //             fs.arrivalAirportEnName = _flightArrAirports.elementAt(0).nameEN;
+          //           }
+          //       });
+          //     }
           _flights.add(tFlight);
         }
       }
@@ -188,11 +219,12 @@ class BetaApiAssistant {
 
   Future<List<Airport>> getAirport(String keyword) async{
     var res = await http.get(
-        Uri.parse('http://new2.ipackagetours.com/api/airports?name='+ keyword),
+        Uri.parse('https://ipackagetours.com/api/airports?name='+ keyword),
         headers: {"Accept": "application/json"});
     var body = json.decode(res.body);
     print(body);
     Airport tAirport;
+    _airports.clear();
 
     try{
       for (var airport in body['data']) {

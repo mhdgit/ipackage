@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ipackage/modules/Country.dart';
 import 'package:ipackage/modules/Offer/Day.dart';
+import 'package:ipackage/modules/Offer/Flight/FlightSegment.dart';
 import 'package:ipackage/modules/Offer/Hotel/Hotel.dart';
 import 'package:ipackage/modules/Offer/Hotel/HotelFacility.dart';
 import 'package:ipackage/modules/Offer/Offer.dart';
@@ -202,5 +203,28 @@ class LocalAssistant {
       return airport.nameAR;
     else
       return airport.nameEN;
+  }
+
+  String getFlightSegmentByLocale(context , String direction , FlightSegment flightSegment)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+    if(currentLocale.languageCode == 'ar')
+    {
+      switch(direction)
+      {
+        case 'd': return flightSegment.departureAirportArName; break;
+        case 'a': return flightSegment.arrivalAirportArName; break;
+      }
+    }
+    else
+    {
+      switch(direction)
+      {
+        case 'd': return flightSegment.departureAirportEnName; break;
+        case 'a': return flightSegment.arrivalAirportEnName; break;
+      }
+    }
+
+    return 'empty';
   }
 }
