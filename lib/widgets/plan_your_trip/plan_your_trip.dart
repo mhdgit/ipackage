@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:email_validator/email_validator.dart';
@@ -12,6 +13,7 @@ import 'package:ipackage/widgets/home/home.dart';
 import 'package:ipackage/widgets/my_books.dart';
 import 'package:ipackage/widgets/settings.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:http/http.dart' as http;
 
 class PlanYourTrip extends StatefulWidget {
   @override
@@ -61,6 +63,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
   final TextEditingController _whatsAppController = new TextEditingController();
   final TextEditingController _budgetController = new TextEditingController();
   final TextEditingController _notesController = new TextEditingController();
+  var btn_loading = false;
 
   PlanYourTripApi _PlanYourTripApi = new PlanYourTripApi();
 
@@ -2326,7 +2329,7 @@ class _PlanYourTripState extends State<PlanYourTrip>
                   padding: EdgeInsets.symmetric(horizontal: width * 0.03),
                   child: GFButton(
                     size: 50,
-                    onPressed: () {
+                    onPressed: () async {
                       if(_nameController.text.trim().isEmpty || _emailController.text.trim().isEmpty || _whatsAppController.text.trim().isEmpty || _budgetController.text.trim().isEmpty )
                       {
 
@@ -2340,6 +2343,11 @@ class _PlanYourTripState extends State<PlanYourTrip>
                             _show_alert(context,'','يرجى ادخال ايميل صحيح');
                           }else
                           {
+
+                            setState(() {
+                              btn_loading = true;
+                            });
+
                             print ('country: '+destination_id.toString());
                             print ('package: '+pakage_id.toString());
                             print ('date: '+_pickedDate.toString().replaceAll(' 00:00:00.000', ''));
@@ -2357,16 +2365,92 @@ class _PlanYourTripState extends State<PlanYourTrip>
                               stars = 5;
                             }
                             print ('stars: '+stars.toString());
-                            print ('car: '+_isTransfer.toString());
-                            print ('mail: '+_isBreakfast.toString());
+
+
+                            int car_;
+                            int mail_;
+
+                            String car_body = "non_car";
+                            String meal_body = "non_car";
+
+                            if (_isTransfer == true)
+                              {
+                                car_ = 1;
+                                car_body = "transportation";
+                              }
+
+                            if (_isBreakfast == true)
+                            {
+                              mail_ = 1;
+                              meal_body = "meals";
+                            }
+
+                              print ('car: '+car_.toString());
+                            print ('mail: '+mail_.toString());
                             print ('adults: '+_adultsNumber.toString());
+
+
                             print ('children: '+_childrenNumber.toString());
                             print ('babies: '+_babiesNumber.toString());
                             print ('name: '+_nameController.text.toString());
+
+
                             print ('email: '+_emailController.text.toString());
                             print ('whatsapp: '+_whatsAppController.text.toString());
                             print ('budget: '+_budgetController.text.toString());
                             print ('notes: '+_notesController.text.toString());
+
+                            if(_nameController.text.length<10)
+                            {
+                              _show_alert(context,'','The name must be at least 10 characters.');
+                              setState(() {
+                                btn_loading = false;
+                              });
+                            }else if(_whatsAppController.text.length<11){
+                              _show_alert(context,'','The phone must be at least 11 characters.');
+                              setState(() {
+                                btn_loading = false;
+                              });
+                          }else
+                          {
+                              Uri uri = Uri.parse('https://ipackagetours.com/api/plan-your-package');
+                              final response = await http.post(uri,
+                                  body: {
+                                    'countrie_id': destination_id.toString(),
+                                    'package_id': pakage_id.toString(),
+                                    'check_in': _pickedDate.toString().replaceAll(' 00:00:00.000', ''),
+                                    'num_of_days': _daysNumber.toString(),
+                                    'stars': stars.toString(),
+                                    meal_body : mail_.toString(),
+                                    car_body: car_.toString(),
+                                    'adult_count': _adultsNumber.toString(),
+                                    'child_count': _childrenNumber.toString(),
+                                    'bebeys_count': _babiesNumber.toString(),
+                                    'name': _nameController.text.toString(),
+                                    'email': _emailController.text.toString(),
+                                    'phone': _whatsAppController.text.toString(),
+                                    'budget': _budgetController.text.toString(),
+                                    'notes': _notesController.text.toString(),
+                                  });
+
+
+
+                              setState(() {
+                                btn_loading = false;
+                              });
+
+                              var data = response.body;
+
+                              if (data.contains('"status":true'))
+                                {
+                                  _show_success(context,'','تم ارسال طلبك');
+                                }else{
+                                _show_alert(context,'','حدثت مشكلة حاول مرة أخرى من فضلك');
+                              }
+                              print (response.body);
+                            }
+
+
                           }
 
                         /*if (_selectedTabBar < 5)
@@ -2378,7 +2462,9 @@ class _PlanYourTripState extends State<PlanYourTrip>
                     color: Colors.white,
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: width * 0.03),
-                      child: Row(
+                      child: btn_loading? CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                      ) :Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -2660,6 +2746,27 @@ class _PlanYourTripState extends State<PlanYourTrip>
     Alert(
       context: context,
       type: AlertType.warning,
+      title: text,
+      desc: des,
+      alertAnimation: fadeAlertAnimation,
+      buttons: [
+        DialogButton(
+          child: Text(
+            "OK",
+            style: TextStyle(color: Colors.white,fontFamily: 'Cairo', fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color(0xff07898b),
+          radius: BorderRadius.circular(3.0),
+        ),
+      ],
+    ).show();
+  }
+
+  _show_success(context, String text, String des) {
+    Alert(
+      context: context,
+      type: AlertType.success,
       title: text,
       desc: des,
       alertAnimation: fadeAlertAnimation,
