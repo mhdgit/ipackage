@@ -63,6 +63,7 @@ flutter:
     - lib/languages/en.json
     - lib/languages/ar.json
     - assets/images/
+    - assets/images/home/
     - assets/images/logo.jpg
     - assets/images/c1.jpg
     - assets/images/c3.jpg

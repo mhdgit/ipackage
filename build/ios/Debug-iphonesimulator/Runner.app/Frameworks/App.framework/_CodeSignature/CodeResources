@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		wi/DDjNCqBAZ8jJta+Y1e+R29MM=
+		QnkAE8w8jMe+wOALfq5xGA+jK64=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -87,6 +87,30 @@
 		<key>flutter_assets/assets/images/group.jpg</key>
 		<data>
 		Ew8n4UXTFbJ/spzqqLa1gbxGo4U=
+		</data>
+		<key>flutter_assets/assets/images/home/hotels.png</key>
+		<data>
+		LYEDSrCZA3lUWRaeyhiU+rcVrpE=
+		</data>
+		<key>flutter_assets/assets/images/home/paymentOption.png</key>
+		<data>
+		tiZ4T6TG4TsFsMgMY1IYOPPMtH0=
+		</data>
+		<key>flutter_assets/assets/images/home/raiting.png</key>
+		<data>
+		sVfA+vvHVM0rG7FpgK8AIi+sIFo=
+		</data>
+		<key>flutter_assets/assets/images/home/support.png</key>
+		<data>
+		szrXnJMPdWESMeC0M5PvPCowlSw=
+		</data>
+		<key>flutter_assets/assets/images/home/tourism.png</key>
+		<data>
+		RYcbA7Xug9AkgTyHxb7baJnjwYg=
+		</data>
+		<key>flutter_assets/assets/images/home/tourismGuide.png</key>
+		<data>
+		bk1awruc1OJ0pnYEnTpG6Rvajek=
 		</data>
 		<key>flutter_assets/assets/images/hotel.jpg</key>
 		<data>
@@ -174,7 +198,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		cKQbL0jHBY9op5m1tAJTsHPS8Lc=
+		c8geVINd7LRW/0U0KJ7Uf7+/194=
 		</data>
 		<key>flutter_assets/lib/languages/ar.json</key>
 		<data>
@@ -259,11 +283,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wi/DDjNCqBAZ8jJta+Y1e+R29MM=
+			QnkAE8w8jMe+wOALfq5xGA+jK64=
 			</data>
 			<key>hash2</key>
 			<data>
-			2JNT8fXUbjnhdd7jGONhwH+QAijILaTYG6gsc2eI3GY=
+			HrGtx3ykJVgHExVQtN7YwsuMVlOiLyzuf1OOQ+qM2uY=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -473,6 +497,72 @@
 			<key>hash2</key>
 			<data>
 			vYKkKr/xxy7IRUveNfOUAgKJlElFlr3xsC/UPqXSZeE=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/home/hotels.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LYEDSrCZA3lUWRaeyhiU+rcVrpE=
+			</data>
+			<key>hash2</key>
+			<data>
+			D5e2SOruEpqQIk7H7IgTP0+auXlv2if0urqQR9J93/4=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/home/paymentOption.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tiZ4T6TG4TsFsMgMY1IYOPPMtH0=
+			</data>
+			<key>hash2</key>
+			<data>
+			PYLGi2GsBvqsOvsckeljkDxW9N8KXpoKb2Y0StpgI4M=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/home/raiting.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			sVfA+vvHVM0rG7FpgK8AIi+sIFo=
+			</data>
+			<key>hash2</key>
+			<data>
+			8/7ltrHKT3FWmV6poGxeK1BxVEsOHigerKNrqWEBOqk=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/home/support.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			szrXnJMPdWESMeC0M5PvPCowlSw=
+			</data>
+			<key>hash2</key>
+			<data>
+			cYi3JO3IhtoCb2oE0uLdDTUbjExEBwGRzXr7m2o06wY=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/home/tourism.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RYcbA7Xug9AkgTyHxb7baJnjwYg=
+			</data>
+			<key>hash2</key>
+			<data>
+			CH+20EafgVDdwHYOYrP1mimpWgqFWj1gf0LTJcxFZ50=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/home/tourismGuide.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			bk1awruc1OJ0pnYEnTpG6Rvajek=
+			</data>
+			<key>hash2</key>
+			<data>
+			Rs5+Y5IY1QsRAtsD0Et7xktWL2lgBawVjr8RHM5OLEw=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/hotel.jpg</key>
@@ -710,11 +800,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cKQbL0jHBY9op5m1tAJTsHPS8Lc=
+			c8geVINd7LRW/0U0KJ7Uf7+/194=
 			</data>
 			<key>hash2</key>
 			<data>
-			ReXQ3bXz6fPFngwT8yBWxiIHPTu8V4ExV11NaGf0EcI=
+			2fyKDG3g6ivgudGSqt5cSRG95Os5QMUjxEpZ1onEB4s=
 			</data>
 		</dict>
 		<key>flutter_assets/lib/languages/ar.json</key>
