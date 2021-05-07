@@ -20,6 +20,8 @@
   "login_password_hint" : "Password",
   "login_facebook_btn" : "Continue using Facebook",
   "login_google_btn" : "Continue using Google",
+  "login_twitter_btn" : "Continue using Twitter",
+  "login_apple_btn" : "Continue using Apple",
   "login_country_btn" : "Choose your country",
   "login_country_d_title" : "Choose your country",
   "login_alert_d_cancel" : "Cancel",
@@ -105,7 +107,7 @@
   "bottom_bar_trip_plan_btn" : "Plan your trip",
 
   "home_national_tourism_btn" : "Domestic Tourism",
-  "home_international_tourism_btn" : "Foreign Tourism",
+  "home_international_tourism_btn" : "Tourist offers",
 
   "home_ambassadors_btn" : "iPackage Ambassadors ",
   "home_ambassadors_btn_2" : "Destination",
@@ -447,5 +449,25 @@
   "reset_code_subtitle": "Please type the code that was sent to you",
   "reset_new_pass_title": "Create a new password",
   "reset_new_pass_subtitle": "Please type a new password",
-  "reset_pass_subtitle": "Please reset the password using email"
+  "reset_pass_subtitle": "Please reset the password using email",
+
+  "Selectـtheـcountryـkey" : "Select the country key",
+  "MobileـPhoneـNumber": "Mobile Phone Number",
+  "Nationality": "Nationality",
+  "Wrong_data": "Wrong data",
+  "Please enter the name": "Please enter the name",
+  "Please enter an email": "Please enter an email",
+  "Please enter the password": "Please enter the password",
+  "Please enter confirmation password": "Please enter confirmation password",
+  "Passwords do not match": "Passwords do not match",
+  "Please select a country key": "Please select a country key",
+  "Please enter the phone number": "Please enter the phone number",
+  "Please select the nationality": "Please select the nationality",
+  "The email is already used in another account": "The email is already used in another account",
+  "Already have an account": "Already have an account?",
+  "You do not have an account": "You do not have an account?",
+
+  "plan_your_trip_enter_text": "Plan your dream trip through I-Package with the help of the best tourism and travel experts. Just follow the following steps and you will be notified by notifications and e-mail that your dream trip has been prepared for you and what you have to do is prepare your bag and leave the rest to us."
+
+
 }

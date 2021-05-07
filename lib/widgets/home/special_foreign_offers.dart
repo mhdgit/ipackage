@@ -45,7 +45,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
     return _isLoading ?
     Container(
       margin: EdgeInsets.symmetric(vertical: 5.0),
-      height: screenHeight * 0.65,
+      height: 150,
       width: screenWidth,
       child: Center(
         child: GFLoader(
@@ -58,7 +58,7 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
     ) :
     Container(
       margin: EdgeInsets.symmetric(vertical: 5.0),
-      height: screenHeight * 0.66,
+      height: screenHeight * 0.28+265,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _specialForeignOffers.length,
@@ -68,7 +68,9 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
             width: screenWidth * 0.6,
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+
+              },
               child: InkWell(
                 borderRadius: BorderRadius.circular(4.0),
                 onTap: () {
@@ -83,14 +85,15 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                   shadowColor: Colors.white,
                   elevation: 0.0,
                   shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.grey, width: 0.5),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   clipBehavior: Clip.antiAlias,
                   margin: const EdgeInsets.all(0.0),
-                  color: Color(0xffFAFAFA),
+                  color: Color(0xffffffff),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(0),
@@ -103,11 +106,11 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                                 clipper: ShapeBorderClipper(
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                      BorderRadius.circular(15)),
+                                      BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15))),
                                 ),
                                 child: Image.network(
                                   'https://ipackagetours.com/storage/app/' + _specialForeignOffers[index].image.toString(),
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.fitHeight,
                                   height: screenHeight * 0.28,
                                 ),
                               ),
@@ -150,17 +153,17 @@ class _SpecialForeignOffersState extends State<SpecialForeignOffers> {
                       ),
 //
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          localAssistant.getSpecialForeignOfferByLocale(context, _specialForeignOffers[index], 'country'),
+                        padding: const EdgeInsets.all(4.0),
+                        child: SizedBox(height: 60,child:  Text(
+                          localAssistant.getSpecialForeignOfferByLocale(context, _specialForeignOffers[index], 'title'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff07898B),
                           ),
                           softWrap: true,
-                        ),
+                        ),)
                       ),
 
                       Container(

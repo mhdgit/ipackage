@@ -227,8 +227,10 @@ class BetaApiAssistant {
     _airports.clear();
 
     try{
+      _airports.clear();
       for (var airport in body['data']) {
         tAirport = Airport.fromJson(airport);
+
         _airports.add(tAirport);
       }
       print('_airports length is : ' + _airports.length.toString());

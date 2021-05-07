@@ -90,10 +90,10 @@ class _SpecialOffersState extends State<SpecialOffers> {
                   ),
                   clipBehavior: Clip.antiAlias,
                   margin: const EdgeInsets.all(0.0),
-                  color: Color(0xffFAFAFA),
+                  color: Color(0xffffffff),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(0),
@@ -155,7 +155,7 @@ class _SpecialOffersState extends State<SpecialOffers> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          localAssistant.getSpecialDomesticOfferByLocale(context, _specialDomesticOffers[index], 'country'),
+                          localAssistant.getSpecialDomesticOfferByLocale(context, _specialDomesticOffers[index], 'title'),
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             fontSize: 18,
