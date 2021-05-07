@@ -5,6 +5,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/Offer/Airport.dart';
+import 'package:ipackage/modules/Offer/Day.dart';
 import 'package:ipackage/modules/Offer/Flight/Flight.dart';
 import 'package:ipackage/modules/Offer/Flight/FlightSegment.dart';
 import 'package:ipackage/modules/Offer/Hotel/Hotel.dart';
@@ -68,7 +69,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   String day;
   String month;
   String year;
-  int totalFligtsNumber = 0;
+  int totalFlightsNumber = 0;
+  List<Day> _availableCityTrips = [];
 
 
   List<String> _comments = [
@@ -986,7 +988,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                             ),
                           Container(
                             height: screenHeight * 0.06,
-                            width: screenWidth * 0.9,
+                            width: screenWidth * 0.8,
                             padding: const EdgeInsets.all(4.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -1287,6 +1289,163 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     });
   }
 
+  void changeTrip(context , screenWidth , screenHeight  , dayPointer)
+  {
+    showDialog(
+        context: context, builder: (BuildContext bc){
+      return Dialog(
+        child: Container(
+          width: screenWidth * 0.9,
+          // height: screenHeight * 0.7,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  width: screenWidth * 0.9,
+                  color: Color(0xff07898B),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      getTranslated(context, 'fo_change_trip_title'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16 , color: Colors.white),
+                    ),
+                  ),
+                ),
+                for(int i = 0 ; i < _availableCityTrips[dayPointer].trips.length ; i++)
+                  Container(
+                    width: screenWidth * 0.9,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(4.0),
+                      child: Card(
+                        child: Row(
+                          children: <Widget>[
+                            ClipPath(
+                              clipper: ShapeBorderClipper(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(4.0)),
+                              ),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(0),
+                                  child: Image.network(
+                                    'https://ipackagetours.com/storage/app/' +
+                                        _availableCityTrips[dayPointer].trips[i]
+                                            .image
+                                            .toString(),
+                                    fit: BoxFit.fill,
+                                    height: screenHeight * 0.16,
+                                    width: screenWidth * 0.3,
+                                  )),
+                            ),
+                            Column(
+                              mainAxisAlignment:
+                              MainAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  width: screenWidth * 0.54,
+                                  padding: const EdgeInsets.all(0),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Flexible(
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsetsDirectional
+                                              .only(start: 4.0),
+                                          child: Text(
+                                            localAssistant
+                                                .getTripByLocale(
+                                                context,
+                                                _availableCityTrips[dayPointer]
+                                                    .trips[i],
+                                                'name')
+                                                .toString(),
+                                            textAlign:
+                                            TextAlign.start,
+                                            style: TextStyle(
+                                                fontWeight:
+                                                FontWeight.bold,
+                                                fontSize: 15,
+                                                color: Colors.black),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                Container(
+                                  height: screenHeight * 0.06,
+                                  width: screenWidth * 0.54,
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Expanded(
+                                        flex: 28,
+                                        child: Text(''),
+                                      ),
+                                      Expanded(
+                                        flex: 44,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: GFButton(
+                                            onPressed: () {
+                                              setState(() {
+
+                                              });
+                                              Navigator.pop(context);
+                                            },
+                                            color: Colors.teal,
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.add,
+                                                  size: 14,
+                                                  color: Colors.white,
+                                                ),
+
+                                                Padding(
+                                                  padding: const EdgeInsets.all(4.0),
+                                                  child: FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: Text(' ',
+                                                      // (_flightsBack[index].airItineraryPricingInfo.flightTotalFare.totalFare
+                                                      //     - _flightsBack[0].airItineraryPricingInfo.flightTotalFare.totalFare).toStringAsFixed(2) + ' \$',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 28,
+                                        child: Text(''),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      );
+    });
+  }
   _activityBar(width, height, String head) {
     return Row(
       children: [
@@ -5341,35 +5500,12 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     });
   }
 
-  void increaseProperty(index)
-  {
-    setState(() {
-      index++;
-    });
-  }
-
-  void decreaseProperty(index)
-  {
-    setState(() {
-      index--;
-    });
-  }
-
   void calculatePassengersNumber()
   {
     setState((){
       _totalPassengersNumber = _adultsNumber + _childrenNumber + _babiesNumber;
       dayIndex = -1;
     });
-  }
-
-  void clearAirportList(){
-      setState(() {
-        _airports.clear();
-        setState(() {
-
-        });
-      });
   }
 
   _openEditPackageWidget(context , screenWidth, screenHeight) {
@@ -6030,19 +6166,19 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   void getFlightsNumber(){
 
     setState(() {
-      totalFligtsNumber = 0;
+      totalFlightsNumber = 0;
     });
 
     if(_flights.length > 0)
       if(_flights[0].visibility == true)
         setState(() {
-          totalFligtsNumber += _flights[0].originDestinationOptions[0].flightSegments.length;
+          totalFlightsNumber += _flights[0].originDestinationOptions[0].flightSegments.length;
         });
 
     if(_flightsBack.length > 0)
       if(_flightsBack[0].visibility == true)
         setState(() {
-          totalFligtsNumber += _flightsBack[0].originDestinationOptions[0].flightSegments.length;
+          totalFlightsNumber += _flightsBack[0].originDestinationOptions[0].flightSegments.length;
         });
 
   }
@@ -6067,6 +6203,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         calculateFlightsDates();
         // _firstDate = DateFormat('MM-dd').parse(offer.days[0].trips[0].date.toString());
         _destinationCode = offer.airportGo.iata.toString();
+        _availableCityTrips = List.of(offer.days);
         _isLoading = false;
         _isPriceLoading = false;
       });
@@ -6678,7 +6815,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                 color: Color(0xffBDBDBD),
                                 textColor: Colors.black,
                                 child: Text(
-                                    totalFligtsNumber.toString(),
+                                    totalFlightsNumber.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 15),
