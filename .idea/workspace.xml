@@ -3,13 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="635e63dd-f7b8-415a-a66f-415dd4a44b0f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/BetaApiAssistant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/BetaApiAssistant.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/home/foreign_offer_main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/foreign_offer_main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/search/foreign_tour.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/foreign_tour.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/search/search_results.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/search_results.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[5LX9K19403907299]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -342,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620498556805</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Build Foreign offers main widget_updated_10">
+      <created>1620500793299</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1620500793299</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -356,7 +367,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Build change widgets_updated_4" />
     <MESSAGE value="Build change widgets_updated_5" />
     <MESSAGE value="Resolve some conflicts" />
     <MESSAGE value="Build ambassadors widgets" />
@@ -381,7 +391,8 @@
     <MESSAGE value="Build Foreign offers main widget_updated_7" />
     <MESSAGE value="Build Foreign offers main widget_updated_8" />
     <MESSAGE value="Build Foreign offers main widget_updated_9" />
-    <option name="LAST_COMMIT_MESSAGE" value="Build Foreign offers main widget_updated_9" />
+    <MESSAGE value="Build Foreign offers main widget_updated_10" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build Foreign offers main widget_updated_10" />
   </component>
   <component name="WindowStateProjectService">
     <state x="399" y="187" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1619880006132">
@@ -392,10 +403,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1620479874120" />
-    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1620498505910">
+    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1620500787274">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1620498505910" />
+    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1620500787274" />
     <state x="462" y="138" key="FileChooserDialogImpl" timestamp="1618809258978">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -440,10 +451,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="445" y="101" key="VCS.ChangeListViewerDialog/0.0.1366.768@0.0.1366.768" timestamp="1620402171250" />
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1620498647188">
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1620503417617">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1620498647188" />
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1620503417617" />
     <state x="240" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1619126270371">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

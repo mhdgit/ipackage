@@ -248,18 +248,24 @@ class BetaApiAssistant {
 
   Future<List<SpecialForeignOffer>> getSearchResults(int countryId , int packageId) async {
     var res = await http.get(
-        Uri.parse('https://ipackagetours.com/api/offers?country_id='+countryId.toString()+'&package=4'),
+        Uri.parse('https://ipackagetours.com/api/offers?country_id='+countryId.toString()+'&package='+packageId.toString()),
         headers: {"Accept": "application/json"});
     var body = json.decode(res.body);
     print(body);
     SpecialForeignOffer tsfo;
     _searchResults.clear();
 
-    for (var pack in body['data']) {
-      tsfo = SpecialForeignOffer.fromJson(pack);
-      _searchResults.add(tsfo);
+    try{
+      for (var pack in body['data']) {
+        tsfo = SpecialForeignOffer.fromJson(pack);
+        _searchResults.add(tsfo);
+      }
+      print('search results length is : ' + _searchResults.length.toString());
     }
-    print('search results length is : ' + _searchResults.length.toString());
+    catch(e)
+    {
+
+    }
 
     return _searchResults;
   }

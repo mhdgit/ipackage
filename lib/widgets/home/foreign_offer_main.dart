@@ -14,7 +14,6 @@ import 'package:ipackage/modules/Offer/Transportations/Transportation.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/confirm_book.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../modules/BetaApiAssistant.dart';
 import '../../modules/LocalAssistant.dart';
 import '../../modules/Offer/Offer.dart';

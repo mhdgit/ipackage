@@ -430,7 +430,7 @@ class _ForeignTourState extends State<ForeignTour> {
                                         prefs.setString('source_airport', localAssistant.getAirportByLocale(context,
                                             _airports[index]).toString());
 
-                                        _sourceBtnLabel = _airports[index].iata;
+                                        updateSourceAirport(_airports[index].iata);
 
                                         _isAirportResults = false;
                                         _isNotLocked = true;
@@ -583,6 +583,13 @@ class _ForeignTourState extends State<ForeignTour> {
   {
     setState(() {
       _packageBtnLabel = name;
+    });
+  }
+
+  void updateSourceAirport(String name)
+  {
+    setState(() {
+      _sourceBtnLabel = name;
     });
   }
 
