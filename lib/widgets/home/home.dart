@@ -1143,6 +1143,7 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your onPressed code here!
+          _showBotDialog(context, screenHeight, screenWidth);
         },
         child: const Icon(MyIcons.chat),
         backgroundColor: Color(0xff07898B),
@@ -1196,5 +1197,167 @@ class _HomeState extends State<Home> {
       Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new Settings()));
     }
+  }
+
+  void _showBotDialog(context, screenHeight, screenWidth) {
+    showDialog(
+        context: context,
+        builder: (BuildContext bc) {
+          return Padding(
+            padding: EdgeInsets.only(
+              top: 0,
+              bottom: 0,
+            ),
+            child: Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  )),
+              elevation: 16,
+              child: StatefulBuilder(builder: (context, setState) {
+                return Container(
+                    padding: EdgeInsets.all(0),
+                  decoration: BoxDecoration(
+
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(5.0) //                 <--- border radius here
+                    ),
+                  ),
+                    height: 520,
+                    width: screenWidth,
+                    child: Column(
+                        children: <Widget>[
+                    Container(
+                            height: 60,
+                            width: double.infinity,
+                            //color: Color(0xff07898B),
+                              decoration: BoxDecoration(
+                                color: Color(0xff07898B),
+                                border: Border.all(
+                                    width: 1.0,
+                                    color: Color(0xff07898B),
+                                ),
+                                borderRadius: BorderRadius.only(
+                                     topLeft: Radius.circular(5.0),topRight: Radius.circular(5.0)
+                                ),
+                              ),
+                            child: Padding(padding: EdgeInsets.all(5),child: Text('Chat Bot',style: TextStyle(fontSize: 18,color: Colors.white),))
+                          ),
+
+
+                        Container(height: 400, child:
+                        SingleChildScrollView(
+                            child: Column(children: [
+
+                            ],)),),
+
+
+                            /*Row(
+                              children: <Widget>[
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.send,
+                                    color: Color(0xff275879),
+                                  ),
+                                  color: Colors.white,
+                                  //onPressed: _addComment
+                                ),
+                                Container(
+                                  color: Colors.white,
+                                  width:
+                                  150,
+                                  child: TextFormField(
+                                    textAlign: TextAlign.right,
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                      const EdgeInsets.symmetric(
+                                          horizontal: 5.0),
+                                      fillColor: Colors.white,
+                                      border: new OutlineInputBorder(
+                                        borderRadius:
+                                        new BorderRadius.circular(5.0),
+                                        borderSide: new BorderSide(),
+                                      ),
+                                    ),
+                                    //controller: _commentController,
+                                    onChanged: null,
+                                  ),
+                                )
+                              ],
+                            )*/
+
+                          Container(
+                            height: 60,
+                            //color: Color(0xff07898B),
+                            decoration: BoxDecoration(
+                              color: Color(0xff07898B),
+                              border: Border.all(
+                                width: 1.0,
+                                color: Color(0xff07898B),
+                              ),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(5.0) //                 <--- border radius here
+                              ),
+                            ),
+                            child:
+                                      Padding(
+                                          padding: const EdgeInsets.all(5),
+                                          child: TextFormField(
+
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              //fontWeight: FontWeight.w600,
+                                              fontFamily: "CustomFont",
+                                            ),
+                                            //controller: search_nameController,
+                                            keyboardType: TextInputType.text,
+                                            maxLines: null,
+                                            //textAlign: TextAlign.right,
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              contentPadding: EdgeInsets.only(top:12,right: 5,left: 5), // add padding to adjust text
+                                              isDense: true,
+                                              hintText:
+                                              getTranslated(context, 'home_search_hint'),
+                                              hintStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                //fontWeight: FontWeight.w600,
+                                                fontFamily: "CustomFont",
+                                              ),
+                                                suffixIcon: Icon(
+                                                Icons.send,
+                                                size: 26,
+                                                color: Color(0xff34495e),
+                                              ),
+
+                                              border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+
+                                            ),
+                                            onFieldSubmitted: (String str) {
+                                              /*Navigator.of(context).push(new MaterialPageRoute(
+                                                  builder: (BuildContext context) =>
+                                                  new search_tab(
+                                                      text: search_nameController.text
+                                                          .toString())));*/
+                                            },
+                                          )),
+
+
+
+                          ),
+
+
+
+
+                      ],
+                      ),
+                    );
+              }),
+            ),
+          );
+        });
   }
 }

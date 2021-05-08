@@ -466,7 +466,20 @@
   "Already have an account": "Already have an account?",
   "You do not have an account": "You do not have an account?",
 
-  "plan_your_trip_enter_text": "Plan your dream trip through I-Package with the help of the best tourism and travel experts. Just follow the following steps and you will be notified by notifications and e-mail that your dream trip has been prepared for you and what you have to do is prepare your bag and leave the rest to us."
+  "plan_your_trip_enter_text": "Plan your dream trip through I-Package with the help of the best tourism and travel experts. Just follow the following steps and you will be notified by notifications and e-mail that your dream trip has been prepared for you and what you have to do is prepare your bag and leave the rest to us.",
+
+
+  "chatbot_welcome": "Hello. Are you planning a trip? Let me help you find the trip that's right for you: Where do you want to go?",
+  "chatbot_select_country": "Click here to select a country",
+  "chatboat_type_of_trip": "Choose the type of trip",
+  "chatbot_days_number" : "The number of days of the trip",
+  "chatbot_date": "Choose your travel date",
+  "chatbot_hotel": "Choose a hotel category",
+  "chatbot_air": "Do you want a tourist offer that includes international flights?",
+  "chatbot_adults": "Number of adults",
+  "chatbot_children": "Number of children",
+  "chatbot_Infants": "Number of Infants"
+
 
 
 }
