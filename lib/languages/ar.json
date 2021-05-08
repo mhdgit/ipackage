@@ -155,6 +155,7 @@
   "pyt_in_t_children_label" : "أطفال",
   "pyt_in_t_flight_btn" : "الطيران",
   "pyt_in_t_search_btn" : "بحث",
+  "pyt_in_t_package_btn" : "نوع الباكج",
 
   "pyt_ambassadors_btn" : "سفراء آي باكج",
   "pyt_programs" : "البرامج",
@@ -363,6 +364,7 @@
   "notification_content_2" : "مرحبا أنا محمد أحمد و أريد التواصل معك",
 
   "change_flight" : "تغيير الطيران",
+  "offers_search_results" : "نتائج البحث",
 
   "create_membership" : "إنشاء عضوية",
   "create_membership_name" : "الاسم الأول",

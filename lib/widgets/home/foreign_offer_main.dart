@@ -13,6 +13,7 @@ import 'package:ipackage/modules/Offer/Transportations/MinTransportation.dart';
 import 'package:ipackage/modules/Offer/Transportations/Transportation.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/confirm_book.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../modules/BetaApiAssistant.dart';
 import '../../modules/LocalAssistant.dart';
@@ -32,6 +33,7 @@ class ForeignOfferMain extends StatefulWidget {
 class _ForeignOfferMainState extends State<ForeignOfferMain> {
   BetaApiAssistant betaApiAssistant = new BetaApiAssistant();
   LocalAssistant localAssistant = new LocalAssistant();
+  SharedPreferences prefs;
   Offer offer;
   bool _isLoading = true;
   int dayIndex = -1;
@@ -64,19 +66,94 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   bool _isNotLocked = true;
   final TextEditingController _nameController = new TextEditingController();
   int totalTripDays = 0;
-  String firstFlightDate;
+  String firstFlightDate = ' ';
   String lastFlightDate;
   String day;
   String month;
   String year;
   int totalFlightsNumber = 0;
   List<Day> _availableCityTrips = [];
+  bool _isFlight = false;
+  bool _isExtraTripsLoading = true;
 
 
   List<String> _comments = [
     "لقد كانت رحلة رائعة لقد كانت رحلة رائعة لقد كانت رحلة رائعة",
     "لقد كانت رحلة رائعة",
   ];
+
+  Future _loadUserPreferences() async{
+
+    final key = 'source_airport_code';
+    final value = prefs.getString(key);
+    if(value != null)
+      setState(() {
+        _originCode = value;
+      });
+
+    final key6 = 'source_airport';
+    final value6 = prefs.getString(key6);
+    if(value6 != null)
+      setState(() {
+        _nameController.text = value6 + ' - ' + value.toString();
+      });
+
+    // final key2 = 'destination_country';
+    // final value2 = prefs.getString(key2);
+    // if(value2 != null)
+    //   setState(() {
+    //     _destinationBtnLabel = value2;
+    //   });
+
+    // final key8 = 'destination_country_id';
+    // final value8 = prefs.getInt(key8);
+    // if(value8 != null)
+    //   setState(() {
+    //     _destinationCountryId = value8;
+    //   });
+
+    final key3 = 'departure_date';
+    final value3 = prefs.getString(key3);
+    if(value3 != null)
+      setState(() {
+        firstFlightDate = value3;
+      });
+
+    final key4 = 'adults_number';
+    final value4 = prefs.getInt(key4);
+    if(value4 != null)
+      setState(() {
+        _adultsNumber = value4;
+      });
+
+    final key5 = 'children_number';
+    final value5 = prefs.getInt(key5);
+    if(value5 != null)
+      setState(() {
+        _childrenNumber = value5;
+      });
+
+    final key7 = 'is_flight';
+    final value7 = prefs.getBool(key7);
+    if(value7 != null)
+      setState(() {
+        _isFlight = value7;
+      });
+
+    // final key9 = 'package_name';
+    // final value9 = prefs.getString(key9);
+    // if(value9 != null)
+    //   setState(() {
+    //     _packageBtnLabel = value9;
+    //   });
+
+    // final key10 = 'package_id';
+    // final value10 = prefs.getInt(key10);
+    // if(value10 != null)
+    //   setState(() {
+    //     _packageId = value10;
+    //   });
+  }
 
   void calculateFlightsDates()
   {
@@ -1297,7 +1374,17 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         child: Container(
           width: screenWidth * 0.9,
           // height: screenHeight * 0.7,
-          child: SingleChildScrollView(
+          child: _isExtraTripsLoading ?
+          Center(
+            child: GFLoader(
+              type: GFLoaderType.circle,
+              loaderColorOne: Color(0xff07898B),
+              loaderColorTwo: Color(0xff07898B),
+              loaderColorThree: Color(0xff07898B),
+            ),
+          )
+          :
+          SingleChildScrollView(
             child: Column(
               children: [
                 Container(
@@ -5481,7 +5568,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(2018),
-        lastDate: DateTime.now(),
+        lastDate: DateTime.now().add(Duration(days: 730)),
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: ThemeData.light().copyWith(
@@ -5496,6 +5583,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
       if (selectedDate == null) return;
       setState(() {
         firstFlightDate = fullFormatter.format(selectedDate).toString();
+        prefs.setString('departure_date', fullFormatter.format(selectedDate).toString());
+        dayIndex = -1;
       });
     });
   }
@@ -5956,26 +6045,33 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                             _nameController.text = localAssistant.getAirportByLocale(context,
                                                 _airports[index]).toString() + '-' + _airports[index].iata;
 
+                                            prefs.setString('source_airport_code', _airports[index].iata);
+
+                                            prefs.setString('source_airport', localAssistant.getAirportByLocale(context,
+                                                _airports[index]).toString());
+
                                             _isAirportResults = false;
 
-                                          });
+                                            betaApiAssistant.getFlightPath(_originCode, _destinationCode, firstFlightDate).then((value) {
+                                              setState((){
+                                                _flights = List.of(value);
 
-                                          betaApiAssistant.getFlightPath(_originCode, _destinationCode, firstFlightDate).then((value) {
-                                            setState((){
-                                              _flights = List.of(value);
+                                                betaApiAssistant.getFlightPath(_destinationCode, _originCode, lastFlightDate).then((value2) {
+                                                  setState((){
+                                                    _flightsBack = List.of(value2);
+
+                                                    getFlightsNumber();
+                                                    calculateOfferPrice();
+
+                                                    _isFlightsLoading = false;
+                                                    _isNotLocked = true;
+                                                    dayIndex = -1;
+                                                  });
+                                                });
+
+                                              });
                                             });
-                                          });
 
-                                          betaApiAssistant.getFlightPath(_destinationCode, _originCode, lastFlightDate).then((value2) {
-                                            setState((){
-                                              _flightsBack = List.of(value2);
-
-                                              getFlightsNumber();
-
-                                              _isFlightsLoading = false;
-                                              _isNotLocked = true;
-                                              dayIndex = -1;
-                                            });
                                           });
                                         },
                                         contentPadding:const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
@@ -6186,28 +6282,60 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   @override
   void initState() {
     super.initState();
+    SharedPreferences.getInstance().then((value) {
+      prefs = value;
 
-    setState(() {
-      firstFlightDate = fullFormatter.format(DateTime.now().add(Duration(days: 15))).toString();
-    });
-    print(firstFlightDate);
+      _loadUserPreferences().then((value) {
 
-    betaApiAssistant.getOffer(widget.id, firstFlightDate).then((value) {
-      setState(() {
-        offer = value;
-        calculateOfferPrice();
-        // getOfferImages();
-        buildHotelsList(offer);
-        calculateOfferNumber(offer);
-        // _pickedDate = DateFormat('MM/dd').parse(offer.days[0].trips[0].date.toString());
-        calculateFlightsDates();
-        // _firstDate = DateFormat('MM-dd').parse(offer.days[0].trips[0].date.toString());
-        _destinationCode = offer.airportGo.iata.toString();
-        _availableCityTrips = List.of(offer.days);
-        _isLoading = false;
-        _isPriceLoading = false;
+        if(firstFlightDate == ' ')
+          setState(() {
+            firstFlightDate = fullFormatter.format(DateTime.now().add(Duration(days: 15))).toString();
+          });
+        print(firstFlightDate);
+
+        betaApiAssistant.getOffer(widget.id, firstFlightDate).then((value) {
+          setState(() {
+            offer = value;
+            _destinationCode = offer.airportGo.iata.toString();
+            calculateFlightsDates();
+
+            if(_isFlight && _originCode != 'AAA')
+            {
+              betaApiAssistant.getFlightPath(_originCode, _destinationCode, firstFlightDate).then((value) {
+                setState((){
+                  _flights = List.of(value);
+
+                  betaApiAssistant.getFlightPath(_destinationCode, _originCode, lastFlightDate).then((value2) {
+                    setState((){
+                      _flightsBack = List.of(value2);
+
+                      getFlightsNumber();
+                      calculateOfferPrice();
+                      // getOfferImages();
+                      buildHotelsList(offer);
+                      calculateOfferNumber(offer);
+                      calculatePassengersNumber();
+                      // _pickedDate = DateFormat('MM/dd').parse(offer.days[0].trips[0].date.toString());
+                      // _firstDate = DateFormat('MM-dd').parse(offer.days[0].trips[0].date.toString());
+                      _availableCityTrips = List.of(offer.days);
+                      _isLoading = false;
+                      _isPriceLoading = false;
+
+                      dayIndex = -1;
+                    });
+                  });
+                });
+              });
+            }
+          });
+        });
       });
-    });
+
+      });
+
+
+
+
   }
 
   _commentsWidget(width, height) {

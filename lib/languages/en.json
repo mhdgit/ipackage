@@ -134,10 +134,10 @@
   "home_help_label" : "Why choose iPackage",
   "home_payment_choices_title" : "Payment options",
   "home_payment_choices" : "Various payment options such as Visa, MasterCard and bank transfers",
-  "home_customer_services_title" : "Customer service 24 hours",
-  "home_customer_services" : "To answer all your inquiries and meet all your needs throughout the week",
-  "home_customer_ratings_title" : "Customer ratings",
-  "home_customer_ratings" : "All tourism offers are highly rated and distinguished by service",
+  "home_agent_services_title" : "Customer service 24 hours",
+  "home_agent_services" : "To answer all your inquiries and meet all your needs throughout the week",
+  "home_agent_ratings_title" : "Customer ratings",
+  "home_agent_ratings" : "All tourism offers are highly rated and distinguished by service",
   "home_best_hotels_title" : "Best hotels",
   "home_best_hotels" : "A selection of distinctive hotels is selected and the hotel reviews link is attached to the offer",
 
@@ -157,6 +157,7 @@
   "pyt_in_t_children_label" : "Children",
   "pyt_in_t_flight_btn" : "Flight",
   "pyt_in_t_search_btn" : "Search",
+  "pyt_in_t_package_btn" : "Package type",
 
   "pyt_ambassadors_btn" : "iPackage Ambassadors ",
   "pyt_programs" : "Packages",
@@ -365,6 +366,7 @@
   "notification_content_2" : "Hello, I am Mohamed Ahmed, and I want to communicate with you",
 
   "change_flight" : "Change flight",
+  "offers_search_results" : "Search results",
 
   "create_membership" : "Create  membership",
   "create_membership_name" : "First name",
