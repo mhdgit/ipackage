@@ -95,6 +95,17 @@ class _SearchResultsState extends State<SearchResults> {
                 ),
               ),
 
+              if(_specialForeignOffers.length == 0)
+              Text(
+                getTranslated(context,
+                    'fo_no_airports'),
+                style: TextStyle(
+                  fontSize: 14,
+                  // fontWeight: FontWeight.bold,
+                  color: Colors.blueGrey,
+                ),
+              ),
+
               for(int index = 0 ; index < _specialForeignOffers.length ; index++)
                 Container(
                   width: screenWidth * 0.84,
@@ -210,7 +221,7 @@ class _SearchResultsState extends State<SearchResults> {
                                             left: 0.0,
                                             bottom: 0.0),
                                         child: Text(
-                                          _specialForeignOffers[index].daysNumber.toString() +
+                                          _specialForeignOffers[index].daysNumber.toString() +' '+
                                               getTranslated(context,
                                                   'home_offer_card_days'),
                                           textAlign: TextAlign.start,
