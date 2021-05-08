@@ -155,6 +155,7 @@
   "pyt_in_t_children_label" : "أطفال",
   "pyt_in_t_flight_btn" : "الطيران",
   "pyt_in_t_search_btn" : "بحث",
+  "pyt_in_t_package_btn" : "نوع الباكج",
 
   "pyt_ambassadors_btn" : "سفراء آي باكج",
   "pyt_programs" : "البرامج",
@@ -257,6 +258,7 @@
   "fo_no_flight_2" : "لا تتوفر رحلات جوية حالياً.",
   "fo_no_airports" : "لا يوجد نتائج",
   "fo_flight_remove_note" : "سيتم إزالة رحلة الطيران بشكل نهائي",
+  "fo_change_trip_title" : "المزيد من الأنشطة",
 
   "book_trip_label" : "حدد وجهتك",
   "book_trip_label_2" : "اختار الباقة",
@@ -362,6 +364,7 @@
   "notification_content_2" : "مرحبا أنا محمد أحمد و أريد التواصل معك",
 
   "change_flight" : "تغيير الطيران",
+  "offers_search_results" : "نتائج البحث",
 
   "create_membership" : "إنشاء عضوية",
   "create_membership_name" : "الاسم الأول",

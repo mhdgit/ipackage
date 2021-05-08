@@ -6,6 +6,7 @@ import 'package:ipackage/modules/Offer/Airport.dart';
 import 'package:ipackage/modules/Offer/Flight/Flight.dart';
 import 'package:ipackage/modules/Offer/Flight/FlightSegment.dart';
 import 'package:ipackage/modules/Offer/Offer.dart';
+import 'package:ipackage/modules/Offer/Trip.dart';
 import 'package:ipackage/modules/Package.dart';
 import 'package:ipackage/modules/SpecialDomesticOffer.dart';
 import 'package:ipackage/modules/SpecialForeignOffer.dart';
@@ -14,12 +15,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class BetaApiAssistant {
   List<Country> _countries = [];
   List<Package> _packages = [];
+  List<SpecialForeignOffer> _searchResults = [];
   List<SpecialDomesticOffer> _sdo = [];
   List<SpecialForeignOffer> _sfo = [];
   List<Flight> _flights = [];
   List<Airport> _airports = [];
   List<Airport> _flightDepAirports = [];
   List<Airport> _flightArrAirports = [];
+  List<Trip> _extraTrips = [];
   Offer _offer;
 
   Future<List<Country>> getCountries() async {
@@ -46,6 +49,7 @@ class BetaApiAssistant {
     var body = json.decode(res.body);
     // print(body);
     Package tPackage;
+    _packages.clear();
 
     for (var pack in body['data']) {
       tPackage = Package.fromJson(pack);
@@ -240,5 +244,42 @@ class BetaApiAssistant {
     }
 
     return _airports;
+  }
+
+  Future<List<SpecialForeignOffer>> getSearchResults(int countryId , int packageId) async {
+    var res = await http.get(
+        Uri.parse('https://ipackagetours.com/api/offers?country_id='+countryId.toString()+'&package=4'),
+        headers: {"Accept": "application/json"});
+    var body = json.decode(res.body);
+    print(body);
+    SpecialForeignOffer tsfo;
+    _searchResults.clear();
+
+    for (var pack in body['data']) {
+      tsfo = SpecialForeignOffer.fromJson(pack);
+      _searchResults.add(tsfo);
+    }
+    print('search results length is : ' + _searchResults.length.toString());
+
+    return _searchResults;
+  }
+
+  Future<List<Trip>> getExtraTrips(int cityId , int tripId , int adultsNumber , int childrenNumber , int infantNumber) async {
+    var res = await http.get(
+        Uri.parse('https://ipackagetours.com/api/offer/trips?city_id='+cityId.toString()+'&trip='+tripId.toString()
+            +'&adults='+adultsNumber.toString()+'&children='+childrenNumber.toString()+'&infant='+infantNumber.toString()),
+        headers: {"Accept": "application/json"});
+    var body = json.decode(res.body);
+    print(body);
+    Trip trip;
+    _searchResults.clear();
+
+    for (var pack in body['data']) {
+      trip = Trip.fromJson(pack);
+      _extraTrips.add(trip);
+    }
+    print('Extra trips length is : ' + _extraTrips.length.toString());
+
+    return _extraTrips;
   }
 }

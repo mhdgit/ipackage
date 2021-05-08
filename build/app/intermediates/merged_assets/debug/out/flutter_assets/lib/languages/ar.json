@@ -19,6 +19,8 @@
   "login_password_hint" : "كلمة المرور",
   "login_facebook_btn" : "الإستمرار بإستخدام فيسبوك",
   "login_google_btn" : "الإستمرار بإستخدام جوجل",
+  "login_twitter_btn" : "الإستمرار بإستخدام تويتر",
+  "login_apple_btn" : "الإستمرار بإستخدام Apple",
   "login_country_btn" : "اختر دولتك",
   "login_country_d_title" : "اختر دولتك",
   "login_alert_d_cancel" : "إلغاء",
@@ -104,7 +106,7 @@
   "bottom_bar_trip_plan_btn" : "خطط رحلتك",
 
   "home_national_tourism_btn" : "السياحة الداخلية",
-  "home_international_tourism_btn" : "السياحة الخارجية",
+  "home_international_tourism_btn" : "العروض السياحية",
 
   "home_ambassadors_btn" : "سفراء آي باكج",
   "home_ambassadors_btn_2" : "الوجهة",
@@ -153,6 +155,7 @@
   "pyt_in_t_children_label" : "أطفال",
   "pyt_in_t_flight_btn" : "الطيران",
   "pyt_in_t_search_btn" : "بحث",
+  "pyt_in_t_package_btn" : "نوع الباكج",
 
   "pyt_ambassadors_btn" : "سفراء آي باكج",
   "pyt_programs" : "البرامج",
@@ -254,6 +257,8 @@
   "fo_no_flight" : "لم تحدد مطار المغادرة ، لذا لم نتمكن من تحديد الرحلات الطيران المناسبة لك. يرجى تحديد مطار المغادرة حتى نتمكن من تحديد أفضل رحلة لك.",
   "fo_no_flight_2" : "لا تتوفر رحلات جوية حالياً.",
   "fo_no_airports" : "لا يوجد نتائج",
+  "fo_flight_remove_note" : "سيتم إزالة رحلة الطيران بشكل نهائي",
+  "fo_change_trip_title" : "المزيد من الأنشطة",
 
   "book_trip_label" : "حدد وجهتك",
   "book_trip_label_2" : "اختار الباقة",
@@ -444,5 +449,23 @@
   "reset_code_subtitle": "يرجى كتابة الكود الذي أرسل إليك",
   "reset_new_pass_title": "إنشاء كلمة مرور جديدة",
   "reset_new_pass_subtitle": "يرجى كتابة كلمة مرور جديدة",
-  "reset_pass_subtitle": "يرجى إعادة ضبط كلمة المرور باستخدام البريد الإلكتروني"
+  "reset_pass_subtitle": "يرجى إعادة ضبط كلمة المرور باستخدام البريد الإلكتروني",
+  "Selectـtheـcountryـkey" : "اختر مفتاح الدولة",
+  "MobileـPhoneـNumber": "رقم الهاتف المحمول",
+  "Nationality": "الجنسية",
+  "Wrong_data": "بيانات خاطئة",
+  "Please enter the name": "يرجى إدخال الاسم",
+  "Please enter an email": "يرجى إدخال البريد الالكتروني",
+  "Please enter the password": "يرجى إدخال كلمة المرور",
+  "Please enter confirmation password": "يرجى إدخال تأكيد كلمة المرور",
+  "Passwords do not match": "كلمتا المرور غير متطابقتان",
+  "Please select a country key": "يرجى اختيار مفتاح الدولة",
+  "Please enter the phone number": "يرجى إدخال رقم الهاتف",
+  "Please select the nationality": "يرجى تحديد الجنسية",
+  "The email is already used in another account": "الايميل مستخدم في حساب آخر",
+
+  "Already have an account": "لديك حساب بالفعل؟",
+  "You do not have an account": "ليس لديك حساب؟",
+
+  "plan_your_trip_enter_text": "خطط رحلة احلامك  عن طريق اي باكج بمساعدة افضل خبراء السياحة و السفر فقط اتبع الخطوات التالية و سيتم اشعارك عن طريق الاشعارات و الايميل بأن رحلة احلامك قد تم تجهيزها لك و ما عليك غير تجهز شنطتك و خلي الباقي علينا"
 }

@@ -14,6 +14,7 @@ class Trip {
   int emptyDay;
   int status;
   int total;
+  int pricePlus;
   String date;
   String dateISO;
   String image;
@@ -40,6 +41,7 @@ class Trip {
     this.emptyDay,
     this.status,
     this.total,
+    this.pricePlus,
     this.date,
     this.dateISO,
     this.image,
@@ -69,6 +71,7 @@ class Trip {
       emptyDay: json['empty_date'] as int,
       status: json['status'] as int,
       total: json['total'] as int,
+      pricePlus: json.containsKey('price_plus') ? json['price_plus'] as int : 0,
       date: json['date'] as String,
       dateISO: json['date_iso'] as String,
       image: json['image'] as String,
