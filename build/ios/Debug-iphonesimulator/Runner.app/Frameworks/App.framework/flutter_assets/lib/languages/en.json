@@ -134,10 +134,10 @@
   "home_help_label" : "Why choose iPackage",
   "home_payment_choices_title" : "Payment options",
   "home_payment_choices" : "Various payment options such as Visa, MasterCard and bank transfers",
-  "home_customer_services_title" : "Customer service 24 hours",
-  "home_customer_services" : "To answer all your inquiries and meet all your needs throughout the week",
-  "home_customer_ratings_title" : "Customer ratings",
-  "home_customer_ratings" : "All tourism offers are highly rated and distinguished by service",
+  "home_agent_services_title" : "Customer service 24 hours",
+  "home_agent_services" : "To answer all your inquiries and meet all your needs throughout the week",
+  "home_agent_ratings_title" : "Customer ratings",
+  "home_agent_ratings" : "All tourism offers are highly rated and distinguished by service",
   "home_best_hotels_title" : "Best hotels",
   "home_best_hotels" : "A selection of distinctive hotels is selected and the hotel reviews link is attached to the offer",
 
@@ -157,6 +157,7 @@
   "pyt_in_t_children_label" : "Children",
   "pyt_in_t_flight_btn" : "Flight",
   "pyt_in_t_search_btn" : "Search",
+  "pyt_in_t_package_btn" : "Package type",
 
   "pyt_ambassadors_btn" : "iPackage Ambassadors ",
   "pyt_programs" : "Packages",
@@ -259,6 +260,7 @@
   "fo_no_flight_2" : "There are currently no flights available.",
   "fo_no_airports" : "No results",
   "fo_flight_remove_note" : "The flight will be permanently removed",
+  "fo_change_trip_title" : "More activities",
 
   "book_trip_label" : "Select your destination",
   "book_trip_label_2" : "Choose package",
@@ -364,6 +366,7 @@
   "notification_content_2" : "Hello, I am Mohamed Ahmed, and I want to communicate with you",
 
   "change_flight" : "Change flight",
+  "offers_search_results" : "Search results",
 
   "create_membership" : "Create  membership",
   "create_membership_name" : "First name",
@@ -466,7 +469,20 @@
   "Already have an account": "Already have an account?",
   "You do not have an account": "You do not have an account?",
 
-  "plan_your_trip_enter_text": "Plan your dream trip through I-Package with the help of the best tourism and travel experts. Just follow the following steps and you will be notified by notifications and e-mail that your dream trip has been prepared for you and what you have to do is prepare your bag and leave the rest to us."
+  "plan_your_trip_enter_text": "Plan your dream trip through I-Package with the help of the best tourism and travel experts. Just follow the following steps and you will be notified by notifications and e-mail that your dream trip has been prepared for you and what you have to do is prepare your bag and leave the rest to us.",
+
+
+  "chatbot_welcome": "Hello. Are you planning a trip? Let me help you find the trip that's right for you: Where do you want to go?",
+  "chatbot_select_country": "Click here to select a country",
+  "chatboat_type_of_trip": "Choose the type of trip",
+  "chatbot_days_number" : "The number of days of the trip",
+  "chatbot_date": "Choose your travel date",
+  "chatbot_hotel": "Choose a hotel category",
+  "chatbot_air": "Do you want a tourist offer that includes international flights?",
+  "chatbot_adults": "Number of adults",
+  "chatbot_children": "Number of children",
+  "chatbot_Infants": "Number of Infants"
+
 
 
 }
