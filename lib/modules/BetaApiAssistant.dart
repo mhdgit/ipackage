@@ -176,8 +176,11 @@ class BetaApiAssistant {
     print(body);
     if(body['Success'] == false && body['Error']['Message'] == 'Invalid SessionID')
       {
-        setupPartocrsSession();
-        getFlightPath(origin, destination, date);
+        setupPartocrsSession().whenComplete(() {
+          getFlightPath(origin, destination, date).whenComplete(() {
+            return _flights;
+          });
+        });
       }
     else if(body['Success'] == true)
       {
@@ -278,7 +281,7 @@ class BetaApiAssistant {
     var body = json.decode(res.body);
     print(body);
     Trip trip;
-    _searchResults.clear();
+    _extraTrips.clear();
 
     for (var pack in body['data']) {
       trip = Trip.fromJson(pack);
