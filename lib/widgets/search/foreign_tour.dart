@@ -546,6 +546,8 @@ class _ForeignTourState extends State<ForeignTour> {
                             setState((){
                               updatePackage(localAssistant.getPackageByLocale(context,
                                   _packages[index]).toString());
+
+                              _packageId = _packages[index].id;
                             });
                             Navigator.of(context).pop();
 
@@ -673,10 +675,10 @@ class _ForeignTourState extends State<ForeignTour> {
         MediaQuery.of(context).size.height - statusBarHeight - kToolbarHeight;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    if(_sourceBtnLabel == ' ')
-    setState(() {
-      _sourceBtnLabel = getTranslated(context, 'pyt_in_t_source_btn');
-    });
+    // if(_sourceBtnLabel == ' ')
+    // setState(() {
+    //   _sourceBtnLabel = getTranslated(context, 'pyt_in_t_source_btn');
+    // });
 
     if(_destinationBtnLabel == ' ')
       setState(() {

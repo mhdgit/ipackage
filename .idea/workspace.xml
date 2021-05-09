@@ -18,7 +18,7 @@
       <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/home/foreign_offer_main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/foreign_offer_main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/search/foreign_tour.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/foreign_tour.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -386,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620584896295</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Build Foreign offers main widget_updated_14">
+      <created>1620590975502</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1620590975502</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -400,7 +407,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Build tourist widgets" />
     <MESSAGE value="Build chat widgets" />
     <MESSAGE value="Build chat and change flight widgets" />
     <MESSAGE value="Build Settings widgets" />
@@ -425,7 +431,8 @@
     <MESSAGE value="Build Foreign offers main widget_updated_11" />
     <MESSAGE value="Build Foreign offers main widget_updated_12" />
     <MESSAGE value="Build Foreign offers main widget_updated_13" />
-    <option name="LAST_COMMIT_MESSAGE" value="Build Foreign offers main widget_updated_13" />
+    <MESSAGE value="Build Foreign offers main widget_updated_14" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build Foreign offers main widget_updated_14" />
   </component>
   <component name="WindowStateProjectService">
     <state x="399" y="187" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1619880006132">
@@ -436,30 +443,30 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1620479874120" />
-    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1620584835763">
+    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1620590923379">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1620584835763" />
+    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1620590923379" />
     <state x="462" y="138" key="FileChooserDialogImpl" timestamp="1618809258978">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="462" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1618809258978" />
-    <state width="1323" height="194" key="GridCell.Tab.0.bottom" timestamp="1620590273483">
+    <state width="1323" height="194" key="GridCell.Tab.0.bottom" timestamp="1620592904387">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="194" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1620590273483" />
-    <state width="1323" height="194" key="GridCell.Tab.0.center" timestamp="1620590273482">
+    <state width="1323" height="194" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1620592904387" />
+    <state width="1323" height="194" key="GridCell.Tab.0.center" timestamp="1620592904387">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="194" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1620590273481" />
-    <state width="1323" height="194" key="GridCell.Tab.0.left" timestamp="1620590273480">
+    <state width="1323" height="194" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1620592904387" />
+    <state width="1323" height="194" key="GridCell.Tab.0.left" timestamp="1620592904387">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="194" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1620590273480" />
-    <state width="1323" height="194" key="GridCell.Tab.0.right" timestamp="1620590273482">
+    <state width="1323" height="194" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1620592904387" />
+    <state width="1323" height="194" key="GridCell.Tab.0.right" timestamp="1620592904387">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="194" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1620590273482" />
+    <state width="1323" height="194" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1620592904387" />
     <state x="129" y="59" key="MergeDialog" timestamp="1620402374901">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -484,10 +491,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="445" y="101" key="VCS.ChangeListViewerDialog/0.0.1366.768@0.0.1366.768" timestamp="1620402171250" />
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1620584960512">
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1620591844898">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1620584960512" />
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1620591844898" />
     <state x="240" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1619126270371">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
