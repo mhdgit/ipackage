@@ -54,7 +54,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   Trip shiftTrip;
   double _totalOfferPrice = 0;
   int carNumber = 0;
-  String _originCode = 'AAA';
+  String _originCode = ' ';
   String _destinationCode;
   List<Flight> _flights = [];
   List<Flight> _flightsBack = [];
@@ -6638,33 +6638,47 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
             _destinationCode = offer.airportGo.iata.toString();
             calculateFlightsDates();
 
-            if(_isFlight && _originCode != 'AAA')
+            if(_isFlight)
             {
-              betaApiAssistant.getFlightPath(_originCode, _destinationCode, firstFlightDate).then((value) {
-                setState((){
-                  _flights = List.of(value);
-
-                  betaApiAssistant.getFlightPath(_destinationCode, _originCode, lastFlightDate).then((value2) {
+              if(_originCode != ' ')
+                {
+                  betaApiAssistant.getFlightPath(_originCode, _destinationCode, firstFlightDate).then((value) {
                     setState((){
-                      _flightsBack = List.of(value2);
+                      _flights = List.of(value);
 
-                      getFlightsNumber();
-                      calculateOfferPrice();
-                      // getOfferImages();
-                      buildHotelsList(offer);
-                      calculateOfferNumber(offer);
-                      calculatePassengersNumber();
-                      // _pickedDate = DateFormat('MM/dd').parse(offer.days[0].trips[0].date.toString());
-                      // _firstDate = DateFormat('MM-dd').parse(offer.days[0].trips[0].date.toString());
-                      _isLoading = false;
-                      _isPriceLoading = false;
+                      betaApiAssistant.getFlightPath(_destinationCode, _originCode, lastFlightDate).then((value2) {
+                        setState((){
+                          _flightsBack = List.of(value2);
 
-                      dayIndex = -1;
+                          getFlightsNumber();
+                          calculateOfferPrice();
+                          // getOfferImages();
+                          buildHotelsList(offer);
+                          calculateOfferNumber(offer);
+                          calculatePassengersNumber();
+                          // _pickedDate = DateFormat('MM/dd').parse(offer.days[0].trips[0].date.toString());
+                          // _firstDate = DateFormat('MM-dd').parse(offer.days[0].trips[0].date.toString());
+                          _isLoading = false;
+                          _isPriceLoading = false;
+
+                          dayIndex = -1;
+                        });
+                      });
                     });
                   });
-                });
-              });
+                }
             }
+            else
+              {
+                getFlightsNumber();
+                calculateOfferPrice();
+                buildHotelsList(offer);
+                calculateOfferNumber(offer);
+                calculatePassengersNumber();
+                _isLoading = false;
+                _isPriceLoading = false;
+                dayIndex = -1;
+              }
           });
         });
       });
