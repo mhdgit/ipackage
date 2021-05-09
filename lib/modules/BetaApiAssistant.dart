@@ -278,7 +278,7 @@ class BetaApiAssistant {
     var body = json.decode(res.body);
     print(body);
     Trip trip;
-    _searchResults.clear();
+    _extraTrips.clear();
 
     for (var pack in body['data']) {
       trip = Trip.fromJson(pack);

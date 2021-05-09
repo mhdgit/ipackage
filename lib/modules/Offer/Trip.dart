@@ -24,6 +24,7 @@ class Trip {
   String tripAR;
   String nameEN;
   String tripEN;
+  bool visibility = true;
 
   Trip({
     this.id,

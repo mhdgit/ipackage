@@ -5,12 +5,12 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/Offer/Airport.dart';
-import 'package:ipackage/modules/Offer/Day.dart';
 import 'package:ipackage/modules/Offer/Flight/Flight.dart';
 import 'package:ipackage/modules/Offer/Flight/FlightSegment.dart';
 import 'package:ipackage/modules/Offer/Hotel/Hotel.dart';
 import 'package:ipackage/modules/Offer/Transportations/MinTransportation.dart';
 import 'package:ipackage/modules/Offer/Transportations/Transportation.dart';
+import 'package:ipackage/modules/Offer/Trip.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/confirm_book.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,6 +51,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   int _totalPassengersNumber = 1;
   MinTransportation shiftTransportation;
   List<FlightSegment> shiftFlightSegments;
+  Trip shiftTrip;
   double _totalOfferPrice = 0;
   int carNumber = 0;
   String _originCode = 'AAA';
@@ -71,10 +72,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   String month;
   String year;
   int totalFlightsNumber = 0;
-  List<Day> _availableCityTrips = [];
+  List<Trip> _availableCityTrips = [];
   bool _isFlight = false;
-  bool _isExtraTripsLoading = true;
-
 
   List<String> _comments = [
     "لقد كانت رحلة رائعة لقد كانت رحلة رائعة لقد كانت رحلة رائعة",
@@ -1365,169 +1364,373 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     });
   }
 
-  void changeTrip(context , screenWidth , screenHeight  , dayPointer)
+  void changeTrip(context , screenWidth , screenHeight  , cityId , tripId , adults , children , babies , dayPointer , tripPointer)
   {
     showDialog(
         context: context, builder: (BuildContext bc){
+      // betaApiAssistant.getExtraTrips(cityId, tripId, adults, children, babies).then((value) {
+      //   setState(() {
+      //     _availableCityTrips = List.of(value);
+      //     _isExtraTripsLoading = false;
+      //   });
+      // });
       return Dialog(
-        child: Container(
-          width: screenWidth * 0.9,
-          // height: screenHeight * 0.7,
-          child: _isExtraTripsLoading ?
-          Center(
-            child: GFLoader(
-              type: GFLoaderType.circle,
-              loaderColorOne: Color(0xff07898B),
-              loaderColorTwo: Color(0xff07898B),
-              loaderColorThree: Color(0xff07898B),
-            ),
-          )
-          :
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  width: screenWidth * 0.9,
-                  color: Color(0xff07898B),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      getTranslated(context, 'fo_change_trip_title'),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16 , color: Colors.white),
-                    ),
-                  ),
-                ),
-                for(int i = 0 ; i < _availableCityTrips[dayPointer].trips.length ; i++)
-                  Container(
-                    width: screenWidth * 0.9,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(4.0),
-                      child: Card(
-                        child: Row(
-                          children: <Widget>[
-                            ClipPath(
-                              clipper: ShapeBorderClipper(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(4.0)),
-                              ),
+        child: StatefulBuilder(
+          builder:(context , setState){
+
+            return Container(
+              width: screenWidth * 0.9,
+              // height: screenHeight * 0.7,
+              child: FutureBuilder(
+
+                future: betaApiAssistant.getExtraTrips(cityId, tripId, adults, children, babies),
+                builder: (BuildContext context , AsyncSnapshot snapshot){
+
+                  if (snapshot.data == null) {
+                    return Center(
+                      child: GFLoader(
+                        type: GFLoaderType.circle,
+                        loaderColorOne: Color(0xff07898B),
+                        loaderColorTwo: Color(0xff07898B),
+                        loaderColorThree: Color(0xff07898B),
+                      ),
+                    );
+                  } else
+                    return Container(
+                      height: screenHeight * 0.8,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: screenWidth * 0.9,
+                              color: Color(0xff07898B),
                               child: Padding(
-                                  padding: const EdgeInsets.all(0),
-                                  child: Image.network(
-                                    'https://ipackagetours.com/storage/app/' +
-                                        _availableCityTrips[dayPointer].trips[i]
-                                            .image
-                                            .toString(),
-                                    fit: BoxFit.fill,
-                                    height: screenHeight * 0.16,
-                                    width: screenWidth * 0.3,
-                                  )),
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  getTranslated(context, 'fo_change_trip_title'),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 16 , color: Colors.white),
+                                ),
+                              ),
                             ),
-                            Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  width: screenWidth * 0.54,
-                                  padding: const EdgeInsets.all(0),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Flexible(
-                                        child: Padding(
-                                          padding:
-                                          const EdgeInsetsDirectional
-                                              .only(start: 4.0),
-                                          child: Text(
-                                            localAssistant
-                                                .getTripByLocale(
-                                                context,
-                                                _availableCityTrips[dayPointer]
-                                                    .trips[i],
-                                                'name')
-                                                .toString(),
-                                            textAlign:
-                                            TextAlign.start,
-                                            style: TextStyle(
-                                                fontWeight:
-                                                FontWeight.bold,
-                                                fontSize: 15,
-                                                color: Colors.black),
+                            for(int i = 0 ; i < snapshot.data.length ; i++)
+                              Card(
+                                elevation: 2,
+                                child: ListTile(
+                                  contentPadding:const EdgeInsets.all(2),
+                                  onTap: (){
+
+                                  },
+                                  subtitle: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: ClipPath(
+                                          clipper: ShapeBorderClipper(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(4.0)),
                                           ),
+                                          child: Padding(
+                                              padding: const EdgeInsets.all(0),
+                                              child: Image.network(
+                                                'https://ipackagetours.com/storage/app/' +
+                                                    snapshot.data[i]
+                                                        .image
+                                                        .toString(),
+                                                fit: BoxFit.fill,
+                                                height: screenHeight * 0.2,
+                                                width: screenWidth * 0.85,
+                                              )),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-
-                                Container(
-                                  height: screenHeight * 0.06,
-                                  width: screenWidth * 0.54,
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Expanded(
-                                        flex: 28,
-                                        child: Text(''),
-                                      ),
-                                      Expanded(
-                                        flex: 44,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: GFButton(
-                                            onPressed: () {
-                                              setState(() {
-
-                                              });
-                                              Navigator.pop(context);
-                                            },
-                                            color: Colors.teal,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.add,
-                                                  size: 14,
-                                                  color: Colors.white,
+                                      Container(
+                                        width: screenWidth * 0.85,
+                                        child: Row(
+                                          children: <Widget>[
+                                            Flexible(
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsetsDirectional
+                                                    .only(start: 4.0),
+                                                child: Text(
+                                                  localAssistant
+                                                      .getTripByLocale(
+                                                      context,
+                                                      snapshot.data[i],
+                                                      'name')
+                                                      .toString(),
+                                                  textAlign:
+                                                  TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                      FontWeight.bold,
+                                                      fontSize: 15,
+                                                      color: Colors.black),
                                                 ),
-
-                                                Padding(
-                                                  padding: const EdgeInsets.all(4.0),
-                                                  child: FittedBox(
-                                                    fit: BoxFit.scaleDown,
-                                                    child: Text(' ',
-                                                      // (_flightsBack[index].airItineraryPricingInfo.flightTotalFare.totalFare
-                                                      //     - _flightsBack[0].airItineraryPricingInfo.flightTotalFare.totalFare).toStringAsFixed(2) + ' \$',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          Flexible(
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsetsDirectional
+                                                  .only(start: 0.0),
+                                              child: Text(
+                                                localAssistant
+                                                    .getTripByLocale(
+                                                    context,
+                                                    snapshot.data[i],
+                                                    'trip')
+                                                    .toString(),
+                                                textAlign:
+                                                TextAlign.start,
+                                                style: TextStyle(
+                                                  // fontWeight:
+                                                  // FontWeight.bold,
+                                                    fontSize: 14,
+                                                    color: Colors.black),
+                                              ),
                                             ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                      Expanded(
-                                        flex: 28,
-                                        child: Text(''),
+                                      Container(
+                                        height: screenHeight * 0.07,
+                                        width: screenWidth * 0.85,
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Expanded(
+                                              flex: 20,
+                                              child: Text(''),
+                                            ),
+                                            Expanded(
+                                              flex: 60,
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(2.0),
+                                                child: GFButton(
+                                                  onPressed: () {
+                                                    setState((){
+                                                      shiftTrip = offer.days[dayPointer].trips[tripPointer];
+                                                      offer.days[dayPointer].trips[tripPointer] = snapshot.data[i];
+                                                      calculateOfferPrice();
+                                                      dayIndex = -1;
+                                                    });
+                                                    Navigator.pop(context);
+                                                  },
+                                                  color: Colors.teal,
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.add,
+                                                        size: 14,
+                                                        color: Colors.white,
+                                                      ),
+
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(4.0),
+                                                        child: FittedBox(
+                                                          fit: BoxFit.scaleDown,
+                                                          child: Text(
+                                                            snapshot.data[i].pricePlus.toString(),
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                              color: Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 20,
+                                              child: Text(''),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                              // Container(
+                              //   width: screenWidth * 0.85,
+                              //   child: InkWell(
+                              //     borderRadius: BorderRadius.circular(4.0),
+                              //     child: Card(
+                              //       child: Row(
+                              //         children: <Widget>[
+                              //           Column(
+                              //             children: [
+                              //               ClipPath(
+                              //                 clipper: ShapeBorderClipper(
+                              //                   shape: RoundedRectangleBorder(
+                              //                       borderRadius:
+                              //                       BorderRadius.circular(4.0)),
+                              //                 ),
+                              //                 child: Padding(
+                              //                     padding: const EdgeInsets.all(0),
+                              //                     child: Image.network(
+                              //                       'https://ipackagetours.com/storage/app/' +
+                              //                           snapshot.data[i]
+                              //                               .image
+                              //                               .toString(),
+                              //                       fit: BoxFit.fill,
+                              //                       height: screenHeight * 0.16,
+                              //                       width: screenWidth * 0.25,
+                              //                     )),
+                              //               ),
+                              //             ],
+                              //           ),
+                              //           Column(
+                              //             mainAxisAlignment:
+                              //             MainAxisAlignment.center,
+                              //             children: <Widget>[
+                              //               Container(
+                              //                 width: screenWidth * 0.5,
+                              //                 padding: const EdgeInsets.all(0),
+                              //                 child: Row(
+                              //                   children: <Widget>[
+                              //                     Flexible(
+                              //                       child: Padding(
+                              //                         padding:
+                              //                         const EdgeInsetsDirectional
+                              //                             .only(start: 4.0),
+                              //                         child: Text(
+                              //                           localAssistant
+                              //                               .getTripByLocale(
+                              //                               context,
+                              //                               snapshot.data[i],
+                              //                               'name')
+                              //                               .toString(),
+                              //                           textAlign:
+                              //                           TextAlign.start,
+                              //                           style: TextStyle(
+                              //                               fontWeight:
+                              //                               FontWeight.bold,
+                              //                               fontSize: 15,
+                              //                               color: Colors.black),
+                              //                         ),
+                              //                       ),
+                              //                     ),
+                              //                   ],
+                              //                 ),
+                              //               ),
+                              //               Container(
+                              //                 width: screenWidth * 0.5,
+                              //                 padding: const EdgeInsets.all(0),
+                              //                 child: Row(
+                              //                   children: <Widget>[
+                              //                     Flexible(
+                              //                       child: Padding(
+                              //                         padding:
+                              //                         const EdgeInsetsDirectional
+                              //                             .only(start: 4.0),
+                              //                         child: Text(
+                              //                           localAssistant
+                              //                               .getTripByLocale(
+                              //                               context,
+                              //                               snapshot.data[i],
+                              //                               'trip')
+                              //                               .toString(),
+                              //                           textAlign:
+                              //                           TextAlign.start,
+                              //                           style: TextStyle(
+                              //                               // fontWeight:
+                              //                               // FontWeight.bold,
+                              //                               fontSize: 14,
+                              //                               color: Colors.black),
+                              //                         ),
+                              //                       ),
+                              //                     ),
+                              //                   ],
+                              //                 ),
+                              //               ),
+                              //
+                              //               Container(
+                              //                 height: screenHeight * 0.06,
+                              //                 width: screenWidth * 0.5,
+                              //                 padding: const EdgeInsets.all(4.0),
+                              //                 child: Row(
+                              //                   mainAxisAlignment: MainAxisAlignment.end,
+                              //                   children: [
+                              //                     Expanded(
+                              //                       flex: 20,
+                              //                       child: Text(''),
+                              //                     ),
+                              //                     Expanded(
+                              //                       flex: 60,
+                              //                       child: Padding(
+                              //                         padding: const EdgeInsets.all(2.0),
+                              //                         child: GFButton(
+                              //                           onPressed: () {
+                              //                             setState(() {
+                              //
+                              //                             });
+                              //                             Navigator.pop(context);
+                              //                           },
+                              //                           color: Colors.teal,
+                              //                           child: Row(
+                              //                             mainAxisAlignment: MainAxisAlignment.center,
+                              //                             children: [
+                              //                               Icon(
+                              //                                 Icons.add,
+                              //                                 size: 14,
+                              //                                 color: Colors.white,
+                              //                               ),
+                              //
+                              //                               Padding(
+                              //                                 padding: const EdgeInsets.all(4.0),
+                              //                                 child: FittedBox(
+                              //                                   fit: BoxFit.scaleDown,
+                              //                                   child: Text(
+                              //                                     snapshot.data[i].pricePlus.toString(),
+                              //                                     style: TextStyle(
+                              //                                       fontSize: 14,
+                              //                                       color: Colors.white,
+                              //                                     ),
+                              //                                   ),
+                              //                                 ),
+                              //                               )
+                              //                             ],
+                              //                           ),
+                              //                         ),
+                              //                       ),
+                              //                     ),
+                              //                     Expanded(
+                              //                       flex: 20,
+                              //                       child: Text(''),
+                              //                     ),
+                              //                   ],
+                              //                 ),
+                              //               ),
+                              //             ],
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-              ],
-            ),
-          ),
+                    );
+
+                },
+
+              ),
+            );
+          }
         ),
       );
     });
@@ -2046,6 +2249,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                             _flights[0].visibility = ! _flights[0].visibility;
                                                             calculateOfferPrice();
                                                             getFlightsNumber();
+                                                            dayIndex = -1;
                                                           });
                                                           Navigator.pop(context);
                                                         },
@@ -3038,174 +3242,217 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                             ),
 
                             // Trip
-                            Container(
-                              width: screenWidth * 0.9,
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(4.0),
-                                child: Card(
-                                  child: Row(
-                                    children: <Widget>[
-                                      ClipPath(
-                                        clipper: ShapeBorderClipper(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(4.0)),
+                            Visibility(
+                              visible: offer.days[index].trips[i].visibility,
+                              child: Container(
+                                width: screenWidth * 0.9,
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  child: Card(
+                                    child: Row(
+                                      children: <Widget>[
+                                        ClipPath(
+                                          clipper: ShapeBorderClipper(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(4.0)),
+                                          ),
+                                          child: Padding(
+                                              padding: const EdgeInsets.all(0),
+                                              child: Image.network(
+                                                'https://ipackagetours.com/storage/app/' +
+                                                    offer.days[index].trips[i]
+                                                        .image
+                                                        .toString(),
+                                                fit: BoxFit.fill,
+                                                height: screenHeight * 0.16,
+                                                width: screenWidth * 0.3,
+                                              )),
                                         ),
-                                        child: Padding(
-                                            padding: const EdgeInsets.all(0),
-                                            child: Image.network(
-                                              'https://ipackagetours.com/storage/app/' +
-                                                  offer.days[index].trips[i]
-                                                      .image
-                                                      .toString(),
-                                              fit: BoxFit.fill,
-                                              height: screenHeight * 0.16,
-                                              width: screenWidth * 0.3,
-                                            )),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Container(
-                                            width: screenWidth * 0.56,
-                                            padding: const EdgeInsets.all(0),
-                                            child: Row(
-                                              children: <Widget>[
-                                                Flexible(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .only(start: 4.0),
-                                                    child: Text(
-                                                      localAssistant
-                                                          .getTripByLocale(
-                                                              context,
-                                                              offer.days[index]
-                                                                  .trips[i],
-                                                              'name')
-                                                          .toString(),
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 15,
-                                                          color: Colors.black),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Container(
+                                              width: screenWidth * 0.56,
+                                              padding: const EdgeInsets.all(0),
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Flexible(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .only(start: 4.0),
+                                                      child: Text(
+                                                        localAssistant
+                                                            .getTripByLocale(
+                                                                context,
+                                                                offer.days[index]
+                                                                    .trips[i],
+                                                                'name')
+                                                            .toString(),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 15,
+                                                            color: Colors.black),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
 
-                                          // Container(
-                                          //   height: screenHeight * 0.05,
-                                          //   width: screenWidth * 0.56,
-                                          //   padding: const EdgeInsets.all(4.0),
-                                          //   child: Row(
-                                          //     mainAxisAlignment: MainAxisAlignment.start,
-                                          //     children: [
-                                          //       Expanded(
-                                          //         flex: 50,
-                                          //         child: FittedBox(
-                                          //           child: GFRating(
-                                          //             color: Colors.amber,
-                                          //             borderColor: Colors.amber,
-                                          //             allowHalfRating: true,
-                                          //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
-                                          //           ),
-                                          //         ),
-                                          //       ),
-                                          //       Expanded(
-                                          //         flex: 50,
-                                          //         child: Padding(
-                                          //           padding: const EdgeInsets.only(
-                                          //               top: 0.0,
-                                          //               right: 0.0,
-                                          //               left: 0.0,
-                                          //               bottom: 0.0),
-                                          //           child: Text(
-                                          //             ' ',
-                                          //             textAlign: TextAlign.start,
-                                          //             style: TextStyle(
-                                          //                 fontWeight: FontWeight.bold,
-                                          //                 fontSize: 15,
-                                          //                 color: Colors.black),
-                                          //           ),
-                                          //         ),
-                                          //       ),
-                                          //     ],
-                                          //   ),
-                                          // ),
-                                          Container(
-                                            height: screenHeight * 0.06,
-                                            width: screenWidth * 0.56,
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Expanded(
-                                                  flex: 56,
-                                                  child: Text(''),
-                                                ),
-                                                Expanded(
-                                                  flex: 22,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            2.0),
-                                                    child: GFButton(
-                                                      onPressed: () {},
-                                                      color: Colors.teal,
-                                                      child: Icon(
-                                                        Icons.edit,
-                                                        size: 14,
-                                                        color: Colors.white,
+                                            // Container(
+                                            //   height: screenHeight * 0.05,
+                                            //   width: screenWidth * 0.56,
+                                            //   padding: const EdgeInsets.all(4.0),
+                                            //   child: Row(
+                                            //     mainAxisAlignment: MainAxisAlignment.start,
+                                            //     children: [
+                                            //       Expanded(
+                                            //         flex: 50,
+                                            //         child: FittedBox(
+                                            //           child: GFRating(
+                                            //             color: Colors.amber,
+                                            //             borderColor: Colors.amber,
+                                            //             allowHalfRating: true,
+                                            //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
+                                            //           ),
+                                            //         ),
+                                            //       ),
+                                            //       Expanded(
+                                            //         flex: 50,
+                                            //         child: Padding(
+                                            //           padding: const EdgeInsets.only(
+                                            //               top: 0.0,
+                                            //               right: 0.0,
+                                            //               left: 0.0,
+                                            //               bottom: 0.0),
+                                            //           child: Text(
+                                            //             ' ',
+                                            //             textAlign: TextAlign.start,
+                                            //             style: TextStyle(
+                                            //                 fontWeight: FontWeight.bold,
+                                            //                 fontSize: 15,
+                                            //                 color: Colors.black),
+                                            //           ),
+                                            //         ),
+                                            //       ),
+                                            //     ],
+                                            //   ),
+                                            // ),
+                                            Container(
+                                              height: screenHeight * 0.06,
+                                              width: screenWidth * 0.56,
+                                              padding: const EdgeInsets.all(4.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Expanded(
+                                                    flex: 56,
+                                                    child: Text(''),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 22,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              2.0),
+                                                      child: GFButton(
+                                                        onPressed: () {
+                                                          changeTrip(context, screenWidth, screenHeight,
+                                                              offer.days[index].trips[i].cityId, offer.days[index].trips[i].id, _adultsNumber, _childrenNumber, _babiesNumber,
+                                                              offer.days.indexOf(offer.days[index]), offer.days[index].trips.indexOf(offer.days[index].trips[i]));
+                                                        },
+                                                        color: Colors.teal,
+                                                        child: Icon(
+                                                          Icons.edit,
+                                                          size: 14,
+                                                          color: Colors.white,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  flex: 22,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            2.0),
-                                                    child: GFButton(
-                                                      color: Colors.redAccent,
-                                                      onPressed: () {},
-                                                      child: Icon(
-                                                        Icons.delete,
-                                                        size: 14,
-                                                        color: Colors.white,
+                                                  Expanded(
+                                                    flex: 22,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              2.0),
+                                                      child: GFButton(
+                                                        color: Colors.redAccent,
+                                                        onPressed: () {
+
+                                                          showDialog(
+                                                              context: context,
+                                                              builder: (_) => AssetGiffyDialog(
+                                                                onlyOkButton: true,
+                                                                buttonCancelText: Text(getTranslated(context, 'login_alert_d_cancel'),
+                                                                    style: TextStyle(fontSize: 16)),
+                                                                buttonOkText: Text(getTranslated(context, 'edit_book_delete'),
+                                                                    style: TextStyle(
+                                                                        fontSize: 16,
+                                                                        color: Colors.white)),
+                                                                buttonOkColor: Colors.redAccent,
+                                                                image: Image.asset('assets/images/alert.png', fit: BoxFit.cover),
+                                                                title: Text(
+                                                                  getTranslated(context, 'home_alert_login_title'),
+                                                                  style: TextStyle(
+                                                                      fontSize: 18.0,
+                                                                      color: Colors.teal),
+                                                                ),
+                                                                description: Text(
+                                                                  getTranslated(context, 'fo_trip_remove_note'),
+                                                                  textAlign: TextAlign.center,
+                                                                  style: TextStyle(fontSize: 16),
+                                                                ),
+                                                                onOkButtonPressed: () {
+                                                                  setState(() {
+                                                                    offer.days[index].trips[i].visibility = ! offer.days[index].trips[i].visibility;
+                                                                    calculateOfferPrice();
+                                                                    calculateTripsNumber();
+                                                                    dayIndex = -1;
+                                                                  });
+                                                                  Navigator.pop(context);
+                                                                },
+                                                              ));
+
+                                                        },
+                                                        child: Icon(
+                                                          Icons.delete,
+                                                          size: 14,
+                                                          color: Colors.white,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                                // Padding(
-                                                //   padding: const EdgeInsets.all(2.0),
-                                                //   child: IconButton(
-                                                //     color: Colors.teal,
-                                                //     icon: Icon(Icons.edit , size: 20),
-                                                //     onPressed: (){},
-                                                //   ),
-                                                // ),
-                                                // Padding(
-                                                //   padding: const EdgeInsets.all(2.0),
-                                                //   child: IconButton(
-                                                //     color: Colors.redAccent,
-                                                //     icon: Icon(Icons.delete , size: 20,),
-                                                //     onPressed: (){},
-                                                //   ),
-                                                // ),
-                                              ],
+                                                  // Padding(
+                                                  //   padding: const EdgeInsets.all(2.0),
+                                                  //   child: IconButton(
+                                                  //     color: Colors.teal,
+                                                  //     icon: Icon(Icons.edit , size: 20),
+                                                  //     onPressed: (){},
+                                                  //   ),
+                                                  // ),
+                                                  // Padding(
+                                                  //   padding: const EdgeInsets.all(2.0),
+                                                  //   child: IconButton(
+                                                  //     color: Colors.redAccent,
+                                                  //     icon: Icon(Icons.delete , size: 20,),
+                                                  //     onPressed: (){},
+                                                  //   ),
+                                                  // ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -3726,6 +3973,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                         _flightsBack[0].visibility = ! _flightsBack[0].visibility;
                                                         calculateOfferPrice();
                                                         getFlightsNumber();
+                                                        dayIndex = -1;
                                                       });
                                                       Navigator.pop(context);
                                                     },
@@ -4772,172 +5020,242 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
           ],
         ),
         for (int index = 0; index < offer.days.length; index++)
-          for (int tIndex = 0;
-              tIndex < offer.days[index].trips.length;
-              tIndex++)
+          for (int i = 0; i < offer.days[index].trips.length; i++)
             // Trip
-            Container(
-              width: screenWidth * 0.9,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(4.0),
-                child: Card(
-                  child: Row(
-                    children: <Widget>[
-                      ClipPath(
-                        clipper: ShapeBorderClipper(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0)),
+            Visibility(
+              visible: offer.days[index].trips[i].visibility,
+              child: Container(
+                width: screenWidth * 0.9,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(4.0),
+                  child: Card(
+                    child: Row(
+                      children: <Widget>[
+                        ClipPath(
+                          clipper: ShapeBorderClipper(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(4.0)),
+                          ),
+                          child: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Image.network(
+                                'https://ipackagetours.com/storage/app/' +
+                                    offer.days[index].trips[i]
+                                        .image
+                                        .toString(),
+                                fit: BoxFit.fill,
+                                height: screenHeight * 0.16,
+                                width: screenWidth * 0.3,
+                              )),
                         ),
-                        child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Image.network(
-                              'https://ipackagetours.com/storage/app/' +
-                                  offer.days[index].trips[tIndex].image
-                                      .toString(),
-                              fit: BoxFit.fill,
-                              height: screenHeight * 0.16,
-                              width: screenWidth * 0.3,
-                            )),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: screenWidth * 0.56,
-                            padding: const EdgeInsets.all(0),
-                            child: Row(
-                              children: <Widget>[
-                                Flexible(
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.only(
-                                        start: 4.0),
-                                    child: Text(
-                                      localAssistant
-                                          .getTripByLocale(
-                                              context,
-                                              offer.days[index].trips[tIndex],
-                                              'name')
-                                          .toString(),
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Colors.black),
+                        Column(
+                          mainAxisAlignment:
+                          MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              width: screenWidth * 0.56,
+                              padding: const EdgeInsets.all(0),
+                              child: Row(
+                                children: <Widget>[
+                                  Flexible(
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsetsDirectional
+                                          .only(start: 4.0),
+                                      child: Text(
+                                        localAssistant
+                                            .getTripByLocale(
+                                            context,
+                                            offer.days[index]
+                                                .trips[i],
+                                            'name')
+                                            .toString(),
+                                        textAlign:
+                                        TextAlign.start,
+                                        style: TextStyle(
+                                            fontWeight:
+                                            FontWeight.bold,
+                                            fontSize: 15,
+                                            color: Colors.black),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
 
-                          // Container(
-                          //   height: screenHeight * 0.05,
-                          //   width: screenWidth * 0.56,
-                          //   padding: const EdgeInsets.all(4.0),
-                          //   child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.start,
-                          //     children: [
-                          //       Expanded(
-                          //         flex: 50,
-                          //         child: FittedBox(
-                          //           child: GFRating(
-                          //             color: Colors.amber,
-                          //             borderColor: Colors.amber,
-                          //             allowHalfRating: true,
-                          //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
-                          //           ),
-                          //         ),
-                          //       ),
-                          //       Expanded(
-                          //         flex: 50,
-                          //         child: Padding(
-                          //           padding: const EdgeInsets.only(
-                          //               top: 0.0,
-                          //               right: 0.0,
-                          //               left: 0.0,
-                          //               bottom: 0.0),
-                          //           child: Text(
-                          //             ' ',
-                          //             textAlign: TextAlign.start,
-                          //             style: TextStyle(
-                          //                 fontWeight: FontWeight.bold,
-                          //                 fontSize: 15,
-                          //                 color: Colors.black),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
-                          Container(
-                            height: screenHeight * 0.06,
-                            width: screenWidth * 0.56,
-                            padding: const EdgeInsets.all(4.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Expanded(
-                                  flex: 56,
-                                  child: Text(''),
-                                ),
-                                Expanded(
-                                  flex: 22,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(2.0),
-                                    child: GFButton(
-                                      onPressed: () {},
-                                      color: Colors.teal,
-                                      child: Icon(
-                                        Icons.edit,
-                                        size: 14,
-                                        color: Colors.white,
+                            // Container(
+                            //   height: screenHeight * 0.05,
+                            //   width: screenWidth * 0.56,
+                            //   padding: const EdgeInsets.all(4.0),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.start,
+                            //     children: [
+                            //       Expanded(
+                            //         flex: 50,
+                            //         child: FittedBox(
+                            //           child: GFRating(
+                            //             color: Colors.amber,
+                            //             borderColor: Colors.amber,
+                            //             allowHalfRating: true,
+                            //             value: double.parse(offer.days[index].hotels[0].rating.toString()) ?? 0.0,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 50,
+                            //         child: Padding(
+                            //           padding: const EdgeInsets.only(
+                            //               top: 0.0,
+                            //               right: 0.0,
+                            //               left: 0.0,
+                            //               bottom: 0.0),
+                            //           child: Text(
+                            //             ' ',
+                            //             textAlign: TextAlign.start,
+                            //             style: TextStyle(
+                            //                 fontWeight: FontWeight.bold,
+                            //                 fontSize: 15,
+                            //                 color: Colors.black),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                            Container(
+                              height: screenHeight * 0.06,
+                              width: screenWidth * 0.56,
+                              padding: const EdgeInsets.all(4.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    flex: 56,
+                                    child: Text(''),
+                                  ),
+                                  Expanded(
+                                    flex: 22,
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.all(
+                                          2.0),
+                                      child: GFButton(
+                                        onPressed: () {
+                                          changeTrip(context, screenWidth, screenHeight,
+                                              offer.days[index].trips[i].cityId, offer.days[index].trips[i].id, _adultsNumber, _childrenNumber, _babiesNumber,
+                                              offer.days.indexOf(offer.days[index]), offer.days[index].trips.indexOf(offer.days[index].trips[i]));
+                                        },
+                                        color: Colors.teal,
+                                        child: Icon(
+                                          Icons.edit,
+                                          size: 14,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 22,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(2.0),
-                                    child: GFButton(
-                                      color: Colors.redAccent,
-                                      onPressed: () {},
-                                      child: Icon(
-                                        Icons.delete,
-                                        size: 14,
-                                        color: Colors.white,
+                                  Expanded(
+                                    flex: 22,
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.all(
+                                          2.0),
+                                      child: GFButton(
+                                        color: Colors.redAccent,
+                                        onPressed: () {
+
+                                          showDialog(
+                                              context: context,
+                                              builder: (_) => AssetGiffyDialog(
+                                                onlyOkButton: true,
+                                                buttonCancelText: Text(getTranslated(context, 'login_alert_d_cancel'),
+                                                    style: TextStyle(fontSize: 16)),
+                                                buttonOkText: Text(getTranslated(context, 'edit_book_delete'),
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.white)),
+                                                buttonOkColor: Colors.redAccent,
+                                                image: Image.asset('assets/images/alert.png', fit: BoxFit.cover),
+                                                title: Text(
+                                                  getTranslated(context, 'home_alert_login_title'),
+                                                  style: TextStyle(
+                                                      fontSize: 18.0,
+                                                      color: Colors.teal),
+                                                ),
+                                                description: Text(
+                                                  getTranslated(context, 'fo_trip_remove_note'),
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(fontSize: 16),
+                                                ),
+                                                onOkButtonPressed: () {
+                                                  setState(() {
+                                                    offer.days[index].trips[i].visibility = ! offer.days[index].trips[i].visibility;
+                                                    calculateOfferPrice();
+                                                    calculateTripsNumber();
+                                                    dayIndex = -1;
+                                                  });
+                                                  Navigator.pop(context);
+                                                },
+                                              ));
+
+                                          setState(() {
+                                          });
+
+                                        },
+                                        child: Icon(
+                                          Icons.delete,
+                                          size: 14,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                // Padding(
-                                //   padding: const EdgeInsets.all(2.0),
-                                //   child: IconButton(
-                                //     color: Colors.teal,
-                                //     icon: Icon(Icons.edit , size: 20),
-                                //     onPressed: (){},
-                                //   ),
-                                // ),
-                                // Padding(
-                                //   padding: const EdgeInsets.all(2.0),
-                                //   child: IconButton(
-                                //     color: Colors.redAccent,
-                                //     icon: Icon(Icons.delete , size: 20,),
-                                //     onPressed: (){},
-                                //   ),
-                                // ),
-                              ],
+                                  // Padding(
+                                  //   padding: const EdgeInsets.all(2.0),
+                                  //   child: IconButton(
+                                  //     color: Colors.teal,
+                                  //     icon: Icon(Icons.edit , size: 20),
+                                  //     onPressed: (){},
+                                  //   ),
+                                  // ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.all(2.0),
+                                  //   child: IconButton(
+                                  //     color: Colors.redAccent,
+                                  //     icon: Icon(Icons.delete , size: 20,),
+                                  //     onPressed: (){},
+                                  //   ),
+                                  // ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
       ],
     );
+  }
+
+  void calculateTripsNumber()
+  {
+    setState(() {
+      activitiesNumber = 0;
+    });
+    for (int index = 0; index < offer.days.length; index++)
+      for (int i = 0; i < offer.days[index].trips.length; i++)
+        if(offer.days[index].trips[i].visibility == true)
+          setState(() {
+            activitiesNumber++;
+          });
+
   }
 
   _flightsWidget(screenWidth, screenHeight) {
@@ -5238,6 +5556,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                           _flights[0].visibility = ! _flights[0].visibility;
                                                           calculateOfferPrice();
                                                           getFlightsNumber();
+                                                          dayIndex = -1;
                                                         });
                                                         Navigator.pop(context);
                                                       },
@@ -5505,6 +5824,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                         _flightsBack[0].visibility = ! _flightsBack[0].visibility;
                                                         calculateOfferPrice();
                                                         getFlightsNumber();
+                                                        dayIndex = -1;
                                                       });
                                                       Navigator.pop(context);
                                                     },
@@ -6167,30 +6487,50 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
 
     for (int index = 0; index < offer.days.length; index++) {
       for (int dIndex = 0; dIndex < offer.days[index].trips.length; dIndex++) {
-        //Adults price
-        if (_adultsNumber == 1)
-          setState(() {
-            _totalOfferPrice += offer.days[index].trips[dIndex].pricePerson ?? 0;
-          });
-        else if (_adultsNumber == 2)
-          setState(() {
-            _totalOfferPrice += offer.days[index].trips[dIndex].pricePerson2 ?? 0;
-          });
-        else if (_adultsNumber == 3)
-          setState(() {
-            _totalOfferPrice += offer.days[index].trips[dIndex].pricePerson3 ?? 0;
-          });
-        else
-          setState(() {
-            _totalOfferPrice +=
-                offer.days[index].trips[dIndex].pricePerson * _adultsNumber ?? 0;
-          });
 
-        //Children price
-        setState(() {
-          _totalOfferPrice +=
-              offer.days[index].trips[dIndex].priceChild ?? 0 * _childrenNumber;
-        });
+        if(offer.days[index].trips[dIndex].visibility == true)
+          {
+            if(offer.days[index].trips[dIndex].pricePlus == 0)
+            {
+              //Adults price
+              if (_adultsNumber == 1)
+                setState(() {
+                  _totalOfferPrice += offer.days[index].trips[dIndex].pricePerson ?? 0;
+                });
+              else if (_adultsNumber == 2)
+                setState(() {
+                  _totalOfferPrice += offer.days[index].trips[dIndex].pricePerson2 ?? 0;
+                });
+              else if (_adultsNumber == 3)
+                setState(() {
+                  _totalOfferPrice += offer.days[index].trips[dIndex].pricePerson3 ?? 0;
+                });
+              else
+                setState(() {
+                  _totalOfferPrice +=
+                      offer.days[index].trips[dIndex].pricePerson * _adultsNumber ?? 0;
+                });
+
+              //Children price
+              setState(() {
+                _totalOfferPrice +=
+                    offer.days[index].trips[dIndex].priceChild ?? 0 * _childrenNumber;
+              });
+
+              //Babies price
+              setState(() {
+                _totalOfferPrice +=
+                    offer.days[index].trips[dIndex].priceChild ?? 0 * _babiesNumber;
+              });
+            }
+            else
+            {
+              setState(() {
+                _totalOfferPrice += offer.days[index].trips[dIndex].pricePlus;
+              });
+            }
+          }
+
       }
 
       //Car Price
@@ -6316,7 +6656,6 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                       calculatePassengersNumber();
                       // _pickedDate = DateFormat('MM/dd').parse(offer.days[0].trips[0].date.toString());
                       // _firstDate = DateFormat('MM-dd').parse(offer.days[0].trips[0].date.toString());
-                      _availableCityTrips = List.of(offer.days);
                       _isLoading = false;
                       _isPriceLoading = false;
 
@@ -6445,58 +6784,58 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
       //   ),
       //   centerTitle: true,
       // ),
-      floatingActionButton: GFButton(
-        onPressed: () {
-          Navigator.of(context).push(new MaterialPageRoute(
-            builder: (BuildContext context) => new ConfirmBook()));
-        },
-        size: 40,
-        shape: GFButtonShape.pills,
-        color: Color(0xff07898B),
-        child: Container(
-          width: screenWidth * 0.87,
-          height: screenHeight * 0.07,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 60,
-                child: _isPriceLoading ? Center(
-                  child: GFLoader(
-                    type: GFLoaderType.circle,
-                    loaderColorOne: Colors.white,
-                    loaderColorTwo: Colors.white,
-                    loaderColorThree: Colors.white,
-                  ),
-                ) :
-                Text(
-                  _totalOfferPrice.toStringAsFixed(2) + ' \$',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 40,
-                child: Text(
-                  getTranslated(context, 'domestic_offer_book_btn'),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 16,
-                    // fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        textStyle: TextStyle(
-          fontFamily: 'cairo',
-        ),
-      ),
+      // floatingActionButton: GFButton(
+      //   onPressed: () {
+      //     Navigator.of(context).push(new MaterialPageRoute(
+      //       builder: (BuildContext context) => new ConfirmBook()));
+      //   },
+      //   size: 40,
+      //   shape: GFButtonShape.pills,
+      //   color: Color(0xff07898B),
+      //   child: Container(
+      //     width: screenWidth * 0.87,
+      //     height: screenHeight * 0.07,
+      //     child: Row(
+      //       children: <Widget>[
+      //         Expanded(
+      //           flex: 60,
+      //           child: _isPriceLoading ? Center(
+      //             child: GFLoader(
+      //               type: GFLoaderType.circle,
+      //               loaderColorOne: Colors.white,
+      //               loaderColorTwo: Colors.white,
+      //               loaderColorThree: Colors.white,
+      //             ),
+      //           ) :
+      //           Text(
+      //             _totalOfferPrice.toStringAsFixed(2) + ' \$',
+      //             textAlign: TextAlign.center,
+      //             style: TextStyle(
+      //               fontSize: 18,
+      //               fontWeight: FontWeight.bold,
+      //               color: Colors.white,
+      //             ),
+      //           ),
+      //         ),
+      //         Expanded(
+      //           flex: 40,
+      //           child: Text(
+      //             getTranslated(context, 'domestic_offer_book_btn'),
+      //             textAlign: TextAlign.start,
+      //             style: TextStyle(
+      //               fontSize: 16,
+      //               // fontWeight: FontWeight.bold,
+      //               color: Colors.black,
+      //             ),
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      //   textStyle: TextStyle(
+      //     fontFamily: 'cairo',
+      //   ),
+      // ),
       // Container(
       //   width: screenWidth * 1.02,
       //   child: Stack(
@@ -7017,6 +7356,62 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                   ),
 
                   _widgetRouter(screenWidth, screenHeight),
+
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: GFButton(
+                      onPressed: () {
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) => new ConfirmBook()));
+                      },
+                      size: 40,
+                      shape: GFButtonShape.pills,
+                      color: Color(0xff07898B),
+                      child: Container(
+                        width: screenWidth * 0.9,
+                        height: screenHeight * 0.09,
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 60,
+                              child: _isPriceLoading ? Center(
+                                child: GFLoader(
+                                  type: GFLoaderType.circle,
+                                  loaderColorOne: Colors.white,
+                                  loaderColorTwo: Colors.white,
+                                  loaderColorThree: Colors.white,
+                                ),
+                              ) :
+                              Text(
+                                _totalOfferPrice.toStringAsFixed(2) + ' \$',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 40,
+                              child: Text(
+                                getTranslated(context, 'domestic_offer_book_btn'),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      textStyle: TextStyle(
+                        fontFamily: 'cairo',
+                      ),
+                    ),
+                  ),
 
                   SizedBox(
                     height: screenHeight * 0.15,

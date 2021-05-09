@@ -2,11 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="635e63dd-f7b8-415a-a66f-415dd4a44b0f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/36982327e4de77d7666bdce1dd2c9914/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/36982327e4de77d7666bdce1dd2c9914/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/36982327e4de77d7666bdce1dd2c9914/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/36982327e4de77d7666bdce1dd2c9914/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/36982327e4de77d7666bdce1dd2c9914/debug_android_application.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/36982327e4de77d7666bdce1dd2c9914/debug_android_application.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/36982327e4de77d7666bdce1dd2c9914/flutter_assets.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/36982327e4de77d7666bdce1dd2c9914/flutter_assets.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_build.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_build.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app.apk.sha1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/languages/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/ar.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/languages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/lib/languages/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/modules/BetaApiAssistant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/BetaApiAssistant.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/Offer/Trip.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/Offer/Trip.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/home/foreign_offer_main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/home/foreign_offer_main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/search/foreign_tour.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/foreign_tour.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/search/search_results.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/search/search_results.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -353,7 +369,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620500793299</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Build Foreign offers main widget_updated_11">
+      <created>1620510667421</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1620510667421</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -367,7 +390,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Build change widgets_updated_5" />
     <MESSAGE value="Resolve some conflicts" />
     <MESSAGE value="Build ambassadors widgets" />
     <MESSAGE value="Build tourist widgets" />
@@ -392,7 +414,8 @@
     <MESSAGE value="Build Foreign offers main widget_updated_8" />
     <MESSAGE value="Build Foreign offers main widget_updated_9" />
     <MESSAGE value="Build Foreign offers main widget_updated_10" />
-    <option name="LAST_COMMIT_MESSAGE" value="Build Foreign offers main widget_updated_10" />
+    <MESSAGE value="Build Foreign offers main widget_updated_11" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build Foreign offers main widget_updated_11" />
   </component>
   <component name="WindowStateProjectService">
     <state x="399" y="187" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1619880006132">
@@ -403,30 +426,30 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="488" y="103" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1620479874120" />
-    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1620500787274">
+    <state x="232" y="0" key="CommitChangelistDialog2" timestamp="1620510623165">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1620500787274" />
+    <state x="232" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1620510623165" />
     <state x="462" y="138" key="FileChooserDialogImpl" timestamp="1618809258978">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="462" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1618809258978" />
-    <state width="1323" height="194" key="GridCell.Tab.0.bottom" timestamp="1620478174475">
+    <state width="1323" height="194" key="GridCell.Tab.0.bottom" timestamp="1620575267608">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="194" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1620478174475" />
-    <state width="1323" height="194" key="GridCell.Tab.0.center" timestamp="1620478174474">
+    <state width="1323" height="194" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1620575267608" />
+    <state width="1323" height="194" key="GridCell.Tab.0.center" timestamp="1620575267606">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="194" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1620478174474" />
-    <state width="1323" height="194" key="GridCell.Tab.0.left" timestamp="1620478174472">
+    <state width="1323" height="194" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1620575267606" />
+    <state width="1323" height="194" key="GridCell.Tab.0.left" timestamp="1620575267606">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="194" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1620478174472" />
-    <state width="1323" height="194" key="GridCell.Tab.0.right" timestamp="1620478174475">
+    <state width="1323" height="194" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1620575267606" />
+    <state width="1323" height="194" key="GridCell.Tab.0.right" timestamp="1620575267606">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1323" height="194" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1620478174475" />
+    <state width="1323" height="194" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1620575267606" />
     <state x="129" y="59" key="MergeDialog" timestamp="1620402374901">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -451,10 +474,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="445" y="101" key="VCS.ChangeListViewerDialog/0.0.1366.768@0.0.1366.768" timestamp="1620402171250" />
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1620503417617">
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1620510679084">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1620503417617" />
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1620510679084" />
     <state x="240" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1619126270371">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

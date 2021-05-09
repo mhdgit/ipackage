@@ -260,6 +260,7 @@
   "fo_no_flight_2" : "There are currently no flights available.",
   "fo_no_airports" : "No results",
   "fo_flight_remove_note" : "The flight will be permanently removed",
+  "fo_trip_remove_note" : "The tour will be permanently removed",
   "fo_change_trip_title" : "More activities",
 
   "book_trip_label" : "Select your destination",
