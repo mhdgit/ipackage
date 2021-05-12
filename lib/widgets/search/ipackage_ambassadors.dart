@@ -87,21 +87,21 @@ class _IPackageAmbassadorsState extends State<IPackageAmbassadors> {
             ),
           ),
 
-          Container(
-            width: screenWidth * 0.5,
-            padding:
-            EdgeInsets.only(top: 10.0, right: 0.0, left: 0.0, bottom: 0.0),
-            child: GFButton(
-              onPressed: (){
-                Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context) => new AmbassadorsServices()));
-              },
-              text: getTranslated(context, 'home_ambassadors_btn_4'),
-              textColor: Colors.white,
-              textStyle: TextStyle(fontSize: 14),
-              color: Colors.amberAccent,
-            ),
-          ),
+          // Container(
+          //   width: screenWidth * 0.5,
+          //   padding:
+          //   EdgeInsets.only(top: 10.0, right: 0.0, left: 0.0, bottom: 0.0),
+          //   child: GFButton(
+          //     onPressed: (){
+          //       Navigator.of(context).push(new MaterialPageRoute(
+          //           builder: (BuildContext context) => new AmbassadorsServices()));
+          //     },
+          //     text: getTranslated(context, 'home_ambassadors_btn_4'),
+          //     textColor: Colors.white,
+          //     textStyle: TextStyle(fontSize: 14),
+          //     color: Colors.amberAccent,
+          //   ),
+          // ),
 
 
         ],
