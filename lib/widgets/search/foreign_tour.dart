@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:getwidget/types/gf_loader_type.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/BetaApiAssistant.dart';
@@ -1050,11 +1051,36 @@ class _ForeignTourState extends State<ForeignTour> {
                   print(_packageId);
 
                   if(_destinationCountryId != 0 && _packageId != 0)
-                  Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context) => new SearchResults(
-                      countryId: _destinationCountryId,
-                      packageId: _packageId,
-                  )));
+                    Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new SearchResults(
+                        countryId: _destinationCountryId,
+                        packageId: _packageId,
+                      )));
+                  else
+                    showDialog(
+                        context: context,
+                        builder: (_) => AssetGiffyDialog(
+                          onlyOkButton: true,
+                          buttonCancelText: Text(
+                              getTranslated(context, 'login_alert_d_cancel'),
+                              style: TextStyle(fontSize: 16)),
+                          buttonOkText: Text(getTranslated(context, 'login_alert_d_ok'),
+                              style: TextStyle(fontSize: 16, color: Colors.white)),
+                          buttonOkColor: Colors.redAccent,
+                          image: Image.asset('assets/images/alert.png', fit: BoxFit.cover),
+                          title: Text(
+                            getTranslated(context, 'home_alert_login_title'),
+                            style: TextStyle(fontSize: 18.0, color: Colors.teal),
+                          ),
+                          description: Text(
+                            getTranslated(context, 'pyt_in_t_alert'),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          onOkButtonPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

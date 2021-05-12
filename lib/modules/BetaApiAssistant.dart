@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:ipackage/modules/Country.dart';
 import 'package:http/http.dart' as http;
 import 'package:ipackage/modules/Offer/Airport.dart';
 import 'package:ipackage/modules/Offer/Flight/Flight.dart';
-import 'package:ipackage/modules/Offer/Flight/FlightSegment.dart';
+import 'package:ipackage/modules/Offer/Hotel/Hotel.dart';
 import 'package:ipackage/modules/Offer/Offer.dart';
 import 'package:ipackage/modules/Offer/Trip.dart';
 import 'package:ipackage/modules/Package.dart';
@@ -23,6 +22,7 @@ class BetaApiAssistant {
   List<Airport> _flightDepAirports = [];
   List<Airport> _flightArrAirports = [];
   List<Trip> _extraTrips = [];
+  List<Hotel> _extraHotels = [];
   Offer _offer;
 
   Future<List<Country>> getCountries() async {
@@ -144,6 +144,10 @@ class BetaApiAssistant {
     final key = 'session_id';
     final value = prefs.getString(key);
 
+    _flightDepAirports.clear();
+    _flightArrAirports.clear();
+    _flights.clear();
+
     var res = await http.post(
         Uri.parse('https://apidemo.partocrs.com/Rest/Air/AirLowFareSearch'),
         body: json.encode({
@@ -185,9 +189,7 @@ class BetaApiAssistant {
     else if(body['Success'] == true)
       {
         Flight tFlight;
-        _flightDepAirports.clear();
-        _flightArrAirports.clear();
-        _flights.clear();
+
 
         for (var flight in body['PricedItineraries']) {
           tFlight = Flight.fromJson(flight);
@@ -218,10 +220,16 @@ class BetaApiAssistant {
           //     }
           _flights.add(tFlight);
         }
-      }
-    print('_flights length is : ' + _flights.length.toString());
 
-    return _flights;
+        print('_flights length is : ' + _flights.length.toString());
+        return _flights;
+      }
+    else
+      {
+        print('_flights length is : ' + _flights.length.toString());
+        return _flights;
+      }
+
   }
 
   Future<List<Airport>> getAirport(String keyword) async{
@@ -229,7 +237,7 @@ class BetaApiAssistant {
         Uri.parse('https://ipackagetours.com/api/airports?name='+ keyword),
         headers: {"Accept": "application/json"});
     var body = json.decode(res.body);
-    print(body);
+    // print(body);
     Airport tAirport;
     _airports.clear();
 
@@ -290,5 +298,122 @@ class BetaApiAssistant {
     print('Extra trips length is : ' + _extraTrips.length.toString());
 
     return _extraTrips;
+  }
+
+  Future<Hotel> getHotel(int hotelId) async{
+    var res = await http.get(
+        Uri.parse('https://ipackagetours.com/api/hotel/info/'+ hotelId.toString()),
+        headers: {"Accept": "application/json"});
+    var body = json.decode(res.body.toString());
+    // print(body);
+    Hotel tHotel = new Hotel();
+
+    try
+    {
+        tHotel = Hotel.fromJson(body['data']);
+    }
+    catch(e){
+      return tHotel;
+    }
+    return tHotel;
+  }
+
+  Future<String> getHotelImage(int hotelId) async{
+
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'session_id';
+    final value = prefs.getString(key);
+
+    var res = await http.post(
+        Uri.parse('https://apidemo.partocrs.com/Rest/Hotel/HotelImage'),
+        body: json.encode({
+          "SessionId": value.toString(),
+          "HotelId": hotelId,
+        }),
+        headers: {"Accept": "application/json" , "Content-Type": "application/json"});
+    var body = json.decode(res.body);
+    // print(body);
+
+    var linksList = List.of(body['Links']);
+
+    if(linksList.length > 0)
+      return body['Links'][0]['Link'].toString();
+    else
+      return 'empty';
+  }
+
+  Future<List<Hotel>> getCityHotels(String checkIn , String checkout , int cityId , int adultsNumber , int childrenNumber) async {
+
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'session_id';
+    final value = prefs.getString(key);
+
+    var res = await http.post(
+        Uri.parse('https://apidemo.partocrs.com/Rest/Hotel/HotelAvailability'),
+        body: json.encode({
+          "SessionId": value.toString(),
+          "CheckIn": checkIn+"T00:00:00",
+          "CheckOut": checkout+"T00:00:00",
+          "Latitude": "",
+          "Longitude": "",
+          "RadiusInKilometer": 0,
+          "SetGeoLocation": false,
+          "NationalityId": "US",
+          "HotelId": null,
+          "CityId": cityId,
+          "CountryCode": "",
+          "Occupancies": [
+            {
+              "AdultCount": adultsNumber,
+              "ChildCount": childrenNumber,
+              "ChildAges": []
+            }
+          ]
+        }),
+        headers: {"Accept": "application/json" , "Content-Type": "application/json"});
+
+    var body = json.decode(res.body.toString());
+    // print(body);
+    if(body['Success'] == false && body['Error']['Message'] == 'Invalid SessionID')
+    {
+      setupPartocrsSession().whenComplete(() {
+        getCityHotels(checkIn , checkout , cityId , adultsNumber , childrenNumber).whenComplete(() {
+          return _extraHotels;
+        });
+      });
+    }
+    else if(body['Success'] == true)
+    {
+      int hotelIndex = 0;
+      _extraHotels.clear();
+
+      for (var hotel in body['PricedItineraries']) {
+
+        if(hotelIndex == 15)
+          break;
+        await getHotel(hotel['HotelId']).then((hotelObject) async{
+
+          print(hotel['NetRate'].toString());
+          hotelObject.netRate = hotel['NetRate'];
+
+          getHotelImage(hotel['HotelId']).then((hotelImage) {
+              hotelObject.images = hotelImage.toString();
+
+            _extraHotels.add(hotelObject);
+            hotelIndex++;
+            // print('joined!');
+          });
+        });
+      }
+
+      print('Success _extraHotels length is : ' + _extraHotels.length.toString());
+      return _extraHotels;
+    }
+    else
+    {
+      print('Failed _extraHotels length is : ' + _extraHotels.length.toString());
+      return _extraHotels;
+    }
+
   }
 }

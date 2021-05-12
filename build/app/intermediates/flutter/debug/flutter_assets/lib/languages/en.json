@@ -262,6 +262,7 @@
   "fo_flight_remove_note" : "The flight will be permanently removed",
   "fo_trip_remove_note" : "The tour will be permanently removed",
   "fo_change_trip_title" : "More activities",
+  "fo_change_hotel_title" : "More hotels",
 
   "book_trip_label" : "Select your destination",
   "book_trip_label_2" : "Choose package",
