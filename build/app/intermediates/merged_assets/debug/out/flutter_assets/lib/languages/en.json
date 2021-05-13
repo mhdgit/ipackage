@@ -111,7 +111,7 @@
 
   "home_ambassadors_btn" : "iPackage Ambassadors ",
   "home_ambassadors_btn_2" : "Destination",
-  "home_ambassadors_btn_3" : "Tour guide",
+  "home_ambassadors_btn_3" : "Create a tour guide membership",
   "home_ambassadors_btn_4" : "Tourist",
   "home_ambassadors_label_1" : "Register now in the I-Package Ambassadors Program and become an ambassador for your city, where you can increase your monthly income by adding the best tourist places, shopping places and parks at reasonable prices for you and for your service that you can help our customers in visiting them and be their guide and a tourist ambassador for your city",
 
@@ -309,6 +309,7 @@
   "as_year" : "year",
   "as_services" : "The services it provides",
   "as_language" : "Ambassador's language ",
+  "as_note" : "Welcome to the iPackage family. We will contact you via the email and mobile number entered by you ",
 
   "ambassador_profile_btn" : "Ambassador booking",
   "ambassador_profile_service" : "Rent a cottage",
@@ -485,7 +486,11 @@
   "chatbot_air": "Do you want a tourist offer that includes international flights?",
   "chatbot_adults": "Number of adults",
   "chatbot_children": "Number of children",
-  "chatbot_Infants": "Number of Infants"
+  "chatbot_Infants": "Number of Infants",
+  "chatbot_budget": "Enter your budget",
+  "chatbot_whatsapp": "Can I get your WhatsApp number with the country code for easy communication?",
+  "chatbot_email" : "Can I get your email?",
+  "chatbot_end": "The best offers that suit your trip were found, and the data that you entered was sent as a special request, and we will reply to you within 24 hours via the entered e-mail and whatsapp number."
 
 
 
