@@ -78,33 +78,7 @@ class _HomeState extends State<Home> {
                   //   ),
                   // ),
                   Expanded(
-                    flex: 50,
-                    child: Padding(
-                        padding: const EdgeInsetsDirectional.only(
-                            top: 20, end: 8.0, start: 18.0, bottom: 8.0),
-                        child: TextButton(
-                            style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xffe4952e)),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(new MaterialPageRoute(
-                                  builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 0,)));
-                            },
-                            child: Column(
-                              children: [
-                                /*Icon((MyIcons.plane_arrival),
-                                  size: 36.0,),*/
-                                Image.asset('assets/images/home/tourism.png',),
-                                Text(getTranslated(context, 'home_international_tourism_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
-                              ],
-                            )
-                        )
-
-                    ),
-                  ),
-                  Expanded(
-                    flex: 50,
+                    flex: 1,
                     child: Padding(
                         padding: const EdgeInsetsDirectional.only(
                             top: 20, end: 8.0, start: 18.0, bottom: 8.0),
@@ -115,18 +89,21 @@ class _HomeState extends State<Home> {
                             ),
                             onPressed: () {
                               Navigator.of(context).push(new MaterialPageRoute(
-                                  builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 1,)));
+                                  builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 0,)));
                             },
                             child: Column(
                               children: [
-                                Image.asset('assets/images/home/tourismGuide.png',),
-                                Text(getTranslated(context, 'home_ambassadors_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
+                                /*Icon((MyIcons.plane_arrival),
+                                  size: 36.0,),*/
+                                Image.asset('assets/images/home/tourism.png',width: 200,height: 200,),
+                                Text(getTranslated(context, 'home_international_tourism_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 20, fontWeight: FontWeight.bold,),)
                               ],
                             )
                         )
 
                     ),
                   ),
+
 
 
                 ],
@@ -617,7 +594,31 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              Container(
+
+              Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        top: 20, end: 8.0, start: 18.0, bottom: 8.0),
+                    child: TextButton(
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: MaterialStateProperty.all<Color>(Color(0xffe4952e)),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 1,)));
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset('assets/images/home/tourismGuide.png',),
+                            Text(getTranslated(context, 'home_ambassadors_btn'),style: TextStyle(fontFamily: "cairo",fontSize: 16, fontWeight: FontWeight.bold,),)
+                          ],
+                        )
+                    )
+
+                ),
+
+
+              /*Container(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 15.0 , bottom: 15.0 , right: 15 , left: 15),
                   child: Image.asset(
@@ -627,7 +628,7 @@ class _HomeState extends State<Home> {
                     height: screenHeight * 0.5,
                   ),
                 ),
-              ),
+              ),*/
 
 
 
@@ -1140,7 +1141,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your onPressed code here!
           _showBotDialog(context, screenHeight, screenWidth);
@@ -1148,7 +1149,7 @@ class _HomeState extends State<Home> {
         child: const Icon(MyIcons.chat),
         backgroundColor: Color(0xff07898B),
 
-      ),
+      ),*/
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         unselectedItemColor: Color(0xff9FD0D2),

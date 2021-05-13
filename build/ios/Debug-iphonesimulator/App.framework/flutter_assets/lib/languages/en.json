@@ -158,6 +158,7 @@
   "pyt_in_t_flight_btn" : "Flight",
   "pyt_in_t_search_btn" : "Search",
   "pyt_in_t_package_btn" : "Package type",
+  "pyt_in_t_alert" : "Please select both the airport of departure and the country of destination",
 
   "pyt_ambassadors_btn" : "iPackage Ambassadors ",
   "pyt_programs" : "Packages",
@@ -257,10 +258,12 @@
   "fo_remove_note" : "The means of transport will be permanently removed",
   "fo_change_trans_title" : "More transportation",
   "fo_no_flight" : "You have not specified the airport of departure, so we were unable to determine which flights would be suitable for you. Please select the airport of departure so that we can determine the best flight for you.",
-  "fo_no_flight_2" : "There are currently no flights available.",
+  "fo_no_flight_2" : "Currently, there are no flights available according to the specific destination and dates.",
   "fo_no_airports" : "No results",
   "fo_flight_remove_note" : "The flight will be permanently removed",
+  "fo_trip_remove_note" : "The tour will be permanently removed",
   "fo_change_trip_title" : "More activities",
+  "fo_change_hotel_title" : "More hotels",
 
   "book_trip_label" : "Select your destination",
   "book_trip_label_2" : "Choose package",
@@ -481,7 +484,11 @@
   "chatbot_air": "Do you want a tourist offer that includes international flights?",
   "chatbot_adults": "Number of adults",
   "chatbot_children": "Number of children",
-  "chatbot_Infants": "Number of Infants"
+  "chatbot_Infants": "Number of Infants",
+  "chatbot_budget": "Enter your budget",
+  "chatbot_whatsapp": "Can I get your WhatsApp number with the country code for easy communication?",
+  "chatbot_email" : "Can I get your email?",
+  "chatbot_end": "The best offers that suit your trip were found, and the data that you entered was sent as a special request, and we will reply to you within 24 hours via the entered e-mail and whatsapp number."
 
 
 
