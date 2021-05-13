@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/components/loader/gf_loader.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/api/mybooks_api.dart';
 import 'package:ipackage/localization/localizationValues.dart';
+import 'package:ipackage/modules/LocalAssistant.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/domestic_offer_main.dart';
 import 'package:ipackage/widgets/home/home.dart';
+import 'package:ipackage/widgets/mybook/book_offer_main.dart';
 import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/settings.dart';
 import 'package:ipackage/widgets/users/login.dart';
@@ -19,10 +23,30 @@ class _MyBooksState extends State<MyBooks> {
 
 
   MyBooksApi books_api = new MyBooksApi();
-
+  List my_book_list = [];
   bool _isGuest = false;
   bool is_loading = true;
 
+
+  LocalAssistant localAssistant = new LocalAssistant();
+
+  get_mybooks() async{
+    final prefs = await SharedPreferences.getInstance();
+    final key2 = 'api_token';
+    final token = prefs.get(key2) ?? 0;
+    //print("api: "+token.toString());
+
+    books_api.get_books(token).then((value) {
+
+
+      my_book_list = List.of(value['data']);
+
+      setState(() {
+        is_loading = false;
+      });
+
+    });
+  }
   checkLogin() async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'is_login';
@@ -33,13 +57,8 @@ class _MyBooksState extends State<MyBooks> {
         _isGuest = false;
       });
 
-      final key2 = 'api_token';
-      final token = prefs.get(key2) ?? 0;
-      //print("api: "+token.toString());
+      get_mybooks();
 
-      books_api.get_books(token).then((value) {
-
-        });
 
 
     } else {
@@ -159,8 +178,16 @@ class _MyBooksState extends State<MyBooks> {
           ),
         ),
       )
+          : is_loading? GFLoader(
+        type:GFLoaderType.circle,
+        loaderColorOne: Color(0xff07898B),
+        loaderColorTwo: Color(0xff07898B),
+        loaderColorThree: Color(0xff07898B),
+      )
+
           :Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
 
           Row(
@@ -188,25 +215,36 @@ class _MyBooksState extends State<MyBooks> {
             ],
           ),
 
-          Padding(
+
+          Expanded(child:Padding(
             padding: EdgeInsetsDirectional.only(
-                start: screenWidth * 0.06, top: 8.0, bottom: 20.0),
+                 top: 8.0, bottom: 20.0),
             child: Container(
-              height: screenHeight * 0.65,
+              //constraints: BoxConstraints.expand(),
+              //height: screenHeight*0.6,
               child: ListView(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical,
                 children: <Widget>[
-                  Container(
-                    width: screenWidth * 0.6,
+
+                  for(int i=0; i < my_book_list.length;i++)
+                    Container(
+                    width: screenWidth,
                     padding: const EdgeInsets.all(8.0),
+                    margin: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {},
                       child: InkWell(
                         borderRadius: BorderRadius.circular(4.0),
                         onTap: () {
+
+                          //print(my_book_list[i].toString());
                           Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                              new DomesticOfferMain()));
+                            builder: (BuildContext context) => new BookOfferMain(
+                                package: my_book_list[i]['package_ar'].toString(),
+                                rating: my_book_list[i]['stars'].toString(),
+                              id: i,
+                              ),
+                          ));
                         },
                         child: Card(
                           elevation: 1.0,
@@ -230,8 +268,8 @@ class _MyBooksState extends State<MyBooks> {
                                           borderRadius:
                                           BorderRadius.circular(15)),
                                     ),
-                                    child: Image.asset(
-                                      'assets/images/c4.jpg',
+                                    child: Image.network(
+                                      'https://ipackagetours.com/storage/app/' + my_book_list[i]['image'],
                                       fit: BoxFit.fill,
                                       height: screenHeight * 0.28,
                                     ),
@@ -242,9 +280,8 @@ class _MyBooksState extends State<MyBooks> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  getTranslated(
-                                      context, 'home_offer_card_city'),
-                                  textAlign: TextAlign.start,
+                                  localAssistant.MyBookTitle(context, my_book_list[i]['description_ar'], my_book_list[i]['description_en']),
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -254,73 +291,7 @@ class _MyBooksState extends State<MyBooks> {
                                 ),
                               ),
 
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      flex: 50,
-                                      child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 0.0,
-                                              right: 0.0,
-                                              left: 0.0,
-                                              bottom: 0.0),
-                                          child: Text(
-                                            getTranslated(context,
-                                                'home_offer_card_days'),
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15,
-                                                color: Colors.black),
-                                          ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  getTranslated(
-                                      context, 'home_offer_card_price') +
-                                      ' 220\$',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                  softWrap: true,
-                                ),
-                              ),
-
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 0.0,
-                                          right: 0.0,
-                                          left: 0.0,
-                                          bottom: 0.0),
-                                      child: GFButton(
-                                        textColor: Colors.white,
-                                        onPressed: (){},
-                                        text: getTranslated(
-                                            context, 'my_reservations_set'),
-                                        color: Color(0xff07898B),
-                                      )
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              book_status(my_book_list[i]['status'].toString()),
 
                             ],
                           ),
@@ -328,141 +299,10 @@ class _MyBooksState extends State<MyBooks> {
                       ),
                     ),
                   ),
-                  Container(
-                    width: screenWidth * 0.6,
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(4.0),
-                        onTap: () {
-                          Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                              new DomesticOfferMain()));
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          margin: const EdgeInsets.all(0.0),
-                          color: Color(0xffFAFAFA),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(0),
-                                  child: ClipPath(
-                                    clipper: ShapeBorderClipper(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(15)),
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/c4.jpg',
-                                      fit: BoxFit.fill,
-                                      height: screenHeight * 0.28,
-                                    ),
-                                  ),
-                                ),
-                              ),
-//
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  getTranslated(
-                                      context, 'home_offer_card_city'),
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff07898B),
-                                  ),
-                                  softWrap: true,
-                                ),
-                              ),
 
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      flex: 50,
-                                      child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 0.0,
-                                              right: 0.0,
-                                              left: 0.0,
-                                              bottom: 0.0),
-                                          child: Text(
-                                            getTranslated(context,
-                                                'home_offer_card_days'),
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15,
-                                                color: Colors.black),
-                                          ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  getTranslated(
-                                      context, 'home_offer_card_price') +
-                                      ' 220\$',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                  softWrap: true,
-                                ),
-                              ),
-
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 0.0,
-                                          right: 0.0,
-                                          left: 0.0,
-                                          bottom: 0.0),
-                                      child: GFButton(
-                                        textColor: Colors.white,
-                                        onPressed: (){},
-                                        text: getTranslated(
-                                            context, 'my_reservations_canceled'),
-                                        color: Colors.redAccent,
-                                      )
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
-            ),
+            ),)
           )
 
         ],
@@ -516,5 +356,76 @@ class _MyBooksState extends State<MyBooks> {
       Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new Settings()));
     }
+  }
+
+  Widget book_status(String status)
+  {
+
+    Locale currentLocale = Localizations.localeOf(context);
+    String text = '';
+
+    Color xx = Colors.green;
+    if (status == "0")
+      {
+        if(currentLocale.languageCode == 'ar')
+          {
+            text = 'لم يتم الدفع';
+            xx =Colors.grey;
+          }else
+            {
+              text = 'No payment has been made';
+              xx =Colors.grey;
+            }
+
+      }else if (status == "1")
+    {
+      if(currentLocale.languageCode == 'ar') {
+        text = ' تم الحجز';
+        xx = Color(0xff07898B);
+      }else{
+        text = 'Booked';
+        xx =Color(0xff07898B);
+      }
+
+
+    }else if (status == "3")
+    {
+      if(currentLocale.languageCode == 'ar')
+        {
+          text = 'ملغي';
+          xx =Colors.red;
+        }else
+          {
+            text = 'Canceled';
+            xx =Colors.red;
+          }
+
+
+
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(
+          horizontal: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Padding(
+              padding: const EdgeInsets.only(
+                  top: 0.0,
+                  right: 0.0,
+                  left: 0.0,
+                  bottom: 0.0),
+              child: GFButton(
+                textColor: Colors.white,
+                onPressed: (){},
+                text: text,
+                color: xx,
+                textStyle: TextStyle(fontFamily: 'Cairo',fontSize: 16),
+              )
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -231,4 +231,15 @@ class LocalAssistant {
 
     return 'empty';
   }
+
+
+  String MyBookTitle(context , String ar_name , String en_name)
+  {
+    Locale currentLocale = Localizations.localeOf(context);
+
+    if(currentLocale.languageCode == 'ar')
+      return ar_name;
+    else
+      return en_name;
+  }
 }

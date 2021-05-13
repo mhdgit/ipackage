@@ -8015,6 +8015,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         betaApiAssistant.getOffer(widget.id, firstFlightDate).then((value) {
           setState(() {
             offer = value;
+            print(value);
             _destinationCode = offer.airportGo.iata.toString();
             calculateFlightsDates();
             _hotelsCheckInDates.add(firstFlightDate);
