@@ -84,4 +84,35 @@ class Trip {
       tripEN: json['trip_en'] as String,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['id'] = this.id;
+    data['city_id'] = this.cityId;
+    data['countrie_id'] = this.countryId;
+    data['district_id'] = this.districtId;
+    data['add_by'] = this.addBy;
+    data['tickets'] = this.tickets;
+    data['standard_car'] = this.standardCar;
+    data['micro_bus'] = this.microBus;
+    data['price_person'] = this.pricePerson;
+    data['price_person2'] = this.pricePerson2;
+    data['price_person3'] = this.pricePerson3;
+    data['price_child'] = this.priceChild;
+    data['empty_date'] = this.emptyDay;
+    data['status'] = this.status;
+    data['total'] = this.total;
+    data['date'] = this.date;
+    data['date_iso'] = this.dateISO;
+    data['image'] = this.image;
+    data['image_sm'] = this.imageSm;
+    data['image_md'] = this.imageMd;
+    data['name_ar'] = this.nameAR;
+    data['name_en'] = this.nameEN;
+    data['trip_ar'] = this.tripAR;
+    data['trip_en'] = this.tripEN;
+
+    return data;
+  }
 }

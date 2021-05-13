@@ -42,4 +42,33 @@ class Day {
       trips: tList,
     );
   }
+
+  List hToJson(List<Hotel> list) {
+    List jsonList = [];
+    if(list != null)
+    list.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
+  }
+
+  List tToJson(List<Trip> list) {
+    List jsonList = [];
+    if(list != null)
+    list.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['hotel_id'] = this.hotelId;
+    data['city_id'] = this.cityId;
+    data['city_ar'] = this.cityAR;
+    data['city_en'] = this.cityEN;
+    data['internal_flight'] = this.internalFlight;
+    data['transportations'] = this.transportationMethods.toJson();
+    data['hotel_facilitys'] = hToJson(this.hotels);
+    data['hotel_rooms'] = tToJson(this.trips);
+
+    return data;
+  }
 }

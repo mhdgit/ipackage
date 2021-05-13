@@ -13,6 +13,7 @@ import 'package:ipackage/modules/Offer/Transportations/Transportation.dart';
 import 'package:ipackage/modules/Offer/Trip.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/confirm_book.dart';
+import 'package:ipackage/widgets/users/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../modules/BetaApiAssistant.dart';
 import '../../modules/LocalAssistant.dart';
@@ -132,6 +133,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         _childrenNumber = value5;
       });
 
+    final key8 = 'babies_number';
+    final value8 = prefs.getInt(key8);
+    if (value8 != null)
+      setState(() {
+        _babiesNumber = value5;
+      });
+
     final key7 = 'is_flight';
     final value7 = prefs.getBool(key7);
     if (value7 != null)
@@ -178,7 +186,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
               .add(Duration(days: offer.days[index].trips.length)))
           .toString());
 
-      print('Hotel date: '+ _hotelsCheckInDates[index]);
+      print('Hotel date: ' + _hotelsCheckInDates[index]);
     }
   }
 
@@ -209,10 +217,11 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
     }
   }
 
-  void getOfferHotelsImages()
-  {
-    for(int index = 0 ; index < offer.days.length ; index++)
-      betaApiAssistant.getHotelImage(offer.days[index].hotels[0].id).then((value) {
+  void getOfferHotelsImages() {
+    for (int index = 0; index < offer.days.length; index++)
+      betaApiAssistant
+          .getHotelImage(offer.days[index].hotels[0].id)
+          .then((value) {
         setState(() {
           offer.days[index].hotels[0].images = value.toString();
         });
@@ -220,35 +229,35 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   }
 
   changeTransportationVisibility(Transportation transportation) {
-      showDialog(
-          context: context,
-          builder: (_) => AssetGiffyDialog(
-                onlyOkButton: true,
-                buttonCancelText: Text(
-                    getTranslated(context, 'login_alert_d_cancel'),
-                    style: TextStyle(fontSize: 16)),
-                buttonOkText: Text(getTranslated(context, 'edit_book_delete'),
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
-                buttonOkColor: Colors.redAccent,
-                image: Image.asset('assets/images/alert.png', fit: BoxFit.cover),
-                title: Text(
-                  getTranslated(context, 'home_alert_login_title'),
-                  style: TextStyle(fontSize: 18.0, color: Colors.teal),
-                ),
-                description: Text(
-                  getTranslated(context, 'fo_remove_note'),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
-                ),
-                onOkButtonPressed: () {
-                  setState(() {
-                    transportation.visibility = false;
-                    dayIndex = -1;
-                  });
-                  Navigator.pop(context);
-                  calculateOfferPrice();
-                },
-              ));
+    showDialog(
+        context: context,
+        builder: (_) => AssetGiffyDialog(
+              onlyOkButton: true,
+              buttonCancelText: Text(
+                  getTranslated(context, 'login_alert_d_cancel'),
+                  style: TextStyle(fontSize: 16)),
+              buttonOkText: Text(getTranslated(context, 'edit_book_delete'),
+                  style: TextStyle(fontSize: 16, color: Colors.white)),
+              buttonOkColor: Colors.redAccent,
+              image: Image.asset('assets/images/alert.png', fit: BoxFit.cover),
+              title: Text(
+                getTranslated(context, 'home_alert_login_title'),
+                style: TextStyle(fontSize: 18.0, color: Colors.teal),
+              ),
+              description: Text(
+                getTranslated(context, 'fo_remove_note'),
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16),
+              ),
+              onOkButtonPressed: () {
+                setState(() {
+                  transportation.visibility = false;
+                  dayIndex = -1;
+                });
+                Navigator.pop(context);
+                calculateOfferPrice();
+              },
+            ));
   }
 
   void changeTransportation(context, screenWidth, screenHeight, type, dIndex,
@@ -1944,10 +1953,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
         });
   }
 
-
   void changeHotel(context, screenWidth, screenHeight, cityId, checkIn,
       checkout, adults, children, dayPointer) {
-
     print('city id: ' + cityId.toString());
 
     showDialog(
@@ -2014,9 +2021,8 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                           .toString() !=
                                                       null
                                                   ? Image.network(
-                                                      snapshot
-                                                              .data[i].images
-                                                              .toString(),
+                                                      snapshot.data[i].images
+                                                          .toString(),
                                                       fit: BoxFit.fill,
                                                       height:
                                                           screenHeight * 0.2,
@@ -2106,12 +2112,13 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                   child: GFButton(
                                                     onPressed: () {
                                                       setState(() {
-
-                                                        print('Rating: ' + offer
-                                                            .days[dayPointer]
-                                                            .hotels[0]
-                                                            .rating
-                                                            .toString());
+                                                        print('Rating: ' +
+                                                            offer
+                                                                .days[
+                                                                    dayPointer]
+                                                                .hotels[0]
+                                                                .rating
+                                                                .toString());
 
                                                         shiftHotel = offer
                                                             .days[dayPointer]
@@ -2143,7 +2150,9 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                             fit: BoxFit
                                                                 .scaleDown,
                                                             child: Text(
-                                                              snapshot.data[i].netRate.toString(),
+                                                              snapshot.data[i]
+                                                                  .netRate
+                                                                  .toString(),
                                                               style: TextStyle(
                                                                 fontSize: 14,
                                                                 color: Colors
@@ -2608,16 +2617,17 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                         const EdgeInsets.all(
                                                             8.0),
                                                     child: Text(
-                                                      _originCode == ' ' ?
-                                                       getTranslated(context,
-                                                          'fo_no_flight')
-                                                          :
-                                                          _isFlight == false ?
-                                                          getTranslated(context,
+                                                      _originCode == ' '
+                                                          ? getTranslated(
+                                                              context,
                                                               'fo_no_flight')
-                                                              :
-                                                      getTranslated(context,
-                                                          'fo_no_flight_2'),
+                                                          : _isFlight == false
+                                                              ? getTranslated(
+                                                                  context,
+                                                                  'fo_no_flight')
+                                                              : getTranslated(
+                                                                  context,
+                                                                  'fo_no_flight_2'),
                                                       textAlign:
                                                           TextAlign.start,
                                                       style: TextStyle(
@@ -3707,21 +3717,21 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(0),
-                                  child: offer.days[index].hotels[0].images !=
-                                          null
-                                      ? Image.network(
-                                          offer.days[index].hotels[0].images
+                                  child:
+                                      offer.days[index].hotels[0].images != null
+                                          ? Image.network(
+                                              offer.days[index].hotels[0].images
                                                   .toString(),
-                                          fit: BoxFit.fill,
-                                          height: screenHeight * 0.16,
-                                          width: screenWidth * 0.3,
-                                        )
-                                      : Image.asset(
-                                          'assets/images/hotel.jpg',
-                                          fit: BoxFit.fill,
-                                          height: screenHeight * 0.16,
-                                          width: screenWidth * 0.3,
-                                        ),
+                                              fit: BoxFit.fill,
+                                              height: screenHeight * 0.16,
+                                              width: screenWidth * 0.3,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/hotel.jpg',
+                                              fit: BoxFit.fill,
+                                              height: screenHeight * 0.16,
+                                              width: screenWidth * 0.3,
+                                            ),
                                 ),
                               ),
                               Column(
@@ -3817,18 +3827,19 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                             padding: const EdgeInsets.all(2.0),
                                             child: GFButton(
                                               onPressed: () {
-
-                                                print('check in date:' + _hotelsCheckInDates[index]);
-                                                print('checkout date:' + fullFormatter
-                                                    .format(DateTime.parse(
-                                                    _hotelsCheckInDates[
-                                                    index])
-                                                    .add(Duration(
-                                                    days: offer
-                                                        .days[index]
-                                                        .trips
-                                                        .length)))
-                                                    .toString());
+                                                print('check in date:' +
+                                                    _hotelsCheckInDates[index]);
+                                                print('checkout date:' +
+                                                    fullFormatter
+                                                        .format(DateTime.parse(
+                                                                _hotelsCheckInDates[
+                                                                    index])
+                                                            .add(Duration(
+                                                                days: offer
+                                                                    .days[index]
+                                                                    .trips
+                                                                    .length)))
+                                                        .toString());
 
                                                 changeHotel(
                                                     context,
@@ -4620,16 +4631,14 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          _originCode == ' ' ?
-                                          getTranslated(context,
-                                              'fo_no_flight')
-                                              :
-                                          _isFlight == false ?
-                                          getTranslated(context,
-                                              'fo_no_flight')
-                                              :
-                                          getTranslated(context,
-                                              'fo_no_flight_2'),
+                                          _originCode == ' '
+                                              ? getTranslated(
+                                                  context, 'fo_no_flight')
+                                              : _isFlight == false
+                                                  ? getTranslated(
+                                                      context, 'fo_no_flight')
+                                                  : getTranslated(context,
+                                                      'fo_no_flight_2'),
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
                                             fontSize: 15,
@@ -5166,8 +5175,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                         padding: const EdgeInsets.all(0),
                         child: offer.days[index].hotels[0].images != null
                             ? Image.network(
-                                'https://ipackagetours.com/storage/app/' +
-                                    offer.days[index].hotels[0].images
+                                offer.days[index].hotels[0].images
                                         .toString(),
                                 fit: BoxFit.fill,
                                 height: screenHeight * 0.16,
@@ -6327,16 +6335,16 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: Text(
-                                                  _originCode == ' ' ?
-                                                  getTranslated(context,
-                                                      'fo_no_flight')
-                                                      :
-                                                  _isFlight == false ?
-                                                  getTranslated(context,
-                                                      'fo_no_flight')
-                                                      :
-                                                  getTranslated(context,
-                                                      'fo_no_flight_2'),
+                                                  _originCode == ' '
+                                                      ? getTranslated(context,
+                                                          'fo_no_flight')
+                                                      : _isFlight == false
+                                                          ? getTranslated(
+                                                              context,
+                                                              'fo_no_flight')
+                                                          : getTranslated(
+                                                              context,
+                                                              'fo_no_flight_2'),
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
                                                     fontSize: 15,
@@ -6774,16 +6782,14 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                _originCode == ' ' ?
-                                                getTranslated(context,
-                                                    'fo_no_flight')
-                                                    :
-                                                _isFlight == false ?
-                                                getTranslated(context,
-                                                    'fo_no_flight')
-                                                    :
-                                                getTranslated(context,
-                                                    'fo_no_flight_2'),
+                                                _originCode == ' '
+                                                    ? getTranslated(
+                                                        context, 'fo_no_flight')
+                                                    : _isFlight == false
+                                                        ? getTranslated(context,
+                                                            'fo_no_flight')
+                                                        : getTranslated(context,
+                                                            'fo_no_flight_2'),
                                                 textAlign: TextAlign.start,
                                                 style: TextStyle(
                                                   fontSize: 15,
@@ -7686,6 +7692,9 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                                         '-' +
                                                         _airports[index].iata;
 
+                                                    prefs.setBool(
+                                                        'is_flight', true);
+
                                                     prefs.setString(
                                                         'source_airport_code',
                                                         _airports[index].iata);
@@ -7801,7 +7810,12 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                                 ),
                           onPressed: () {
                             if (_isNotLocked) {
+                              prefs.setInt('adults_number', _adultsNumber);
+                              prefs.setInt('children_number', _childrenNumber);
+                              prefs.setInt('babies_number', _babiesNumber);
+
                               Navigator.of(context).pop();
+
                               calculatePassengersNumber();
                               calculateOfferPrice();
                             }
@@ -7836,20 +7850,15 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
             _flightsBack[0].airItineraryPricingInfo.flightTotalFare.totalFare;
       });
 
-
-
-    for (int index = 0; index < offer.days.length; index++)
-    {
+    for (int index = 0; index < offer.days.length; index++) {
       // Changed hotel price
       setState(() {
         _totalOfferPrice += offer.days[index].hotels[0].netRate;
       });
 
       // Trips
-      for (int dIndex = 0; dIndex < offer.days[index].trips.length; dIndex++)
-      {
-        if (offer.days[index].trips[dIndex].visibility == true)
-        {
+      for (int dIndex = 0; dIndex < offer.days[index].trips.length; dIndex++) {
+        if (offer.days[index].trips[dIndex].visibility == true) {
           if (offer.days[index].trips[dIndex].pricePlus == 0) {
             //Adults price
             if (_adultsNumber == 1)
@@ -7886,9 +7895,7 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
               _totalOfferPrice += offer.days[index].trips[dIndex].priceChild ??
                   0 * _babiesNumber;
             });
-          }
-          else
-            {
+          } else {
             setState(() {
               _totalOfferPrice += offer.days[index].trips[dIndex].pricePlus;
             });
@@ -8028,16 +8035,14 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
                         _originCode, _destinationCode, firstFlightDate)
                     .then((value) {
                   setState(() {
-                    if(value.length > 0)
-                    _flights = List.of(value);
+                    if (value.length > 0) _flights = List.of(value);
 
                     betaApiAssistant
                         .getFlightPath(
                             _destinationCode, _originCode, lastFlightDate)
                         .then((value2) {
                       setState(() {
-                        if(value.length > 0)
-                        _flightsBack = List.of(value2);
+                        if (value.length > 0) _flightsBack = List.of(value2);
 
                         getFlightsNumber();
                         calculateOfferPrice();
@@ -8162,6 +8167,12 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     final double screenHeight =
@@ -8183,8 +8194,49 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: GFButton(
         onPressed: () {
-          Navigator.of(context).push(new MaterialPageRoute(
-            builder: (BuildContext context) => new ConfirmBook()));
+          setState(() {
+            dayIndex = -1;
+          });
+
+          final check = prefs.getString('is_login');
+
+          if(check == '1')
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new ConfirmBook(
+                  offer: offer,
+                  offerId: widget.id,
+                )));
+          else
+            showDialog(
+                context: context,
+                builder: (_) => AssetGiffyDialog(
+                  onlyOkButton: true,
+                  buttonCancelText: Text(
+                      getTranslated(context, 'login_alert_d_cancel'),
+                      style: TextStyle(fontSize: 16)),
+                  buttonOkText: Text(getTranslated(context, 'home_alert_login_ok_btn'),
+                      style: TextStyle(fontSize: 16, color: Colors.white)),
+                  buttonOkColor: Colors.redAccent,
+                  image: Image.asset('assets/images/alert.png', fit: BoxFit.cover),
+                  title: Text(
+                    getTranslated(context, 'home_alert_login_title'),
+                    style: TextStyle(fontSize: 18.0, color: Colors.teal),
+                  ),
+                  description: Text(
+                    getTranslated(context, 'fo_alert_login_content'),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  onOkButtonPressed: () {
+                    setState(() {
+                      dayIndex = -1;
+                    });
+
+                    Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (BuildContext context) => new login()));
+                  },
+                ));
+
         },
         size: 50,
         shape: GFButtonShape.square,
@@ -8196,23 +8248,24 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
             children: <Widget>[
               Expanded(
                 flex: 60,
-                child: _isPriceLoading ? Center(
-                  child: GFLoader(
-                    type: GFLoaderType.circle,
-                    loaderColorOne: Colors.white,
-                    loaderColorTwo: Colors.white,
-                    loaderColorThree: Colors.white,
-                  ),
-                ) :
-                Text(
-                  _totalOfferPrice.toStringAsFixed(2) + ' \$',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
+                child: _isPriceLoading
+                    ? Center(
+                        child: GFLoader(
+                          type: GFLoaderType.circle,
+                          loaderColorOne: Colors.white,
+                          loaderColorTwo: Colors.white,
+                          loaderColorThree: Colors.white,
+                        ),
+                      )
+                    : Text(
+                        _totalOfferPrice.toStringAsFixed(2) + ' \$',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
               ),
               Expanded(
                 flex: 40,
@@ -8233,7 +8286,6 @@ class _ForeignOfferMainState extends State<ForeignOfferMain> {
           fontFamily: 'cairo',
         ),
       ),
-
 
       // Container(
       //   width: screenWidth * 1.02,

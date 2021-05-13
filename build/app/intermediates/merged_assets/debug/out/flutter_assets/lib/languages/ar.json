@@ -263,6 +263,7 @@
   "fo_trip_remove_note" : "سيتم إزالة الجولة بشكل نهائي",
   "fo_change_trip_title" : "المزيد من الأنشطة",
   "fo_change_hotel_title" : "تغيير الفندق",
+  "fo_alert_login_content" : "يجب عليك أن تسجل الدخول أولاً حتى تتمكن من إتمام عملية الحجز",
 
   "book_trip_label" : "حدد وجهتك",
   "book_trip_label_2" : "اختار الباقة",
@@ -399,6 +400,9 @@
   "confirm_book_btn_1" : "يرجى التواصل معي",
   "confirm_book_label_4" : "أو",
   "confirm_book_btn_2" : "تواصل معنا عن طريق الواتساب",
+  "confirm_book_passenger_note" : "الرجاء إدخال عدد الأفراد في الرحلة",
+  "confirm_book_date_note" : "الرجاء إدخال تاريخ السفر",
+  "confirm_book_error_note" : "خطأ في إتمام الطلب . الرجاء المحاولة لاحقاً",
 
   "edit_book_delete" : "حذف",
   "edit_book_cancel" : "إلغاء",

@@ -35,4 +35,20 @@ class MinTransportation {
       transportation: Transportation.fromJson(json['transportation']) ?? new Transportation(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['id'] = this.id;
+    data['airport_transfer'] = this.airportTransfer;
+    data['transportation_cities'] = this.transportationCities;
+    data['transportation_id'] = this.transportationId;
+    data['car_price'] = this.carPrice;
+    data['price_child'] = this.priceChild;
+    data['price_indv'] = this.priceIndividuals;
+    data['transportation'] = this.transportation.toJson();
+
+    return data;
+  }
 }

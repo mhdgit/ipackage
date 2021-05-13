@@ -23,4 +23,17 @@ class Airport {
       iata: json['iata'] as String,
     );
   }
+
+  Map<String, dynamic> toJson() {
+
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['id'] = this.id;
+    data['city_id'] = this.cityId;
+    data['name_ar'] = this.nameAR;
+    data['name_en'] = this.nameEN;
+    data['iata'] = this.iata;
+
+    return data;
+  }
 }

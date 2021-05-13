@@ -43,4 +43,20 @@ class TransportationMethods {
 
 
   }
+
+  List mtToJson(List<MinTransportation> list) {
+    List jsonList = [];
+    if(list != null)
+    list.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['min_transportation'] = mtToJson(this.defaultTrans);
+    data['transportation'] = mtToJson(this.additionalTrans);
+
+    return data;
+  }
 }
