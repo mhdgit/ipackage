@@ -110,8 +110,9 @@
 
   "home_ambassadors_btn" : "سفراء آي باكج",
   "home_ambassadors_btn_2" : "الوجهة",
-  "home_ambassadors_btn_3" : "مرشد سياحي",
+  "home_ambassadors_btn_3" : "إنشاء عضوية مرشد سياحي",
   "home_ambassadors_btn_4" : "سائح",
+  "home_ambassadors_label_1" : "سجل الان في برنامج سفراء اي باكج و كن سفيرا لمدينتك حيث يمكنك ان تزيد من دخلك الشهري  عن طريق اضافة افضل الاماكن السياحية و اماكن التسوق و المتنزهات باسعار مناسبة لك و لخدمتك التي تستطيع ان تساعد عملائنا  في زيارتها و ان تكون مرشد لهم و سفيرا سياحي لمدينتك",
 
   "home_national_tourism_cities_label" : "مدن السياحة الداخلية",
   "home_national_tourism_offers_label" : "العروض المميزة في السياحة الداخلية",
@@ -306,6 +307,7 @@
   "as_year" : "سنة",
   "as_services" : "الخدمات التي يقدمها",
   "as_language" : "لغة السفير",
+  "as_note" : "أهلاً بك في أسرة iPackage سيتم التواصل معك عبر البريد الالكتروني و رقم الجوال المدخلين من قبلك",
 
   "ambassador_profile_btn" : "حجز السفير",
   "ambassador_profile_service" : "استئجار كوخ",

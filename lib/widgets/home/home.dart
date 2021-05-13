@@ -115,7 +115,7 @@ class _HomeState extends State<Home> {
                             ),
                             onPressed: () {
                               Navigator.of(context).push(new MaterialPageRoute(
-                                  builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 2,)));
+                                  builder: (BuildContext context) => new SearchYourTrip(initialTabIndex: 1,)));
                             },
                             child: Column(
                               children: [

@@ -113,6 +113,7 @@
   "home_ambassadors_btn_2" : "Destination",
   "home_ambassadors_btn_3" : "Tour guide",
   "home_ambassadors_btn_4" : "Tourist",
+  "home_ambassadors_label_1" : "Register now in the I-Package Ambassadors Program and become an ambassador for your city, where you can increase your monthly income by adding the best tourist places, shopping places and parks at reasonable prices for you and for your service that you can help our customers in visiting them and be their guide and a tourist ambassador for your city",
 
   "home_national_tourism_cities_label" : "Domestic tourism cities",
   "home_national_tourism_offers_label" : "Special offers in domestic tourism ",
@@ -158,6 +159,7 @@
   "pyt_in_t_flight_btn" : "Flight",
   "pyt_in_t_search_btn" : "Search",
   "pyt_in_t_package_btn" : "Package type",
+  "pyt_in_t_alert" : "Please select both the airport of departure and the country of destination",
 
   "pyt_ambassadors_btn" : "iPackage Ambassadors ",
   "pyt_programs" : "Packages",
@@ -257,7 +259,7 @@
   "fo_remove_note" : "The means of transport will be permanently removed",
   "fo_change_trans_title" : "More transportation",
   "fo_no_flight" : "You have not specified the airport of departure, so we were unable to determine which flights would be suitable for you. Please select the airport of departure so that we can determine the best flight for you.",
-  "fo_no_flight_2" : "There are currently no flights available.",
+  "fo_no_flight_2" : "Currently, there are no flights available according to the specific destination and dates.",
   "fo_no_airports" : "No results",
   "fo_flight_remove_note" : "The flight will be permanently removed",
   "fo_trip_remove_note" : "The tour will be permanently removed",

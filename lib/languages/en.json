@@ -111,8 +111,9 @@
 
   "home_ambassadors_btn" : "iPackage Ambassadors ",
   "home_ambassadors_btn_2" : "Destination",
-  "home_ambassadors_btn_3" : "Tour guide",
+  "home_ambassadors_btn_3" : "Create a tour guide membership",
   "home_ambassadors_btn_4" : "Tourist",
+  "home_ambassadors_label_1" : "Register now in the I-Package Ambassadors Program and become an ambassador for your city, where you can increase your monthly income by adding the best tourist places, shopping places and parks at reasonable prices for you and for your service that you can help our customers in visiting them and be their guide and a tourist ambassador for your city",
 
   "home_national_tourism_cities_label" : "Domestic tourism cities",
   "home_national_tourism_offers_label" : "Special offers in domestic tourism ",
@@ -308,6 +309,7 @@
   "as_year" : "year",
   "as_services" : "The services it provides",
   "as_language" : "Ambassador's language ",
+  "as_note" : "Welcome to the iPackage family. We will contact you via the email and mobile number entered by you ",
 
   "ambassador_profile_btn" : "Ambassador booking",
   "ambassador_profile_service" : "Rent a cottage",

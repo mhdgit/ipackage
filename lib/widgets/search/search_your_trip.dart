@@ -30,7 +30,7 @@ class _SearchYourTripState extends State<SearchYourTrip> {
 
     return DefaultTabController(
       initialIndex: widget.initialTabIndex,
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -56,9 +56,9 @@ class _SearchYourTripState extends State<SearchYourTrip> {
               Tab(
                 text: getTranslated(context, 'home_ambassadors_btn'),
               ),
-              Tab(
-                text: getTranslated(context, 'pyt_programs'),
-              ),
+              // Tab(
+              //   text: getTranslated(context, 'pyt_programs'),
+              // ),
             ],
           ),
         ),
@@ -67,7 +67,7 @@ class _SearchYourTripState extends State<SearchYourTrip> {
             ForeignTour(),
             IPackageAmbassadors(),
             // Countries(),
-            Packages(),
+            // Packages(),
             // DomesticTour(),
             // IPackageAmbassadors(),
           ],
