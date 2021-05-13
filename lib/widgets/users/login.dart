@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
@@ -12,6 +13,8 @@ import 'package:http/http.dart' as http;
 import 'new_account.dart';
 
 
+final fbLogin = FacebookLogin();
+
 class login extends StatefulWidget {
   @override
   _login createState() => _login();
@@ -21,6 +24,38 @@ class _login extends State<login> {
   bool _is_btn_Loading = false;
   final email_Controller = TextEditingController();
   final pass_Controller = TextEditingController();
+
+  var fb_btn_shild = true;
+  var g_btn_shild = true;
+  var apple_btn_shild = true;
+
+  Future signInFB() async {
+    setState(() {
+      fb_btn_shild = false;
+    });
+    final FacebookLoginResult result = await fbLogin.logIn(["email"]);
+    print(result.accessToken);
+    final String token = result.accessToken.token;
+    Uri uri = Uri.parse('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture&access_token=${token}');
+    final response = await http.get(uri);
+    final profile = jsonDecode(response.body);
+    print(profile);
+
+    var data = {
+      'name': profile["name"],
+      'email': profile["email"],
+      'id': profile["id"],
+    };
+
+      setState(() {
+        fb_btn_shild = true;
+      });
+
+    }
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +89,7 @@ class _login extends State<login> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 10,),
-                            Text(getTranslated(context, 'login_name_hint'),style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,fontFamily: 'cairo',),textAlign: TextAlign.right,),
+                            Text(getTranslated(context, 'login_email_hint'),style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,fontFamily: 'cairo',),textAlign: TextAlign.right,),
                             SizedBox(height: 5,),
                             TextField(
                               controller: email_Controller,
@@ -79,6 +114,7 @@ class _login extends State<login> {
                             Text(getTranslated(context, 'login_password_hint'),style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,fontFamily: 'cairo',),textAlign: TextAlign.right,),
                             SizedBox(height: 5,),
                             TextField(
+                              obscureText: true,
                               controller: pass_Controller,
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(5.0),
@@ -192,7 +228,7 @@ class _login extends State<login> {
 
                                 ),
                                 onPressed: () {
-                                  print('Pressed');
+                                  signInFB();
                                 },
                               ),),
                             SizedBox(height: 10,),

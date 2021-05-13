@@ -11,8 +11,10 @@ import 'package:ipackage/widgets/my_books.dart';
 import 'package:ipackage/widgets/payment_methods.dart';
 import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/users/edit_profile.dart';
+import 'package:ipackage/widgets/users/login.dart';
 import 'package:ipackage/widgets/users/new_account.dart';
 import 'package:ipackage/widgets/users/new_membership.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -21,6 +23,36 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
 
+  bool _isGuest = false;
+
+  checkLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'is_login';
+    final is_login_value = prefs.get(key) ?? 0;
+
+    if (is_login_value == "1") {
+      _isGuest = false;
+
+      final key2 = 'api_token';
+      final token = prefs.get(key2) ?? 0;
+
+      print(token);
+
+    } else {
+
+
+      _isGuest = true;
+
+    }
+    print("is_login value: $is_login_value");
+    print("gust: "+_isGuest.toString());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkLogin();
+  }
   void _changeLanguage(Language lang) async {
     Locale currentLocale = Localizations.localeOf(context);
 
@@ -49,7 +81,7 @@ class _SettingsState extends State<Settings> {
 
       body: Column(
         children: <Widget>[
-          Container(
+          /*Container(
             padding: EdgeInsets.all(10.0),
             child: Card(
               elevation: 2.0,
@@ -57,7 +89,7 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: <Widget>[
-                    InkWell(
+                    *//*InkWell(
                       onTap: (){
                         Navigator.of(context).push(new MaterialPageRoute(
                             builder: (BuildContext context) =>
@@ -131,8 +163,8 @@ class _SettingsState extends State<Settings> {
                           ],
                         ),
                       ),
-                    ),
-                    InkWell(
+                    ),*//*
+                    *//*InkWell(
                       onTap: (){
                         Navigator.of(context).push(new MaterialPageRoute(
                             builder: (BuildContext context) => new New_account()));
@@ -155,8 +187,8 @@ class _SettingsState extends State<Settings> {
                           ],
                         ),
                       ),
-                    ),
-                    InkWell(
+                    ),*//*
+                    *//*InkWell(
                       onTap: (){
                         Navigator.of(context).push(new MaterialPageRoute(
                             builder: (BuildContext context) => new PaymentMethods()));
@@ -179,7 +211,71 @@ class _SettingsState extends State<Settings> {
                           ],
                         ),
                       ),
+                    ),*//*
+
+                  ],
+                ),
+              ),
+            ),
+          ),*/
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: Card(
+              elevation: 2.0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: <Widget>[
+                    InkWell(
+                      onTap: (){
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                            new AboutUs()));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 20,
+                              child: Icon(Icons.info, color: Color(0xff07898B),),
+                            ),
+                            Expanded(
+                              flex: 80,
+                              child: Text(
+                              getTranslated(context, 'drawer_about_us'),
+                              style: TextStyle(fontSize: 18,),
+                            ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
+                    /*InkWell(
+                      onTap: (){
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                            new Blog()));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 20,
+                              child: Icon(Icons.info, color: Color(0xff07898B),),
+                            ),
+                            Expanded(
+                              flex: 80,
+                              child: Text(
+                              getTranslated(context, 'settings_blog'),
+                              style: TextStyle(fontSize: 18,),
+                            ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),*/
                     Row(
                       children: <Widget>[
                         Expanded(
@@ -218,71 +314,24 @@ class _SettingsState extends State<Settings> {
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: Card(
-              elevation: 2.0,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: <Widget>[
                     InkWell(
-                      onTap: (){
-                        Navigator.of(context).push(new MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                            new AboutUs()));
+                      onTap: () async {
+
+                        if(_isGuest == true)
+                          {
+                            Navigator.of(context).push(
+                              new MaterialPageRoute(
+                                  builder: (BuildContext context) => new login()),
+                            );
+                          }else{
+                          final prefs = await SharedPreferences.getInstance();
+                          await prefs.clear();
+                          setState(() {
+                            _isGuest = true;
+                          });
+                        }
+
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5.0),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 20,
-                              child: Icon(Icons.info, color: Color(0xff07898B),),
-                            ),
-                            Expanded(
-                              flex: 80,
-                              child: Text(
-                              getTranslated(context, 'drawer_about_us'),
-                              style: TextStyle(fontSize: 18,),
-                            ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.of(context).push(new MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                            new Blog()));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5.0),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 20,
-                              child: Icon(Icons.info, color: Color(0xff07898B),),
-                            ),
-                            Expanded(
-                              flex: 80,
-                              child: Text(
-                              getTranslated(context, 'settings_blog'),
-                              style: TextStyle(fontSize: 18,),
-                            ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){},
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: Row(
@@ -293,7 +342,10 @@ class _SettingsState extends State<Settings> {
                             ),
                             Expanded(
                               flex: 80,
-                              child: Text(
+                              child: _isGuest? Text(
+                                getTranslated(context, 'login_sign_in_btn'),
+                                style: TextStyle(fontSize: 18,),
+                              ) :Text(
                               getTranslated(context, 'drawer_logout'),
                               style: TextStyle(fontSize: 18,),
                             ),

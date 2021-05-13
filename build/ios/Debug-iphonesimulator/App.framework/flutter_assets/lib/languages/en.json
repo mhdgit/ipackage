@@ -488,8 +488,8 @@
   "chatbot_budget": "Enter your budget",
   "chatbot_whatsapp": "Can I get your WhatsApp number with the country code for easy communication?",
   "chatbot_email" : "Can I get your email?",
-  "chatbot_end": "The best offers that suit your trip were found, and the data that you entered was sent as a special request, and we will reply to you within 24 hours via the entered e-mail and whatsapp number."
-
+  "chatbot_end": "The best offers that suit your trip were found, and the data that you entered was sent as a special request, and we will reply to you within 24 hours via the entered e-mail and whatsapp number.",
+  "my_books_login_hint" : "Please log in to view reservations"
 
 
 }

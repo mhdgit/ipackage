@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
+import 'package:ipackage/api/mybooks_api.dart';
 import 'package:ipackage/localization/localizationValues.dart';
 import 'package:ipackage/modules/my_icons.dart';
 import 'package:ipackage/widgets/home/domestic_offer_main.dart';
 import 'package:ipackage/widgets/home/home.dart';
 import 'package:ipackage/widgets/plan_your_trip/plan_your_trip.dart';
 import 'package:ipackage/widgets/settings.dart';
+import 'package:ipackage/widgets/users/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyBooks extends StatefulWidget {
   @override
@@ -13,8 +16,54 @@ class MyBooks extends StatefulWidget {
 }
 
 class _MyBooksState extends State<MyBooks> {
+
+
+  MyBooksApi books_api = new MyBooksApi();
+
+  bool _isGuest = false;
+  bool is_loading = true;
+
+  checkLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'is_login';
+    final is_login_value = prefs.get(key) ?? 0;
+
+    if (is_login_value == "1") {
+      setState(() {
+        _isGuest = false;
+      });
+
+      final key2 = 'api_token';
+      final token = prefs.get(key2) ?? 0;
+      //print("api: "+token.toString());
+
+      books_api.get_books(token).then((value) {
+
+        });
+
+
+    } else {
+
+      setState(() {
+        _isGuest = true;
+      });
+
+
+    }
+
+    print("gust: "+_isGuest.toString());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
+
+
 
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     final double screenHeight =
@@ -23,7 +72,94 @@ class _MyBooksState extends State<MyBooks> {
 
     return Scaffold(
 
-      body: Column(
+      appBar: AppBar(
+        backgroundColor: Color(0xffE9F7F8),
+        elevation: 0.0,
+        shadowColor: Colors.white,
+        title: Text(
+          getTranslated(context, 'bottom_bar_my_reservations_btn'),
+        ),
+        centerTitle: true,
+      ),
+      body:_isGuest?
+          InkWell(
+
+        borderRadius: BorderRadius.circular(5),
+        onTap: () {},
+        child: Card(
+
+
+          clipBehavior: Clip.antiAlias,
+          margin: const EdgeInsets.only(top:10.0),
+          //color: Colors.grey,
+          elevation: 0,
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  getTranslated(context, 'my_books_login_hint'),
+                                  style: TextStyle(
+                                      fontFamily: 'Cairo', fontSize: 20
+                                  ),textAlign: TextAlign.center,
+                                ),
+                              ),
+
+
+                              SizedBox(height: 30,),
+                              InkWell(onTap: () {
+                                Navigator.of(context).push(
+                                  new MaterialPageRoute(
+                                      builder: (BuildContext context) => new login()),
+                                );
+                              } , child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: const EdgeInsets.all(7),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white),
+                                    //borderRadius: BorderRadius.only(bottomRight: Radius.circular(5),bottomLeft: Radius.circular(5)),
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Color(0xff07898B)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+
+                                    Text(
+                                      getTranslated(context, 'favorites_sign_in_btn'),
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        color: Colors.white,
+                                        fontFamily: "Cairo",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+          :Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
 
@@ -331,6 +467,7 @@ class _MyBooksState extends State<MyBooks> {
 
         ],
       ),
+
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         unselectedItemColor: Color(0xff9FD0D2),

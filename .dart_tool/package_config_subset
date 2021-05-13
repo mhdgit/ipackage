@@ -58,6 +58,10 @@ flare_flutter
 2.2
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-2.0.6/
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-2.0.6/lib/
+flutter_facebook_login
+2.0
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_login-3.0.0/
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_login-3.0.0/lib/
 flutter_svg
 2.12
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.22.0/
@@ -104,12 +108,12 @@ file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/lib/
 path_drawing
 2.12
-file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_drawing-0.5.0/
-file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_drawing-0.5.0/lib/
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_drawing-0.5.1/
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_drawing-0.5.1/lib/
 path_parsing
 2.12
-file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-0.2.0/
-file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-0.2.0/lib/
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-0.2.1/
+file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-0.2.1/lib/
 path_provider_linux
 2.12
 file:///Users/sh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.0.0/
