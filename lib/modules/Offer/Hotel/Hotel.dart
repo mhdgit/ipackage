@@ -110,4 +110,43 @@ class Hotel {
       }
 
   }
+
+  List hfToJson(List<HotelFacility> list) {
+    List jsonList = [];
+    if(list != null)
+    list.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
+  }
+
+  List hrToJson(List<HotelRoom> list) {
+    List jsonList = [];
+    if(list != null)
+    list.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['id'] = this.id;
+    data['city_id'] = this.cityId;
+    data['rating'] = this.rating;
+    data['url'] = this.url;
+    data['address'] = this.address;
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
+    data['phone'] = this.phone;
+    data['fax'] = this.fax;
+    data['description'] = this.description;
+    data['images'] = this.images;
+    data['mandatory_fee'] = this.mandatoryFee;
+    data['accommodation_ar'] = this.accommodationAR;
+    data['accommodation_en'] = this.accommodationEN;
+    data['name_ar'] = this.nameAR;
+    data['name_en'] = this.nameEN;
+    data['hotel_facilitys'] = hfToJson(this.hotelFacilities);
+    data['hotel_rooms'] = hrToJson(this.hotelRooms);
+
+    return data;
+  }
 }

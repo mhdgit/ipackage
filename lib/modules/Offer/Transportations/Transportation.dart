@@ -34,4 +34,19 @@ class Transportation {
       visibility: true,
     );
   }
+
+  Map<String, dynamic> toJson() {
+
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['id'] = this.id;
+    data['name_ar'] = this.nameAR;
+    data['name_en'] = this.nameEN;
+    data['image'] = this.image;
+    data['image_md'] = this.imageMd;
+    data['image_sm'] = this.imageSm;
+    data['num_person'] = this.peopleNumber;
+
+    return data;
+  }
 }

@@ -80,4 +80,57 @@ class Offer {
       airportTransferBack: atbList,
     );
   }
+
+  List dToJson(List<Day> list) {
+    List jsonList = [];
+    if(list != null)
+    list.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
+  }
+
+  List iToJson(List<Included> list) {
+    List jsonList = [];
+    if(list != null)
+    list.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
+  }
+
+  List eToJson(List<Excluded> list) {
+    List jsonList = [];
+    if(list != null)
+    list.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
+  }
+
+  List mtToJson(List<MinTransportation> list) {
+    List jsonList = [];
+    if(list != null)
+    list.map((item) => jsonList.add(item.toJson())).toList();
+    return jsonList;
+  }
+
+  Map<String, dynamic> toJson() {
+
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['num_days'] = this.daysNumber;
+    data['description_ar'] = this.descriptionAR;
+    data['description_en'] = this.descriptionEN;
+    data['county_ar'] = this.countryAR;
+    data['county_en'] = this.countryEN;
+    data['package_ar'] = this.packageAR;
+    data['package_en'] = this.packageEN;
+    data['image'] = this.image;
+    data['image_md'] = this.imageMd;
+    data['image_sm'] = this.imageSm;
+    data['airpot_go'] = this.airportGo.toJson();
+    data['airpot_back'] = this.airportBack.toJson();
+    data['days'] = dToJson(this.days);
+    data['includeds'] = iToJson(this.includeds);
+    data['excludeds'] = eToJson(this.excludeds);
+    data['airport_transfers_go'] = mtToJson(this.airportTransferGo);
+    data['airport_transfers_back'] = mtToJson(this.airportTransferBack);
+
+    return data;
+  }
 }

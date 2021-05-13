@@ -265,6 +265,7 @@
   "fo_trip_remove_note" : "The tour will be permanently removed",
   "fo_change_trip_title" : "More activities",
   "fo_change_hotel_title" : "More hotels",
+  "fo_alert_login_content" : "You must first log in to be able to complete the booking process",
 
   "book_trip_label" : "Select your destination",
   "book_trip_label_2" : "Choose package",
@@ -401,6 +402,9 @@
   "confirm_book_btn_1" : "Please contact me",
   "confirm_book_label_4" : "OR",
   "confirm_book_btn_2" : "Contact us by WhatsApp",
+  "confirm_book_passenger_note" : "Please enter the number of passengers in the tour",
+  "confirm_book_date_note" : "Please enter the start date the tour",
+  "confirm_book_error_note" : "Error completing the request. Please try again later",
 
   "edit_book_delete" : "Delete",
   "edit_book_cancel" : "Cancel",
