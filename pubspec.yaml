@@ -43,6 +43,7 @@ dependencies:
   flutter_svg: ^0.22.0
   email_validator: ^2.0.1
   url_launcher: ^6.0.3
+  flutter_facebook_login: ^3.0.0
 
 dev_dependencies:
   flutter_test:
